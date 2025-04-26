@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Week {
 
- String get id; String get yearId; DateTime get start; DateTime get end; WeekTense get tense; WeekAssessment get assessment; List<Goal> get goals; List<Event> get events; String get resume; List<String> get photos;
+ int get id; int get yearId; DateTime get start; DateTime get end; WeekTense get tense; WeekAssessment get assessment; List<Goal> get goals; List<Event> get events; String get resume; List<String> get photos;
 /// Create a copy of Week
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -46,7 +46,7 @@ abstract mixin class $WeekCopyWith<$Res>  {
   factory $WeekCopyWith(Week value, $Res Function(Week) _then) = _$WeekCopyWithImpl;
 @useResult
 $Res call({
- String id, String yearId, DateTime start, DateTime end, WeekTense tense, WeekAssessment assessment, List<Goal> goals, List<Event> events, String resume, List<String> photos
+ int id, int yearId, DateTime start, DateTime end, WeekTense tense, WeekAssessment assessment, List<Goal> goals, List<Event> events, String resume, List<String> photos
 });
 
 
@@ -66,8 +66,8 @@ class _$WeekCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? yearId = null,Object? start = null,Object? end = null,Object? tense = null,Object? assessment = null,Object? goals = null,Object? events = null,Object? resume = null,Object? photos = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,yearId: null == yearId ? _self.yearId : yearId // ignore: cast_nullable_to_non_nullable
-as String,start: null == start ? _self.start : start // ignore: cast_nullable_to_non_nullable
+as int,yearId: null == yearId ? _self.yearId : yearId // ignore: cast_nullable_to_non_nullable
+as int,start: null == start ? _self.start : start // ignore: cast_nullable_to_non_nullable
 as DateTime,end: null == end ? _self.end : end // ignore: cast_nullable_to_non_nullable
 as DateTime,tense: null == tense ? _self.tense : tense // ignore: cast_nullable_to_non_nullable
 as WeekTense,assessment: null == assessment ? _self.assessment : assessment // ignore: cast_nullable_to_non_nullable
@@ -89,8 +89,8 @@ class _Week implements Week {
   const _Week({required this.id, required this.yearId, required this.start, required this.end, required this.tense, required this.assessment, required final  List<Goal> goals, required final  List<Event> events, required this.resume, required final  List<String> photos}): _goals = goals,_events = events,_photos = photos;
   
 
-@override final  String id;
-@override final  String yearId;
+@override final  int id;
+@override final  int yearId;
 @override final  DateTime start;
 @override final  DateTime end;
 @override final  WeekTense tense;
@@ -148,7 +148,7 @@ abstract mixin class _$WeekCopyWith<$Res> implements $WeekCopyWith<$Res> {
   factory _$WeekCopyWith(_Week value, $Res Function(_Week) _then) = __$WeekCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String yearId, DateTime start, DateTime end, WeekTense tense, WeekAssessment assessment, List<Goal> goals, List<Event> events, String resume, List<String> photos
+ int id, int yearId, DateTime start, DateTime end, WeekTense tense, WeekAssessment assessment, List<Goal> goals, List<Event> events, String resume, List<String> photos
 });
 
 
@@ -168,8 +168,8 @@ class __$WeekCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? yearId = null,Object? start = null,Object? end = null,Object? tense = null,Object? assessment = null,Object? goals = null,Object? events = null,Object? resume = null,Object? photos = null,}) {
   return _then(_Week(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,yearId: null == yearId ? _self.yearId : yearId // ignore: cast_nullable_to_non_nullable
-as String,start: null == start ? _self.start : start // ignore: cast_nullable_to_non_nullable
+as int,yearId: null == yearId ? _self.yearId : yearId // ignore: cast_nullable_to_non_nullable
+as int,start: null == start ? _self.start : start // ignore: cast_nullable_to_non_nullable
 as DateTime,end: null == end ? _self.end : end // ignore: cast_nullable_to_non_nullable
 as DateTime,tense: null == tense ? _self.tense : tense // ignore: cast_nullable_to_non_nullable
 as WeekTense,assessment: null == assessment ? _self.assessment : assessment // ignore: cast_nullable_to_non_nullable

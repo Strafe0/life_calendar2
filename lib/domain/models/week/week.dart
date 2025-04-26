@@ -9,8 +9,8 @@ part 'week.freezed.dart';
 @freezed
 abstract class Week with _$Week {
   const factory Week({
-    required String id,
-    required String yearId,
+    required int id,
+    required int yearId,
     required DateTime start,
     required DateTime end,
     required WeekTense tense,
