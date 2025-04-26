@@ -45,7 +45,7 @@ linter:
     prefer_mixin: true
     require_trailing_commas: true
     sized_box_shrink_expand: true
-    sort_constructors_first: true
+#    sort_constructors_first: true
     sort_unnamed_constructors_first: true
     throw_in_finally: true
     test_types_in_equals: true
