@@ -7,34 +7,34 @@ import 'package:life_calendar2/utils/result.dart';
 abstract class WeekRepository {
   Future<Result<List<Week>>> getWeeks();
 
-  Future<Result<Week>> getWeek(String id);
+  Future<Result<Week>> getWeek(int id);
 
-  Future<Result<void>> insertWeek(List<Week> weeks);
+  Future<Result<void>> insertWeeks(List<Week> weeks);
 
   Future<Result<Week>> getCurrentWeek();
 
   Future<Result<void>> updateAssessment({
-    required String weekId,
+    required int weekId,
     required WeekAssessment assessment,
   });
 
   Future<Result<void>> updateEvents({
-    required String weekId,
+    required int weekId,
     required List<Event> events,
   });
 
   Future<Result<void>> updateGoals({
-    required String weekId,
+    required int weekId,
     required List<Goal> goals,
   });
 
   Future<Result<void>> updateResume({
-    required String weekId,
+    required int weekId,
     required String resume,
   });
 
   Future<Result<void>> updatePhotos({
-    required String weekId,
+    required int weekId,
     required List<String> photos,
   });
 }
