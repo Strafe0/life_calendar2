@@ -6,6 +6,8 @@ import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
 
 part 'week.freezed.dart';
 
+part 'week.g.dart';
+
 @freezed
 abstract class Week with _$Week {
   const factory Week({
@@ -20,4 +22,7 @@ abstract class Week with _$Week {
     required String resume,
     required List<String> photos,
   }) = _Week;
+
+  factory Week.fromJson(Map<String, dynamic> json) => _$WeekFromJson(json);
 }
+

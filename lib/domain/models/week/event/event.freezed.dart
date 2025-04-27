@@ -12,6 +12,7 @@ part of 'event.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+
 /// @nodoc
 mixin _$Event {
 
@@ -22,6 +23,8 @@ mixin _$Event {
 @pragma('vm:prefer-inline')
 $EventCopyWith<Event> get copyWith => _$EventCopyWithImpl<Event>(this as Event, _$identity);
 
+  /// Serializes this Event to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
@@ -29,7 +32,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is Event&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.date, date) || other.date == date));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,title,date);
 
@@ -76,11 +79,11 @@ as DateTime,
 
 
 /// @nodoc
-
+@JsonSerializable()
 
 class _Event implements Event {
   const _Event({required this.id, required this.title, required this.date});
-  
+  factory _Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
 
 @override final  String id;
 @override final  String title;
@@ -92,14 +95,17 @@ class _Event implements Event {
 @pragma('vm:prefer-inline')
 _$EventCopyWith<_Event> get copyWith => __$EventCopyWithImpl<_Event>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$EventToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _Event&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.date, date) || other.date == date));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,title,date);
 

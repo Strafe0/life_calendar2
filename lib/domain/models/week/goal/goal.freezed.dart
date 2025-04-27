@@ -12,6 +12,7 @@ part of 'goal.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+
 /// @nodoc
 mixin _$Goal {
 
@@ -22,6 +23,8 @@ mixin _$Goal {
 @pragma('vm:prefer-inline')
 $GoalCopyWith<Goal> get copyWith => _$GoalCopyWithImpl<Goal>(this as Goal, _$identity);
 
+  /// Serializes this Goal to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
@@ -29,7 +32,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is Goal&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.isCompleted, isCompleted) || other.isCompleted == isCompleted));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,title,isCompleted);
 
@@ -76,11 +79,11 @@ as bool,
 
 
 /// @nodoc
-
+@JsonSerializable()
 
 class _Goal implements Goal {
   const _Goal({required this.id, required this.title, required this.isCompleted});
-  
+  factory _Goal.fromJson(Map<String, dynamic> json) => _$GoalFromJson(json);
 
 @override final  String id;
 @override final  String title;
@@ -92,14 +95,17 @@ class _Goal implements Goal {
 @pragma('vm:prefer-inline')
 _$GoalCopyWith<_Goal> get copyWith => __$GoalCopyWithImpl<_Goal>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$GoalToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _Goal&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.isCompleted, isCompleted) || other.isCompleted == isCompleted));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,title,isCompleted);
 

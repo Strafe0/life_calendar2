@@ -12,6 +12,7 @@ part of 'week.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
+
 /// @nodoc
 mixin _$Week {
 
@@ -22,6 +23,8 @@ mixin _$Week {
 @pragma('vm:prefer-inline')
 $WeekCopyWith<Week> get copyWith => _$WeekCopyWithImpl<Week>(this as Week, _$identity);
 
+  /// Serializes this Week to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
@@ -29,7 +32,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is Week&&(identical(other.id, id) || other.id == id)&&(identical(other.yearId, yearId) || other.yearId == yearId)&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end)&&(identical(other.tense, tense) || other.tense == tense)&&(identical(other.assessment, assessment) || other.assessment == assessment)&&const DeepCollectionEquality().equals(other.goals, goals)&&const DeepCollectionEquality().equals(other.events, events)&&(identical(other.resume, resume) || other.resume == resume)&&const DeepCollectionEquality().equals(other.photos, photos));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,yearId,start,end,tense,assessment,const DeepCollectionEquality().hash(goals),const DeepCollectionEquality().hash(events),resume,const DeepCollectionEquality().hash(photos));
 
@@ -83,11 +86,11 @@ as List<String>,
 
 
 /// @nodoc
-
+@JsonSerializable()
 
 class _Week implements Week {
   const _Week({required this.id, required this.yearId, required this.start, required this.end, required this.tense, required this.assessment, required final  List<Goal> goals, required final  List<Event> events, required this.resume, required final  List<String> photos}): _goals = goals,_events = events,_photos = photos;
-  
+  factory _Week.fromJson(Map<String, dynamic> json) => _$WeekFromJson(json);
 
 @override final  int id;
 @override final  int yearId;
@@ -124,14 +127,17 @@ class _Week implements Week {
 @pragma('vm:prefer-inline')
 _$WeekCopyWith<_Week> get copyWith => __$WeekCopyWithImpl<_Week>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$WeekToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _Week&&(identical(other.id, id) || other.id == id)&&(identical(other.yearId, yearId) || other.yearId == yearId)&&(identical(other.start, start) || other.start == start)&&(identical(other.end, end) || other.end == end)&&(identical(other.tense, tense) || other.tense == tense)&&(identical(other.assessment, assessment) || other.assessment == assessment)&&const DeepCollectionEquality().equals(other._goals, _goals)&&const DeepCollectionEquality().equals(other._events, _events)&&(identical(other.resume, resume) || other.resume == resume)&&const DeepCollectionEquality().equals(other._photos, _photos));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,id,yearId,start,end,tense,assessment,const DeepCollectionEquality().hash(_goals),const DeepCollectionEquality().hash(_events),resume,const DeepCollectionEquality().hash(_photos));
 
