@@ -18,7 +18,7 @@ linter:
     close_sinks: true
     cast_nullable_to_non_nullable: true
     directives_ordering: true
-    discarded_futures: true
+    # discarded_futures: true
     unawaited_futures: true
     document_ignores: true
     deprecated_member_use_from_same_package: true
