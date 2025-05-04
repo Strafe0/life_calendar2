@@ -1,4 +1,4 @@
-import 'package:life_calendar2/domain/models/week/week.dart';
+import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 
 sealed class CalendarState {
   const CalendarState();
@@ -15,7 +15,7 @@ final class CalendarLoading extends CalendarState {
 final class CalendarSuccess extends CalendarState {
   const CalendarSuccess({required this.weeks});
 
-  final List<Week> weeks;
+  final List<WeekBox> weeks;
 }
 
 final class CalendarFailure extends CalendarState {

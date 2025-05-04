@@ -1,18 +1,18 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/domain/models/week/week.dart';
+import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 import 'package:life_calendar2/ui/core/themes/week_extension.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 
 class CalendarPainter extends CustomPainter {
-  final List<Week> weeks;
+  final List<WeekBox> weekBoxes;
   final CalendarSize calendarSize;
   final Color textColor;
   final Brightness brightness;
 
   const CalendarPainter({
-    required this.weeks,
+    required this.weekBoxes,
     required this.calendarSize,
     required this.textColor,
     required this.brightness,
@@ -23,54 +23,25 @@ class CalendarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final y0 =
-        calendarSize.vrtPadding +
-        calendarSize.labelVrtPadding +
-        calendarSize.weekBoxSide / 2;
-
     _drawWeekLabels(canvas, textColor);
 
     int yearId = 0;
-    int previousYearsWeekCount = 0;
-    int weekInYearCount = 0;
-    for (int weekId = 0; weekId < weeks.length; weekId++) {
-      weekInYearCount++;
-
-      final x0 =
-          calendarSize.horPadding +
-          calendarSize.labelHorPadding +
-          calendarSize.weekBoxSide / 2;
-      final y =
-          y0 +
-          yearId * (calendarSize.weekBoxSide + calendarSize.weekBoxPaddingY);
-
+    for (int weekId = 0; weekId < weekBoxes.length; weekId++) {
       if (yearId % 5 == 0) {
         _drawYearLabel(yearId, canvas, textColor);
       }
 
-      final x =
-          x0 +
-          (weekId - previousYearsWeekCount) *
-              (calendarSize.weekBoxSide + calendarSize.weekBoxPaddingX);
-
-      final Rect rect = Rect.fromCenter(
-        center: Offset(x, y),
-        width: calendarSize.weekBoxSide,
-        height: calendarSize.weekBoxSide,
-      );
-
       final RRect rrect = RRect.fromRectAndRadius(
-        rect,
+        weekBoxes[weekId].rect,
         const Radius.circular(1.5),
       );
 
-      final week = weeks[weekId];
+      final week = weekBoxes[weekId];
       final color = week.getColor(brightness: brightness);
       canvas.drawRRect(rrect, Paint()..color = color);
 
-      if (weekId + 1 < weeks.length && weeks[weekId + 1].yearId > yearId) {
-        previousYearsWeekCount += weekInYearCount;
-        weekInYearCount = 0;
+      if (weekId + 1 < weekBoxes.length &&
+          weekBoxes[weekId + 1].yearId > yearId) {
         yearId++;
       }
     }
