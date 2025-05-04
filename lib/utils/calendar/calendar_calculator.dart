@@ -2,11 +2,11 @@ import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
 
-class CalendarCalculator {
+class CalendarGenerator {
   final DateTime birthday;
   final int lifeSpan;
 
-  const CalendarCalculator({required this.birthday, required this.lifeSpan});
+  const CalendarGenerator({required this.birthday, required this.lifeSpan});
 
   List<Week> generateWeeks() {
     final List<Week> weeks = [];

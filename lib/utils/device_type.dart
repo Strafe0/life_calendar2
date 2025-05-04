@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum DeviceType {
-  phone, tablet
-}
+enum DeviceType { phone, tablet }
 
 DeviceType getDeviceType() {
   final view = WidgetsBinding.instance.platformDispatcher.views.first;

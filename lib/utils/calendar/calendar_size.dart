@@ -17,7 +17,7 @@ class CalendarSize {
     required this.labelHorPadding,
   });
 
-factory CalendarSize.forPhone(double width, double height, int yearsCount) {
+  factory CalendarSize.forPhone(double width, double height, int yearsCount) {
     final N = 53, M = yearsCount;
     const k1 = 10, k2 = 15, k3 = 20;
     const m2 = 5, m3 = 4;

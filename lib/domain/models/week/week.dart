@@ -25,4 +25,3 @@ abstract class Week with _$Week {
 
   factory Week.fromJson(Map<String, dynamic> json) => _$WeekFromJson(json);
 }
-

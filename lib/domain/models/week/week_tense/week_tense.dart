@@ -1,3 +1,1 @@
-enum WeekTense {
-  past, current, future;
-}
+enum WeekTense { past, current, future }

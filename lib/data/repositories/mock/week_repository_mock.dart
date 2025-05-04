@@ -24,7 +24,7 @@ class WeekRepositoryMock implements WeekRepository {
     await Future.delayed(const Duration(seconds: 1));
 
     return Result.ok(
-      CalendarCalculator(
+      CalendarGenerator(
         birthday: DateTime(1998, 12, 22),
         lifeSpan: 80,
       ).generateWeeks(),
