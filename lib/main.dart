@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/ui/core/themes/app_theme.dart';
 import 'package:life_calendar2/ui/home/home_screen.dart';
 
 void main() {
@@ -12,9 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       home: const HomeScreen(),
     );
   }

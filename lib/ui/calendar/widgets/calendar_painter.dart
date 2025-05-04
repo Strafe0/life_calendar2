@@ -1,8 +1,8 @@
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
-import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
-import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
+import 'package:life_calendar2/ui/core/themes/week_extension.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 
 class CalendarPainter extends CustomPainter {
@@ -64,7 +64,8 @@ class CalendarPainter extends CustomPainter {
         const Radius.circular(1.5),
       );
 
-      final color = getWeekColor(weeks[weekId], brightness);
+      final week = weeks[weekId];
+      final color = week.getColor(brightness: brightness);
       canvas.drawRRect(rrect, Paint()..color = color);
 
       if (weekId + 1 < weeks.length && weeks[weekId + 1].yearId > yearId) {
@@ -139,23 +140,5 @@ class CalendarPainter extends CustomPainter {
                 (calendarSize.weekBoxSide + calendarSize.weekBoxPaddingY),
       ),
     );
-  }
-
-  Color getWeekColor(Week week, Brightness brightness) {
-    final Color weekColor = switch (week.tense) {
-      WeekTense.past => switch (week.assessment) {
-        WeekAssessment.good => Colors.green,
-        WeekAssessment.bad => Colors.red,
-        WeekAssessment.poor => Colors.black54,
-      },
-      WeekTense.current => Colors.blueAccent,
-      WeekTense.future => switch (week.assessment) {
-        WeekAssessment.good => Colors.green,
-        WeekAssessment.bad => Colors.red,
-        WeekAssessment.poor => Colors.grey,
-      },
-    };
-
-    return weekColor;
   }
 }

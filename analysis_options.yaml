@@ -7,7 +7,7 @@ linter:
     prefer_const_constructors_in_immutables: true
     always_use_package_imports: true
     avoid_bool_literals_in_conditional_expressions: true
-    avoid_classes_with_only_static_members: true
+    # avoid_classes_with_only_static_members: true
     avoid_equals_and_hash_code_on_mutable_classes: true
     avoid_positional_boolean_parameters: true
     avoid_slow_async_io: true
@@ -20,7 +20,7 @@ linter:
     directives_ordering: true
     # discarded_futures: true
     unawaited_futures: true
-    document_ignores: true
+    # document_ignores: true
     deprecated_member_use_from_same_package: true
     library_names: true
     lines_longer_than_80_chars: true
