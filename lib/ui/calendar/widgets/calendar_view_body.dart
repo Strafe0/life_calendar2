@@ -31,6 +31,7 @@ class CalendarViewBody extends StatelessWidget {
         };
 
         return CustomPaint(
+          size: Size.infinite,
           painter: CalendarPainter(
             weeks: weeks,
             calendarSize: calendarSize,

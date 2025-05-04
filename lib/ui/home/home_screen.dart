@@ -13,8 +13,7 @@ class HomeScreen extends StatelessWidget {
       create: (context) => WeekRepositoryMock(),
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(title: const Text('Календарь жизни')),
-          body: const CalendarView(),
+          body: InteractiveViewer(maxScale: 5, child: const CalendarView()),
         ),
       ),
     );

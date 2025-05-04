@@ -1,6 +1,5 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
@@ -32,9 +31,11 @@ class CalendarPainter extends CustomPainter {
     _drawWeekLabels(canvas, textColor);
 
     int yearId = 0;
-    int count = 0;
+    int previousYearsWeekCount = 0;
     int weekInYearCount = 0;
     for (int weekId = 0; weekId < weeks.length; weekId++) {
+      weekInYearCount++;
+
       final x0 =
           calendarSize.horPadding +
           calendarSize.labelHorPadding +
@@ -47,10 +48,9 @@ class CalendarPainter extends CustomPainter {
         _drawYearLabel(yearId, canvas, textColor);
       }
 
-      weekInYearCount++;
       final x =
           x0 +
-          (weekId - count) *
+          (weekId - previousYearsWeekCount) *
               (calendarSize.weekBoxSide + calendarSize.weekBoxPaddingX);
 
       final Rect rect = Rect.fromCenter(
@@ -68,23 +68,10 @@ class CalendarPainter extends CustomPainter {
       canvas.drawRRect(rrect, Paint()..color = color);
 
       if (weekId + 1 < weeks.length && weeks[weekId + 1].yearId > yearId) {
-        count += weekInYearCount;
-        logger.d(
-          'Year: $yearId, weekInYearCount: $weekInYearCount, count: $count',
-        );
+        previousYearsWeekCount += weekInYearCount;
         weekInYearCount = 0;
         yearId++;
       }
-
-      // if (weeks[weekId].yearId == yearId) {
-      // } else {
-      //   logger.d(
-      //     'Year: $yearId, week: ${weeks[weekId].start}-${weeks[weekId].end}',
-      //   );
-      //   count += weekInYearCount;
-      //   weekInYearCount = 1;
-      //   yearId++;
-      // }
     }
   }
 
@@ -92,7 +79,7 @@ class CalendarPainter extends CustomPainter {
     for (int i = 0; i < 11; i++) {
       final builder = ui.ParagraphBuilder(
         ui.ParagraphStyle(
-          fontSize: calendarSize.labelVrtPadding,
+          fontSize: 10,
           textAlign: TextAlign.center,
           maxLines: 1,
           height: 1,
@@ -126,7 +113,7 @@ class CalendarPainter extends CustomPainter {
     final builder =
         ui.ParagraphBuilder(
             ui.ParagraphStyle(
-              fontSize: calendarSize.weekBoxSide * 1.5,
+              fontSize: 10,
               textAlign: TextAlign.end,
               maxLines: 1,
               height: 1,
