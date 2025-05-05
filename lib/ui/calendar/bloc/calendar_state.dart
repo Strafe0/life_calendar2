@@ -13,13 +13,13 @@ final class CalendarLoading extends CalendarState {
 }
 
 final class CalendarSuccess extends CalendarState {
-  const CalendarSuccess({required this.weeks});
-
   final List<WeekBox> weeks;
+
+  const CalendarSuccess({required this.weeks});
 }
 
 final class CalendarFailure extends CalendarState {
-  const CalendarFailure(this.exception);
-
   final Exception exception;
+
+  const CalendarFailure(this.exception);
 }

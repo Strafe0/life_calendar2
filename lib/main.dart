@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_calendar2/data/repositories/mock/user_repository_mock.dart';
+import 'package:life_calendar2/data/repositories/mock/week_repository_mock.dart';
+import 'package:life_calendar2/domain/repositories/user_repository.dart';
+import 'package:life_calendar2/domain/repositories/week_repository.dart';
 import 'package:life_calendar2/ui/core/themes/app_theme.dart';
 import 'package:life_calendar2/ui/home/home_screen.dart';
 
@@ -11,11 +16,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      home: const HomeScreen(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<UserRepository>(create: (_) => UserRepositoryMock()),
+        RepositoryProvider<WeekRepository>(create: (_) => WeekRepositoryMock()),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        home: const HomeScreen(),
+      ),
     );
   }
 }

@@ -9,11 +9,11 @@ import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 import 'package:life_calendar2/utils/result.dart';
 
 class CalendarCubit extends Cubit<CalendarState> {
+  final WeekRepository _weekRepository;
+
   CalendarCubit({required WeekRepository weekRepository})
     : _weekRepository = weekRepository,
       super(const CalendarInitial());
-
-  final WeekRepository _weekRepository;
 
   Future<void> getWeeks({required CalendarSize calendarSize}) async {
     emit(const CalendarLoading());
