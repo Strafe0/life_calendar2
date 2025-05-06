@@ -2,6 +2,7 @@ import 'package:life_calendar2/domain/models/week/event/event.dart';
 import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
 import 'package:life_calendar2/domain/repositories/week_repository.dart';
 import 'package:life_calendar2/utils/calendar/calendar_calculator.dart';
 import 'package:life_calendar2/utils/result.dart';
@@ -14,9 +15,25 @@ class WeekRepositoryMock implements WeekRepository {
   }
 
   @override
-  Future<Result<Week>> getWeek(int id) {
-    // TODO: implement getWeek
-    throw UnimplementedError();
+  Future<Result<Week>> getWeek(int id) async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    return Result.ok(
+      Week(
+        id: id,
+        yearId: 666,
+        start: DateTime(2023, 08, 21),
+        end: DateTime(2023, 08, 28),
+        tense: WeekTense.past,
+        assessment: WeekAssessment.good,
+        goals: [const Goal(id: '0', title: 'Пожениться', isCompleted: true)],
+        events: [
+          Event(id: '0', title: 'Свадьба', date: DateTime(2023, 08, 26)),
+        ],
+        resume: '',
+        photos: const [],
+      ),
+    );
   }
 
   @override
