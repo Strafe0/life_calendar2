@@ -14,8 +14,16 @@ final class CalendarLoading extends CalendarState {
 
 final class CalendarSuccess extends CalendarState {
   final List<WeekBox> weeks;
+  final int? selectedWeekId;
 
-  const CalendarSuccess({required this.weeks});
+  const CalendarSuccess({required this.weeks, this.selectedWeekId});
+
+  CalendarSuccess copyWith({int? selectedWeekId}) {
+    return CalendarSuccess(
+      weeks: weeks,
+      selectedWeekId: selectedWeekId ?? this.selectedWeekId,
+    );
+  }
 }
 
 final class CalendarFailure extends CalendarState {
