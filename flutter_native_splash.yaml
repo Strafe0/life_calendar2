@@ -1,0 +1,8 @@
+flutter_native_splash:
+  color: "#0151DF"
+  image: assets/calendar_splash_image.png
+
+  android_12:
+    image: assets/calendar_splash_image.png
+    color: "#0151DF"
+    icon_background_color: "#0151DF"
