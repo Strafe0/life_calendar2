@@ -226,6 +226,11 @@ class AppTheme {
         letterSpacing: 0.5,
       ),
     ),
+
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: Color(0xFF0151DF),
+      strokeCap: StrokeCap.round,
+    ),
   );
 
   static ThemeData get darkTheme => ThemeData(
@@ -416,6 +421,11 @@ class AppTheme {
         height: 1.43,
         letterSpacing: 0.5,
       ),
+    ),
+
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: Color(0xFFB5C4FF),
+      strokeCap: StrokeCap.round,
     ),
   );
 }

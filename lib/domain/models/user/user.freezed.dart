@@ -78,8 +78,8 @@ as int,
 /// @nodoc
 
 
-class _User implements User {
-  const _User({required this.id, required this.birthday, required this.lifeSpan});
+class _User extends User {
+  const _User({required this.id, required this.birthday, required this.lifeSpan}): super._();
   
 
 @override final  String id;
