@@ -8,7 +8,10 @@ import 'package:life_calendar2/ui/splash/widgets/splash_screen.dart';
 
 final goRouter = GoRouter(
   routes: [
-    GoRoute(path: AppRoute.root, builder: (context, state) => const SplashScreen()),
+    GoRoute(
+      path: AppRoute.root,
+      builder: (context, state) => const SplashScreen(),
+    ),
     GoRoute(
       path: AppRoute.calendar,
       builder: (context, state) => const HomeScreen(),

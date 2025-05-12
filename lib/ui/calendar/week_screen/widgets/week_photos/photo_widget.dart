@@ -14,10 +14,7 @@ class PhotoWidget extends StatelessWidget {
       elevation: 2,
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(16)),
-        child: Image.file(
-          File(photoUrl),
-          fit: BoxFit.fill,
-        ),
+        child: Image.file(File(photoUrl), fit: BoxFit.fill),
       ),
     );
   }

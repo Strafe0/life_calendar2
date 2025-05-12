@@ -33,7 +33,7 @@ class UserRepositoryLocal implements UserRepository {
       if (isFirstLaunch) {
         return Result.ok(User.empty());
       }
-      
+
       final birthday = await _sharedPreferencesService.getBirthday();
       final lifespan = await _sharedPreferencesService.getLifespan();
 
