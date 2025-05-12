@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/ui/user/bloc/user_cubit.dart';
 import 'package:life_calendar2/ui/user/bloc/user_state.dart';
 
@@ -32,12 +32,12 @@ class _SplashScreenState extends State<SplashScreen> {
               listener: (context, state) {
                 if (state is UserSuccess) {
                   if (!state.user.isEmpty) {
-                    context.go('/calendar');
+                    context.go(AppRoute.calendar);
                   } else {
-                    context.go('/onboarding');
+                    context.go(AppRoute.onboarding);
                   }
                 } else if (state is UserFailure) {
-                  context.go('/error');
+                  context.go(AppRoute.error);
                 }
               },
               child: SafeArea(

@@ -4,13 +4,13 @@ part 'user.freezed.dart';
 
 @freezed
 abstract class User with _$User {
-  const User._();
-
   const factory User({
     required String id,
     required DateTime birthday,
     required int lifeSpan,
   }) = _User;
+
+  const User._();
 
   factory User.empty() => _User(
     id: '',

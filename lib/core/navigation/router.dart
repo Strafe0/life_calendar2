@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_screen.dart';
 import 'package:life_calendar2/ui/home/home_screen.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_screen.dart';
@@ -7,13 +8,13 @@ import 'package:life_calendar2/ui/splash/widgets/splash_screen.dart';
 
 final goRouter = GoRouter(
   routes: [
-    GoRoute(path: '/', builder: (context, state) => const SplashScreen()),
+    GoRoute(path: AppRoute.root, builder: (context, state) => const SplashScreen()),
     GoRoute(
-      path: '/calendar',
+      path: AppRoute.calendar,
       builder: (context, state) => const HomeScreen(),
       routes: [
         GoRoute(
-          path: '/week/:weekId',
+          path: AppRoute.week,
           builder: (context, state) {
             final selectedWeekId = int.tryParse(
               state.pathParameters['weekId'] ?? '',
@@ -24,11 +25,11 @@ final goRouter = GoRouter(
       ],
     ),
     GoRoute(
-      path: '/onboarding',
+      path: AppRoute.onboarding,
       builder: (context, state) => const OnboardingScreen(),
     ),
     GoRoute(
-      path: '/error',
+      path: AppRoute.error,
       builder: (context, state) => const ErrorSplashScreen(),
     ),
   ],

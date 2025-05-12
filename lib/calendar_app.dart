@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/router.dart';
+import 'package:life_calendar2/core/navigation/router.dart';
 import 'package:life_calendar2/data/repositories/mock/user_repository_mock.dart';
 import 'package:life_calendar2/data/repositories/mock/week_repository_mock.dart';
 import 'package:life_calendar2/domain/repositories/user_repository.dart';

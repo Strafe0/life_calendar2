@@ -29,6 +29,11 @@ class UserRepositoryLocal implements UserRepository {
   @override
   Future<Result<User>> getUser() async {
     try {
+      final isFirstLaunch = await _sharedPreferencesService.isFirstLaunch();
+      if (isFirstLaunch) {
+        return Result.ok(User.empty());
+      }
+      
       final birthday = await _sharedPreferencesService.getBirthday();
       final lifespan = await _sharedPreferencesService.getLifespan();
 
