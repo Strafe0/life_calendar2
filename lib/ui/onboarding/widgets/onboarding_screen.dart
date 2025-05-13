@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/ui/core/themes/onboarding_theme.dart';
 import 'package:life_calendar2/ui/onboarding/bloc/onboarding_cubit.dart';
 import 'package:life_calendar2/ui/onboarding/bloc/onboarding_state.dart';
+import 'package:life_calendar2/ui/onboarding/widgets/onboarding_view.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -37,9 +38,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: CircularProgressIndicator(),
                   ),
                   OnboardingFailure() => const Center(child: Text('Ошибка')),
-                  OnboardingSuccess() => Center(
-                    child: Text('Success: ${state.pages.length}'),
-                  ),
+                  OnboardingSuccess() => OnboardingView(pages: state.pages),
                 };
               },
             ),
