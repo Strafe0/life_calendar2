@@ -1,4 +1,6 @@
-class OnboardingPage {
+import 'package:equatable/equatable.dart';
+
+class OnboardingPage extends Equatable {
   /// Url or path
   final String? image;
   final String? title;
@@ -9,4 +11,7 @@ class OnboardingPage {
     required this.title,
     required this.content,
   });
+
+  @override
+  List<Object?> get props => [image, title, content];
 }

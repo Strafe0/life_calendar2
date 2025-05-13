@@ -3,6 +3,8 @@ import 'package:life_calendar2/domain/repositories/onboarding_repository.dart';
 import 'package:life_calendar2/utils/result.dart';
 
 class OnboardingRepositoryLocal implements OnboardingRepository {
+  const OnboardingRepositoryLocal();
+  
   @override
   Future<Result<List<OnboardingPage>>> getPages() {
     return Future.value(

@@ -1,10 +1,51 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_calendar2/ui/core/themes/onboarding_theme.dart';
+import 'package:life_calendar2/ui/onboarding/bloc/onboarding_cubit.dart';
+import 'package:life_calendar2/ui/onboarding/bloc/onboarding_state.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
   @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Onboarding'));
+    final brightness = Theme.of(context).brightness;
+    final theme = OnboardingTheme(brightness: brightness);
+
+    return BlocProvider(
+      create:
+          (context) =>
+              OnboardingCubit(onboardingRepository: context.read())
+                ..loadPages(),
+      child: AnnotatedRegion(
+        value: SystemUiOverlayStyle(
+          statusBarColor: theme.surfaceColor,
+          systemNavigationBarColor: theme.surfaceColor,
+        ),
+        child: SafeArea(
+          child: Scaffold(
+            body: BlocBuilder<OnboardingCubit, OnboardingState>(
+              builder: (context, state) {
+                return switch (state) {
+                  OnboardingInitial() || OnboardingLoading() => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  OnboardingFailure() => const Center(child: Text('Ошибка')),
+                  OnboardingSuccess() => Center(
+                    child: Text('Success: ${state.pages.length}'),
+                  ),
+                };
+              },
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

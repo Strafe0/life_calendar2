@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/navigation/router.dart';
 import 'package:life_calendar2/data/repositories/mock/user_repository_mock.dart';
 import 'package:life_calendar2/data/repositories/mock/week_repository_mock.dart';
+import 'package:life_calendar2/data/repositories/onboarding_repository_local.dart';
+import 'package:life_calendar2/domain/repositories/onboarding_repository.dart';
 import 'package:life_calendar2/domain/repositories/user_repository.dart';
 import 'package:life_calendar2/domain/repositories/week_repository.dart';
 import 'package:life_calendar2/ui/core/themes/app_theme.dart';
@@ -14,6 +16,9 @@ class CalendarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider<OnboardingRepository>(
+          create: (_) => const OnboardingRepositoryLocal(),
+        ),
         RepositoryProvider<UserRepository>(create: (_) => UserRepositoryMock()),
         RepositoryProvider<WeekRepository>(create: (_) => WeekRepositoryMock()),
       ],
@@ -23,9 +28,9 @@ class CalendarApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme,
         routerConfig: goRouter,
         builder: (context, widget) {
-          Widget error = const Text('Ошибка приложения');
+          Widget error = const Center(child: Text('Ошибка приложения'));
           if (widget is Scaffold || widget is Navigator) {
-            error = Scaffold(body: Center(child: error));
+            error = Scaffold(body: error);
           }
           ErrorWidget.builder = (errorDetails) => error;
           if (widget != null) return widget;
