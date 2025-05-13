@@ -2,12 +2,11 @@ import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
 import 'package:life_calendar2/domain/repositories/onboarding_repository.dart';
 import 'package:life_calendar2/utils/result.dart';
 
-class OnboardingRepositoryMock implements OnboardingRepository {
+class OnboardingRepositoryLocal implements OnboardingRepository {
   @override
   Future<Result<List<OnboardingPage>>> getPages() {
-    return Future.delayed(
-      const Duration(milliseconds: 100),
-      () => const Result.ok([
+    return Future.value(
+      const Result.ok([
         OnboardingPage(
           image: 'assets/onboarding/life_calendar_paper.png',
           title: 'Календарь жизни в неделях',
@@ -16,7 +15,7 @@ class OnboardingRepositoryMock implements OnboardingRepository {
               'прожитых и оставшихся неделей нашей жизни.',
         ),
         OnboardingPage(
-          image: 'assets/onboarding/onboarding2.png',
+          image: 'assets/onboarding/life_calendar_arrows.png',
           title: 'Календарь жизни в неделях',
           content:
               'Каждая строка календаря соответствует одному году '
@@ -31,7 +30,7 @@ class OnboardingRepositoryMock implements OnboardingRepository {
               'вы перейдете на экран выбранной недели.',
         ),
         OnboardingPage(
-          image: 'assets/onboarding/onboarding4.png',
+          image: 'assets/onboarding/current_week_button.png',
           title: 'Переходите к текущей неделе одним нажатием',
           content:
               'Чтобы сразу перейти к текущей неделе, '
