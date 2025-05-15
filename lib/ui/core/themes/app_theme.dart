@@ -4,39 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 
 class AppTheme {
-  static const TextStyle introDescriptionStyle = TextStyle(
-    color: Color(0xFF00174D),
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-    height: 1.43,
-    letterSpacing: 0.5,
-  ); // bodyMedium
-  static const TextStyle introTitleStyle = TextStyle(
-    color: Color(0xFF00174D),
-    fontSize: 28,
-    fontWeight: FontWeight.w400,
-    height: 1.29,
-  );
-  static const TextStyle introNextStyle = TextStyle(
-    color: Color(0xFF0151DF),
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.5,
-  );
-  static const TextStyle introSkipStyle = TextStyle(
-    color: Color(0xFF0151DF),
-    fontSize: 11,
-    fontWeight: FontWeight.w500,
-    height: 1.45,
-    letterSpacing: 0.5,
-  );
-  static const TextStyle introDoneStyle = TextStyle(
-    color: Color(0xFF0151DF),
-    fontSize: 16,
-    fontWeight: FontWeight.w500,
-    letterSpacing: 0.5,
-  );
-
   static ThemeData get lightTheme => ThemeData(
     useMaterial3: true,
     colorScheme: const ColorScheme(

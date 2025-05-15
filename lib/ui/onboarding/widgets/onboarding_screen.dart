@@ -26,23 +26,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ..loadPages(),
       child: AnnotatedRegion(
         value: SystemUiOverlayStyle(
-          statusBarColor: theme.surfaceColor,
-          systemNavigationBarColor: theme.surfaceColor,
+          statusBarColor: theme.statusBarColor,
+          systemNavigationBarColor: theme.systemNavigationBarColor,
         ),
         child: SafeArea(
           child: Scaffold(
-            body: BlocBuilder<OnboardingCubit, OnboardingState>(
-              builder: (context, state) {
-                return switch (state) {
-                  // TODO: add loading widget with text
-                  OnboardingInitial() || OnboardingLoading() => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  // TODO: add error widget
-                  OnboardingFailure() => const Center(child: Text('Ошибка')),
-                  OnboardingSuccess() => OnboardingView(pages: state.pages),
-                };
-              },
+            body: DecoratedBox(
+              decoration: BoxDecoration(gradient: theme.gradient),
+              child: BlocBuilder<OnboardingCubit, OnboardingState>(
+                builder: (context, state) {
+                  return switch (state) {
+                    // TODO: add loading widget with text
+                    OnboardingInitial() || OnboardingLoading() => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    // TODO: add error widget
+                    OnboardingFailure() => const Center(child: Text('Ошибка')),
+                    OnboardingSuccess() => OnboardingView(pages: state.pages),
+                  };
+                },
+              ),
             ),
           ),
         ),

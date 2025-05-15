@@ -18,11 +18,8 @@ class PageIndicator extends StatelessWidget {
 
     return Row(
       children: [
-        Visibility(
+        Visibility.maintain(
           visible: currentPageIndex > 0,
-          maintainSize: true,
-          maintainAnimation: true,
-          maintainState: true,
           child: IconButton(
             onPressed: () {
               onUpdateCurrentPageIndex(currentPageIndex - 1);
