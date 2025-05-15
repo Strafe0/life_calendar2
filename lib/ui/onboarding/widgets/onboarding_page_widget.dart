@@ -13,11 +13,24 @@ class OnboardingPageWidget extends StatelessWidget {
 
     return Column(
       children: [
-        if (image != null)
-          Expanded(child: Image.asset(image)),
+        if (image != null) Expanded(flex: 10, child: Image.asset(image)),
         if (title != null)
-          Text(title),
-        Text(page.content),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Text(
+              title,
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        Text(
+          page.content,
+          style: Theme.of(context).textTheme.bodySmall,
+          textAlign: TextAlign.center,
+        ),
+        const Spacer(),
       ],
     );
   }
