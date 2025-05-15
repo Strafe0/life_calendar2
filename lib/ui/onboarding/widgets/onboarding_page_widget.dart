@@ -13,7 +13,14 @@ class OnboardingPageWidget extends StatelessWidget {
 
     return Column(
       children: [
-        if (image != null) Expanded(flex: 10, child: Image.asset(image)),
+        if (image != null)
+          Expanded(
+            flex: 10,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Image.asset(image),
+            ),
+          ),
         if (title != null)
           Padding(
             padding: const EdgeInsets.only(bottom: 16),
