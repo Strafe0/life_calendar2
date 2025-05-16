@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 
 class EventWidget extends StatelessWidget {
   const EventWidget({super.key, required this.event});
@@ -35,14 +36,14 @@ class EventWidget extends StatelessWidget {
                 PopupMenuItem(
                   value: 1,
                   child: Text(
-                    'Изменить',
+                    context.l10n.edit,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
                 PopupMenuItem(
                   value: 2,
                   child: Text(
-                    'Удалить',
+                    context.l10n.delete,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),

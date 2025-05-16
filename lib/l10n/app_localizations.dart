@@ -93,11 +93,107 @@ abstract class AppLocalizations {
     Locale('ru')
   ];
 
-  /// Title of the app
+  /// Название приложения
   ///
   /// In ru, this message translates to:
   /// **'Календарь жизни'**
   String get appTitle;
+
+  /// Текст загрузки
+  ///
+  /// In ru, this message translates to:
+  /// **'Загрузка'**
+  String get loading;
+
+  /// Текст общей ошибки без конкретики
+  ///
+  /// In ru, this message translates to:
+  /// **'Произошла ошибка'**
+  String get errorHappened;
+
+  /// Текст для кнопки
+  ///
+  /// In ru, this message translates to:
+  /// **'Попробовать снова'**
+  String get tryAgain;
+
+  /// No description provided for @week.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неделя'**
+  String get week;
+
+  /// No description provided for @goals.
+  ///
+  /// In ru, this message translates to:
+  /// **'Цели'**
+  String get goals;
+
+  /// No description provided for @noGoals.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет целей'**
+  String get noGoals;
+
+  /// No description provided for @events.
+  ///
+  /// In ru, this message translates to:
+  /// **'События'**
+  String get events;
+
+  /// No description provided for @noEvents.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет событий'**
+  String get noEvents;
+
+  /// No description provided for @photos.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фото'**
+  String get photos;
+
+  /// No description provided for @noPhotos.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет фото'**
+  String get noPhotos;
+
+  /// No description provided for @resume.
+  ///
+  /// In ru, this message translates to:
+  /// **'Итог'**
+  String get resume;
+
+  /// No description provided for @noResume.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет итога'**
+  String get noResume;
+
+  /// No description provided for @rateWeek.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дайте оценку неделе'**
+  String get rateWeek;
+
+  /// No description provided for @edit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменить'**
+  String get edit;
+
+  /// No description provided for @delete.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить'**
+  String get delete;
+
+  /// No description provided for @skip.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пропустить'**
+  String get skip;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

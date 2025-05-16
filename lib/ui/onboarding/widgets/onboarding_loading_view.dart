@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 
 class OnboardingLoadingView extends StatelessWidget {
   const OnboardingLoadingView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox.expand(
+    return SizedBox.expand(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(bottom: 16),
             child: CircularProgressIndicator(),
           ),
-          Text('Загрузка'),
+          Text(context.l10n.loading),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_assessment/week_assessment_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/week_event_list_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_goals/week_goal_list_widget.dart';
@@ -20,7 +21,9 @@ class _WeekViewState extends State<WeekView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Неделя ${widget.week.start} - ${widget.week.end}'),
+        title: Text(
+          '${context.l10n.week} ${widget.week.start} - ${widget.week.end}',
+        ),
         titleSpacing: 0,
         leadingWidth: 48,
       ),

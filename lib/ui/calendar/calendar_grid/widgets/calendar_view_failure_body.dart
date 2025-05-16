@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 
 class CalendarViewFailureBody extends StatelessWidget {
   const CalendarViewFailureBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Error'));
+    return Center(child: Text(context.l10n.errorHappened));
   }
 }

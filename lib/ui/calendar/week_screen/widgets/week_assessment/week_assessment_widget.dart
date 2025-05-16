@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_assessment/assessment_radio_button.dart';
@@ -28,7 +29,7 @@ class WeekAssessmentWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 12, bottom: 4),
               child: Text(
-                'Дайте оценку неделе',
+                context.l10n.rateWeek,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),

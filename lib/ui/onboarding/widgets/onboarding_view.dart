@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/widgets/page_indicator.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_page_widget.dart';
 
@@ -32,7 +33,7 @@ class _OnboardingViewState extends State<OnboardingView>
             alignment: Alignment.centerLeft,
             child: TextButton(
               onPressed: () {},
-              child: const Text('Пропустить'),
+              child: Text(context.l10n.skip),
             ),
           ),
           Expanded(

@@ -2,6 +2,44 @@
     "@@locale": "ru",
     "appTitle": "Календарь жизни",
     "@appTitle": {
-        "description": "Title of the app"
-    }
+        "description": "Название приложения"
+    },
+    "loading": "Загрузка",
+    "@loading": {
+        "description": "Текст загрузки"
+    },
+    "errorHappened": "Произошла ошибка",
+    "@errorHappened": {
+        "description": "Текст общей ошибки без конкретики"
+    },
+    "tryAgain": "Попробовать снова",
+    "@tryAgain": {
+        "description": "Текст для кнопки"
+    },
+    "week": "Неделя",
+    "@week": {},
+    "goals": "Цели",
+    "@goals": {},
+    "noGoals": "Нет целей",
+    "@noGoals": {},
+    "events": "События",
+    "@events": {},
+    "noEvents": "Нет событий",
+    "@noEvents": {},
+    "photos": "Фото",
+    "@photos": {},
+    "noPhotos": "Нет фото",
+    "@noPhotos": {},
+    "resume": "Итог",
+    "@resume": {},
+    "noResume": "Нет итога",
+    "@noResume": {},
+    "rateWeek": "Дайте оценку неделе",
+    "@rateWeek": {},
+    "edit": "Изменить",
+    "@edit": {},
+    "delete": "Удалить",
+    "@delete": {},
+    "skip": "Пропустить",
+    "@skip": {}
 }

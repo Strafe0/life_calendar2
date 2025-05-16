@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/event_widget.dart';
@@ -15,7 +16,7 @@ class WeekEventListWidget extends StatelessWidget {
           padding: const EdgeInsets.only(left: 12, bottom: 4),
           sliver: SliverToBoxAdapter(
             child: Text(
-              'События',
+              context.l10n.events,
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
@@ -25,8 +26,8 @@ class WeekEventListWidget extends StatelessWidget {
             final events = state is WeekSuccess ? state.week.events : [];
 
             if (events.isEmpty) {
-              return const SliverToBoxAdapter(
-                child: Center(child: Text('Нет событий')),
+              return SliverToBoxAdapter(
+                child: Center(child: Text(context.l10n.noEvents)),
               );
             }
 

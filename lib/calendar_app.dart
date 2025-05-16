@@ -32,7 +32,7 @@ class CalendarApp extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         builder: (context, widget) {
-          Widget error = const Center(child: Text('Ошибка приложения'));
+          Widget error = Center(child: Text(context.l10n.errorHappened));
           if (widget is Scaffold || widget is Navigator) {
             error = Scaffold(body: error);
           }
