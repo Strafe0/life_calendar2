@@ -13,6 +13,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       super(const OnboardingInitial());
 
   Future<void> loadPages() async {
+    if (state is OnboardingLoading) return;
+
     emit(const OnboardingLoading());
 
     final pagesResult = await _onboardingRepository.getPages();

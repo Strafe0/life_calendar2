@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/ui/core/themes/onboarding_theme.dart';
 import 'package:life_calendar2/ui/onboarding/bloc/onboarding_cubit.dart';
 import 'package:life_calendar2/ui/onboarding/bloc/onboarding_state.dart';
+import 'package:life_calendar2/ui/onboarding/widgets/onboarding_error_view.dart';
+import 'package:life_calendar2/ui/onboarding/widgets/onboarding_loading_view.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_view.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -37,20 +39,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 builder: (context, state) {
                   return switch (state) {
                     OnboardingInitial() ||
-                    OnboardingLoading() => const SizedBox.expand(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 16),
-                            child: CircularProgressIndicator(),
-                          ),
-                          Text('Загрузка'),
-                        ],
-                      ),
-                    ),
-                    // TODO: add error widget
-                    OnboardingFailure() => const Center(child: Text('Ошибка')),
+                    OnboardingLoading() => const OnboardingLoadingView(),
+                    OnboardingFailure() => const OnboardingErrorView(),
                     OnboardingSuccess() => OnboardingView(pages: state.pages),
                   };
                 },
