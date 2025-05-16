@@ -7,6 +7,8 @@ import 'package:life_calendar2/data/repositories/onboarding_repository_local.dar
 import 'package:life_calendar2/domain/repositories/onboarding_repository.dart';
 import 'package:life_calendar2/domain/repositories/user_repository.dart';
 import 'package:life_calendar2/domain/repositories/week_repository.dart';
+import 'package:life_calendar2/l10n/app_localizations.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/themes/app_theme.dart';
 
 class CalendarApp extends StatelessWidget {
@@ -23,10 +25,12 @@ class CalendarApp extends StatelessWidget {
         RepositoryProvider<WeekRepository>(create: (_) => WeekRepositoryMock()),
       ],
       child: MaterialApp.router(
-        title: 'Календарь жизни',
+        title: context.l10n.appTitle,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         routerConfig: goRouter,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         builder: (context, widget) {
           Widget error = const Center(child: Text('Ошибка приложения'));
           if (widget is Scaffold || widget is Navigator) {

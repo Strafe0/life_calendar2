@@ -1,0 +1,7 @@
+{
+    "@@locale": "ru",
+    "appTitle": "Календарь жизни",
+    "@appTitle": {
+        "description": "Title of the app"
+    }
+}
