@@ -36,9 +36,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: BlocBuilder<OnboardingCubit, OnboardingState>(
                 builder: (context, state) {
                   return switch (state) {
-                    // TODO: add loading widget with text
-                    OnboardingInitial() || OnboardingLoading() => const Center(
-                      child: CircularProgressIndicator(),
+                    OnboardingInitial() ||
+                    OnboardingLoading() => const SizedBox.expand(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 16),
+                            child: CircularProgressIndicator(),
+                          ),
+                          Text('Загрузка'),
+                        ],
+                      ),
                     ),
                     // TODO: add error widget
                     OnboardingFailure() => const Center(child: Text('Ошибка')),
