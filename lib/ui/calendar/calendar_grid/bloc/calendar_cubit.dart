@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
-import 'package:life_calendar2/domain/repositories/week_repository.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_state.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 import 'package:life_calendar2/utils/result.dart';

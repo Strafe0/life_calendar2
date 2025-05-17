@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/navigation/router.dart';
-import 'package:life_calendar2/data/repositories/mock/user_repository_mock.dart';
-import 'package:life_calendar2/data/repositories/mock/week_repository_mock.dart';
-import 'package:life_calendar2/data/repositories/onboarding_repository_local.dart';
-import 'package:life_calendar2/domain/repositories/onboarding_repository.dart';
-import 'package:life_calendar2/domain/repositories/user_repository.dart';
-import 'package:life_calendar2/domain/repositories/week_repository.dart';
+import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository.dart';
+import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository_impl.dart';
+import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
+import 'package:life_calendar2/data/repositories/user_repository/user_repository_mock.dart';
+import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
+import 'package:life_calendar2/data/repositories/week_repository/week_repository_mock.dart';
 import 'package:life_calendar2/l10n/app_localizations.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/themes/app_theme.dart';
@@ -19,7 +19,7 @@ class CalendarApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<OnboardingRepository>(
-          create: (_) => const OnboardingRepositoryLocal(),
+          create: (_) => const OnboardingRepositoryImpl(),
         ),
         RepositoryProvider<UserRepository>(create: (_) => UserRepositoryMock()),
         RepositoryProvider<WeekRepository>(create: (_) => WeekRepositoryMock()),

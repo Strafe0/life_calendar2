@@ -1,13 +1,13 @@
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
 import 'package:life_calendar2/data/services/shared_preferences_service.dart';
 import 'package:life_calendar2/domain/models/user/user.dart';
-import 'package:life_calendar2/domain/repositories/user_repository.dart';
 import 'package:life_calendar2/utils/result.dart';
 
-class UserRepositoryLocal implements UserRepository {
+class UserRepositoryImpl implements UserRepository {
   final SharedPreferencesService _sharedPreferencesService;
 
-  const UserRepositoryLocal({
+  const UserRepositoryImpl({
     required SharedPreferencesService sharedPreferencesService,
   }) : _sharedPreferencesService = sharedPreferencesService;
 

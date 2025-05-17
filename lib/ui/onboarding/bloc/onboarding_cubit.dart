@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository.dart';
 import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
-import 'package:life_calendar2/domain/repositories/onboarding_repository.dart';
 import 'package:life_calendar2/ui/onboarding/bloc/onboarding_state.dart';
 import 'package:life_calendar2/utils/result.dart';
 

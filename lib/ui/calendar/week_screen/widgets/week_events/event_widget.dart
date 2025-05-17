@@ -24,7 +24,7 @@ class EventWidget extends StatelessWidget {
             Icons.more_vert,
             color: Theme.of(context).colorScheme.onSurface,
           ),
-          onSelected: (value) async {
+          onSelected: (value) {
             if (value == 1) {
               // TODO: change event
             } else if (value == 2) {

@@ -52,7 +52,7 @@ class GoalWidget extends StatelessWidget {
                   ),
                 ),
               ],
-          onSelected: (value) async {
+          onSelected: (value) {
             if (value == 1) {
               // TODO: change goal title
             } else if (value == 2) {

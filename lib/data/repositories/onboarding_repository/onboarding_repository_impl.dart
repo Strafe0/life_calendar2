@@ -1,9 +1,9 @@
+import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository.dart';
 import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
-import 'package:life_calendar2/domain/repositories/onboarding_repository.dart';
 import 'package:life_calendar2/utils/result.dart';
 
-class OnboardingRepositoryLocal implements OnboardingRepository {
-  const OnboardingRepositoryLocal();
+class OnboardingRepositoryImpl implements OnboardingRepository {
+  const OnboardingRepositoryImpl();
 
   @override
   Future<Result<List<OnboardingPage>>> getPages() {

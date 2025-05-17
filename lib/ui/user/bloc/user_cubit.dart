@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
 import 'package:life_calendar2/domain/models/user/user.dart';
-import 'package:life_calendar2/domain/repositories/user_repository.dart';
 import 'package:life_calendar2/ui/user/bloc/user_state.dart';
 import 'package:life_calendar2/utils/result.dart';
 

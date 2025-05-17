@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/domain/repositories/week_repository.dart';
+import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_state.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_view_body.dart';

@@ -1,16 +1,16 @@
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/data/services/database_service.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';
 import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
-import 'package:life_calendar2/domain/repositories/week_repository.dart';
 import 'package:life_calendar2/utils/result.dart';
 
-class WeekRepositoryLocal implements WeekRepository {
+class WeekRepositoryImpl implements WeekRepository {
   final DatabaseService _databaseService;
 
-  const WeekRepositoryLocal({required DatabaseService databaseService})
+  const WeekRepositoryImpl({required DatabaseService databaseService})
     : _databaseService = databaseService;
 
   @override

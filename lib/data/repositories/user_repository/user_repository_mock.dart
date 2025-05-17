@@ -1,12 +1,14 @@
+import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
 import 'package:life_calendar2/domain/models/user/user.dart';
-import 'package:life_calendar2/domain/repositories/user_repository.dart';
 import 'package:life_calendar2/utils/result.dart';
 
 class UserRepositoryMock implements UserRepository {
   @override
   Future<Result<void>> createUser(User user) {
-    // TODO: implement createUser
-    throw UnimplementedError();
+    return Future.delayed(
+      const Duration(milliseconds: 500),
+      () => const Result.ok(null),
+    );
   }
 
   @override
