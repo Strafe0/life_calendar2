@@ -31,10 +31,7 @@ class _OnboardingViewState extends State<OnboardingView>
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: TextButton(
-              onPressed: () {},
-              child: Text(context.l10n.skip),
-            ),
+            child: TextButton(onPressed: () {}, child: Text(context.l10n.skip)),
           ),
           Expanded(
             child: PageView(

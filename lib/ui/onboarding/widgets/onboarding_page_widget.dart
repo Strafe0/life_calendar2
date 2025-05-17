@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
   const OnboardingPageWidget({super.key, required this.page});
@@ -9,7 +10,9 @@ class OnboardingPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final image = page.image;
-    final title = page.title;
+    final l10n = context.l10n;
+    final title = page.titleResolver(l10n);
+    final content = page.contentResolver(l10n);
 
     return Column(
       children: [
@@ -33,7 +36,7 @@ class OnboardingPageWidget extends StatelessWidget {
             ),
           ),
         Text(
-          page.content,
+          content,
           style: Theme.of(context).textTheme.bodySmall,
           textAlign: TextAlign.center,
         ),

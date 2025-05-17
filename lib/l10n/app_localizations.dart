@@ -61,7 +61,8 @@ import 'app_localizations_ru.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -69,7 +70,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -81,17 +83,16 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('ru')
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('ru')];
 
   /// Название приложения
   ///
@@ -194,9 +195,58 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Пропустить'**
   String get skip;
+
+  /// No description provided for @onboardingTitleWelcome.
+  ///
+  /// In ru, this message translates to:
+  /// **'Календарь жизни в неделях'**
+  String get onboardingTitleWelcome;
+
+  /// No description provided for @onboardingContentWelcome.
+  ///
+  /// In ru, this message translates to:
+  /// **'Этот календарь дает наглядное представление о количестве прожитых и оставшихся неделей нашей жизни.'**
+  String get onboardingContentWelcome;
+
+  /// No description provided for @onboardingTitleGrid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Календарь жизни в неделях'**
+  String get onboardingTitleGrid;
+
+  /// No description provided for @onboardingContentGrid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Каждая строка календаря соответствует одному году (52 или 53 недели). Каждый год начинается с недели, которая содержит ваш день рождения.'**
+  String get onboardingContentGrid;
+
+  /// Заголовок подсказки о приближении календаря
+  ///
+  /// In ru, this message translates to:
+  /// **'Увеличивайте календарь и выбирайте неделю'**
+  String get onboardingTitleZoom;
+
+  /// Текст подсказки о приближении календаря
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы можете приблизить календарь. Нажав на квадрат, вы перейдете на экран выбранной недели.'**
+  String get onboardingContentZoom;
+
+  /// Заголовок подсказки о переходе к текущей неделе
+  ///
+  /// In ru, this message translates to:
+  /// **'Переходите к текущей неделе одним нажатием'**
+  String get onboardingTitleJumpToCurrentWeek;
+
+  /// Текст подсказки о переходе к текущей неделе
+  ///
+  /// In ru, this message translates to:
+  /// **'Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.'**
+  String get onboardingContentJumpToCurrentWeek;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -205,24 +255,24 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ru'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ru'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ru': return AppLocalizationsRu();
+    case 'ru':
+      return AppLocalizationsRu();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

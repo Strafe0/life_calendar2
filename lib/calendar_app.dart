@@ -25,7 +25,7 @@ class CalendarApp extends StatelessWidget {
         RepositoryProvider<WeekRepository>(create: (_) => WeekRepositoryMock()),
       ],
       child: MaterialApp.router(
-        title: context.l10n.appTitle,
+        title: 'Life Calendar',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         routerConfig: goRouter,

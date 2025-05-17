@@ -41,5 +41,29 @@
     "delete": "Удалить",
     "@delete": {},
     "skip": "Пропустить",
-    "@skip": {}
+    "@skip": {},
+    "onboardingTitleWelcome": "Календарь жизни в неделях",
+    "@onboardingTitleWelcome": {},
+    "onboardingContentWelcome": "Этот календарь дает наглядное представление о количестве прожитых и оставшихся неделей нашей жизни.",
+    "@onboardingContentWelcome": {},
+    "onboardingTitleGrid": "Календарь жизни в неделях",
+    "@onboardingTitleGrid": {},
+    "onboardingContentGrid": "Каждая строка календаря соответствует одному году (52 или 53 недели). Каждый год начинается с недели, которая содержит ваш день рождения.",
+    "@onboardingContentGrid": {},
+    "onboardingTitleZoom": "Увеличивайте календарь и выбирайте неделю",
+    "@onboardingTitleZoom": {
+        "description": "Заголовок подсказки о приближении календаря"
+    },
+    "onboardingContentZoom": "Вы можете приблизить календарь. Нажав на квадрат, вы перейдете на экран выбранной недели.",
+    "@onboardingContentZoom": {
+        "description": "Текст подсказки о приближении календаря"
+    },
+    "onboardingTitleJumpToCurrentWeek": "Переходите к текущей неделе одним нажатием",
+    "@onboardingTitleJumpToCurrentWeek": {
+        "description": "Заголовок подсказки о переходе к текущей неделе"
+    },
+    "onboardingContentJumpToCurrentWeek": "Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.",
+    "@onboardingContentJumpToCurrentWeek": {
+        "description": "Текст подсказки о переходе к текущей неделе"
+    }
 }

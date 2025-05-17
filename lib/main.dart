@@ -6,7 +6,7 @@ import 'package:life_calendar2/core/logger.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   FlutterError.onError = (details) {
     FlutterError.presentError(details);
     logger.f('Fatal error', error: details);

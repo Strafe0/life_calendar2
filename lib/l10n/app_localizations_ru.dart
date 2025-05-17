@@ -58,4 +58,33 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get skip => 'Пропустить';
+
+  @override
+  String get onboardingTitleWelcome => 'Календарь жизни в неделях';
+
+  @override
+  String get onboardingContentWelcome =>
+      'Этот календарь дает наглядное представление о количестве прожитых и оставшихся неделей нашей жизни.';
+
+  @override
+  String get onboardingTitleGrid => 'Календарь жизни в неделях';
+
+  @override
+  String get onboardingContentGrid =>
+      'Каждая строка календаря соответствует одному году (52 или 53 недели). Каждый год начинается с недели, которая содержит ваш день рождения.';
+
+  @override
+  String get onboardingTitleZoom => 'Увеличивайте календарь и выбирайте неделю';
+
+  @override
+  String get onboardingContentZoom =>
+      'Вы можете приблизить календарь. Нажав на квадрат, вы перейдете на экран выбранной недели.';
+
+  @override
+  String get onboardingTitleJumpToCurrentWeek =>
+      'Переходите к текущей неделе одним нажатием';
+
+  @override
+  String get onboardingContentJumpToCurrentWeek =>
+      'Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.';
 }

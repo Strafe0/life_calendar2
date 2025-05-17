@@ -4,39 +4,30 @@ import 'package:life_calendar2/utils/result.dart';
 
 class OnboardingRepositoryLocal implements OnboardingRepository {
   const OnboardingRepositoryLocal();
-  
+
   @override
   Future<Result<List<OnboardingPage>>> getPages() {
     return Future.value(
-      const Result.ok([
+      Result.ok([
         OnboardingPage(
           image: 'assets/onboarding/life_calendar_paper.png',
-          title: 'Календарь жизни в неделях',
-          content:
-              'Этот календарь дает наглядное представление о количестве '
-              'прожитых и оставшихся неделей нашей жизни.',
+          titleResolver: (l10n) => l10n.onboardingTitleWelcome,
+          contentResolver: (l10n) => l10n.onboardingContentWelcome,
         ),
         OnboardingPage(
           image: 'assets/onboarding/life_calendar_arrows.png',
-          title: 'Календарь жизни в неделях',
-          content:
-              'Каждая строка календаря соответствует одному году '
-              '(52 или 53 недели). Каждый год начинается с недели, которая '
-              'содержит ваш день рождения.',
+          titleResolver: (l10n) => l10n.onboardingTitleGrid,
+          contentResolver: (l10n) => l10n.onboardingContentGrid,
         ),
         OnboardingPage(
           image: 'assets/onboarding/zoom_select.png',
-          title: 'Увеличивайте календарь и выбирайте неделю',
-          content:
-              'Вы можете приблизить календарь. Нажав на квадрат, '
-              'вы перейдете на экран выбранной недели.',
+          titleResolver: (l10n) => l10n.onboardingTitleZoom,
+          contentResolver: (l10n) => l10n.onboardingContentZoom,
         ),
         OnboardingPage(
           image: 'assets/onboarding/current_week_button.png',
-          title: 'Переходите к текущей неделе одним нажатием',
-          content:
-              'Чтобы сразу перейти к текущей неделе, '
-              'нажмите на кнопку снизу справа.',
+          titleResolver: (l10n) => l10n.onboardingTitleJumpToCurrentWeek,
+          contentResolver: (l10n) => l10n.onboardingContentJumpToCurrentWeek,
         ),
       ]),
     );

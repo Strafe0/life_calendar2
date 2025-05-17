@@ -1,17 +1,18 @@
 import 'package:equatable/equatable.dart';
+import 'package:life_calendar2/l10n/app_localizations.dart';
 
 class OnboardingPage extends Equatable {
   /// Url or path
   final String? image;
-  final String? title;
-  final String content;
+  final String? Function(AppLocalizations) titleResolver;
+  final String Function(AppLocalizations) contentResolver;
 
   const OnboardingPage({
     required this.image,
-    required this.title,
-    required this.content,
+    required this.titleResolver,
+    required this.contentResolver,
   });
 
   @override
-  List<Object?> get props => [image, title, content];
+  List<Object?> get props => [image, titleResolver, contentResolver];
 }
