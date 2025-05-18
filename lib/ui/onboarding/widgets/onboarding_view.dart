@@ -35,7 +35,12 @@ class _OnboardingViewState extends State<OnboardingView>
             alignment: Alignment.centerLeft,
             child: TextButton(
               onPressed: () => context.go(AppRoute.registration),
-              child: Text(context.l10n.skip),
+              child: Text(
+                context.l10n.skip,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface.withAlpha(122),
+                ),
+              ),
             ),
           ),
           Expanded(
