@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/widgets/page_indicator.dart';
@@ -31,15 +33,26 @@ class _OnboardingViewState extends State<OnboardingView>
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: TextButton(onPressed: () {}, child: Text(context.l10n.skip)),
+            child: TextButton(
+              onPressed: () => context.go(AppRoute.registration),
+              child: Text(context.l10n.skip),
+            ),
           ),
           Expanded(
-            child: PageView(
-              controller: _pageController,
-              children: widget.pages
-                  .map((page) => OnboardingPageWidget(page: page))
-                  .toList(growable: false),
+            child: PageView.builder(
+              itemCount: widget.pages.length + 1,
+              itemBuilder: (context, i) {
+                if (i == widget.pages.length) {
+                  return const SizedBox.expand();
+                }
+                return OnboardingPageWidget(page: widget.pages[i]);
+              },
               onPageChanged: (newPageIndex) {
+                if (newPageIndex == widget.pages.length) {
+                  context.go(AppRoute.registration);
+                  return;
+                }
+
                 setState(() {
                   _tabController.index = newPageIndex;
                   _pageIndex = newPageIndex;

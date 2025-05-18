@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/navigation/router.dart';
+import 'package:life_calendar2/data/repositories/auth_repository/auth_repository.dart';
+import 'package:life_calendar2/data/repositories/auth_repository/auth_repository_impl.dart';
 import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository.dart';
 import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository_impl.dart';
 import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
 import 'package:life_calendar2/data/repositories/user_repository/user_repository_mock.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository_mock.dart';
+import 'package:life_calendar2/data/services/shared_preferences_service.dart';
 import 'package:life_calendar2/l10n/app_localizations.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/themes/app_theme.dart';
@@ -18,8 +21,14 @@ class CalendarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider(create: (_) => const SharedPreferencesService()),
         RepositoryProvider<OnboardingRepository>(
           create: (_) => const OnboardingRepositoryImpl(),
+        ),
+        RepositoryProvider<AuthRepository>(
+          create: (_) {
+            return AuthRepositoryImpl(sharedPreferencesService: context.read());
+          },
         ),
         RepositoryProvider<UserRepository>(create: (_) => UserRepositoryMock()),
         RepositoryProvider<WeekRepository>(create: (_) => WeekRepositoryMock()),
