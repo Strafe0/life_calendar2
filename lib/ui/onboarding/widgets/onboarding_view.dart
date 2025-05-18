@@ -46,6 +46,7 @@ class _OnboardingViewState extends State<OnboardingView>
           Expanded(
             child: PageView.builder(
               itemCount: widget.pages.length + 1,
+              controller: _pageController,
               itemBuilder: (context, i) {
                 if (i == widget.pages.length) {
                   return const SizedBox.expand();
