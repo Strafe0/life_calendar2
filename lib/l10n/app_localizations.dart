@@ -242,6 +242,30 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.'**
   String get onboardingContentJumpToCurrentWeek;
+
+  /// No description provided for @enterBirthday.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите дату рождения'**
+  String get enterBirthday;
+
+  /// No description provided for @enterLifespan.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите продолжительность жизни'**
+  String get enterLifespan;
+
+  /// No description provided for @ready.
+  ///
+  /// In ru, this message translates to:
+  /// **'Готово'**
+  String get ready;
+
+  /// No description provided for @lifespanInterval.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите целое число от 60 до 100 лет'**
+  String get lifespanInterval;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

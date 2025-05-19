@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/themes/onboarding_theme.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_cubit.dart';
 
@@ -41,8 +42,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           children: [
                             TextFormField(
                               controller: _birthdayTextController,
-                              decoration: const InputDecoration(
-                                labelText: 'Введите дату рождения',
+                              decoration: InputDecoration(
+                                labelText: context.l10n.enterBirthday,
                               ),
                               onTapOutside:
                                   (event) =>
@@ -52,8 +53,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             const SizedBox(height: 16),
                             TextFormField(
                               controller: _lifeSpanTextController,
-                              decoration: const InputDecoration(
-                                labelText: 'Продолжительность жизни',
+                              decoration: InputDecoration(
+                                labelText: context.l10n.enterLifespan,
                               ),
                               onTapOutside:
                                   (event) =>
@@ -64,7 +65,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               padding: const EdgeInsets.all(48),
                               child: OutlinedButton(
                                 onPressed: () {},
-                                child: const Text('Готово'),
+                                child: Text(context.l10n.ready),
                               ),
                             ),
                           ],

@@ -65,5 +65,13 @@
     "onboardingContentJumpToCurrentWeek": "Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.",
     "@onboardingContentJumpToCurrentWeek": {
         "description": "Текст подсказки о переходе к текущей неделе"
-    }
+    },
+    "enterBirthday": "Введите дату рождения",
+    "@enterBirthday": {},
+    "enterLifespan": "Введите продолжительность жизни",
+    "@enterLifespan": {},
+    "ready": "Готово",
+    "@ready": {},
+    "lifespanInterval": "Введите целое число от 60 до 100 лет",
+    "@lifespanInterval": {}
 }

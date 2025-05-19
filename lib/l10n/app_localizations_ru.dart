@@ -82,4 +82,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get onboardingContentJumpToCurrentWeek => 'Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.';
+
+  @override
+  String get enterBirthday => 'Введите дату рождения';
+
+  @override
+  String get enterLifespan => 'Введите продолжительность жизни';
+
+  @override
+  String get ready => 'Готово';
+
+  @override
+  String get lifespanInterval => 'Введите целое число от 60 до 100 лет';
 }
