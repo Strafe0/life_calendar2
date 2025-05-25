@@ -16,8 +16,8 @@ class UserRepositoryMock implements UserRepository {
     return Future.delayed(
       const Duration(milliseconds: 500),
       () => Result.ok(
-        // User.empty(),
-        User(id: 'mock_id', birthday: DateTime(1998, 12, 22), lifeSpan: 80),
+        User.empty(),
+        // User(id: 'mock_id', birthday: DateTime(1998, 12, 22), lifeSpan: 80),
       ),
     );
   }

@@ -243,17 +243,35 @@ abstract class AppLocalizations {
   /// **'Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.'**
   String get onboardingContentJumpToCurrentWeek;
 
-  /// No description provided for @enterBirthday.
+  /// No description provided for @enterBirthdate.
   ///
   /// In ru, this message translates to:
   /// **'Введите дату рождения'**
-  String get enterBirthday;
+  String get enterBirthdate;
+
+  /// No description provided for @dateFormatError.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверный формат даты'**
+  String get dateFormatError;
+
+  /// No description provided for @dateInvalid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите дату {start} - {end}'**
+  String dateInvalid(String start, String end);
 
   /// No description provided for @enterLifespan.
   ///
   /// In ru, this message translates to:
   /// **'Введите продолжительность жизни'**
   String get enterLifespan;
+
+  /// No description provided for @lifespanFormatError.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверный формат'**
+  String get lifespanFormatError;
 
   /// No description provided for @ready.
   ///
@@ -264,8 +282,8 @@ abstract class AppLocalizations {
   /// No description provided for @lifespanInterval.
   ///
   /// In ru, this message translates to:
-  /// **'Введите целое число от 60 до 100 лет'**
-  String get lifespanInterval;
+  /// **'Введите целое число от {start} до {end} лет'**
+  String lifespanInterval(int start, int end);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

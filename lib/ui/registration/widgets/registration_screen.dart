@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/themes/onboarding_theme.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_cubit.dart';
+import 'package:life_calendar2/ui/registration/widgets/registration_form_body.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -13,8 +13,7 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final _birthdayTextController = TextEditingController();
-  final _lifeSpanTextController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,49 +30,35 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           child: Scaffold(
             body: DecoratedBox(
               decoration: BoxDecoration(gradient: onboardingTheme.gradient),
-              child: Column(
-                children: [
-                  Image.asset('assets/calendar_splash_image.png'),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Form(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return SingleChildScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: IntrinsicHeight(
                         child: Column(
                           children: [
-                            TextFormField(
-                              controller: _birthdayTextController,
-                              decoration: InputDecoration(
-                                labelText: context.l10n.enterBirthday,
-                              ),
-                              onTapOutside:
-                                  (event) =>
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus(),
-                            ),
-                            const SizedBox(height: 16),
-                            TextFormField(
-                              controller: _lifeSpanTextController,
-                              decoration: InputDecoration(
-                                labelText: context.l10n.enterLifespan,
-                              ),
-                              onTapOutside:
-                                  (event) =>
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus(),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(48),
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                child: Text(context.l10n.ready),
+                            Image.asset('assets/calendar_splash_image.png'),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Form(
+                                  key: _formKey,
+                                  child: RegistrationFormBody(
+                                    formKey: _formKey,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),

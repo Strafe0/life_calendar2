@@ -19,7 +19,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       await _sharedPreferencesService.setBirthday(birthday.toTimeStamp());
       logger.d('Birthday is saved');
-      
+
       await _sharedPreferencesService.setLifespan(lifeSpan);
       logger.d('Lifespan is saved');
 

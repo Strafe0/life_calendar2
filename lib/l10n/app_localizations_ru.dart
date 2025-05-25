@@ -84,14 +84,27 @@ class AppLocalizationsRu extends AppLocalizations {
   String get onboardingContentJumpToCurrentWeek => 'Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.';
 
   @override
-  String get enterBirthday => 'Введите дату рождения';
+  String get enterBirthdate => 'Введите дату рождения';
+
+  @override
+  String get dateFormatError => 'Неверный формат даты';
+
+  @override
+  String dateInvalid(String start, String end) {
+    return 'Введите дату $start - $end';
+  }
 
   @override
   String get enterLifespan => 'Введите продолжительность жизни';
 
   @override
+  String get lifespanFormatError => 'Неверный формат';
+
+  @override
   String get ready => 'Готово';
 
   @override
-  String get lifespanInterval => 'Введите целое число от 60 до 100 лет';
+  String lifespanInterval(int start, int end) {
+    return 'Введите целое число от $start до $end лет';
+  }
 }

@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
+import 'package:life_calendar2/ui/registration/bloc/registration_cubit.dart';
+
+class RegistrationFormBody extends StatefulWidget {
+  const RegistrationFormBody({super.key, required this.formKey});
+
+  final GlobalKey<FormState> formKey;
+
+  @override
+  State<RegistrationFormBody> createState() => _RegistrationFormBodyState();
+}
+
+class _RegistrationFormBodyState extends State<RegistrationFormBody> {
+  bool _isLoading = false;
+  final _lifeSpanTextController = TextEditingController();
+  DateTime? _birthdate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        DateTextField(
+          firstDate: DateTime(1950, 01, 01),
+          lastDate: DateTime.now(),
+          initialDate: _birthdate,
+          onDateSaved: (value) {
+            _birthdate = value;
+            logger.d('birthday saved: $_birthdate');
+          },
+          onDateSubmitted: (value) {
+            setState(() => _birthdate = value);
+            logger.d('birthday submitted: $_birthdate');
+          },
+        ),
+        const SizedBox(height: 16),
+        TextFormField(
+          controller: _lifeSpanTextController,
+          decoration: InputDecoration(labelText: context.l10n.enterLifespan),
+          keyboardType: TextInputType.number,
+          onTapOutside:
+              (event) => FocusManager.instance.primaryFocus?.unfocus(),
+        ),
+        const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.all(48),
+          child: OutlinedButton(
+            onPressed: () async {
+              if (!_isLoading) return;
+              setState(() => _isLoading = true);
+
+              final form = widget.formKey.currentState;
+              if (form != null) {
+                form.save();
+                final enteredDataIsValid = form.validate();
+                if (enteredDataIsValid) {
+                  final lifeSpan = int.tryParse(_lifeSpanTextController.text);
+                  if (_birthdate != null && lifeSpan != null) {
+                    await context.read<RegistrationCubit>().register(
+                      birthday: _birthdate!,
+                      lifeSpan: lifeSpan,
+                    );
+                  }
+                }
+              }
+
+              setState(() => _isLoading = false);
+            },
+            child: Text(context.l10n.ready),
+          ),
+        ),
+      ],
+    );
+  }
+}
