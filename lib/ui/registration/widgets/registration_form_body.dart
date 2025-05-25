@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/domain/models/user/user.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_cubit.dart';
@@ -43,13 +44,24 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
           keyboardType: TextInputType.number,
           onTapOutside:
               (event) => FocusManager.instance.primaryFocus?.unfocus(),
+          validator: (value) {
+            final lifeSpan = int.tryParse(value ?? '');
+            if (lifeSpan == null) {
+              return context.l10n.lifespanInterval(
+                User.minLifeSpan,
+                User.maxLifeSpan,
+              );
+            }
+
+            return null;
+          },
         ),
         const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.all(48),
           child: OutlinedButton(
             onPressed: () async {
-              if (!_isLoading) return;
+              if (_isLoading) return;
               setState(() => _isLoading = true);
 
               final form = widget.formKey.currentState;

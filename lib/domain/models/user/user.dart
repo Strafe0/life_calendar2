@@ -19,4 +19,7 @@ abstract class User with _$User {
   );
 
   bool get isEmpty => id.isEmpty;
+
+  static const minLifeSpan = 60;
+  static const maxLifeSpan = 122; // Jeanne Calment 
 }

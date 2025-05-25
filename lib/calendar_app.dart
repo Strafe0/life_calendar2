@@ -21,17 +21,23 @@ class CalendarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (_) => const SharedPreferencesService()),
+        RepositoryProvider(
+          create: (context) => const SharedPreferencesService(),
+        ),
         RepositoryProvider<OnboardingRepository>(
-          create: (_) => const OnboardingRepositoryImpl(),
+          create: (context) => const OnboardingRepositoryImpl(),
         ),
         RepositoryProvider<AuthRepository>(
-          create: (_) {
+          create: (context) {
             return AuthRepositoryImpl(sharedPreferencesService: context.read());
           },
         ),
-        RepositoryProvider<UserRepository>(create: (_) => UserRepositoryMock()),
-        RepositoryProvider<WeekRepository>(create: (_) => WeekRepositoryMock()),
+        RepositoryProvider<UserRepository>(
+          create: (context) => UserRepositoryMock(),
+        ),
+        RepositoryProvider<WeekRepository>(
+          create: (context) => WeekRepositoryMock(),
+        ),
       ],
       child: MaterialApp.router(
         title: 'Life Calendar',

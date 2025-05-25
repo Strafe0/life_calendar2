@@ -16,6 +16,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     required int lifeSpan,
   }) async {
     emit(const RegistrationLoading());
+    logger.d('Started registration');
 
     final result = await _authRepository.register(
       birthday: birthday,
