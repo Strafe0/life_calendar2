@@ -53,6 +53,7 @@ class CalendarView extends StatelessWidget {
               create:
                   (context) => CalendarCubit(
                     weekRepository: context.read<WeekRepository>(),
+                    sharedPreferencesService: context.read(),
                   )..getWeeks(calendarSize: calendarSize),
               child: BlocBuilder<CalendarCubit, CalendarState>(
                 builder: (context, state) {

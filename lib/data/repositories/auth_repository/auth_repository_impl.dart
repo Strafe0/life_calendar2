@@ -13,15 +13,18 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Result<void>> register({
-    required DateTime birthday,
+    required DateTime birthdate,
     required int lifeSpan,
   }) async {
     try {
-      await _sharedPreferencesService.setBirthday(birthday.toTimeStamp());
-      logger.d('Birthday is saved');
+      await _sharedPreferencesService.setBirthday(birthdate.toTimeStamp());
+      logger.d('Birthdate $birthdate is saved');
 
       await _sharedPreferencesService.setLifespan(lifeSpan);
-      logger.d('Lifespan is saved');
+      logger.d('Lifespan $lifeSpan is saved');
+
+      await _sharedPreferencesService.setFirstLaunch(isFirstLaunch: false);
+      logger.d('First launch (false) is saved');
 
       return const Result.ok(null);
     } on Exception catch (e, s) {

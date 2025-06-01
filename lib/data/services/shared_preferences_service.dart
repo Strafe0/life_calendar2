@@ -1,6 +1,7 @@
 import 'package:life_calendar2/core/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// TODO: add error handling
 class SharedPreferencesService {
   const SharedPreferencesService();
 
@@ -49,7 +50,7 @@ class SharedPreferencesService {
 
     final lifespan = await prefs.getInt(_lifespanKey);
 
-    if (lifespan != null) {
+    if (lifespan == null) {
       logger.d('Lifespan from prefs is null');
     }
 

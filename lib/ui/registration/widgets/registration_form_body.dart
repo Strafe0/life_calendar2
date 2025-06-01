@@ -30,11 +30,11 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
           initialDate: _birthdate,
           onDateSaved: (value) {
             _birthdate = value;
-            logger.d('birthday saved: $_birthdate');
+            logger.d('birthdate form saved: $_birthdate');
           },
           onDateSubmitted: (value) {
             setState(() => _birthdate = value);
-            logger.d('birthday submitted: $_birthdate');
+            logger.d('birthdate form submitted: $_birthdate');
           },
         ),
         const SizedBox(height: 16),
@@ -46,7 +46,7 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
               (event) => FocusManager.instance.primaryFocus?.unfocus(),
           validator: (value) {
             final lifeSpan = int.tryParse(value ?? '');
-            if (lifeSpan == null) {
+            if (lifeSpan == null || !_lifeSpanIsValid(lifeSpan)) {
               return context.l10n.lifespanInterval(
                 User.minLifeSpan,
                 User.maxLifeSpan,
@@ -87,4 +87,7 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
       ],
     );
   }
+
+  bool _lifeSpanIsValid(int lifeSpan) =>
+      User.minLifeSpan <= lifeSpan && lifeSpan <= User.maxLifeSpan;
 }

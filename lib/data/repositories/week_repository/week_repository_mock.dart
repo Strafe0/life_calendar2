@@ -4,7 +4,7 @@ import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
-import 'package:life_calendar2/utils/calendar/calendar_calculator.dart';
+import 'package:life_calendar2/utils/calendar/calendar_generator.dart';
 import 'package:life_calendar2/utils/result.dart';
 
 class WeekRepositoryMock implements WeekRepository {

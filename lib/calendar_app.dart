@@ -6,7 +6,7 @@ import 'package:life_calendar2/data/repositories/auth_repository/auth_repository
 import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository.dart';
 import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository_impl.dart';
 import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
-import 'package:life_calendar2/data/repositories/user_repository/user_repository_mock.dart';
+import 'package:life_calendar2/data/repositories/user_repository/user_repository_impl.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository_mock.dart';
 import 'package:life_calendar2/data/services/shared_preferences_service.dart';
@@ -33,7 +33,9 @@ class CalendarApp extends StatelessWidget {
           },
         ),
         RepositoryProvider<UserRepository>(
-          create: (context) => UserRepositoryMock(),
+          create:
+              (context) =>
+                  UserRepositoryImpl(sharedPreferencesService: context.read()),
         ),
         RepositoryProvider<WeekRepository>(
           create: (context) => WeekRepositoryMock(),

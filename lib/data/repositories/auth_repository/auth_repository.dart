@@ -2,7 +2,7 @@ import 'package:life_calendar2/utils/result.dart';
 
 abstract class AuthRepository {
   Future<Result<void>> register({
-    required DateTime birthday,
+    required DateTime birthdate,
     required int lifeSpan,
   });
 }

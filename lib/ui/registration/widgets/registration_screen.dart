@@ -23,13 +23,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final brightness = Theme.of(context).brightness;
     final onboardingTheme = OnboardingTheme(brightness: brightness);
     return BlocProvider(
-      create: (context) => RegistrationCubit(authRepository: context.read()),
+      create:
+          (context) => RegistrationCubit(
+            authRepository: context.read(),
+            weekRepository: context.read(),
+          ),
       child: Builder(
         builder: (context) {
           return BlocListener<RegistrationCubit, RegistrationState>(
             listener: (context, state) {
-              if (state is RegistrationSuccess) {
-                context.go(AppRoute.calendar);
+              switch (state) {
+                case RegistrationSuccess():
+                  context.go(AppRoute.calendar);
+                case RegistrationFailure():
+                  // TODO: add snackbar
+                  break;
+                default:
+                  break;
               }
             },
             child: AnnotatedRegion(

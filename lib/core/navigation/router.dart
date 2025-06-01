@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
+import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_screen.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_screen.dart';
-import 'package:life_calendar2/ui/home/home_screen.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_screen.dart';
 import 'package:life_calendar2/ui/registration/widgets/registration_screen.dart';
 import 'package:life_calendar2/ui/splash/widgets/error_splash_screen.dart';
@@ -15,7 +15,7 @@ final goRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoute.calendar,
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => const CalendarScreen(),
       routes: [
         GoRoute(
           path: AppRoute.week,

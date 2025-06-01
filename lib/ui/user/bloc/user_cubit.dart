@@ -19,7 +19,11 @@ class UserCubit extends Cubit<UserState> {
 
     switch (userResult) {
       case Ok<User>():
-        logger.d('Got user ${userResult.value.id}');
+        logger.d(
+          'Got user ${userResult.value.id} '
+          '(${userResult.value.birthday}, '
+          '${userResult.value.lifeSpan})',
+        );
         emit(UserSuccess(user: userResult.value));
       case Error<User>():
         logger.d('Failed to get user', error: userResult.error);
