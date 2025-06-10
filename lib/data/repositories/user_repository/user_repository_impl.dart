@@ -34,21 +34,24 @@ class UserRepositoryImpl implements UserRepository {
         return Result.ok(User.empty());
       }
 
-      final birthday = await _sharedPreferencesService.getBirthday();
-      final lifespan = await _sharedPreferencesService.getLifespan();
+      final userId = await _sharedPreferencesService.getUserId();
+      final birthdate = await _sharedPreferencesService.getBirthday();
+      final lifeSpan = await _sharedPreferencesService.getLifespan();
 
-      if (birthday == null || lifespan == null) {
-        logger.e('Failed to get birthday: $birthday or $lifespan from prefs');
+      if (userId == null || birthdate == null || lifeSpan == null) {
+        logger.e('Failed to get from prefs UserID (null - ${userId == null}), '
+        'or birthdate: (null - ${birthdate == null}), '
+        'or lifeSpan(null - ${lifeSpan == null})');
         return Result.error(Exception());
       }
 
       return Result.ok(
         User(
-          id: '',
+          id: userId,
           birthday: DateTime.fromMillisecondsSinceEpoch(
-            Duration(seconds: birthday).inMilliseconds,
+            Duration(seconds: birthdate).inMilliseconds,
           ),
-          lifeSpan: lifespan,
+          lifeSpan: lifeSpan,
         ),
       );
     } on Exception catch (e, s) {

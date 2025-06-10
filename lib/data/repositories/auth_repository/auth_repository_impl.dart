@@ -1,5 +1,6 @@
 import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/uuid/app_uuid.dart';
 import 'package:life_calendar2/data/repositories/auth_repository/auth_repository.dart';
 import 'package:life_calendar2/data/services/shared_preferences_service.dart';
 import 'package:life_calendar2/utils/result.dart';
@@ -25,6 +26,10 @@ class AuthRepositoryImpl implements AuthRepository {
 
       await _sharedPreferencesService.setFirstLaunch(isFirstLaunch: false);
       logger.d('First launch (false) is saved');
+
+      final userId = AppUuid.generateUserId();
+      await _sharedPreferencesService.setUserId(userId);
+      logger.d('UserID (${userId.length} symbols) is saved');
 
       return const Result.ok(null);
     } on Exception catch (e, s) {
