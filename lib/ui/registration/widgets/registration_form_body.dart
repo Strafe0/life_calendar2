@@ -56,33 +56,30 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
             return null;
           },
         ),
-        const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.all(48),
-          child: OutlinedButton(
-            onPressed: () async {
-              if (_isLoading) return;
-              setState(() => _isLoading = true);
-
-              final form = widget.formKey.currentState;
-              if (form != null) {
-                form.save();
-                final enteredDataIsValid = form.validate();
-                if (enteredDataIsValid) {
-                  final lifeSpan = int.tryParse(_lifeSpanTextController.text);
-                  if (_birthdate != null && lifeSpan != null) {
-                    await context.read<RegistrationCubit>().register(
-                      birthday: _birthdate!,
-                      lifeSpan: lifeSpan,
-                    );
-                  }
+        const Spacer(),
+        OutlinedButton(
+          onPressed: () async {
+            if (_isLoading) return;
+            setState(() => _isLoading = true);
+        
+            final form = widget.formKey.currentState;
+            if (form != null) {
+              form.save();
+              final enteredDataIsValid = form.validate();
+              if (enteredDataIsValid) {
+                final lifeSpan = int.tryParse(_lifeSpanTextController.text);
+                if (_birthdate != null && lifeSpan != null) {
+                  await context.read<RegistrationCubit>().register(
+                    birthday: _birthdate!,
+                    lifeSpan: lifeSpan,
+                  );
                 }
               }
-
-              setState(() => _isLoading = false);
-            },
-            child: Text(context.l10n.ready),
-          ),
+            }
+        
+            setState(() => _isLoading = false);
+          },
+          child: Text(context.l10n.ready),
         ),
       ],
     );

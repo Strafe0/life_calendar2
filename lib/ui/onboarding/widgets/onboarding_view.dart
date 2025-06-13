@@ -5,6 +5,7 @@ import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/widgets/page_indicator.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_page_widget.dart';
+import 'package:life_calendar2/ui/registration/widgets/registration_screen.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key, required this.pages});
@@ -17,9 +18,11 @@ class OnboardingView extends StatefulWidget {
 
 class _OnboardingViewState extends State<OnboardingView>
     with TickerProviderStateMixin {
+  int get totalPageCount => widget.pages.length + 1; // + registration
+
   final _pageController = PageController();
   late final _tabController = TabController(
-    length: widget.pages.length,
+    length: totalPageCount,
     vsync: this,
   );
   int _pageIndex = 0;
@@ -45,20 +48,15 @@ class _OnboardingViewState extends State<OnboardingView>
           ),
           Expanded(
             child: PageView.builder(
-              itemCount: widget.pages.length + 1,
+              itemCount: totalPageCount,
               controller: _pageController,
               itemBuilder: (context, i) {
                 if (i == widget.pages.length) {
-                  return const SizedBox.expand();
+                  return const RegistrationScreen();
                 }
                 return OnboardingPageWidget(page: widget.pages[i]);
               },
               onPageChanged: (newPageIndex) {
-                if (newPageIndex == widget.pages.length) {
-                  context.go(AppRoute.registration);
-                  return;
-                }
-
                 setState(() {
                   _tabController.index = newPageIndex;
                   _pageIndex = newPageIndex;
