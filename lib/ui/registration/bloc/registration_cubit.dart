@@ -45,7 +45,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
             emit(const RegistrationSuccess());
           case Error():
             logger.e('User saved, but weeks weren\'t generated');
-            emit(const RegistrationFailure());
+            emit(const RegistrationCalendarFailure());
         }
       case Error():
         logger.e('Registration is failed', error: result.error);

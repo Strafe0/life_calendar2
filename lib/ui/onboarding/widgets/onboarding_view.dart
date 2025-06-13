@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/widgets/page_indicator.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_page_widget.dart';
-import 'package:life_calendar2/ui/registration/widgets/registration_screen.dart';
+import 'package:life_calendar2/ui/registration/widgets/registration_page.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key, required this.pages});
@@ -37,7 +35,12 @@ class _OnboardingViewState extends State<OnboardingView>
           Align(
             alignment: Alignment.centerLeft,
             child: TextButton(
-              onPressed: () => context.go(AppRoute.registration),
+              onPressed:
+                  () => _pageController.animateToPage(
+                    widget.pages.length,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.fastOutSlowIn,
+                  ),
               child: Text(
                 context.l10n.skip,
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
@@ -52,7 +55,7 @@ class _OnboardingViewState extends State<OnboardingView>
               controller: _pageController,
               itemBuilder: (context, i) {
                 if (i == widget.pages.length) {
-                  return const RegistrationScreen();
+                  return const RegistrationPage();
                 }
                 return OnboardingPageWidget(page: widget.pages[i]);
               },

@@ -3,7 +3,6 @@ import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_screen.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_screen.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_screen.dart';
-import 'package:life_calendar2/ui/registration/widgets/registration_screen.dart';
 import 'package:life_calendar2/ui/splash/widgets/error_splash_screen.dart';
 import 'package:life_calendar2/ui/splash/widgets/splash_screen.dart';
 
@@ -31,10 +30,6 @@ final goRouter = GoRouter(
     GoRoute(
       path: AppRoute.onboarding,
       builder: (context, state) => const OnboardingScreen(),
-    ),
-    GoRoute(
-      path: AppRoute.registration,
-      builder: (context, state) => const RegistrationScreen(),
     ),
     GoRoute(
       path: AppRoute.error,

@@ -284,6 +284,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Введите целое число от {start} до {end} лет'**
   String lifespanInterval(int start, int end);
+
+  /// No description provided for @registrationUserError.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось создать пользователя'**
+  String get registrationUserError;
+
+  /// No description provided for @registrationCalendarError.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось создать календарь'**
+  String get registrationCalendarError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

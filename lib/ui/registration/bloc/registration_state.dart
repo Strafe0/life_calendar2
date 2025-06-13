@@ -17,3 +17,7 @@ final class RegistrationSuccess extends RegistrationState {
 final class RegistrationFailure extends RegistrationState {
   const RegistrationFailure();
 }
+
+final class RegistrationCalendarFailure extends RegistrationState {
+  const RegistrationCalendarFailure();
+}

@@ -107,4 +107,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String lifespanInterval(int start, int end) {
     return 'Введите целое число от $start до $end лет';
   }
+
+  @override
+  String get registrationUserError => 'Не удалось создать пользователя';
+
+  @override
+  String get registrationCalendarError => 'Не удалось создать календарь';
 }
