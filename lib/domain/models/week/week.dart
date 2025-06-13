@@ -1,4 +1,8 @@
+// ignore_for_file: invalid_annotation_target
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:life_calendar2/core/converters/event_converter.dart';
+import 'package:life_calendar2/core/converters/goal_converter.dart';
+import 'package:life_calendar2/core/converters/photo_converter.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';
 import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
@@ -15,12 +19,12 @@ abstract class Week with _$Week {
     required int yearId,
     required DateTime start,
     required DateTime end,
-    required WeekTense tense,
+    @JsonKey(name: 'state') required WeekTense tense,
     required WeekAssessment assessment,
-    required List<Goal> goals,
-    required List<Event> events,
+    @GoalConverter() required List<Goal> goals,
+    @EventConverter() required List<Event> events,
     required String resume,
-    required List<String> photos,
+    @PhotoConverter() required List<String> photos,
   }) = _Week;
 
   factory Week.fromJson(Map<String, dynamic> json) => _$WeekFromJson(json);

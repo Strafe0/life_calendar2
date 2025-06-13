@@ -11,18 +11,12 @@ _Week _$WeekFromJson(Map<String, dynamic> json) => _Week(
   yearId: (json['yearId'] as num).toInt(),
   start: DateTime.parse(json['start'] as String),
   end: DateTime.parse(json['end'] as String),
-  tense: $enumDecode(_$WeekTenseEnumMap, json['tense']),
+  tense: $enumDecode(_$WeekTenseEnumMap, json['state']),
   assessment: $enumDecode(_$WeekAssessmentEnumMap, json['assessment']),
-  goals:
-      (json['goals'] as List<dynamic>)
-          .map((e) => Goal.fromJson(e as Map<String, dynamic>))
-          .toList(),
-  events:
-      (json['events'] as List<dynamic>)
-          .map((e) => Event.fromJson(e as Map<String, dynamic>))
-          .toList(),
+  goals: const GoalConverter().fromJson(json['goals'] as String),
+  events: const EventConverter().fromJson(json['events'] as String),
   resume: json['resume'] as String,
-  photos: (json['photos'] as List<dynamic>).map((e) => e as String).toList(),
+  photos: const PhotoConverter().fromJson(json['photos'] as String),
 );
 
 Map<String, dynamic> _$WeekToJson(_Week instance) => <String, dynamic>{
@@ -30,12 +24,12 @@ Map<String, dynamic> _$WeekToJson(_Week instance) => <String, dynamic>{
   'yearId': instance.yearId,
   'start': instance.start.toIso8601String(),
   'end': instance.end.toIso8601String(),
-  'tense': _$WeekTenseEnumMap[instance.tense]!,
+  'state': _$WeekTenseEnumMap[instance.tense]!,
   'assessment': _$WeekAssessmentEnumMap[instance.assessment]!,
-  'goals': instance.goals,
-  'events': instance.events,
+  'goals': const GoalConverter().toJson(instance.goals),
+  'events': const EventConverter().toJson(instance.events),
   'resume': instance.resume,
-  'photos': instance.photos,
+  'photos': const PhotoConverter().toJson(instance.photos),
 };
 
 const _$WeekTenseEnumMap = {

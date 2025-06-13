@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:life_calendar2/core/extensions/date_time/theme_extension.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/ui/user/bloc/user_cubit.dart';
 import 'package:life_calendar2/ui/user/bloc/user_state.dart';
@@ -16,12 +17,15 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    final surfaceColor = Theme.of(context).colorScheme.surface;
+    final theme = Theme.of(context);
+    final surfaceColor = theme.colorScheme.surface;
+    final isDarkMode = theme.isDarkMode;
 
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
         statusBarColor: surfaceColor,
-        systemNavigationBarColor: surfaceColor,
+        statusBarIconBrightness:
+            isDarkMode ? Brightness.light : Brightness.dark,
       ),
       child: BlocProvider(
         create:

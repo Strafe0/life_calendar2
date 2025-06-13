@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Week {
 
- int get id; int get yearId; DateTime get start; DateTime get end; WeekTense get tense; WeekAssessment get assessment; List<Goal> get goals; List<Event> get events; String get resume; List<String> get photos;
+ int get id; int get yearId; DateTime get start; DateTime get end;@JsonKey(name: 'state') WeekTense get tense; WeekAssessment get assessment;@GoalConverter() List<Goal> get goals;@EventConverter() List<Event> get events; String get resume;@PhotoConverter() List<String> get photos;
 /// Create a copy of Week
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $WeekCopyWith<$Res>  {
   factory $WeekCopyWith(Week value, $Res Function(Week) _then) = _$WeekCopyWithImpl;
 @useResult
 $Res call({
- int id, int yearId, DateTime start, DateTime end, WeekTense tense, WeekAssessment assessment, List<Goal> goals, List<Event> events, String resume, List<String> photos
+ int id, int yearId, DateTime start, DateTime end,@JsonKey(name: 'state') WeekTense tense, WeekAssessment assessment,@GoalConverter() List<Goal> goals,@EventConverter() List<Event> events, String resume,@PhotoConverter() List<String> photos
 });
 
 
@@ -89,24 +89,24 @@ as List<String>,
 @JsonSerializable()
 
 class _Week implements Week {
-  const _Week({required this.id, required this.yearId, required this.start, required this.end, required this.tense, required this.assessment, required final  List<Goal> goals, required final  List<Event> events, required this.resume, required final  List<String> photos}): _goals = goals,_events = events,_photos = photos;
+  const _Week({required this.id, required this.yearId, required this.start, required this.end, @JsonKey(name: 'state') required this.tense, required this.assessment, @GoalConverter() required final  List<Goal> goals, @EventConverter() required final  List<Event> events, required this.resume, @PhotoConverter() required final  List<String> photos}): _goals = goals,_events = events,_photos = photos;
   factory _Week.fromJson(Map<String, dynamic> json) => _$WeekFromJson(json);
 
 @override final  int id;
 @override final  int yearId;
 @override final  DateTime start;
 @override final  DateTime end;
-@override final  WeekTense tense;
+@override@JsonKey(name: 'state') final  WeekTense tense;
 @override final  WeekAssessment assessment;
  final  List<Goal> _goals;
-@override List<Goal> get goals {
+@override@GoalConverter() List<Goal> get goals {
   if (_goals is EqualUnmodifiableListView) return _goals;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_goals);
 }
 
  final  List<Event> _events;
-@override List<Event> get events {
+@override@EventConverter() List<Event> get events {
   if (_events is EqualUnmodifiableListView) return _events;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_events);
@@ -114,7 +114,7 @@ class _Week implements Week {
 
 @override final  String resume;
  final  List<String> _photos;
-@override List<String> get photos {
+@override@PhotoConverter() List<String> get photos {
   if (_photos is EqualUnmodifiableListView) return _photos;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_photos);
@@ -154,7 +154,7 @@ abstract mixin class _$WeekCopyWith<$Res> implements $WeekCopyWith<$Res> {
   factory _$WeekCopyWith(_Week value, $Res Function(_Week) _then) = __$WeekCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int yearId, DateTime start, DateTime end, WeekTense tense, WeekAssessment assessment, List<Goal> goals, List<Event> events, String resume, List<String> photos
+ int id, int yearId, DateTime start, DateTime end,@JsonKey(name: 'state') WeekTense tense, WeekAssessment assessment,@GoalConverter() List<Goal> goals,@EventConverter() List<Event> events, String resume,@PhotoConverter() List<String> photos
 });
 
 

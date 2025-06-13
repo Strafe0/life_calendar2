@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/core/navigation/router.dart';
 import 'package:life_calendar2/data/repositories/auth_repository/auth_repository.dart';
 import 'package:life_calendar2/data/repositories/auth_repository/auth_repository_impl.dart';
@@ -8,7 +9,8 @@ import 'package:life_calendar2/data/repositories/onboarding_repository/onboardin
 import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
 import 'package:life_calendar2/data/repositories/user_repository/user_repository_impl.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
-import 'package:life_calendar2/data/repositories/week_repository/week_repository_mock.dart';
+import 'package:life_calendar2/data/repositories/week_repository/week_repository_impl.dart';
+import 'package:life_calendar2/data/services/database_service.dart';
 import 'package:life_calendar2/data/services/shared_preferences_service.dart';
 import 'package:life_calendar2/l10n/app_localizations.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
@@ -21,11 +23,10 @@ class CalendarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(
-          create: (context) => const SharedPreferencesService(),
-        ),
+        RepositoryProvider(create: (_) => DatabaseService()..init()),
+        RepositoryProvider(create: (_) => const SharedPreferencesService()),
         RepositoryProvider<OnboardingRepository>(
-          create: (context) => const OnboardingRepositoryImpl(),
+          create: (_) => const OnboardingRepositoryImpl(),
         ),
         RepositoryProvider<AuthRepository>(
           create: (context) {
@@ -38,7 +39,8 @@ class CalendarApp extends StatelessWidget {
                   UserRepositoryImpl(sharedPreferencesService: context.read()),
         ),
         RepositoryProvider<WeekRepository>(
-          create: (context) => WeekRepositoryMock(),
+          create:
+              (context) => WeekRepositoryImpl(databaseService: context.read()),
         ),
       ],
       child: MaterialApp.router(
@@ -53,7 +55,10 @@ class CalendarApp extends StatelessWidget {
           if (widget is Scaffold || widget is Navigator) {
             error = Scaffold(body: error);
           }
-          ErrorWidget.builder = (errorDetails) => error;
+          ErrorWidget.builder = (errorDetails) {
+            logger.e('Error building widget ${widget.runtimeType}');
+            return error;
+          };
           if (widget != null) return widget;
           throw StateError('Widget is null');
         },
