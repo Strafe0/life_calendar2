@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/data/repositories/auth_repository/auth_repository.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
+import 'package:life_calendar2/domain/models/user/user.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_state.dart';
 import 'package:life_calendar2/utils/calendar/calendar_generator.dart';
 import 'package:life_calendar2/utils/result.dart';
@@ -30,7 +31,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     );
 
     switch (result) {
-      case Ok():
+      case Ok<User>():
         logger.d('Successfully saved user');
         final generator = CalendarGenerator(
           birthday: birthday,
@@ -42,7 +43,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
         switch (weekGenerationResult) {
           case Ok():
             logger.d('Successfully registered and generated weeks');
-            emit(const RegistrationSuccess());
+            emit(RegistrationSuccess(result.value));
           case Error():
             logger.e('User saved, but weeks weren\'t generated');
             emit(const RegistrationCalendarFailure());

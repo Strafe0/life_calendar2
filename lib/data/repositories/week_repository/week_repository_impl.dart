@@ -41,7 +41,6 @@ class WeekRepositoryImpl implements WeekRepository {
   Future<Result<List<Week>>> getWeeks() async {
     try {
       final weeks = await _databaseService.getAllWeeks();
-
       return Result.ok(weeks);
     } on Exception catch (e, s) {
       logger.e('Failed to get all weeks', error: e, stackTrace: s);

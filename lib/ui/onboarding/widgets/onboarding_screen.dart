@@ -30,8 +30,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         value: SystemUiOverlayStyle(
           statusBarColor: theme.statusBarColor,
           systemNavigationBarColor: theme.systemNavigationBarColor,
+          statusBarBrightness:
+              brightness == Brightness.dark
+                  ? Brightness.light
+                  : Brightness.dark,
         ),
         child: SafeArea(
+          maintainBottomViewPadding: true,
           child: Scaffold(
             body: DecoratedBox(
               decoration: BoxDecoration(gradient: theme.gradient),

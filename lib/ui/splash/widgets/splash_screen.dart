@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/extensions/date_time/theme_extension.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
-import 'package:life_calendar2/ui/user/bloc/user_cubit.dart';
-import 'package:life_calendar2/ui/user/bloc/user_state.dart';
+import 'package:life_calendar2/ui/splash/bloc/splash_cubit.dart';
+import 'package:life_calendar2/ui/splash/bloc/splash_state.dart';
+import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar2/ui/user/bloc/user_event.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -29,29 +31,32 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
       child: BlocProvider(
         create:
-            (context) => UserCubit(userRepository: context.read())..getUser(),
+            (context) => SplashCubit(
+              databaseService: context.read(),
+              userRepository: context.read(),
+            )..prepareApp(),
         child: Builder(
           builder: (context) {
-            return BlocListener<UserCubit, UserState>(
+            return BlocListener<SplashCubit, SplashState>(
               listener: (context, state) {
-                if (state is UserSuccess) {
-                  if (!state.user.isEmpty) {
-                    context.go(AppRoute.calendar);
-                  } else {
-                    context.go(AppRoute.onboarding);
-                  }
-                } else if (state is UserFailure) {
-                  context.go(AppRoute.error);
+                switch (state) {
+                  case SplashInitial():
+                  case SplashLoading():
+                    break;
+                  case SplashReady():
+                    if (state.isAuthenticated) {
+                      context.read<UserBloc>().add(UserReceived(state.user));
+                      context.go(AppRoute.calendar);
+                    } else {
+                      context.go(AppRoute.onboarding);
+                    }
+                  case SplashFailure():
+                    context.go(AppRoute.error);
                 }
               },
-              child: SafeArea(
+              child: const SafeArea(
                 child: Scaffold(
-                  backgroundColor: surfaceColor,
-                  body: const Center(
-                    child: CircularProgressIndicator(
-                      strokeCap: StrokeCap.round,
-                    ),
-                  ),
+                  body: Center(child: CircularProgressIndicator()),
                 ),
               ),
             );

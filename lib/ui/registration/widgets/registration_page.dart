@@ -7,6 +7,8 @@ import 'package:life_calendar2/ui/core/snackbars/snack_bar_service.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_cubit.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_state.dart';
 import 'package:life_calendar2/ui/registration/widgets/registration_form_body.dart';
+import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar2/ui/user/bloc/user_event.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -32,6 +34,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             listener: (context, state) {
               switch (state) {
                 case RegistrationSuccess():
+                  context.read<UserBloc>().add(UserReceived(state.user));
                   context.go(AppRoute.calendar);
                 case RegistrationFailure():
                   SnackBarService.showErrorSnackBar(
@@ -49,7 +52,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
             },
             child: Column(
               children: [
-                Image.asset('assets/calendar_splash_image.png'),
+                Expanded(
+                  child: Image.asset('assets/calendar_splash_image.png'),
+                ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(16),

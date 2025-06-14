@@ -6,7 +6,7 @@ part 'user.freezed.dart';
 abstract class User with _$User {
   const factory User({
     required String id,
-    required DateTime birthday,
+    required DateTime birthdate,
     required int lifeSpan,
   }) = _User;
 
@@ -14,7 +14,7 @@ abstract class User with _$User {
 
   factory User.empty() => _User(
     id: '',
-    birthday: DateTime.fromMillisecondsSinceEpoch(0),
+    birthdate: DateTime.fromMillisecondsSinceEpoch(0),
     lifeSpan: 0,
   );
 

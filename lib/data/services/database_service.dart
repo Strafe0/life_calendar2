@@ -7,6 +7,7 @@ import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
+import 'package:life_calendar2/utils/result.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService {
@@ -14,23 +15,30 @@ class DatabaseService {
   late final Database _db;
   final int _dbVersion = 2;
 
-  Future<void> init() async {
-    _db = await openDatabase(
-      '${await getDatabasesPath()}${Platform.pathSeparator}$tableName',
-      version: _dbVersion,
-      onCreate: (db, version) async {
-        final batch = db.batch();
-        _createTableV2(batch);
-        await batch.commit();
-      },
-      onUpgrade: (db, oldVersion, newVersion) async {
-        final batch = db.batch();
-        if (oldVersion == 1) {
-          _updateTableV1toV2(batch);
-        }
-        await batch.commit();
-      },
-    );
+  Future<Result> init() async {
+    try {
+      _db = await openDatabase(
+        '${await getDatabasesPath()}${Platform.pathSeparator}$tableName',
+        version: _dbVersion,
+        onCreate: (db, version) async {
+          final batch = db.batch();
+          _createTableV2(batch);
+          await batch.commit();
+        },
+        onUpgrade: (db, oldVersion, newVersion) async {
+          final batch = db.batch();
+          if (oldVersion == 1) {
+            _updateTableV1toV2(batch);
+          }
+          await batch.commit();
+        },
+      );
+
+      return const Result.ok(null);
+    } on Exception catch (e, s) {
+      logger.e('Failed to open database', error: e, stackTrace: s);
+      return Result.error(e);
+    }
   }
 
   void _createTableV2(Batch batch) {

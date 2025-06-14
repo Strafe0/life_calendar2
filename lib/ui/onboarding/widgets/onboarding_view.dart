@@ -27,59 +27,56 @@ class _OnboardingViewState extends State<OnboardingView>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton(
-              onPressed:
-                  () => _pageController.animateToPage(
-                    widget.pages.length,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.fastOutSlowIn,
-                  ),
-              child: Text(
-                context.l10n.skip,
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withAlpha(122),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: TextButton(
+            onPressed:
+                () => _pageController.animateToPage(
+                  widget.pages.length,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.fastOutSlowIn,
                 ),
+            child: Text(
+              context.l10n.skip,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: Theme.of(context).colorScheme.onSurface.withAlpha(122),
               ),
             ),
           ),
-          Expanded(
-            child: PageView.builder(
-              itemCount: totalPageCount,
-              controller: _pageController,
-              itemBuilder: (context, i) {
-                if (i == widget.pages.length) {
-                  return const RegistrationPage();
-                }
-                return OnboardingPageWidget(page: widget.pages[i]);
-              },
-              onPageChanged: (newPageIndex) {
-                setState(() {
-                  _tabController.index = newPageIndex;
-                  _pageIndex = newPageIndex;
-                });
-              },
-            ),
-          ),
-          PageIndicator(
-            currentPageIndex: _pageIndex,
-            tabController: _tabController,
-            onUpdateCurrentPageIndex: (index) {
-              _pageController.animateToPage(
-                index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-              );
+        ),
+        Expanded(
+          child: PageView.builder(
+            itemCount: totalPageCount,
+            controller: _pageController,
+            itemBuilder: (context, i) {
+              if (i == widget.pages.length) {
+                return const RegistrationPage();
+              }
+              return OnboardingPageWidget(page: widget.pages[i]);
+            },
+            onPageChanged: (newPageIndex) {
+              setState(() {
+                _tabController.index = newPageIndex;
+                _pageIndex = newPageIndex;
+              });
             },
           ),
-        ],
-      ),
+        ),
+        PageIndicator(
+          currentPageIndex: _pageIndex,
+          tabController: _tabController,
+          onUpdateCurrentPageIndex: (index) {
+            _pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            );
+          },
+        ),
+      ],
     );
   }
 

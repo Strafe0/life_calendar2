@@ -3,6 +3,7 @@ import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/core/uuid/app_uuid.dart';
 import 'package:life_calendar2/data/repositories/auth_repository/auth_repository.dart';
 import 'package:life_calendar2/data/services/shared_preferences_service.dart';
+import 'package:life_calendar2/domain/models/user/user.dart';
 import 'package:life_calendar2/utils/result.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -13,7 +14,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }) : _sharedPreferencesService = sharedPreferencesService;
 
   @override
-  Future<Result<void>> register({
+  Future<Result<User>> register({
     required DateTime birthdate,
     required int lifeSpan,
   }) async {
@@ -31,7 +32,9 @@ class AuthRepositoryImpl implements AuthRepository {
       await _sharedPreferencesService.setUserId(userId);
       logger.d('UserID (${userId.length} symbols) is saved');
 
-      return const Result.ok(null);
+      return Result.ok(
+        User(id: userId, birthdate: birthdate, lifeSpan: lifeSpan),
+      );
     } on Exception catch (e, s) {
       logger.e(
         'Failed to register user ($DateTime, $lifeSpan)',

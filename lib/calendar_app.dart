@@ -15,6 +15,7 @@ import 'package:life_calendar2/data/services/shared_preferences_service.dart';
 import 'package:life_calendar2/l10n/app_localizations.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/themes/app_theme.dart';
+import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
 
 class CalendarApp extends StatelessWidget {
   const CalendarApp({super.key});
@@ -23,7 +24,7 @@ class CalendarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider(create: (_) => DatabaseService()..init()),
+        RepositoryProvider(create: (_) => DatabaseService()),
         RepositoryProvider(create: (_) => const SharedPreferencesService()),
         RepositoryProvider<OnboardingRepository>(
           create: (_) => const OnboardingRepositoryImpl(),
@@ -43,24 +44,31 @@ class CalendarApp extends StatelessWidget {
               (context) => WeekRepositoryImpl(databaseService: context.read()),
         ),
       ],
-      child: MaterialApp.router(
-        title: 'Life Calendar',
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        routerConfig: goRouter,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        builder: (context, widget) {
-          Widget error = Center(child: Text(context.l10n.errorHappened));
-          if (widget is Scaffold || widget is Navigator) {
-            error = Scaffold(body: error);
-          }
-          ErrorWidget.builder = (errorDetails) {
-            logger.e('Error building widget ${widget.runtimeType}');
-            return error;
-          };
-          if (widget != null) return widget;
-          throw StateError('Widget is null');
+      child: Builder(
+        builder: (context) {
+          return BlocProvider(
+            create: (context) => UserBloc(userRepository: context.read()),
+            child: MaterialApp.router(
+              title: 'Life Calendar',
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              routerConfig: goRouter,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              builder: (context, widget) {
+                Widget error = Center(child: Text(context.l10n.errorHappened));
+                if (widget is Scaffold || widget is Navigator) {
+                  error = Scaffold(body: error);
+                }
+                ErrorWidget.builder = (errorDetails) {
+                  logger.e('Error building widget ${widget.runtimeType}');
+                  return error;
+                };
+                if (widget != null) return widget;
+                throw StateError('Widget is null');
+              },
+            ),
+          );
         },
       ),
     );

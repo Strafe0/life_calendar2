@@ -15,7 +15,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<Result<void>> createUser(User user) async {
     try {
       await _sharedPreferencesService.setBirthday(
-        Duration(milliseconds: user.birthday.millisecondsSinceEpoch).inSeconds,
+        Duration(milliseconds: user.birthdate.millisecondsSinceEpoch).inSeconds,
       );
       await _sharedPreferencesService.setLifespan(user.lifeSpan);
 
@@ -48,7 +48,7 @@ class UserRepositoryImpl implements UserRepository {
       return Result.ok(
         User(
           id: userId,
-          birthday: DateTime.fromMillisecondsSinceEpoch(
+          birthdate: DateTime.fromMillisecondsSinceEpoch(
             Duration(seconds: birthdate).inMilliseconds,
           ),
           lifeSpan: lifeSpan,

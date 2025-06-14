@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User {
 
- String get id; DateTime get birthday; int get lifeSpan;
+ String get id; DateTime get birthdate; int get lifeSpan;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.id, id) || other.id == id)&&(identical(other.birthday, birthday) || other.birthday == birthday)&&(identical(other.lifeSpan, lifeSpan) || other.lifeSpan == lifeSpan));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.id, id) || other.id == id)&&(identical(other.birthdate, birthdate) || other.birthdate == birthdate)&&(identical(other.lifeSpan, lifeSpan) || other.lifeSpan == lifeSpan));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,birthday,lifeSpan);
+int get hashCode => Object.hash(runtimeType,id,birthdate,lifeSpan);
 
 @override
 String toString() {
-  return 'User(id: $id, birthday: $birthday, lifeSpan: $lifeSpan)';
+  return 'User(id: $id, birthdate: $birthdate, lifeSpan: $lifeSpan)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- String id, DateTime birthday, int lifeSpan
+ String id, DateTime birthdate, int lifeSpan
 });
 
 
@@ -63,10 +63,10 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? birthday = null,Object? lifeSpan = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? birthdate = null,Object? lifeSpan = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,birthday: null == birthday ? _self.birthday : birthday // ignore: cast_nullable_to_non_nullable
+as String,birthdate: null == birthdate ? _self.birthdate : birthdate // ignore: cast_nullable_to_non_nullable
 as DateTime,lifeSpan: null == lifeSpan ? _self.lifeSpan : lifeSpan // ignore: cast_nullable_to_non_nullable
 as int,
   ));
@@ -79,11 +79,11 @@ as int,
 
 
 class _User extends User {
-  const _User({required this.id, required this.birthday, required this.lifeSpan}): super._();
+  const _User({required this.id, required this.birthdate, required this.lifeSpan}): super._();
   
 
 @override final  String id;
-@override final  DateTime birthday;
+@override final  DateTime birthdate;
 @override final  int lifeSpan;
 
 /// Create a copy of User
@@ -96,16 +96,16 @@ _$UserCopyWith<_User> get copyWith => __$UserCopyWithImpl<_User>(this, _$identit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.id, id) || other.id == id)&&(identical(other.birthday, birthday) || other.birthday == birthday)&&(identical(other.lifeSpan, lifeSpan) || other.lifeSpan == lifeSpan));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.id, id) || other.id == id)&&(identical(other.birthdate, birthdate) || other.birthdate == birthdate)&&(identical(other.lifeSpan, lifeSpan) || other.lifeSpan == lifeSpan));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,birthday,lifeSpan);
+int get hashCode => Object.hash(runtimeType,id,birthdate,lifeSpan);
 
 @override
 String toString() {
-  return 'User(id: $id, birthday: $birthday, lifeSpan: $lifeSpan)';
+  return 'User(id: $id, birthdate: $birthdate, lifeSpan: $lifeSpan)';
 }
 
 
@@ -116,7 +116,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- String id, DateTime birthday, int lifeSpan
+ String id, DateTime birthdate, int lifeSpan
 });
 
 
@@ -133,10 +133,10 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? birthday = null,Object? lifeSpan = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? birthdate = null,Object? lifeSpan = null,}) {
   return _then(_User(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,birthday: null == birthday ? _self.birthday : birthday // ignore: cast_nullable_to_non_nullable
+as String,birthdate: null == birthdate ? _self.birthdate : birthdate // ignore: cast_nullable_to_non_nullable
 as DateTime,lifeSpan: null == lifeSpan ? _self.lifeSpan : lifeSpan // ignore: cast_nullable_to_non_nullable
 as int,
   ));

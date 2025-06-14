@@ -2,17 +2,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
 import 'package:life_calendar2/domain/models/user/user.dart';
+import 'package:life_calendar2/ui/user/bloc/user_event.dart';
 import 'package:life_calendar2/ui/user/bloc/user_state.dart';
 import 'package:life_calendar2/utils/result.dart';
 
-class UserCubit extends Cubit<UserState> {
+class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository _userRepository;
 
-  UserCubit({required UserRepository userRepository})
+  UserBloc({required UserRepository userRepository})
     : _userRepository = userRepository,
-      super(const UserInitial());
+      super(const UserInitial()) {
+    on<UserReceived>((event, emit) => emit(UserSuccess(user: event.user)));
+    on<UserLoadingTriggered>(_getUser);
+  }
 
-  Future<void> getUser() async {
+  Future<void> _getUser(UserEvent event, Emitter<UserState> emit) async {
     emit(const UserLoading());
 
     final userResult = await _userRepository.getUser();
@@ -21,7 +25,7 @@ class UserCubit extends Cubit<UserState> {
       case Ok<User>():
         logger.d(
           'Got user ${userResult.value.id} '
-          '(${userResult.value.birthday}, '
+          '(${userResult.value.birthdate}, '
           '${userResult.value.lifeSpan})',
         );
         emit(UserSuccess(user: userResult.value));

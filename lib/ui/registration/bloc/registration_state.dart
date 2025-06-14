@@ -1,3 +1,5 @@
+import 'package:life_calendar2/domain/models/user/user.dart';
+
 sealed class RegistrationState {
   const RegistrationState();
 }
@@ -11,7 +13,9 @@ final class RegistrationLoading extends RegistrationState {
 }
 
 final class RegistrationSuccess extends RegistrationState {
-  const RegistrationSuccess();
+  final User user;
+
+  const RegistrationSuccess(this.user);
 }
 
 final class RegistrationFailure extends RegistrationState {
