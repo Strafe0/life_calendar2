@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';
 import 'package:life_calendar2/domain/models/week/goal/goal.dart';
@@ -93,6 +94,12 @@ class DatabaseService {
   Future<List<Week>> getAllWeeks() async {
     final records = await _db.query(tableName);
 
+    final weeks = await compute(_parseWeeks, records);
+
+    return weeks;
+  }
+
+  static List<Week> _parseWeeks(List<Map<String, Object?>> records) {
     final weeks = List.generate(
       records.length,
       (i) => Week.fromJson(records[i]),
