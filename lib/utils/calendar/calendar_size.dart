@@ -1,4 +1,6 @@
-class CalendarSize {
+import 'package:equatable/equatable.dart';
+
+class CalendarSize extends Equatable {
   final double weekBoxSide;
   final double weekBoxPaddingX;
   final double weekBoxPaddingY;
@@ -70,4 +72,15 @@ class CalendarSize {
       labelHorPadding: labelHorPadding,
     );
   }
+
+  @override
+  List<Object> get props => [
+    weekBoxSide,
+    weekBoxPaddingX,
+    weekBoxPaddingY,
+    vrtPadding,
+    horPadding,
+    labelVrtPadding,
+    labelHorPadding,
+  ];
 }

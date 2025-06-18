@@ -6,6 +6,7 @@ import 'package:life_calendar2/data/services/shared_preferences_service.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_state.dart';
+import 'package:life_calendar2/ui/core/themes/week_extension.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 import 'package:life_calendar2/utils/result.dart';
 
@@ -20,7 +21,10 @@ class CalendarCubit extends Cubit<CalendarState> {
        _sharedPreferencesService = sharedPreferencesService,
        super(const CalendarInitial());
 
-  Future<void> getWeeks({required CalendarSize calendarSize}) async {
+  Future<void> getWeeks({
+    required CalendarSize calendarSize,
+    required Brightness brightness,
+  }) async {
     emit(const CalendarLoading());
 
     final weeksResult = await _weekRepository.getWeeks();
@@ -39,7 +43,11 @@ class CalendarCubit extends Cubit<CalendarState> {
 
         emit(
           CalendarSuccess(
-            weeks: _prepareWeekBoxes(weeksResult.value, calendarSize),
+            weeks: _prepareWeekBoxes(
+              weeksResult.value,
+              calendarSize,
+              brightness,
+            ),
           ),
         );
       case Error<List<Week>>():
@@ -48,7 +56,11 @@ class CalendarCubit extends Cubit<CalendarState> {
     }
   }
 
-  List<WeekBox> _prepareWeekBoxes(List<Week> weeks, CalendarSize calendarSize) {
+  List<WeekBox> _prepareWeekBoxes(
+    List<Week> weeks,
+    CalendarSize calendarSize,
+    Brightness brightness,
+  ) {
     final y0 =
         calendarSize.vrtPadding +
         calendarSize.labelVrtPadding +
@@ -74,10 +86,13 @@ class CalendarCubit extends Cubit<CalendarState> {
           (weekId - previousYearsWeekCount) *
               (calendarSize.weekBoxSide + calendarSize.weekBoxPaddingX);
 
-      final Rect rect = Rect.fromCenter(
-        center: Offset(x, y),
-        width: calendarSize.weekBoxSide,
-        height: calendarSize.weekBoxSide,
+      final rrect = RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: Offset(x, y),
+          width: calendarSize.weekBoxSide,
+          height: calendarSize.weekBoxSide,
+        ),
+        const Radius.circular(1.5),
       );
 
       if (weekId + 1 < weeks.length && weeks[weekId + 1].yearId > yearId) {
@@ -89,9 +104,8 @@ class CalendarCubit extends Cubit<CalendarState> {
       return WeekBox(
         weekId: weeks[weekId].id,
         yearId: weeks[weekId].yearId,
-        tense: weeks[weekId].tense,
-        assessment: weeks[weekId].assessment,
-        rect: rect,
+        color: weeks[weekId].getColor(brightness: brightness),
+        rect: rrect,
       );
     });
   }

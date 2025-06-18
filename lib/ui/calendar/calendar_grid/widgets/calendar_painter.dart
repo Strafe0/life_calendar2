@@ -2,7 +2,6 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
-import 'package:life_calendar2/ui/core/themes/week_extension.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 
 class CalendarPainter extends CustomPainter {
@@ -19,7 +18,11 @@ class CalendarPainter extends CustomPainter {
   });
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant CalendarPainter oldDelegate) =>
+      weekBoxes.length != oldDelegate.weekBoxes.length ||
+      calendarSize != oldDelegate.calendarSize ||
+      textColor != oldDelegate.textColor ||
+      brightness != oldDelegate.brightness;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -31,14 +34,8 @@ class CalendarPainter extends CustomPainter {
         _drawYearLabel(yearId, canvas, textColor);
       }
 
-      final RRect rrect = RRect.fromRectAndRadius(
-        weekBoxes[weekId].rect,
-        const Radius.circular(1.5),
-      );
-
       final week = weekBoxes[weekId];
-      final color = week.getColor(brightness: brightness);
-      canvas.drawRRect(rrect, Paint()..color = color);
+      canvas.drawRRect(week.rect, Paint()..color = week.color);
 
       if (weekId + 1 < weekBoxes.length &&
           weekBoxes[weekId + 1].yearId > yearId) {
@@ -51,7 +48,7 @@ class CalendarPainter extends CustomPainter {
     for (int i = 0; i < 11; i++) {
       final builder = ui.ParagraphBuilder(
         ui.ParagraphStyle(
-          fontSize: 10,
+          fontSize: calendarSize.weekBoxSide,
           textAlign: TextAlign.center,
           maxLines: 1,
           height: 1,
@@ -85,7 +82,7 @@ class CalendarPainter extends CustomPainter {
     final builder =
         ui.ParagraphBuilder(
             ui.ParagraphStyle(
-              fontSize: 10,
+              fontSize: calendarSize.weekBoxSide,
               textAlign: TextAlign.end,
               maxLines: 1,
               height: 1,

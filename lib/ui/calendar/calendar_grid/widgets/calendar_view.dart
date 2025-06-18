@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
@@ -18,6 +17,8 @@ class CalendarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+
     return BlocSelector<UserBloc, UserState, int>(
       selector: (state) {
         return switch (state) {
@@ -28,7 +29,7 @@ class CalendarView extends StatelessWidget {
       },
       builder: (context, yearsCount) {
         logger.d('Years count: $yearsCount');
-        
+
         if (yearsCount == 0) {
           return const CalendarViewLoadingBody();
         } else if (yearsCount == -1) {
@@ -57,7 +58,10 @@ class CalendarView extends StatelessWidget {
                   (context) => CalendarCubit(
                     weekRepository: context.read<WeekRepository>(),
                     sharedPreferencesService: context.read(),
-                  )..getWeeks(calendarSize: calendarSize),
+                  )..getWeeks(
+                    calendarSize: calendarSize,
+                    brightness: brightness,
+                  ),
               child: BlocBuilder<CalendarCubit, CalendarState>(
                 builder: (context, state) {
                   return switch (state) {
