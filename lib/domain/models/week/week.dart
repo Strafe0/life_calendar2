@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:life_calendar2/core/converters/date_converter.dart';
 import 'package:life_calendar2/core/converters/event_converter.dart';
 import 'package:life_calendar2/core/converters/goal_converter.dart';
 import 'package:life_calendar2/core/converters/photo_converter.dart';
@@ -17,8 +18,8 @@ abstract class Week with _$Week {
   const factory Week({
     required int id,
     required int yearId,
-    required DateTime start,
-    required DateTime end,
+    @DateConverter() required DateTime start,
+    @DateConverter() required DateTime end,
     @JsonKey(name: 'state') required WeekTense tense,
     required WeekAssessment assessment,
     @GoalConverter() required List<Goal> goals,

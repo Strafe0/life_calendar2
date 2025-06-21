@@ -9,8 +9,8 @@ part of 'week.dart';
 _Week _$WeekFromJson(Map<String, dynamic> json) => _Week(
   id: (json['id'] as num).toInt(),
   yearId: (json['yearId'] as num).toInt(),
-  start: DateTime.parse(json['start'] as String),
-  end: DateTime.parse(json['end'] as String),
+  start: const DateConverter().fromJson((json['start'] as num).toInt()),
+  end: const DateConverter().fromJson((json['end'] as num).toInt()),
   tense: $enumDecode(_$WeekTenseEnumMap, json['state']),
   assessment: $enumDecode(_$WeekAssessmentEnumMap, json['assessment']),
   goals: const GoalConverter().fromJson(json['goals'] as String),
@@ -22,8 +22,8 @@ _Week _$WeekFromJson(Map<String, dynamic> json) => _Week(
 Map<String, dynamic> _$WeekToJson(_Week instance) => <String, dynamic>{
   'id': instance.id,
   'yearId': instance.yearId,
-  'start': instance.start.toIso8601String(),
-  'end': instance.end.toIso8601String(),
+  'start': const DateConverter().toJson(instance.start),
+  'end': const DateConverter().toJson(instance.end),
   'state': _$WeekTenseEnumMap[instance.tense]!,
   'assessment': _$WeekAssessmentEnumMap[instance.assessment]!,
   'goals': const GoalConverter().toJson(instance.goals),
