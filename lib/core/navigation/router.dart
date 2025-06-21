@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
@@ -31,11 +32,17 @@ final goRouter = GoRouter(
           routes: [
             GoRoute(
               path: AppRoute.week,
-              builder: (context, state) {
+              pageBuilder: (context, state) {
                 final selectedWeekId = int.tryParse(
                   state.pathParameters['weekId'] ?? '',
                 );
-                return WeekScreen(selectedWeekId: selectedWeekId);
+
+                return CustomTransitionPage(
+                  transitionsBuilder: (context, animation, _, child) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                  child: WeekScreen(selectedWeekId: selectedWeekId),
+                );
               },
             ),
           ],
