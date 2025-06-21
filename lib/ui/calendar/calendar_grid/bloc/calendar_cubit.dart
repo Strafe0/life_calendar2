@@ -27,6 +27,14 @@ class CalendarCubit extends Cubit<CalendarState> {
   }) async {
     emit(const CalendarLoading());
 
+    final updateCurrWeekResult = await _weekRepository.updateCurrentWeek();
+    if (updateCurrWeekResult is Error) {
+      logger.w(
+        'Failed to update current week in DB',
+        error: updateCurrWeekResult.error,
+      );
+    }
+
     final weeksResult = await _weekRepository.getWeeks();
 
     switch (weeksResult) {

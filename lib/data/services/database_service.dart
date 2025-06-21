@@ -91,6 +91,15 @@ class DatabaseService {
     });
   }
 
+  Future<bool> insertWeek(Week week) async {
+    final insertCount = await _db.insert(
+      tableName,
+      week.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    return insertCount == 1;
+  }
+
   Future<List<Week>> getAllWeeks() async {
     final records = await _db.query(tableName);
 

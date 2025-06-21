@@ -22,14 +22,16 @@ class CalendarViewBody extends StatelessWidget {
     logger.d('Build CalendarViewBody');
     return GestureDetector(
       onTapDown: (details) => _onCalendarTap(context, details, calendarSize),
-      child: CustomPaint(
-        size: Size.infinite,
-        painter: CalendarPainter(
-          weekBoxes: weekBoxes,
-          calendarSize: calendarSize,
-          lastUpdateTime: lastUpdateTime,
-          textColor: Theme.of(context).colorScheme.onSurface,
-          brightness: Theme.of(context).brightness,
+      child: RepaintBoundary(
+        child: CustomPaint(
+          size: Size.infinite,
+          painter: CalendarPainter(
+            weekBoxes: weekBoxes,
+            calendarSize: calendarSize,
+            lastUpdateTime: lastUpdateTime,
+            textColor: Theme.of(context).colorScheme.onSurface,
+            brightness: Theme.of(context).brightness,
+          ),
         ),
       ),
     );

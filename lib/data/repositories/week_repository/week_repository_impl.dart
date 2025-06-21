@@ -5,6 +5,7 @@ import 'package:life_calendar2/domain/models/week/event/event.dart';
 import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
 import 'package:life_calendar2/utils/result.dart';
 
 class WeekRepositoryImpl implements WeekRepository {
@@ -23,6 +24,48 @@ class WeekRepositoryImpl implements WeekRepository {
       logger.e('Failed to get current week from DB', error: e, stackTrace: s);
       return Result.error(e);
     }
+  }
+
+  @override
+  Future<Result<void>> updateCurrentWeek() async {
+    try {
+      final today = DateTime.now();
+      final currentWeekResult = await getCurrentWeek();
+      switch (currentWeekResult) {
+        case Ok():
+          await _updateCurrentWeek(today, currentWeekResult.value);
+          return const Result.ok(null);
+        case Error():
+          logger.e(
+            'Failed to get current week for updating',
+            error: currentWeekResult.error,
+          );
+          return Result.error(currentWeekResult.error);
+      }
+    } on Exception catch (e, s) {
+      logger.e('Failed to update current week in DB', error: e, stackTrace: s);
+      return Result.error(e);
+    }
+  }
+
+  Future<void> _updateCurrentWeek(DateTime today, Week currentWeek) async {
+    logger.d('Updating current week in DB');
+
+    Week currWeekDb = currentWeek;
+    while (today.isAfter(currWeekDb.end)) {
+      logger.d('Updating week ${currWeekDb.id}, ${currWeekDb.end}');
+
+      await _databaseService.insertWeek(
+        currWeekDb.copyWith(tense: WeekTense.past),
+      );
+
+      currWeekDb = await _databaseService.getWeek(currWeekDb.id + 1);
+    }
+
+    logger.d('New current week in DB: ${currWeekDb.id}, ${currWeekDb.end}');
+    await _databaseService.insertWeek(
+      currWeekDb.copyWith(tense: WeekTense.current),
+    );
   }
 
   @override
