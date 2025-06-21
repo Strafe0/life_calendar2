@@ -129,6 +129,12 @@ abstract class AppLocalizations {
   /// **'Цели'**
   String get goals;
 
+  /// No description provided for @goal.
+  ///
+  /// In ru, this message translates to:
+  /// **'Цель'**
+  String get goal;
+
   /// No description provided for @noGoals.
   ///
   /// In ru, this message translates to:
@@ -141,6 +147,12 @@ abstract class AppLocalizations {
   /// **'События'**
   String get events;
 
+  /// No description provided for @event.
+  ///
+  /// In ru, this message translates to:
+  /// **'Событие'**
+  String get event;
+
   /// No description provided for @noEvents.
   ///
   /// In ru, this message translates to:
@@ -152,6 +164,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Фото'**
   String get photos;
+
+  /// No description provided for @photo.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фото'**
+  String get photo;
 
   /// No description provided for @noPhotos.
   ///

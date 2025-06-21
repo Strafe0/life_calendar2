@@ -27,16 +27,25 @@ class AppLocalizationsRu extends AppLocalizations {
   String get goals => 'Цели';
 
   @override
+  String get goal => 'Цель';
+
+  @override
   String get noGoals => 'Нет целей';
 
   @override
   String get events => 'События';
 
   @override
+  String get event => 'Событие';
+
+  @override
   String get noEvents => 'Нет событий';
 
   @override
   String get photos => 'Фото';
+
+  @override
+  String get photo => 'Фото';
 
   @override
   String get noPhotos => 'Нет фото';

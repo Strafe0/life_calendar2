@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
@@ -9,6 +10,7 @@ import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_assessment/week_assessment_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/week_event_list_widget.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_goals/week_goal_list_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_photos/week_photo_list_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_resume/week_resume_widget.dart';
@@ -45,6 +47,8 @@ class _WeekViewState extends State<WeekView> {
             titleSpacing: 0,
             leadingWidth: 48,
           ),
+          floatingActionButtonLocation: ExpandableFab.location,
+          floatingActionButton: const WeekFab(),
           body: const Padding(
             padding: EdgeInsets.only(left: 8, right: 8),
             child: CustomScrollView(
