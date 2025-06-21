@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
-import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_state.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_view_body.dart';
@@ -53,17 +52,15 @@ class CalendarView extends StatelessWidget {
               ),
             };
 
-            return BlocProvider(
-              create:
-                  (context) => CalendarCubit(
-                    weekRepository: context.read<WeekRepository>(),
-                    sharedPreferencesService: context.read(),
-                  )..getWeeks(
+            return BlocProvider.value(
+              value:
+                  context.read<CalendarCubit>()..getWeeks(
                     calendarSize: calendarSize,
                     brightness: brightness,
                   ),
               child: BlocBuilder<CalendarCubit, CalendarState>(
                 builder: (context, state) {
+                  logger.d('Calendar new state: $state');
                   return switch (state) {
                     CalendarInitial() ||
                     CalendarLoading() => const CalendarViewLoadingBody(),
@@ -71,6 +68,7 @@ class CalendarView extends StatelessWidget {
                     CalendarSuccess() => CalendarViewBody(
                       weekBoxes: state.weeks,
                       calendarSize: calendarSize,
+                      lastUpdateTime: state.lastUpdateTime,
                     ),
                   };
                 },

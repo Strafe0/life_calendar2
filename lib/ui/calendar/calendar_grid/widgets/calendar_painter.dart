@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 
@@ -9,16 +10,19 @@ class CalendarPainter extends CustomPainter {
   final CalendarSize calendarSize;
   final Color textColor;
   final Brightness brightness;
+  final DateTime lastUpdateTime;
 
   const CalendarPainter({
     required this.weekBoxes,
     required this.calendarSize,
     required this.textColor,
     required this.brightness,
+    required this.lastUpdateTime,
   });
 
   @override
   bool shouldRepaint(covariant CalendarPainter oldDelegate) =>
+      lastUpdateTime != oldDelegate.lastUpdateTime ||
       weekBoxes.length != oldDelegate.weekBoxes.length ||
       calendarSize != oldDelegate.calendarSize ||
       textColor != oldDelegate.textColor ||
@@ -26,6 +30,8 @@ class CalendarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    logger.d('Paint Calendar');
+
     _drawWeekLabels(canvas, textColor);
 
     int yearId = 0;

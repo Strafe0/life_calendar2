@@ -1,3 +1,4 @@
+import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 
 sealed class CalendarState {
@@ -14,16 +15,14 @@ final class CalendarLoading extends CalendarState {
 
 final class CalendarSuccess extends CalendarState {
   final List<WeekBox> weeks;
-  final int? selectedWeekId;
+  final DateTime lastUpdateTime;
 
-  const CalendarSuccess({required this.weeks, this.selectedWeekId});
+  const CalendarSuccess({required this.weeks, required this.lastUpdateTime});
 
-  CalendarSuccess copyWith({int? selectedWeekId}) {
-    return CalendarSuccess(
-      weeks: weeks,
-      selectedWeekId: selectedWeekId ?? this.selectedWeekId,
-    );
-  }
+  @override
+  String toString() =>
+      'CalendarSuccess(weeks: ${weeks.length}, '
+      'lastUpdate: ${lastUpdateTime.toTimeStamp()})';
 }
 
 final class CalendarFailure extends CalendarState {

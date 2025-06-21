@@ -48,11 +48,30 @@ class CalendarCubit extends Cubit<CalendarState> {
               calendarSize,
               brightness,
             ),
+            lastUpdateTime: DateTime.now(),
           ),
         );
       case Error<List<Week>>():
         logger.e('Failed to get weeks', error: weeksResult.error);
         emit(CalendarFailure(weeksResult.error));
+    }
+  }
+
+  void updateWeek({required Week week, required Brightness brightness}) {
+    if (state is CalendarSuccess) {
+      final weeks = (state as CalendarSuccess).weeks;
+      final weekBox = (state as CalendarSuccess).weeks.firstWhere(
+        (w) => w.weekId == week.id,
+        orElse: () => const WeekBox.empty(),
+      );
+      if (weekBox.weekId > 1) {
+        weeks[weekBox.weekId - 1] = WeekBox.fromWeek(
+          week: week,
+          rect: weekBox.rect,
+          brightness: brightness,
+        );
+        emit(CalendarSuccess(weeks: weeks, lastUpdateTime: DateTime.now()));
+      }
     }
   }
 

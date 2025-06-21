@@ -10,13 +10,16 @@ class CalendarViewBody extends StatelessWidget {
     super.key,
     required this.weekBoxes,
     required this.calendarSize,
+    required this.lastUpdateTime,
   });
 
   final List<WeekBox> weekBoxes;
   final CalendarSize calendarSize;
+  final DateTime lastUpdateTime;
 
   @override
   Widget build(BuildContext context) {
+    logger.d('Build CalendarViewBody');
     return GestureDetector(
       onTapDown: (details) => _onCalendarTap(context, details, calendarSize),
       child: CustomPaint(
@@ -24,6 +27,7 @@ class CalendarViewBody extends StatelessWidget {
         painter: CalendarPainter(
           weekBoxes: weekBoxes,
           calendarSize: calendarSize,
+          lastUpdateTime: lastUpdateTime,
           textColor: Theme.of(context).colorScheme.onSurface,
           brightness: Theme.of(context).brightness,
         ),

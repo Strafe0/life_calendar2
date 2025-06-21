@@ -23,9 +23,9 @@ class WeekScreen extends StatelessWidget {
           return BlocBuilder<WeekCubit, WeekState>(
             builder: (context, state) {
               return switch (state) {
+                WeekSuccess() => WeekView(week: state.week),
                 WeekInitial() || WeekLoading() => const WeekLoadingView(),
                 WeekFailure() => const WeekFailureView(),
-                WeekSuccess() => WeekView(week: state.week),
               };
             },
           );
