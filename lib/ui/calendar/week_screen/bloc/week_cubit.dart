@@ -87,4 +87,26 @@ class WeekCubit extends Cubit<WeekState> {
       logger.e('Cannot change goal, because week is not ready');
     }
   }
+
+  Future<void> changeResume(String resume) async {
+    final prevState = state;
+    if (prevState is WeekSuccess) {
+      emit(prevState.copyWith(resume: resume));
+
+      final result = await _weekRepository.updateResume(
+        weekId: prevState.week.id,
+        resume: resume,
+      );
+
+      if (result is Error) {
+        emit(prevState);
+        logger.e(
+          'Failed to change resume. Returning previous state',
+          error: result.error,
+        );
+      }
+    } else {
+      logger.e('Cannot change resume, because week is not ready');
+    }
+  }
 }
