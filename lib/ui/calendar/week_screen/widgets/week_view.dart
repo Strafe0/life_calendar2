@@ -11,6 +11,7 @@ import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_assessment/week_assessment_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/week_event_list_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab_state_provider.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_goals/week_goal_list_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_photos/week_photo_list_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_resume/week_resume_widget.dart';
@@ -37,43 +38,46 @@ class _WeekViewState extends State<WeekView> {
           );
         }
       },
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              '${context.l10n.week} ${widget.week.start.toLocalString(context)} '
-              '- ${widget.week.end.toLocalString(context)}',
+      child: WeekFabStateProvider(
+        child: SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                '${context.l10n.week} '
+                '${widget.week.start.toLocalString(context)} '
+                '- ${widget.week.end.toLocalString(context)}',
+              ),
+              titleSpacing: 0,
+              leadingWidth: 48,
             ),
-            titleSpacing: 0,
-            leadingWidth: 48,
-          ),
-          floatingActionButtonLocation: ExpandableFab.location,
-          floatingActionButton: const WeekFab(),
-          body: const Padding(
-            padding: EdgeInsets.only(left: 8, right: 8),
-            child: CustomScrollView(
-              slivers: [
-                SliverPadding(
-                  padding: EdgeInsets.only(top: 20),
-                  sliver: SliverToBoxAdapter(child: WeekAssessmentWidget()),
-                ),
-                SliverPadding(
-                  padding: EdgeInsets.only(top: 20),
-                  sliver: WeekGoalListWidget(),
-                ),
-                SliverPadding(
-                  padding: EdgeInsets.only(top: 20),
-                  sliver: WeekEventListWidget(),
-                ),
-                SliverPadding(
-                  padding: EdgeInsets.only(top: 20),
-                  sliver: WeekPhotoListWidget(),
-                ),
-                SliverPadding(
-                  padding: EdgeInsets.only(top: 20),
-                  sliver: WeekResumeWidget(),
-                ),
-              ],
+            floatingActionButtonLocation: ExpandableFab.location,
+            floatingActionButton: const WeekFab(),
+            body: const Padding(
+              padding: EdgeInsets.only(left: 8, right: 8),
+              child: CustomScrollView(
+                slivers: [
+                  SliverPadding(
+                    padding: EdgeInsets.only(top: 20),
+                    sliver: SliverToBoxAdapter(child: WeekAssessmentWidget()),
+                  ),
+                  SliverPadding(
+                    padding: EdgeInsets.only(top: 20),
+                    sliver: WeekGoalListWidget(),
+                  ),
+                  SliverPadding(
+                    padding: EdgeInsets.only(top: 20),
+                    sliver: WeekEventListWidget(),
+                  ),
+                  SliverPadding(
+                    padding: EdgeInsets.only(top: 20),
+                    sliver: WeekPhotoListWidget(),
+                  ),
+                  SliverPadding(
+                    padding: EdgeInsets.only(top: 20),
+                    sliver: WeekResumeWidget(),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab_state_provider.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_resume/resume_text_field.dart';
+import 'package:life_calendar2/ui/core/widgets/bottom_sheet.dart';
 
 class ResumeFab extends StatefulWidget {
   const ResumeFab({super.key, this.closeFab});
@@ -41,63 +44,34 @@ class _ResumeFabState extends State<ResumeFab> {
 
   Future<void> _addResume() async {
     final weekCubit = context.read<WeekCubit>();
+    final fabState = WeekFabStateProvider.of(context);
 
-    await showModalBottomSheet<String>(
-      context: context,
-      showDragHandle: true,
-      useSafeArea: true,
-      isScrollControlled: true,
+    String initialText = '';
+    final weekState = weekCubit.state;
+    if (weekState is WeekSuccess) {
+      initialText = weekState.week.resume;
+    }
+
+    await showDraggableBottomSheet(
+      context,
+      title: context.l10n.resume,
       builder: (context) {
-        return DraggableScrollableSheet(
-          expand: false,
-          initialChildSize: 0.8,
-          maxChildSize: 0.9,
-          builder: (context, scrollController) {
-            return SingleChildScrollView(
-              controller: scrollController,
-              child: SizedBox(
-                height: MediaQuery.sizeOf(context).height / 4,
-                child: Column(
-                  children: [
-                    Text(
-                      context.l10n.resume,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: TextField(
-                          controller: _textController,
-                          expands: true,
-                          maxLines: null,
-                          autofocus: true,
-                          textAlignVertical: TextAlignVertical.top,
-                          textInputAction: TextInputAction.done,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                          ),
-                          onEditingComplete: () async {
-                            await weekCubit.changeResume(_textController.text);
-                            if (context.mounted) {
-                              context.pop();
-                              if (widget.closeFab != null) {
-                                widget.closeFab?.call();
-                              }
-                            }
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: ResumeTextField(
+            initialText: initialText,
+            onEditingComplete: (newResumeText) async {
+              await weekCubit.changeResume(newResumeText);
+              if (context.mounted) {
+                context.pop();
+              }
+            },
+          ),
         );
       },
     );
+
+    fabState.close();
   }
 
   @override

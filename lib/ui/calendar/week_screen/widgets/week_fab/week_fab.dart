@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/resume/resume_fab.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab_state_provider.dart';
 
 class WeekFab extends StatefulWidget {
   const WeekFab({super.key});
@@ -11,15 +12,13 @@ class WeekFab extends StatefulWidget {
 }
 
 class _WeekFabState extends State<WeekFab> {
-  final _fabKey = GlobalKey<ExpandableFabState>();
-
   @override
   Widget build(BuildContext context) {
     final backgroundColor = Theme.of(context).cardTheme.color;
     final foregroundColor = Theme.of(context).colorScheme.primary;
 
     return ExpandableFab(
-      key: _fabKey,
+      key: WeekFabStateProvider.of(context).fabKey,
       type: ExpandableFabType.up,
       distance: 65,
       openButtonBuilder: DefaultFloatingActionButtonBuilder(
@@ -29,7 +28,7 @@ class _WeekFabState extends State<WeekFab> {
         child: const Icon(Icons.close),
       ),
       children: [
-        ResumeFab(closeFab: _closeFab),
+        const ResumeFab(),
         FloatingActionButton.extended(
           heroTag: null,
           backgroundColor: backgroundColor,
@@ -57,6 +56,4 @@ class _WeekFabState extends State<WeekFab> {
       ],
     );
   }
-
-  void _closeFab() => _fabKey.currentState?.toggle();
 }

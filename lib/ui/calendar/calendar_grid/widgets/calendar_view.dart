@@ -11,8 +11,15 @@ import 'package:life_calendar2/ui/user/bloc/user_state.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 import 'package:life_calendar2/utils/device_type.dart' as device_type;
 
-class CalendarView extends StatelessWidget {
+class CalendarView extends StatefulWidget {
   const CalendarView({super.key});
+
+  @override
+  State<CalendarView> createState() => _CalendarViewState();
+}
+
+class _CalendarViewState extends State<CalendarView> {
+  Widget? _calendar;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +44,7 @@ class CalendarView extends StatelessWidget {
 
         return LayoutBuilder(
           builder: (context, constraints) {
+            logger.d('LayoutBuilder builder');
             final deviceType = device_type.getDeviceType();
 
             final calendarSize = switch (deviceType) {
@@ -52,7 +60,7 @@ class CalendarView extends StatelessWidget {
               ),
             };
 
-            return BlocProvider.value(
+            _calendar ??= BlocProvider.value(
               value:
                   context.read<CalendarCubit>()..getWeeks(
                     calendarSize: calendarSize,
@@ -74,6 +82,8 @@ class CalendarView extends StatelessWidget {
                 },
               ),
             );
+
+            return _calendar!;
           },
         );
       },
