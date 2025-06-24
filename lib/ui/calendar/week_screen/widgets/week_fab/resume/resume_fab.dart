@@ -9,9 +9,7 @@ import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_resume/resum
 import 'package:life_calendar2/ui/core/widgets/bottom_sheet.dart';
 
 class ResumeFab extends StatefulWidget {
-  const ResumeFab({super.key, this.closeFab});
-
-  final VoidCallback? closeFab;
+  const ResumeFab({super.key});
 
   @override
   State<ResumeFab> createState() => _ResumeFabState();

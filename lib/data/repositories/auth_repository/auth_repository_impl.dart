@@ -28,7 +28,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await _sharedPreferencesService.setFirstLaunch(isFirstLaunch: false);
       logger.d('First launch (false) is saved');
 
-      final userId = AppUuid.generateUserId();
+      final userId = AppUuid.generateTimeBasedUuid();
       await _sharedPreferencesService.setUserId(userId);
       logger.d('UserID (${userId.length} symbols) is saved');
 

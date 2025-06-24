@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/core/logger.dart';
 
 Future<T?> showDraggableBottomSheet<T>(
   BuildContext context, {
@@ -19,18 +20,26 @@ Future<T?> showDraggableBottomSheet<T>(
         initialChildSize: initialChildSize,
         maxChildSize: maxChildSize,
         builder: (context, scrollController) {
-          return SingleChildScrollView(
-            controller: scrollController,
-            child: SizedBox(
-              height: height ?? MediaQuery.sizeOf(context).height / 4,
-              child: Column(
-                children: [
-                  if (title != null)
-                    Text(title, style: Theme.of(context).textTheme.titleMedium),
-                  Expanded(child: builder(context)),
-                ],
-              ),
-            ),
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              logger.d('Sheet max height: ${constraints.maxHeight}');
+              return SingleChildScrollView(
+                controller: scrollController,
+                child: SizedBox(
+                  height: height ?? constraints.maxHeight,
+                  child: Column(
+                    children: [
+                      if (title != null)
+                        Text(
+                          title,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      Expanded(child: builder(context)),
+                    ],
+                  ),
+                ),
+              );
+            },
           );
         },
       );

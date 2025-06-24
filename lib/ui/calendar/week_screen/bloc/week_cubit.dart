@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/uuid/app_uuid.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
+import 'package:life_calendar2/domain/models/week/event/event.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
@@ -102,6 +104,37 @@ class WeekCubit extends Cubit<WeekState> {
         emit(prevState);
         logger.e(
           'Failed to change resume. Returning previous state',
+          error: result.error,
+        );
+      }
+    } else {
+      logger.e('Cannot change resume, because week is not ready');
+    }
+  }
+
+  Future<void> addEvent(DateTime date, String title) async {
+    final prevState = state;
+    if (prevState is WeekSuccess) {
+      final newEventList =
+          prevState.week.events..add(
+            Event(
+              id: AppUuid.generateTimeBasedUuid(),
+              title: title,
+              date: date,
+            ),
+          );
+
+      emit(prevState.copyWith(events: newEventList));
+
+      final result = await _weekRepository.updateEvents(
+        weekId: prevState.week.id,
+        events: newEventList,
+      );
+
+      if (result is Error) {
+        emit(prevState);
+        logger.e(
+          'Failed to add new event. Returning previous state',
           error: result.error,
         );
       }
