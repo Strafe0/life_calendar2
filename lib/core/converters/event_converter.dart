@@ -13,7 +13,7 @@ class EventConverter implements JsonConverter<List<Event>, String> {
       final List values = jsonDecode(json);
       return values
           .map((event) => Event.fromJson(event))
-          .toList(growable: false);
+          .toList();
     } on FormatException catch (e, s) {
       logger.e('Failed to parse events', error: e, stackTrace: s);
       return [];

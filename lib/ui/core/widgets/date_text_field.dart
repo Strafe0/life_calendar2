@@ -10,6 +10,8 @@ class DateTextField extends StatelessWidget {
     this.initialDate,
     this.onDateSaved,
     this.onDateSubmitted,
+    this.fieldLabelText,
+    this.errorFormatText,
   });
 
   final DateTime firstDate;
@@ -17,6 +19,8 @@ class DateTextField extends StatelessWidget {
   final DateTime? initialDate;
   final ValueChanged<DateTime>? onDateSaved;
   final ValueChanged<DateTime>? onDateSubmitted;
+  final String? fieldLabelText;
+  final String? errorFormatText;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +28,13 @@ class DateTextField extends StatelessWidget {
       children: [
         Expanded(
           child: InputDatePickerFormField(
+            keyboardType: TextInputType.datetime,
             firstDate: firstDate,
             lastDate: lastDate,
             initialDate: initialDate,
-            fieldLabelText: context.l10n.enterBirthdate,
-            errorFormatText: context.l10n.dateFormatError,
+            fieldLabelText: fieldLabelText,
+            errorFormatText: errorFormatText,
+            // TODO: fix not showing in event change sheet
             errorInvalidText: context.l10n.dateInvalid(
               firstDate.toLocalString(context),
               lastDate.toLocalString(context),

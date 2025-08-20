@@ -30,7 +30,7 @@ class WeekCubit extends Cubit<WeekState> {
     switch (weekResult) {
       case Ok<Week>():
         logger.d('Got week $weekId');
-        emit(WeekSuccess(week: weekResult.value));
+        emit(WeekSuccess(week: weekResult.value, lastUpdate: DateTime.now()));
       case Error<Week>():
         emit(WeekFailure(Exception('Failed to get week with id: $weekId')));
         logger.e('Failed to receive week $weekId', error: weekResult.error);
@@ -115,6 +115,7 @@ class WeekCubit extends Cubit<WeekState> {
   Future<void> addEvent(DateTime date, String title) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
+      logger.d('prevState events: ${prevState.week.events.length}');
       final newEventList =
           prevState.week.events..add(
             Event(

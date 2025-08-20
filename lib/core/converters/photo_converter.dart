@@ -10,7 +10,7 @@ class PhotoConverter implements JsonConverter<List<String>, String> {
   List<String> fromJson(String json) {
     try {
       final List photos = jsonDecode(json);
-      return photos.map((photo) => photo as String).toList(growable: false);
+      return photos.map((photo) => photo as String).toList();
     } on FormatException catch (e, s) {
       logger.e('Failed to parse photos', error: e, stackTrace: s);
       return [];

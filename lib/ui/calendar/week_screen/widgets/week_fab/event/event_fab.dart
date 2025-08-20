@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
@@ -39,12 +41,22 @@ class _EventFabState extends State<EventFab> {
       context,
       title: context.l10n.event,
       builder: (context) {
+        logger.d('Build event sheet');
         return Padding(
           padding: const EdgeInsets.all(16),
           child: EventChangeSheet(
             firstDate: startDate,
             lastDate: endDate,
-            onSubmit: weekCubit.addEvent,
+            onSubmit: (date, title) async {
+              // TODO: not working
+              logger.d('add event');
+              await weekCubit.addEvent(date, title);
+              logger.d('added event');
+              if (context.mounted) {
+                logger.d('Pop event sheet');
+                context.pop();
+              }
+            },
           ),
         );
       },

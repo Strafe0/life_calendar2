@@ -89,6 +89,8 @@
             }
         }
     },
+    "enterDate": "Введите дату",
+    "@enterDate": {},
     "enterLifespan": "Введите продолжительность жизни",
     "@enterLifespan": {},
     "lifespanFormatError": "Неверный формат",

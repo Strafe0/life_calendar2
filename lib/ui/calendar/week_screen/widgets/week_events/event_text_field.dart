@@ -5,10 +5,12 @@ class EventTextField extends StatefulWidget {
   const EventTextField({
     super.key,
     this.initialText,
+    required this.onChanged,
     required this.onEditingComplete,
   });
 
   final String? initialText;
+  final Function(String text) onChanged;
   final Function(String text) onEditingComplete;
 
   @override
@@ -34,6 +36,7 @@ class _EventTextFieldState extends State<EventTextField> {
       decoration: const InputDecoration(
         border: UnderlineInputBorder(),
       ),
+      onChanged: widget.onChanged,
       onEditingComplete: () => widget.onEditingComplete(_textController.text),
     );
   }

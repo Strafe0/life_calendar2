@@ -104,6 +104,9 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get enterDate => 'Введите дату';
+
+  @override
   String get enterLifespan => 'Введите продолжительность жизни';
 
   @override

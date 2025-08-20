@@ -11,7 +11,7 @@ class GoalConverter implements JsonConverter<List<Goal>, String> {
   List<Goal> fromJson(String json) {
     try {
       final List values = jsonDecode(json);
-      return values.map((g) => Goal.fromJson(g)).toList(growable: false);
+      return values.map((g) => Goal.fromJson(g)).toList();
     } on FormatException catch (e, s) {
       logger.e('Failed to parse goals', error: e, stackTrace: s);
       return [];

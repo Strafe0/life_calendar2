@@ -44,7 +44,6 @@ class _CalendarViewState extends State<CalendarView> {
 
         return LayoutBuilder(
           builder: (context, constraints) {
-            logger.d('LayoutBuilder builder');
             final deviceType = device_type.getDeviceType();
 
             final calendarSize = switch (deviceType) {

@@ -279,6 +279,12 @@ abstract class AppLocalizations {
   /// **'Введите дату {start} - {end}'**
   String dateInvalid(String start, String end);
 
+  /// No description provided for @enterDate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите дату'**
+  String get enterDate;
+
   /// No description provided for @enterLifespan.
   ///
   /// In ru, this message translates to:

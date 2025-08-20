@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';
 import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
@@ -16,10 +17,11 @@ final class WeekLoading extends WeekState {
   const WeekLoading();
 }
 
-final class WeekSuccess extends WeekState {
+final class WeekSuccess extends WeekState with EquatableMixin {
+  final DateTime lastUpdate;
   final Week week;
 
-  const WeekSuccess({required this.week});
+  const WeekSuccess({required this.week, required this.lastUpdate});
 
   WeekSuccess copyWith({
     WeekTense? tense,
@@ -30,6 +32,7 @@ final class WeekSuccess extends WeekState {
     String? resume,
   }) {
     return WeekSuccess(
+      lastUpdate: DateTime.now(),
       week: week.copyWith(
         tense: tense ?? week.tense,
         assessment: assessment ?? week.assessment,
@@ -40,6 +43,9 @@ final class WeekSuccess extends WeekState {
       ),
     );
   }
+
+  @override
+  List<Object?> get props => [lastUpdate, week];
 }
 
 final class WeekFailure extends WeekState {

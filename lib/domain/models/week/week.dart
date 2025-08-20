@@ -13,7 +13,7 @@ part 'week.freezed.dart';
 
 part 'week.g.dart';
 
-@freezed
+@Freezed(makeCollectionsUnmodifiable: false)
 abstract class Week with _$Week {
   const factory Week({
     required int id,

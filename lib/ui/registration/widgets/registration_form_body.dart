@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/user/user.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
@@ -25,9 +26,11 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
     return Column(
       children: [
         DateTextField(
-          firstDate: DateTime(1950, 01, 01),
+          firstDate: firstAvailableDate,
           lastDate: DateTime.now(),
           initialDate: _birthdate,
+          fieldLabelText: context.l10n.enterBirthdate,
+          errorFormatText: context.l10n.dateFormatError,
           onDateSaved: (value) {
             _birthdate = value;
             logger.d('birthdate form saved: $_birthdate');
@@ -61,7 +64,7 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
           onPressed: () async {
             if (_isLoading) return;
             setState(() => _isLoading = true);
-        
+
             final form = widget.formKey.currentState;
             if (form != null) {
               form.save();
@@ -76,7 +79,7 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
                 }
               }
             }
-        
+
             setState(() => _isLoading = false);
           },
           child: Text(context.l10n.ready),
