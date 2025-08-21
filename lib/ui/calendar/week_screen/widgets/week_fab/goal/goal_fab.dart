@@ -3,38 +3,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/event_change_sheet.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab_state_provider.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_goals/goal_change_sheet.dart';
 import 'package:life_calendar2/ui/core/widgets/bottom_sheet.dart';
 
-class EventFab extends StatefulWidget {
-  const EventFab({super.key});
+class GoalFab extends StatefulWidget {
+  const GoalFab({super.key});
 
   @override
-  State<EventFab> createState() => _EventFabState();
+  State<GoalFab> createState() => _GoalFabState();
 }
 
-class _EventFabState extends State<EventFab> {
+class _GoalFabState extends State<GoalFab> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
       heroTag: null,
       backgroundColor: Theme.of(context).cardTheme.color,
       foregroundColor: Theme.of(context).colorScheme.primary,
-      onPressed: _addEvent,
-      label: Text(context.l10n.event),
+      onPressed: _addGoal,
+      label: Text(context.l10n.goal),
       icon: const Icon(Icons.calendar_today),
     );
   }
 
-  Future<void> _addEvent() async {
+  Future<void> _addGoal() async {
     final weekCubit = context.read<WeekCubit>();
     final fabState = WeekFabStateProvider.of(context);
-
-    final weekState = weekCubit.state as WeekSuccess;
-    final startDate = weekState.week.start;
-    final endDate = weekState.week.end;
 
     await showDraggableBottomSheet(
       context,
@@ -42,11 +37,9 @@ class _EventFabState extends State<EventFab> {
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.all(16),
-          child: EventChangeSheet(
-            firstDate: startDate,
-            lastDate: endDate,
-            onSubmit: (date, title) async {
-              await weekCubit.addEvent(date, title);
+          child: GoalChangeSheet(
+            onSubmit: (title) async {
+              await weekCubit.addGoal(title);
               if (context.mounted) {
                 context.pop();
               }

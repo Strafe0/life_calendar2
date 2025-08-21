@@ -3,6 +3,7 @@ import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/core/uuid/app_uuid.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';
+import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
@@ -140,7 +141,38 @@ class WeekCubit extends Cubit<WeekState> {
         );
       }
     } else {
-      logger.e('Cannot change resume, because week is not ready');
+      logger.e('Cannot change event, because week is not ready');
+    }
+  }
+
+  Future<void> addGoal(String title) async {
+    final prevState = state;
+    if (prevState is WeekSuccess) {
+      final newGoalList =
+          prevState.week.goals..add(
+            Goal(
+              id: AppUuid.generateTimeBasedUuid(),
+              title: title,
+              isCompleted: false,
+            ),
+          );
+
+      emit(prevState.copyWith(goals: newGoalList));
+
+      final result = await _weekRepository.updateGoals(
+        weekId: prevState.week.id,
+        goals: newGoalList,
+      );
+
+      if (result is Error) {
+        emit(prevState);
+        logger.e(
+          'Failed to add new goal. Returning previous state',
+          error: result.error,
+        );
+      }
+    } else {
+      logger.e('Cannot change goal, because week is not ready');
     }
   }
 }

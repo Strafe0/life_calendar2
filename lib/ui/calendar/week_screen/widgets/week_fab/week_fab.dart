@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/event/event_fab.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/goal/goal_fab.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/resume/resume_fab.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab_state_provider.dart';
 
@@ -31,14 +32,7 @@ class _WeekFabState extends State<WeekFab> {
       children: [
         const ResumeFab(),
         const EventFab(),
-        FloatingActionButton.extended(
-          heroTag: null,
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          onPressed: () {},
-          label: Text(context.l10n.goal),
-          icon: const Icon(Icons.check),
-        ),
+        const GoalFab(),
         FloatingActionButton.extended(
           heroTag: null,
           onPressed: () {},
