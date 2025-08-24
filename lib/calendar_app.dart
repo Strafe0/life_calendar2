@@ -13,9 +13,11 @@ import 'package:life_calendar2/data/repositories/user_repository/user_repository
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository_impl.dart';
 import 'package:life_calendar2/data/services/database_service.dart';
+import 'package:life_calendar2/data/services/image_picker_service_impl.dart';
 import 'package:life_calendar2/data/services/shared_preferences_service.dart';
 import 'package:life_calendar2/core/l10n/app_localizations.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/domain/services/image_picker_service.dart';
 import 'package:life_calendar2/ui/core/themes/app_theme.dart';
 import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
 
@@ -28,6 +30,9 @@ class CalendarApp extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (_) => DatabaseService()),
         RepositoryProvider(create: (_) => const SharedPreferencesService()),
+        RepositoryProvider<ImagePickerService>(
+          create: (_) => const ImagePickerServiceImpl(),
+        ),
         RepositoryProvider<OnboardingRepository>(
           create: (_) => const OnboardingRepositoryImpl(),
         ),

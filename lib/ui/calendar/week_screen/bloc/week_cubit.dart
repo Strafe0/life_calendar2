@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/core/uuid/app_uuid.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
@@ -162,6 +163,32 @@ class WeekCubit extends Cubit<WeekState> {
       final result = await _weekRepository.updateGoals(
         weekId: prevState.week.id,
         goals: newGoalList,
+      );
+
+      if (result is Error) {
+        emit(prevState);
+        logger.e(
+          'Failed to add new goal. Returning previous state',
+          error: result.error,
+        );
+      }
+    } else {
+      logger.e('Cannot change goal, because week is not ready');
+    }
+  }
+
+  Future<void> addPhotos(List<XFile> photos) async {
+    final prevState = state;
+    if (prevState is WeekSuccess) {
+      final newPhotoList =
+          prevState.week.photos
+            ..addAll(photos.map((xFile) => xFile.path).toList());
+
+      emit(prevState.copyWith(photos: newPhotoList));
+
+      final result = await _weekRepository.updatePhotos(
+        weekId: prevState.week.id,
+        photos: newPhotoList,
       );
 
       if (result is Error) {

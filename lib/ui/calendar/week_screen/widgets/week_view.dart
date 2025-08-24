@@ -73,7 +73,7 @@ class _WeekViewState extends State<WeekView> {
                     sliver: WeekPhotoListWidget(),
                   ),
                   SliverPadding(
-                    padding: EdgeInsets.only(top: 20),
+                    padding: EdgeInsets.symmetric(vertical: 20),
                     sliver: WeekResumeWidget(),
                   ),
                 ],

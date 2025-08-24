@@ -23,7 +23,7 @@ class _GoalFabState extends State<GoalFab> {
       foregroundColor: Theme.of(context).colorScheme.primary,
       onPressed: _addGoal,
       label: Text(context.l10n.goal),
-      icon: const Icon(Icons.calendar_today),
+      icon: const Icon(Icons.check),
     );
   }
 
