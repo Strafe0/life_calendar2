@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/core/logger.dart';
-import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/event_text_field.dart';
 import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
 

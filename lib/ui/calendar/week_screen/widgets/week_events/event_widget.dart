@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
+import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';
-import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 
 class EventWidget extends StatelessWidget {
   const EventWidget({super.key, required this.event});
@@ -16,7 +17,7 @@ class EventWidget extends StatelessWidget {
       child: ListTile(
         title: Text(event.title, style: Theme.of(context).textTheme.bodyMedium),
         subtitle: Text(
-          event.date.toString(),
+          event.date.toLocalString(context),
           style: Theme.of(context).textTheme.bodySmall,
         ),
         trailing: PopupMenuButton<int>(

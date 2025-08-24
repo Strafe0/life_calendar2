@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
-import 'package:life_calendar2/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 
 class DateTextField extends StatelessWidget {
   const DateTextField({

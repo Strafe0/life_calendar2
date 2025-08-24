@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
+import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/user/user.dart';
-import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_cubit.dart';
 

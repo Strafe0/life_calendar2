@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
-import 'package:life_calendar2/l10n/app_localizations_extension.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
   const OnboardingPageWidget({super.key, required this.page});

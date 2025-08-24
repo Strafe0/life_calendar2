@@ -1,3 +1,5 @@
+// ignore_for_file: directives_ordering
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
@@ -12,8 +14,8 @@ import 'package:life_calendar2/data/repositories/week_repository/week_repository
 import 'package:life_calendar2/data/repositories/week_repository/week_repository_impl.dart';
 import 'package:life_calendar2/data/services/database_service.dart';
 import 'package:life_calendar2/data/services/shared_preferences_service.dart';
-import 'package:life_calendar2/l10n/app_localizations.dart';
-import 'package:life_calendar2/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/core/l10n/app_localizations.dart';
+import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/core/themes/app_theme.dart';
 import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
 
