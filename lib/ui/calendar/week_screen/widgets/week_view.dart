@@ -76,6 +76,8 @@ class _WeekViewState extends State<WeekView> {
                     padding: EdgeInsets.symmetric(vertical: 20),
                     sliver: WeekResumeWidget(),
                   ),
+                  // TODO: add ad
+                  // TODO: add padding to not overlap FAB
                 ],
               ),
             ),

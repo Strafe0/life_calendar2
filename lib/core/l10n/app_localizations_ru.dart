@@ -33,6 +33,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get noGoals => 'Нет целей';
 
   @override
+  String get goalCreation => 'Создание цели';
+
+  @override
+  String get goalEdit => 'Изменение цели';
+
+  @override
   String get events => 'События';
 
   @override
@@ -40,6 +46,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noEvents => 'Нет событий';
+
+  @override
+  String get eventCreation => 'Создание события';
+
+  @override
+  String get eventEdit => 'Изменение события';
 
   @override
   String get photos => 'Фото';

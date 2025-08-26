@@ -141,6 +141,18 @@ abstract class AppLocalizations {
   /// **'Нет целей'**
   String get noGoals;
 
+  /// No description provided for @goalCreation.
+  ///
+  /// In ru, this message translates to:
+  /// **'Создание цели'**
+  String get goalCreation;
+
+  /// No description provided for @goalEdit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменение цели'**
+  String get goalEdit;
+
   /// No description provided for @events.
   ///
   /// In ru, this message translates to:
@@ -158,6 +170,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Нет событий'**
   String get noEvents;
+
+  /// No description provided for @eventCreation.
+  ///
+  /// In ru, this message translates to:
+  /// **'Создание события'**
+  String get eventCreation;
+
+  /// No description provided for @eventEdit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменение события'**
+  String get eventEdit;
 
   /// No description provided for @photos.
   ///

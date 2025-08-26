@@ -20,6 +20,7 @@ class EventWidget extends StatelessWidget {
           event.date.toLocalString(context),
           style: Theme.of(context).textTheme.bodySmall,
         ),
+        contentPadding: const EdgeInsets.only(left: 16),
         trailing: PopupMenuButton<int>(
           icon: Icon(
             Icons.more_vert,

@@ -32,14 +32,17 @@ class WeekPhotoListWidget extends StatelessWidget {
               );
             }
 
-            return SliverGrid.builder(
-              itemCount: photos.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
+            return SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              sliver: SliverGrid.builder(
+                itemCount: photos.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                ),
+                itemBuilder: (_, index) => PhotoWidget(photoUrl: photos[index]),
               ),
-              itemBuilder: (_, index) => PhotoWidget(photoUrl: photos[index]),
             );
           },
         ),

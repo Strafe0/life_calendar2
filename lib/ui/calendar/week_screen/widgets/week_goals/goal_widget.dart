@@ -17,6 +17,7 @@ class GoalWidget extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       child: CheckboxListTile(
+        controlAffinity: ListTileControlAffinity.leading,
         value: goal.isCompleted,
         onChanged: (newValue) {
           if (newValue != null) {

@@ -26,12 +26,7 @@ class _WeekFabState extends State<WeekFab> {
       closeButtonBuilder: DefaultFloatingActionButtonBuilder(
         child: const Icon(Icons.close),
       ),
-      children: [
-        const ResumeFab(),
-        const EventFab(),
-        const GoalFab(),
-        const PhotoFab(),
-      ],
+      children: const [ResumeFab(), EventFab(), GoalFab(), PhotoFab()],
     );
   }
 }

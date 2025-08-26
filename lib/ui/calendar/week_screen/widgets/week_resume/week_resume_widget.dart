@@ -98,6 +98,7 @@ class WeekResumeWidget extends StatelessWidget {
     ];
   }
 
+  // TODO: refactor to not repeat (see ResumeFab)
   Future<void> _showResumeBottomSheet(BuildContext context) async {
     final weekCubit = context.read<WeekCubit>();
     final fabState = WeekFabStateProvider.of(context);

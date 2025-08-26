@@ -33,7 +33,7 @@ class _GoalFabState extends State<GoalFab> {
 
     await showDraggableBottomSheet(
       context,
-      title: context.l10n.event,
+      title: context.l10n.goalCreation,
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.all(16),
