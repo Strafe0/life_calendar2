@@ -10,6 +10,7 @@ import 'package:life_calendar2/domain/models/week/week_assessment/week_assessmen
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
 import 'package:life_calendar2/utils/result.dart';
 
+// TODO: separate to multiple blocs (EventBloc, GoalBloc, PhotoBloc, ResumeBloc)
 class WeekCubit extends Cubit<WeekState> {
   final WeekRepository _weekRepository;
 
@@ -169,6 +170,33 @@ class WeekCubit extends Cubit<WeekState> {
         emit(prevState);
         logger.e(
           'Failed to add new goal. Returning previous state',
+          error: result.error,
+        );
+      }
+    } else {
+      logger.e('Cannot add goal, because week is not ready');
+    }
+  }
+
+  Future<void> changeGoal(Goal newGoal) async {
+    final prevState = state;
+    if (prevState is WeekSuccess) {
+      final oldGoalIndex = prevState.week.goals.indexWhere(
+        (g) => g.id == newGoal.id,
+      );
+      final newGoalList = prevState.week.goals..[oldGoalIndex] = newGoal;
+
+      emit(prevState.copyWith(goals: newGoalList));
+
+      final result = await _weekRepository.updateGoals(
+        weekId: prevState.week.id,
+        goals: newGoalList,
+      );
+
+      if (result is Error) {
+        emit(prevState);
+        logger.e(
+          'Failed to change goal. Returning previous state',
           error: result.error,
         );
       }
