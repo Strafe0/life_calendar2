@@ -118,7 +118,6 @@ class WeekCubit extends Cubit<WeekState> {
   Future<void> addEvent(DateTime date, String title) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
-      logger.d('prevState events: ${prevState.week.events.length}');
       final newEventList =
           prevState.week.events..add(
             Event(
@@ -144,6 +143,60 @@ class WeekCubit extends Cubit<WeekState> {
       }
     } else {
       logger.e('Cannot change event, because week is not ready');
+    }
+  }
+
+  Future<void> changeEvent(Event newEvent) async {
+    final prevState = state;
+    if (prevState is WeekSuccess) {
+      final oldEventIndex = prevState.week.events.indexWhere(
+        (event) => event.id == newEvent.id,
+      );
+      final newEventList = prevState.week.events..[oldEventIndex] = newEvent;
+
+      emit(prevState.copyWith(events: newEventList));
+
+      final result = await _weekRepository.updateEvents(
+        weekId: prevState.week.id,
+        events: newEventList,
+      );
+
+      if (result is Error) {
+        emit(prevState);
+        logger.e(
+          'Failed to change event. Returning previous state',
+          error: result.error,
+        );
+      }
+    } else {
+      logger.e('Cannot change event, because week is not ready');
+    }
+  }
+
+  Future<void> deleteEvent(Event event) async {
+    final prevState = state;
+    if (prevState is WeekSuccess) {
+      final eventIndex = prevState.week.events.indexWhere(
+        (event) => event.id == event.id,
+      );
+      final newEventList = prevState.week.events..removeAt(eventIndex);
+
+      emit(prevState.copyWith(events: newEventList));
+
+      final result = await _weekRepository.updateEvents(
+        weekId: prevState.week.id,
+        events: newEventList,
+      );
+
+      if (result is Error) {
+        emit(prevState);
+        logger.e(
+          'Failed to delete event. Returning previous state',
+          error: result.error,
+        );
+      }
+    } else {
+      logger.e('Cannot delete event, because week is not ready');
     }
   }
 

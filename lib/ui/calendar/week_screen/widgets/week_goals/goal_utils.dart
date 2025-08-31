@@ -12,22 +12,21 @@ Future<void> showGoalSheet(BuildContext context, {Goal? goal}) async {
   final weekCubit = context.read<WeekCubit>();
   final fabState = WeekFabStateProvider.of(context);
 
-  final sheetTitle =
-      goal == null ? context.l10n.goalCreation : context.l10n.goalEdit;
+  final isCreation = goal == null;
 
   await showDraggableBottomSheet(
     context,
-    title: sheetTitle,
+    title: isCreation ? context.l10n.goalCreation : context.l10n.goalEdit,
     builder: (context) {
       return Padding(
         padding: const EdgeInsets.all(16),
         child: GoalChangeSheet(
           initialText: goal?.title,
           onSubmit: (title) async {
-            if (goal != null) {
-              await weekCubit.changeGoal(goal.copyWith(title: title));
-            } else {
+            if (isCreation) {
               await weekCubit.addGoal(title);
+            } else {
+              await weekCubit.changeGoal(goal.copyWith(title: title));
             }
 
             if (context.mounted) {

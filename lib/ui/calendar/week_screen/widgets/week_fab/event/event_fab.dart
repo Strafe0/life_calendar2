@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/event_change_sheet.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab_state_provider.dart';
-import 'package:life_calendar2/ui/core/widgets/bottom_sheet.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/event_utils.dart';
 
 class EventFab extends StatefulWidget {
   const EventFab({super.key});
@@ -28,34 +22,5 @@ class _EventFabState extends State<EventFab> {
     );
   }
 
-  Future<void> _addEvent() async {
-    final weekCubit = context.read<WeekCubit>();
-    final fabState = WeekFabStateProvider.of(context);
-
-    final weekState = weekCubit.state as WeekSuccess;
-    final startDate = weekState.week.start;
-    final endDate = weekState.week.end;
-
-    await showDraggableBottomSheet(
-      context,
-      title: context.l10n.event,
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(16),
-          child: EventChangeSheet(
-            firstDate: startDate,
-            lastDate: endDate,
-            onSubmit: (date, title) async {
-              await weekCubit.addEvent(date, title);
-              if (context.mounted) {
-                context.pop();
-              }
-            },
-          ),
-        );
-      },
-    );
-
-    fabState.close();
-  }
+  Future<void> _addEvent() => showEventSheet(context);
 }

@@ -9,11 +9,15 @@ class EventChangeSheet extends StatefulWidget {
     super.key,
     required this.firstDate,
     required this.lastDate,
+    this.initialDate,
+    this.initialTitle,
     required this.onSubmit,
   });
 
   final DateTime firstDate;
   final DateTime lastDate;
+  final DateTime? initialDate;
+  final String? initialTitle;
   final void Function(DateTime, String) onSubmit;
 
   @override
@@ -25,12 +29,21 @@ class _EventChangeSheetState extends State<EventChangeSheet> {
   String? _title;
 
   @override
+  void initState() {
+    super.initState();
+    _dateTime = widget.initialDate;
+    _title = widget.initialTitle;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // TODO: fix not changing if press Ready without pressing Done from keyboard
         DateTextField(
           firstDate: widget.firstDate,
           lastDate: widget.lastDate,
+          initialDate: _dateTime,
           fieldLabelText: context.l10n.enterDate,
           errorFormatText: context.l10n.dateFormatError,
           onDateSaved: (value) {
@@ -44,6 +57,7 @@ class _EventChangeSheetState extends State<EventChangeSheet> {
         ),
         const SizedBox(height: 16),
         EventTextField(
+          initialText: _title,
           onChanged: (title) => _title = title,
           onEditingComplete: (_) {
             FocusManager.instance.primaryFocus?.unfocus();
