@@ -205,6 +205,31 @@ class WeekCubit extends Cubit<WeekState> {
     }
   }
 
+  Future<void> deleteGoal(Goal goal) async {
+    final prevState = state;
+    if (prevState is WeekSuccess) {
+      final goalIndex = prevState.week.goals.indexWhere((g) => g.id == goal.id);
+      final newGoalList = prevState.week.goals..removeAt(goalIndex);
+
+      emit(prevState.copyWith(goals: newGoalList));
+
+      final result = await _weekRepository.updateGoals(
+        weekId: prevState.week.id,
+        goals: newGoalList,
+      );
+
+      if (result is Error) {
+        emit(prevState);
+        logger.e(
+          'Failed to delete goal. Returning previous state',
+          error: result.error,
+        );
+      }
+    } else {
+      logger.e('Cannot delete goal, because week is not ready');
+    }
+  }
+
   Future<void> addPhotos(List<XFile> photos) async {
     final prevState = state;
     if (prevState is WeekSuccess) {

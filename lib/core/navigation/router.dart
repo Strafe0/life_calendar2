@@ -41,7 +41,10 @@ final goRouter = GoRouter(
                   transitionsBuilder: (context, animation, _, child) {
                     return FadeTransition(opacity: animation, child: child);
                   },
-                  child: WeekScreen(selectedWeekId: selectedWeekId),
+                  child:
+                      selectedWeekId != null
+                          ? WeekScreen(selectedWeekId: selectedWeekId)
+                          : const ErrorSplashScreen(),
                 );
               },
             ),
