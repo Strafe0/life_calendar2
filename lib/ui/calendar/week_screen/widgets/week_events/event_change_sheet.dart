@@ -39,7 +39,8 @@ class _EventChangeSheetState extends State<EventChangeSheet> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // TODO: fix not changing if press Ready without pressing Done from keyboard
+        // TODO: fix not changing if press Ready without 
+        // pressing Done from keyboard
         DateTextField(
           firstDate: widget.firstDate,
           lastDate: widget.lastDate,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/ui/core/input_formatters/date_input_formatter.dart';
 
-class DateTextField extends StatelessWidget {
+class DateTextField extends StatefulWidget {
   const DateTextField({
     super.key,
     required this.firstDate,
@@ -23,36 +23,40 @@ class DateTextField extends StatelessWidget {
   final String? errorFormatText;
 
   @override
+  State<DateTextField> createState() => _DateTextFieldState();
+}
+
+class _DateTextFieldState extends State<DateTextField> {
+  final _dateController = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    _dateController.text = widget.initialDate?.toLocalString(context) ?? '';
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: InputDatePickerFormField(
+          child: TextField(
+            controller: _dateController,
             keyboardType: TextInputType.datetime,
-            firstDate: firstDate,
-            lastDate: lastDate,
-            initialDate: initialDate,
-            fieldLabelText: fieldLabelText,
-            errorFormatText: errorFormatText,
-            // TODO: fix not showing in event change sheet
-            errorInvalidText: context.l10n.dateInvalid(
-              firstDate.toLocalString(context),
-              lastDate.toLocalString(context),
-            ),
-            onDateSaved: onDateSaved,
-            onDateSubmitted: onDateSubmitted,
+            inputFormatters: [const DateInputFormatter(separator: '.')],
           ),
         ),
         IconButton(
           onPressed: () async {
             final pickedDate = await showDatePicker(
               context: context,
-              firstDate: firstDate,
-              lastDate: lastDate,
+              firstDate: widget.firstDate,
+              lastDate: widget.lastDate,
             );
 
-            if (pickedDate != null && onDateSubmitted != null) {
-              onDateSubmitted!(pickedDate);
+            if (pickedDate != null && widget.onDateSubmitted != null) {
+              widget.onDateSubmitted!(pickedDate);
             }
           },
           icon: Icon(
