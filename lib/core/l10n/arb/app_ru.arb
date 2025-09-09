@@ -121,5 +121,7 @@
     "registrationUserError": "Не удалось создать пользователя",
     "@registrationUserError": {},
     "registrationCalendarError": "Не удалось создать календарь",
-    "@registrationCalendarError": {}
+    "@registrationCalendarError": {},
+    "errorEmptyField": "Поле не может быть пустым",
+    "@errorEmptyField": {}
 }

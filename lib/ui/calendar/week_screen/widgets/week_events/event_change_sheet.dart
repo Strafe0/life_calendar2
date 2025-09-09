@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/core/extensions/string/string_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/event_text_field.dart';
@@ -25,6 +26,7 @@ class EventChangeSheet extends StatefulWidget {
 }
 
 class _EventChangeSheetState extends State<EventChangeSheet> {
+  final _formKey = GlobalKey<FormState>();
   DateTime? _dateTime;
   String? _title;
 
@@ -37,45 +39,42 @@ class _EventChangeSheetState extends State<EventChangeSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // TODO: fix not changing if press Ready without 
-        // pressing Done from keyboard
-        DateTextField(
-          firstDate: widget.firstDate,
-          lastDate: widget.lastDate,
-          initialDate: _dateTime,
-          fieldLabelText: context.l10n.enterDate,
-          errorFormatText: context.l10n.dateFormatError,
-          onDateSaved: (value) {
-            logger.d('onDateSaved: $value');
-            _dateTime = value;
-          },
-          onDateSubmitted: (value) {
-            logger.d('onDateSubmitted: $value');
-            _dateTime = value;
-          },
-        ),
-        const SizedBox(height: 16),
-        EventTextField(
-          initialText: _title,
-          onChanged: (title) => _title = title,
-          onEditingComplete: (_) {
-            FocusManager.instance.primaryFocus?.unfocus();
-          },
-        ),
-        const SizedBox(height: 16),
-        OutlinedButton(
-          onPressed: () {
-            logger.d('onReadyPressed: $_dateTime, $_title');
-            if (_dateTime != null && _title != null) {
-              logger.d('invoke onSubmit');
-              widget.onSubmit(_dateTime!, _title!);
-            }
-          },
-          child: Text(context.l10n.ready),
-        ),
-      ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          DateTextField(
+            firstDate: widget.firstDate,
+            lastDate: widget.lastDate,
+            initialDate: _dateTime,
+            fieldLabelText: context.l10n.enterDate,
+            errorFormatText: context.l10n.dateFormatError,
+            onChanged: (value) => _dateTime = value.toDateTime(),
+          ),
+          const SizedBox(height: 16),
+          EventTextField(
+            initialText: _title,
+            onChanged: (title) => _title = title,
+            onEditingComplete: (_) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+          ),
+          const SizedBox(height: 16),
+          OutlinedButton(
+            onPressed: () {
+              logger.d('onReadyPressed: $_dateTime, $_title');
+
+              final isValid = _formKey.currentState?.validate() ?? false;
+
+              if (isValid && _dateTime != null && _title != null) {
+                logger.d('invoke onSubmit');
+                widget.onSubmit(_dateTime!, _title!);
+              }
+            },
+            child: Text(context.l10n.ready),
+          ),
+        ],
+      ),
     );
   }
 }

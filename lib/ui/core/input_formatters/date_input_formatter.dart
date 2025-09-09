@@ -5,6 +5,7 @@ class DateInputFormatter extends TextInputFormatter {
 
   const DateInputFormatter({required this.separator});
 
+  // TODO: fix jumping cursor to the end of text
   @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,

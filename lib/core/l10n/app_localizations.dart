@@ -344,6 +344,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Не удалось создать календарь'**
   String get registrationCalendarError;
+
+  /// No description provided for @errorEmptyField.
+  ///
+  /// In ru, this message translates to:
+  /// **'Поле не может быть пустым'**
+  String get errorEmptyField;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

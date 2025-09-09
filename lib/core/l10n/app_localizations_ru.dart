@@ -137,4 +137,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get registrationCalendarError => 'Не удалось создать календарь';
+
+  @override
+  String get errorEmptyField => 'Поле не может быть пустым';
 }

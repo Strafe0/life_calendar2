@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
+import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 
 class EventTextField extends StatefulWidget {
   const EventTextField({
@@ -29,15 +30,26 @@ class _EventTextFieldState extends State<EventTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: _textController,
       maxLength: maxTitleLength,
       textInputAction: TextInputAction.done,
-      decoration: const InputDecoration(
-        border: UnderlineInputBorder(),
-      ),
+      decoration: const InputDecoration(border: UnderlineInputBorder()),
       onChanged: widget.onChanged,
       onEditingComplete: () => widget.onEditingComplete(_textController.text),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return context.l10n.errorEmptyField;
+        }
+
+        return null;
+      },
     );
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
   }
 }

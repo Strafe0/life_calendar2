@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/extensions/date_time/theme_extension.dart';
+import 'package:life_calendar2/core/extensions/theme_extension.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/ui/splash/bloc/splash_cubit.dart';
 import 'package:life_calendar2/ui/splash/bloc/splash_state.dart';

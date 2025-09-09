@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:life_calendar2/core/extensions/date_time/theme_extension.dart';
+import 'package:life_calendar2/core/extensions/theme_extension.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_view.dart';
 
 class CalendarScreen extends StatelessWidget {

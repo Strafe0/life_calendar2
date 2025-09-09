@@ -1,6 +1,8 @@
 import 'package:intl/intl.dart';
 
-final dateFormat = DateFormat('DD.MM.YYYY');
+final dateFormat = DateFormat('dd.MM.yyyy', 'ru');
+
+const dateFormatHintText = 'ДД.ММ.ГГГГ';
 
 const maxTitleLength = 50;
 
