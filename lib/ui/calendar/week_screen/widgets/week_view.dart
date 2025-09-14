@@ -5,6 +5,7 @@ import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dar
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
+import 'package:life_calendar2/ui/ad/ad_block.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
@@ -26,6 +27,8 @@ class WeekView extends StatefulWidget {
 }
 
 class _WeekViewState extends State<WeekView> {
+  double _adHeight = 0;
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<WeekCubit, WeekState>(
@@ -52,32 +55,44 @@ class _WeekViewState extends State<WeekView> {
             ),
             floatingActionButtonLocation: ExpandableFab.location,
             floatingActionButton: const WeekFab(),
-            body: const Padding(
-              padding: EdgeInsets.only(left: 8, right: 8),
-              child: CustomScrollView(
-                slivers: [
-                  SliverPadding(
-                    padding: EdgeInsets.only(top: 20),
-                    sliver: SliverToBoxAdapter(child: WeekAssessmentWidget()),
+            body: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8),
+              child: Stack(
+                children: [
+                  CustomScrollView(
+                    slivers: [
+                      const SliverPadding(
+                        padding: EdgeInsets.only(top: 20),
+                        sliver: SliverToBoxAdapter(
+                          child: WeekAssessmentWidget(),
+                        ),
+                      ),
+                      const SliverPadding(
+                        padding: EdgeInsets.only(top: 20),
+                        sliver: WeekGoalListWidget(),
+                      ),
+                      const SliverPadding(
+                        padding: EdgeInsets.only(top: 20),
+                        sliver: WeekEventListWidget(),
+                      ),
+                      const SliverPadding(
+                        padding: EdgeInsets.only(top: 20),
+                        sliver: WeekPhotoListWidget(),
+                      ),
+                      const SliverPadding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        sliver: WeekResumeWidget(),
+                      ),
+                      SliverToBoxAdapter(child: SizedBox(height: _adHeight)),
+                    ],
                   ),
-                  SliverPadding(
-                    padding: EdgeInsets.only(top: 20),
-                    sliver: WeekGoalListWidget(),
+                  SliverToBoxAdapter(
+                    child: AdBlock(
+                      onAdSizeCalculated: (adHeight) {
+                        setState(() => _adHeight = adHeight.toDouble());
+                      },
+                    ),
                   ),
-                  SliverPadding(
-                    padding: EdgeInsets.only(top: 20),
-                    sliver: WeekEventListWidget(),
-                  ),
-                  SliverPadding(
-                    padding: EdgeInsets.only(top: 20),
-                    sliver: WeekPhotoListWidget(),
-                  ),
-                  SliverPadding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    sliver: WeekResumeWidget(),
-                  ),
-                  // TODO: add ad
-                  // TODO: add padding to not overlap FAB
                 ],
               ),
             ),

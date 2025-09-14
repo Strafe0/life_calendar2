@@ -20,6 +20,15 @@ abstract class User with _$User {
 
   bool get isEmpty => id.isEmpty;
 
+  int get age {
+    final now = DateTime.now();
+    if (now.month < birthdate.month || now.day < birthdate.day) {
+      return now.year - birthdate.year;
+    } else {
+      return now.year - birthdate.year - 1;
+    }
+  }
+
   static const minLifeSpan = 60;
   static const maxLifeSpan = 100;
 }
