@@ -13,6 +13,7 @@ class GoalChangeSheet extends StatefulWidget {
 }
 
 class _GoalChangeSheetState extends State<GoalChangeSheet> {
+  final _formKey = GlobalKey<FormState>();
   late final TextEditingController _textController;
 
   @override
@@ -24,25 +25,37 @@ class _GoalChangeSheetState extends State<GoalChangeSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          controller: _textController,
-          maxLength: maxTitleLength,
-          textInputAction: TextInputAction.done,
-          decoration: const InputDecoration(border: UnderlineInputBorder()),
-        ),
-        const SizedBox(height: 16),
-        OutlinedButton(
-          onPressed: () {
-            final title = _textController.text;
-            if (title.isNotEmpty) {
-              widget.onSubmit(title);
-            }
-          },
-          child: Text(context.l10n.ready),
-        ),
-      ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            controller: _textController,
+            maxLength: maxTitleLength,
+            textInputAction: TextInputAction.done,
+            decoration: const InputDecoration(border: UnderlineInputBorder()),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return context.l10n.errorEmptyField;
+              }
+
+              return null;
+            },
+          ),
+          const SizedBox(height: 16),
+          OutlinedButton(
+            onPressed: () {
+              final isValid = _formKey.currentState?.validate() ?? false;
+
+              final title = _textController.text;
+              if (isValid && title.isNotEmpty) {
+                widget.onSubmit(title);
+              }
+            },
+            child: Text(context.l10n.ready),
+          ),
+        ],
+      ),
     );
   }
 }
