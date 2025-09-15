@@ -86,12 +86,10 @@ class _WeekViewState extends State<WeekView> {
                       SliverToBoxAdapter(child: SizedBox(height: _adHeight)),
                     ],
                   ),
-                  SliverToBoxAdapter(
-                    child: AdBlock(
-                      onAdSizeCalculated: (adHeight) {
-                        setState(() => _adHeight = adHeight.toDouble());
-                      },
-                    ),
+                  AdBlock(
+                    onAdSizeCalculated: (adHeight) {
+                      setState(() => _adHeight = adHeight.toDouble());
+                    },
                   ),
                 ],
               ),
