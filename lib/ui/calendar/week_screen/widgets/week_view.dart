@@ -54,7 +54,10 @@ class _WeekViewState extends State<WeekView> {
               leadingWidth: 48,
             ),
             floatingActionButtonLocation: ExpandableFab.location,
-            floatingActionButton: const WeekFab(),
+            floatingActionButton: Padding(
+              padding: EdgeInsets.only(bottom: _adHeight),
+              child: const WeekFab(),
+            ),
             body: Padding(
               padding: const EdgeInsets.only(left: 8, right: 8),
               child: Stack(
@@ -86,10 +89,13 @@ class _WeekViewState extends State<WeekView> {
                       SliverToBoxAdapter(child: SizedBox(height: _adHeight)),
                     ],
                   ),
-                  AdBlock(
-                    onAdSizeCalculated: (adHeight) {
-                      setState(() => _adHeight = adHeight.toDouble());
-                    },
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: AdBlock(
+                      onAdSizeCalculated: (adHeight) {
+                        setState(() => _adHeight = adHeight.toDouble());
+                      },
+                    ),
                   ),
                 ],
               ),
