@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_screen.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/photo_view/photo_viewer.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_screen.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_screen.dart';
 import 'package:life_calendar2/ui/splash/widgets/error_splash_screen.dart';
@@ -30,6 +32,7 @@ final goRouter = GoRouter(
           path: AppRoute.calendar,
           builder: (context, state) => const CalendarScreen(),
           routes: [
+            // add shell route for week
             GoRoute(
               path: AppRoute.week,
               pageBuilder: (context, state) {
@@ -47,6 +50,25 @@ final goRouter = GoRouter(
                           : const ErrorSplashScreen(),
                 );
               },
+              routes: [
+                GoRoute(
+                  path: AppRoute.photoView,
+                  builder: (context, state) {
+                    final weekCubit = context.read<WeekCubit>();
+
+                    final photoIndex = int.tryParse(
+                      state.pathParameters['index'] ?? '',
+                    );
+
+                    return photoIndex != null
+                        ? BlocProvider<WeekCubit>.value( // NOT WORKING
+                          value: weekCubit,
+                          child: PhotoViewer(initialIndex: photoIndex),
+                        )
+                        : const ErrorSplashScreen();
+                  },
+                ),
+              ],
             ),
           ],
         ),

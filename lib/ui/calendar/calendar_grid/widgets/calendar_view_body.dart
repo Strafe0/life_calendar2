@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_painter.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
@@ -58,7 +59,7 @@ class CalendarViewBody extends StatelessWidget {
 
     logger.i('Tapped on $weekId week');
     if (weekId != -1) {
-      context.push('/calendar/week/$weekId');
+      context.push(AppRoute.weekId(weekId));
     }
   }
 }

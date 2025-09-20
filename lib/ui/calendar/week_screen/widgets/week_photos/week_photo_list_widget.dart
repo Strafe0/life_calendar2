@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_photos/photo_widget.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_photos/photo_card.dart';
 
 class WeekPhotoListWidget extends StatelessWidget {
   const WeekPhotoListWidget({super.key});
@@ -41,7 +43,21 @@ class WeekPhotoListWidget extends StatelessWidget {
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                 ),
-                itemBuilder: (_, index) => PhotoWidget(photoUrl: photos[index]),
+                itemBuilder: (_, index) {
+                  final path = photos[index];
+                  return Hero(
+                    tag: path,
+                    child: PhotoCard(
+                      photoUrl: path,
+                      onPressed: () {
+                        context.push(
+                          '${GoRouter.of(context).state.matchedLocation}/photo-view/$index'
+                          // '/calendar/week/photo-view/$index',
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
             );
           },
