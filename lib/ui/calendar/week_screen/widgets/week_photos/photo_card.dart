@@ -12,11 +12,11 @@ class PhotoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Material(
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
-        elevation: 2,
+    return Material(
+      borderRadius: const BorderRadius.all(Radius.circular(16)),
+      elevation: 2,
+      child: InkWell(
+        onTap: onPressed,
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           child: Image.file(File(photoUrl), fit: BoxFit.fill),
