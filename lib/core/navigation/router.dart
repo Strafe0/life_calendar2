@@ -40,32 +40,41 @@ final goRouter = GoRouter(
                   state.pathParameters['weekId'] ?? '',
                 );
 
+                if (selectedWeekId == null) {
+                  return const MaterialPage(child: ErrorSplashScreen());
+                }
+
                 return CustomTransitionPage(
                   transitionsBuilder: (context, animation, _, child) {
                     return FadeTransition(opacity: animation, child: child);
                   },
-                  child:
-                      selectedWeekId != null
-                          ? WeekScreen(selectedWeekId: selectedWeekId)
-                          : const ErrorSplashScreen(),
+                  child: BlocProvider(
+                    create:
+                        (context) =>
+                            WeekCubit(weekRepository: context.read())
+                              ..getWeek(weekId: selectedWeekId),
+                    child: WeekScreen(selectedWeekId: selectedWeekId),
+                  ),
                 );
               },
               routes: [
                 GoRoute(
                   path: AppRoute.photoView,
                   builder: (context, state) {
-                    final weekCubit = context.read<WeekCubit>();
+                    final photoPathList = state.extra;
 
                     final photoIndex = int.tryParse(
                       state.pathParameters['index'] ?? '',
                     );
 
-                    return photoIndex != null
-                        ? BlocProvider<WeekCubit>.value( // NOT WORKING
-                          value: weekCubit,
-                          child: PhotoViewer(initialIndex: photoIndex),
-                        )
-                        : const ErrorSplashScreen();
+                    if (photoPathList is! List<String> || photoIndex == null) {
+                      return const ErrorSplashScreen();
+                    }
+
+                    return PhotoViewer(
+                      photoPathList: photoPathList,
+                      initialIndex: photoIndex,
+                    );
                   },
                 ),
               ],

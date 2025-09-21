@@ -13,24 +13,14 @@ class WeekScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create:
-          (context) =>
-              WeekCubit(weekRepository: context.read())
-                ..getWeek(weekId: selectedWeekId),
-      child: Builder(
-        builder: (context) {
-          return BlocBuilder<WeekCubit, WeekState>(
-            builder: (context, state) {
-              return switch (state) {
-                WeekSuccess() => WeekView(week: state.week),
-                WeekInitial() || WeekLoading() => const WeekLoadingView(),
-                WeekFailure() => const WeekFailureView(),
-              };
-            },
-          );
-        },
-      ),
+    return BlocBuilder<WeekCubit, WeekState>(
+      builder: (context, state) {
+        return switch (state) {
+          WeekSuccess() => WeekView(week: state.week),
+          WeekInitial() || WeekLoading() => const WeekLoadingView(),
+          WeekFailure() => const WeekFailureView(),
+        };
+      },
     );
   }
 }

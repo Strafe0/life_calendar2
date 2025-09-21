@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO: improve
+// TODO: improve, add scaffold
 class ErrorSplashScreen extends StatelessWidget {
   const ErrorSplashScreen({super.key});
 
