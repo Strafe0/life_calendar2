@@ -120,9 +120,11 @@ class AppTheme {
         height: 1.2,
         letterSpacing: 0.5,
       ), //titleLarge
-      backgroundColor: Color(0xFF0151DF), //primary
+      backgroundColor: Color(0xFF0151DF), // primary
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF003CAC),
+        statusBarColor: Color(0xFF0151DF),
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.light,
       ),
       iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
     ),
@@ -318,7 +320,9 @@ class AppTheme {
       ), //titleLarge
       backgroundColor: Color(0xFF303034), //primary
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Color(0xFF1B1B1F),
+        statusBarColor: Color(0xFF303034),
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.light,
       ),
       iconTheme: IconThemeData(color: Color(0xFFC7C6CA)),
     ),

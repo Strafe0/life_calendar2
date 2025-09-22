@@ -6,6 +6,7 @@ import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_painter.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 
+// TODO: colors not changed when Brightness changed
 class CalendarViewBody extends StatelessWidget {
   const CalendarViewBody({
     super.key,
