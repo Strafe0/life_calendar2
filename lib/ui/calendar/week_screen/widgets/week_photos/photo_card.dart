@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-// TODO: add onTap for opening photo to full screen
 // TODO: add longTap to delete photo
 class PhotoCard extends StatelessWidget {
   const PhotoCard({super.key, required this.photoUrl, this.onPressed});

@@ -5,7 +5,6 @@ import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_screen.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/photo_view/photo_viewer.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_screen.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_screen.dart';
 import 'package:life_calendar2/ui/splash/widgets/error_splash_screen.dart';
@@ -57,27 +56,6 @@ final goRouter = GoRouter(
                   ),
                 );
               },
-              routes: [
-                GoRoute(
-                  path: AppRoute.photoView,
-                  builder: (context, state) {
-                    final photoPathList = state.extra;
-
-                    final photoIndex = int.tryParse(
-                      state.pathParameters['index'] ?? '',
-                    );
-
-                    if (photoPathList is! List<String> || photoIndex == null) {
-                      return const ErrorSplashScreen();
-                    }
-
-                    return PhotoViewer(
-                      photoPathList: photoPathList,
-                      initialIndex: photoIndex,
-                    );
-                  },
-                ),
-              ],
             ),
           ],
         ),

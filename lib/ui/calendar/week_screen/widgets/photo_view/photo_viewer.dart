@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/extensions/theme_extension.dart';
 import 'package:life_calendar2/ui/core/widgets/page_indicator.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:photo_view/photo_view_gallery.dart';
 
 class PhotoViewer extends StatefulWidget {
   const PhotoViewer({
@@ -44,8 +42,6 @@ class _PhotoViewerState extends State<PhotoViewer>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: make page dismissible
-    // TODO: add close button
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
         statusBarColor: Theme.of(context).colorScheme.surface,
@@ -53,65 +49,63 @@ class _PhotoViewerState extends State<PhotoViewer>
         statusBarBrightness: Theme.of(context).inverseBrightness,
       ),
       child: SafeArea(
-        child: Scaffold(
-          body: Dismissible(
-            key: UniqueKey(),
-            direction: DismissDirection.down,
-            dismissThresholds: const {DismissDirection.down: 0.2},
-            onDismissed: (direction) => context.pop(),
-            child: Stack(
-              children: [
-                PhotoViewGallery.builder(
-                  pageController: _pageController,
-                  itemCount: widget.photoPathList.length,
-                  backgroundDecoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                  builder: (context, index) {
-                    return PhotoViewGalleryPageOptions(
-                      imageProvider: FileImage(
-                        File(widget.photoPathList[index]),
+        child: PageView.builder(
+          controller: _pageController,
+          itemCount: widget.photoPathList.length,
+          onPageChanged: (index) {
+            setState(() {
+              _tabController.index = index;
+              _currentIndex = index;
+            });
+          },
+          itemBuilder: (context, index) {
+            final currentPath = widget.photoPathList[index];
+            return Dismissible(
+              key: ValueKey(currentPath),
+              direction: DismissDirection.down,
+              dismissThresholds: const {DismissDirection.down: 0.2},
+              onDismissed: (direction) => Navigator.pop(context),
+              resizeDuration: null,
+              child: ColoredBox(
+                color: Theme.of(context).colorScheme.surface,
+                child: Stack(
+                  children: [
+                    Center(
+                      child: Hero(
+                        tag: currentPath,
+                        child: Image.file(File(currentPath)),
                       ),
-                      heroAttributes: PhotoViewHeroAttributes(
-                        tag: widget.photoPathList[index],
-                      ),
-                    );
-                  },
-                  onPageChanged: (index) {
-                    setState(() {
-                      _tabController.index = index;
-                      _currentIndex = index;
-                    });
-                  },
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    height: 56,
-                    child: PageIndicator(
-                      currentPageIndex: _currentIndex,
-                      tabController: _tabController,
-                      onUpdateCurrentPageIndex: (index) {
-                        _pageController.animateToPage(
-                          index,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      },
                     ),
-                  ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        height: 56,
+                        child: PageIndicator(
+                          currentPageIndex: _currentIndex,
+                          tabController: _tabController,
+                          onUpdateCurrentPageIndex: (index) {
+                            _pageController.animateToPage(
+                              index,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 8,
+                      left: 8,
+                      child: IconButton(
+                        onPressed: () => context.pop(),
+                        icon: const Icon(Icons.close),
+                      ),
+                    ),
+                  ],
                 ),
-                Positioned(
-                  top: 8,
-                  left: 8,
-                  child: IconButton(
-                    onPressed: () => context.pop(),
-                    icon: const Icon(Icons.close),
-                  ),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

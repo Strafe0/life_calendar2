@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
+import 'package:life_calendar2/ui/calendar/week_screen/widgets/photo_view/photo_viewer.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_photos/photo_card.dart';
 
 class WeekPhotoListWidget extends StatelessWidget {
@@ -50,10 +50,15 @@ class WeekPhotoListWidget extends StatelessWidget {
                     child: PhotoCard(
                       photoUrl: path,
                       onPressed: () {
-                        context.push(
-                          '${GoRouter.of(context).state.matchedLocation}/photo-view/$index',
-                          // '/calendar/week/photo-view/$index',
-                          extra: photos,
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            opaque: false,
+                            pageBuilder:
+                                (context, _, __) => PhotoViewer(
+                                  photoPathList: photos,
+                                  initialIndex: index,
+                                ),
+                          ),
                         );
                       },
                     ),
