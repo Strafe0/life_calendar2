@@ -10,7 +10,6 @@ import 'package:life_calendar2/domain/models/week/week_assessment/week_assessmen
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
 import 'package:life_calendar2/utils/result.dart';
 
-// TODO: separate to multiple blocs (EventBloc, GoalBloc, PhotoBloc, ResumeBloc)
 class WeekCubit extends Cubit<WeekState> {
   final WeekRepository _weekRepository;
 
@@ -306,6 +305,30 @@ class WeekCubit extends Cubit<WeekState> {
       }
     } else {
       logger.e('Cannot change goal, because week is not ready');
+    }
+  }
+
+  Future<void> deletePhoto(int index) async {
+    final prevState = state;
+    if (prevState is WeekSuccess) {
+      final newPhotoList = prevState.week.photos..removeAt(index);
+
+      emit(prevState.copyWith(photos: newPhotoList));
+
+      final result = await _weekRepository.updatePhotos(
+        weekId: prevState.week.id,
+        photos: newPhotoList,
+      );
+
+      if (result is Error) {
+        emit(prevState);
+        logger.e(
+          'Failed to delete photo. Returning previous state',
+          error: result.error,
+        );
+      }
+    } else {
+      logger.e('Cannot delete photo, because week is not ready');
     }
   }
 }

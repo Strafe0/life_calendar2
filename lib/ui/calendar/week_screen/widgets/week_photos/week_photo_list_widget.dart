@@ -49,24 +49,57 @@ class WeekPhotoListWidget extends StatelessWidget {
                     tag: path,
                     child: PhotoCard(
                       photoUrl: path,
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          PageRouteBuilder(
-                            opaque: false,
-                            pageBuilder:
-                                (context, _, __) => PhotoViewer(
-                                  photoPathList: photos,
-                                  initialIndex: index,
-                                ),
-                          ),
-                        );
-                      },
+                      onPressed: () => _onPhotoPressed(context, photos, index),
+                      onLongPressStart:
+                          (details) =>
+                              _onLongPressStart(context, index, details),
                     ),
                   );
                 },
               ),
             );
           },
+        ),
+      ],
+    );
+  }
+
+  void _onPhotoPressed(
+    BuildContext context,
+    List<String> photos,
+    int initialIndex,
+  ) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        pageBuilder:
+            (_, __, ___) =>
+                PhotoViewer(photoPathList: photos, initialIndex: initialIndex),
+      ),
+    );
+  }
+
+  void _onLongPressStart(
+    BuildContext context,
+    int index,
+    LongPressStartDetails details,
+  ) async {
+    final offset = details.globalPosition;
+
+    await showMenu(
+      context: context,
+      position: RelativeRect.fromLTRB(
+        offset.dx,
+        offset.dy,
+        offset.dx,
+        offset.dy,
+      ),
+      items: [
+        PopupMenuItem(
+          onTap: () {
+            context.read<WeekCubit>().deletePhoto(index);
+          },
+          child: Text(context.l10n.delete),
         ),
       ],
     );
