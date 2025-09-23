@@ -43,6 +43,14 @@ class _EventChangeSheetState extends State<EventChangeSheet> {
       key: _formKey,
       child: Column(
         children: [
+          EventTextField(
+            initialText: _title,
+            onChanged: (title) => _title = title,
+            onEditingComplete: (_) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+          ),
+          const SizedBox(height: 16),
           DateTextField(
             firstDate: widget.firstDate,
             lastDate: widget.lastDate,
@@ -50,14 +58,6 @@ class _EventChangeSheetState extends State<EventChangeSheet> {
             fieldLabelText: context.l10n.enterDate,
             errorFormatText: context.l10n.dateFormatError,
             onChanged: (value) => _dateTime = value.toDateTime(),
-          ),
-          const SizedBox(height: 16),
-          EventTextField(
-            initialText: _title,
-            onChanged: (title) => _title = title,
-            onEditingComplete: (_) {
-              FocusManager.instance.primaryFocus?.unfocus();
-            },
           ),
           const SizedBox(height: 16),
           OutlinedButton(
