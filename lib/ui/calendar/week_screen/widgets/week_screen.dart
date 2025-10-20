@@ -6,6 +6,7 @@ import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_failure_view
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_loading_view.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_view.dart';
 
+// TODO: add limits to creation
 class WeekScreen extends StatelessWidget {
   const WeekScreen({super.key, required this.selectedWeekId});
 

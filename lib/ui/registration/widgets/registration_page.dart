@@ -37,12 +37,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   context.read<UserBloc>().add(UserReceived(state.user));
                   context.go(AppRoute.calendar);
                 case RegistrationFailure():
-                  SnackBarService.showErrorSnackBar(
+                  showErrorSnackBar(
                     context,
                     text: context.l10n.registrationUserError,
                   );
                 case RegistrationCalendarFailure():
-                  SnackBarService.showErrorSnackBar(
+                  showErrorSnackBar(
                     context,
                     text: context.l10n.registrationCalendarError,
                   );

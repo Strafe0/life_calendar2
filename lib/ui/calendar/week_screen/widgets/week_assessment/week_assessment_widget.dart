@@ -36,25 +36,30 @@ class WeekAssessmentWidget extends StatelessWidget {
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    AssessmentRadioButton(
-                      assessment: WeekAssessment.good,
-                      selectedAssessment: selectedAssessment,
-                      color: WeekColor.goodWeekColor,
-                    ),
-                    AssessmentRadioButton(
-                      assessment: WeekAssessment.bad,
-                      selectedAssessment: selectedAssessment,
-                      color: WeekColor.badWeekColor,
-                    ),
-                    AssessmentRadioButton(
-                      assessment: WeekAssessment.poor,
-                      selectedAssessment: selectedAssessment,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                  ],
+                child: RadioGroup(
+                  groupValue: selectedAssessment,
+                  onChanged: (newAssessment) {
+                    if (newAssessment != null) {
+                      context.read<WeekCubit>().changeAssessment(newAssessment);
+                    }
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const AssessmentRadioButton(
+                        assessment: WeekAssessment.good,
+                        color: WeekColor.goodWeekColor,
+                      ),
+                      const AssessmentRadioButton(
+                        assessment: WeekAssessment.bad,
+                        color: WeekColor.badWeekColor,
+                      ),
+                      AssessmentRadioButton(
+                        assessment: WeekAssessment.poor,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

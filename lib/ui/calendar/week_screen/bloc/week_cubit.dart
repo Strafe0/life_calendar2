@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/core/uuid/app_uuid.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
@@ -18,6 +19,10 @@ class WeekCubit extends Cubit<WeekState> {
       super(const WeekInitial());
 
   bool get isLoading => state == const WeekLoading();
+
+  bool get isGoalsExceededLimit =>
+      state is WeekSuccess &&
+      (state as WeekSuccess).week.goals.length >= goalLimit;
 
   Future<void> getWeek({required int? weekId}) async {
     emit(const WeekLoading());

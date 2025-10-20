@@ -174,13 +174,13 @@ class AppTheme {
       ),
     ),
 
-    cardTheme: const CardTheme(
+    cardTheme: const CardThemeData(
       color: Color(0xFFF2F0F4),
       surfaceTintColor: Colors.transparent,
       elevation: 1,
     ),
 
-    dialogTheme: const DialogTheme(
+    dialogTheme: const DialogThemeData(
       backgroundColor: Color(0xFFF2F0F4),
       surfaceTintColor: Colors.transparent,
     ),
@@ -372,13 +372,13 @@ class AppTheme {
       ),
     ),
 
-    cardTheme: const CardTheme(
+    cardTheme: const CardThemeData(
       color: Color(0xFF303034),
       surfaceTintColor: Colors.transparent,
       elevation: 2,
     ),
 
-    dialogTheme: const DialogTheme(
+    dialogTheme: const DialogThemeData(
       backgroundColor: Color(0xFF303034),
       surfaceTintColor: Colors.transparent,
     ),
