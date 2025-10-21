@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
+import 'package:life_calendar2/core/extensions/string/string_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/user/user.dart';
@@ -31,6 +32,7 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
           initialDate: _birthdate,
           fieldLabelText: context.l10n.enterBirthdate,
           errorFormatText: context.l10n.dateFormatError,
+          onChanged: (value) => _birthdate = value.toDateTime(),
           onDateSaved: (value) {
             _birthdate = value;
             logger.d('birthdate form saved: $_birthdate');

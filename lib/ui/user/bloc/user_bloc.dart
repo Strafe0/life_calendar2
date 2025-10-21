@@ -16,6 +16,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserLoadingTriggered>(_getUser);
   }
 
+  int? get age => state is UserSuccess ? (state as UserSuccess).user.age : null;
+
   Future<void> _getUser(UserEvent event, Emitter<UserState> emit) async {
     emit(const UserLoading());
 

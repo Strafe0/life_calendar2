@@ -22,10 +22,15 @@ abstract class User with _$User {
 
   int get age {
     final now = DateTime.now();
-    if (now.month < birthdate.month || now.day < birthdate.day) {
-      return now.year - birthdate.year;
-    } else {
+
+    if (now.month < birthdate.month) {
       return now.year - birthdate.year - 1;
+    } else if (now.month > birthdate.month) {
+      return now.year - birthdate.year;
+    } else if (now.day < birthdate.day) {
+      return now.year - birthdate.year - 1;
+    } else {
+      return now.year - birthdate.year;
     }
   }
 
