@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/ui/ad/ad_block.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
+import 'package:life_calendar2/ui/ad/ad_error_listener.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_assessment/week_assessment_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/week_event_list_widget.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab.dart';
@@ -31,17 +27,8 @@ class _WeekViewState extends State<WeekView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<WeekCubit, WeekState>(
-      listener: (context, state) {
-        if (state is WeekSuccess) {
-          logger.d('Update Calendar with new week');
-          context.read<CalendarCubit>().updateWeek(
-            week: state.week,
-            brightness: MediaQuery.platformBrightnessOf(context),
-          );
-        }
-      },
-      child: WeekFabStateProvider(
+    return WeekFabStateProvider(
+      child: AdErrorListener(
         child: SafeArea(
           child: Scaffold(
             appBar: AppBar(

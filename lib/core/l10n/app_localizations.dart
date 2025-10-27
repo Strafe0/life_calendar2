@@ -351,6 +351,24 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Поле не может быть пустым'**
   String get errorEmptyField;
+
+  /// No description provided for @error.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ошибка'**
+  String get error;
+
+  /// No description provided for @errorAdLoading.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не получилось загрузить рекламу'**
+  String get errorAdLoading;
+
+  /// No description provided for @ok.
+  ///
+  /// In ru, this message translates to:
+  /// **'ОК'**
+  String get ok;
 }
 
 class _AppLocalizationsDelegate

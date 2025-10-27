@@ -24,6 +24,8 @@ class WeekFabStateProvider extends InheritedWidget {
     if (state != null) {
       logger.d('FAB close');
       state.close();
+    } else {
+      logger.w('Cannot close FAB');
     }
   }
 

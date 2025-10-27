@@ -27,7 +27,7 @@ void showErrorSnackBar(BuildContext context, {required String text}) {
       margin: EdgeInsets.only(
         left: 16,
         right: 16,
-        bottom: MediaQuery.sizeOf(context).height - 110,
+        bottom: MediaQuery.sizeOf(context).height - 100,
       ),
       dismissDirection: DismissDirection.up,
       shape: const RoundedRectangleBorder(

@@ -123,5 +123,11 @@
     "registrationCalendarError": "Не удалось создать календарь",
     "@registrationCalendarError": {},
     "errorEmptyField": "Поле не может быть пустым",
-    "@errorEmptyField": {}
+    "@errorEmptyField": {},
+    "error": "Ошибка",
+    "@error": {},
+    "errorAdLoading": "Не получилось загрузить рекламу",
+    "@errorAdLoading": {},
+    "ok": "ОК",
+    "@ok": {}
 }

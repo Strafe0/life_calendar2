@@ -145,4 +145,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get errorEmptyField => 'Поле не может быть пустым';
+
+  @override
+  String get error => 'Ошибка';
+
+  @override
+  String get errorAdLoading => 'Не получилось загрузить рекламу';
+
+  @override
+  String get ok => 'ОК';
 }

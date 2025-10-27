@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
-import 'package:life_calendar2/ui/core/snackbars/snack_bar_service.dart';
+import 'package:life_calendar2/ui/core/snackbars/error_snack_bar.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_cubit.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_state.dart';
 import 'package:life_calendar2/ui/registration/widgets/registration_form_body.dart';
