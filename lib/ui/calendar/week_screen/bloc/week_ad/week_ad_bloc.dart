@@ -30,12 +30,7 @@ class WeekAdBloc extends Bloc<WeekAdEvent, WeekAdState> {
       onAdLoaded: (rewardedAd) {
         logger.i('Rewarded ad loaded');
 
-        emit(
-          WeekAdLoadFailure(
-            AdRequestError(-1, 'Test', null),
-            userAge: event.userAge,
-          ),
-        );
+        emit(WeekAdLoadSuccess(rewardedAd, userAge: event.userAge));
         completer.complete();
       },
       onAdFailedToLoad: (error) {
