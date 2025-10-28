@@ -58,6 +58,7 @@ class _EventChangeSheetState extends State<EventChangeSheet> {
             fieldLabelText: context.l10n.enterDate,
             errorFormatText: context.l10n.dateFormatError,
             onChanged: (value) => _dateTime = value.toDateTime(),
+            onDateSubmitted: (value) => _dateTime = value,
           ),
           const SizedBox(height: 16),
           OutlinedButton(

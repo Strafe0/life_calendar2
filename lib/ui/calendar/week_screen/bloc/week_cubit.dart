@@ -20,9 +20,26 @@ class WeekCubit extends Cubit<WeekState> {
 
   bool get isLoading => state == const WeekLoading();
 
-  bool get isGoalsExceededLimit =>
-      state is WeekSuccess &&
-      (state as WeekSuccess).week.goals.length >= goalLimit;
+  bool get isGoalsExceededLimit {
+    final currentState = state;
+
+    return currentState is WeekSuccess &&
+        currentState.week.goals.length >= goalLimit;
+  }
+
+  bool get isEventsExceededLimit {
+    final currentState = state;
+
+    return currentState is WeekSuccess &&
+        currentState.week.events.length >= eventLimit;
+  }
+
+  bool get isPhotosExceededLimit {
+    final currentState = state;
+
+    return currentState is WeekSuccess &&
+        currentState.week.photos.length >= photoLimit;
+  }
 
   Future<void> getWeek({required int? weekId}) async {
     emit(const WeekLoading());
@@ -287,12 +304,10 @@ class WeekCubit extends Cubit<WeekState> {
     }
   }
 
-  Future<void> addPhotos(List<XFile> photos) async {
+  Future<void> addPhotos(XFile photo) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
-      final newPhotoList =
-          prevState.week.photos
-            ..addAll(photos.map((xFile) => xFile.path).toList());
+      final newPhotoList = prevState.week.photos..add(photo.path);
 
       emit(prevState.copyWith(photos: newPhotoList));
 

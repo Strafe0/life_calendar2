@@ -369,6 +369,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'ОК'**
   String get ok;
+
+  /// No description provided for @errorPhotoAttach.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не получилось прикрепить фото'**
+  String get errorPhotoAttach;
 }
 
 class _AppLocalizationsDelegate

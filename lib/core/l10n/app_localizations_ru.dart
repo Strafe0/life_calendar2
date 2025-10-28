@@ -154,4 +154,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ok => 'ОК';
+
+  @override
+  String get errorPhotoAttach => 'Не получилось прикрепить фото';
 }

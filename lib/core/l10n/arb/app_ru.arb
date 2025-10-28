@@ -129,5 +129,7 @@
     "errorAdLoading": "Не получилось загрузить рекламу",
     "@errorAdLoading": {},
     "ok": "ОК",
-    "@ok": {}
+    "@ok": {},
+    "errorPhotoAttach": "Не получилось прикрепить фото",
+    "@errorPhotoAttach": {}
 }
