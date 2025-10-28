@@ -24,7 +24,7 @@ class AdErrorListener extends StatelessWidget {
               actions: [
                 DialogAction(
                   onPressed: (context) => Navigator.of(context).pop(),
-                  title: context.l10n.ok,
+                  title: context.l10n.gotIt,
                 ),
               ],
             );

@@ -153,7 +153,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get errorAdLoading => 'Не получилось загрузить рекламу';
 
   @override
-  String get ok => 'ОК';
+  String get gotIt => 'Понятно';
 
   @override
   String get errorPhotoAttach => 'Не получилось прикрепить фото';

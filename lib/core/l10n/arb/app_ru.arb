@@ -128,8 +128,8 @@
     "@error": {},
     "errorAdLoading": "Не получилось загрузить рекламу",
     "@errorAdLoading": {},
-    "ok": "ОК",
-    "@ok": {},
+    "gotIt": "Понятно",
+    "@gotIt": {},
     "errorPhotoAttach": "Не получилось прикрепить фото",
     "@errorPhotoAttach": {}
 }

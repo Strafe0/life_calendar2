@@ -364,11 +364,11 @@ abstract class AppLocalizations {
   /// **'Не получилось загрузить рекламу'**
   String get errorAdLoading;
 
-  /// No description provided for @ok.
+  /// No description provided for @gotIt.
   ///
   /// In ru, this message translates to:
-  /// **'ОК'**
-  String get ok;
+  /// **'Понятно'**
+  String get gotIt;
 
   /// No description provided for @errorPhotoAttach.
   ///

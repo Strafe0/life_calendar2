@@ -6,16 +6,15 @@ class ImagePickerServiceImpl implements ImagePickerService {
   const ImagePickerServiceImpl();
 
   @override
-  Future<XFile?> pickImage() async {
+  Future<({XFile? file, bool hasError})> pickImage() async {
     final picker = ImagePicker();
 
     try {
       final file = await picker.pickImage(source: ImageSource.gallery);
-
-      return file;
+      return (file: file, hasError: false);
     } catch (e, s) {
       logger.e('Failed to pick images', error: e, stackTrace: s);
-      return null;
+      return (file: null, hasError: true);
     }
   }
 }

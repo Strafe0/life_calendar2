@@ -8,6 +8,7 @@ import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_sour
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_state.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab_state_provider.dart';
+import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
 import 'package:life_calendar2/ui/core/dialogs/error_dialog.dart';
 
 class PhotoFab extends StatelessWidget {
@@ -49,14 +50,20 @@ class PhotoFab extends StatelessWidget {
     final fabState = WeekFabStateProvider.of(context);
     final imagePicker = context.read<ImagePickerService>();
 
-    final file = await imagePicker.pickImage();
+    final (:file, :hasError) = await imagePicker.pickImage();
 
     if (file == null) {
-      if (context.mounted) {
+      if (hasError && context.mounted) {
         showErrorDialog(
           context,
           title: context.l10n.error,
           content: context.l10n.errorPhotoAttach,
+          actions: [
+            DialogAction(
+              onPressed: (context) => Navigator.of(context).pop(),
+              title: context.l10n.gotIt,
+            ),
+          ],
         );
       }
       return;
