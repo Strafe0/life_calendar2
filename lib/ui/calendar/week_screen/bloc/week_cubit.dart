@@ -140,13 +140,15 @@ class WeekCubit extends Cubit<WeekState> {
     final prevState = state;
     if (prevState is WeekSuccess) {
       final newEventList =
-          prevState.week.events..add(
-            Event(
-              id: AppUuid.generateTimeBasedUuid(),
-              title: title,
-              date: date,
-            ),
-          );
+          prevState.week.events
+            ..add(
+              Event(
+                id: AppUuid.generateTimeBasedUuid(),
+                title: title,
+                date: date,
+              ),
+            )
+            ..sort((a, b) => a.date.compareTo(b.date));
 
       emit(prevState.copyWith(events: newEventList));
 
