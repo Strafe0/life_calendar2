@@ -11,8 +11,6 @@ class DateTextField extends StatefulWidget {
     required this.firstDate,
     required this.lastDate,
     this.initialDate,
-    this.onDateSaved,
-    this.onDateSubmitted,
     this.onChanged,
     this.fieldLabelText,
     this.errorFormatText,
@@ -21,8 +19,6 @@ class DateTextField extends StatefulWidget {
   final DateTime firstDate;
   final DateTime lastDate;
   final DateTime? initialDate;
-  final ValueChanged<DateTime>? onDateSaved;
-  final ValueChanged<DateTime>? onDateSubmitted;
   final void Function(String)? onChanged;
   final String? fieldLabelText;
   final String? errorFormatText;
@@ -61,8 +57,12 @@ class _DateTextFieldState extends State<DateTextField> {
                     lastDate: widget.lastDate,
                   );
 
-                  if (pickedDate != null && widget.onDateSubmitted != null) {
-                    widget.onDateSubmitted!(pickedDate);
+                  if (pickedDate != null &&
+                      widget.onChanged != null &&
+                      context.mounted) {
+                    final pickedDateText = pickedDate.toLocalString(context);
+                    widget.onChanged!(pickedDateText);
+                    _dateController.text = pickedDateText;
                   }
                 },
                 icon: Icon(
