@@ -30,6 +30,8 @@ final goRouter = GoRouter(
         GoRoute(
           path: AppRoute.calendar,
           builder: (context, state) => const CalendarScreen(),
+          // TODO: add exit dialog
+          onExit: (context, state) => false,
           routes: [
             // add shell route for week
             GoRoute(

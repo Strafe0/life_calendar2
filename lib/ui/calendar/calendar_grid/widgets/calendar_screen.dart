@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:life_calendar2/core/extensions/theme_extension.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_view.dart';
+import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/calendar_drawer.dart';
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
@@ -20,6 +21,8 @@ class CalendarScreen extends StatelessWidget {
       ),
       child: SafeArea(
         child: Scaffold(
+          drawer: CalendarDrawer(),
+          drawerEdgeDragWidth: MediaQuery.sizeOf(context).width,
           body: InteractiveViewer(
             maxScale: 5,
             child: const CalendarView(),
