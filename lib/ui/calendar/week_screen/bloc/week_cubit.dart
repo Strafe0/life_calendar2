@@ -136,6 +136,28 @@ class WeekCubit extends Cubit<WeekState> {
     }
   }
 
+  Future<void> deleteResume() async {
+    final prevState = state;
+    if (prevState is WeekSuccess) {
+      emit(prevState.copyWith(resume: ''));
+
+      final result = await _weekRepository.updateResume(
+        weekId: prevState.week.id,
+        resume: '',
+      );
+
+      if (result is Error) {
+        emit(prevState);
+        logger.e(
+          'Failed to delete resume. Returning previous state',
+          error: result.error,
+        );
+      }
+    } else {
+      logger.e('Cannot delete resume, because week is not ready');
+    }
+  }
+
   Future<void> addEvent(DateTime date, String title) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
