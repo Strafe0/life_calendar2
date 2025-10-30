@@ -53,9 +53,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
             child: Column(
               children: [
                 Expanded(
-                  child: Image.asset('assets/calendar_splash_image.png'),
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 32),
+                    child: Image.asset(
+                      'assets/calendar.png',
+                    ),
+                  ),
                 ),
                 Expanded(
+                  flex: 5,
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Form(

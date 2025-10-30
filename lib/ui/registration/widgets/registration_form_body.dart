@@ -25,6 +25,7 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Spacer(),
         DateTextField(
           firstDate: firstAvailableDate,
           lastDate: DateTime.now(),
