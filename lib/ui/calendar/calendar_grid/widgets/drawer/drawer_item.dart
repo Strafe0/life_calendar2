@@ -24,7 +24,7 @@ class DrawerItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           child: Row(
             children: [
-              Icon(icon, size: 24),
+              Icon(icon, size: 24, color: ColorScheme.of(context).onSurface),
               const SizedBox(width: 16),
               Expanded(
                 child: Text(
