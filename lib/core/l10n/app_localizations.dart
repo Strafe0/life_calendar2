@@ -375,6 +375,30 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Не получилось прикрепить фото'**
   String get errorPhotoAttach;
+
+  /// No description provided for @birthdate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дата рождения'**
+  String get birthdate;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In ru, this message translates to:
+  /// **'Политика конфиденциальности'**
+  String get privacyPolicy;
+
+  /// No description provided for @calendarExport.
+  ///
+  /// In ru, this message translates to:
+  /// **'Экспорт календаря'**
+  String get calendarExport;
+
+  /// No description provided for @calendarImport.
+  ///
+  /// In ru, this message translates to:
+  /// **'Импорт календаря'**
+  String get calendarImport;
 }
 
 class _AppLocalizationsDelegate

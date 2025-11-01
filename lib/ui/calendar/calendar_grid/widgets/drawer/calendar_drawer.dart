@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/calendar_drawer_footer.dart';
+import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/calendar_drawer_header.dart';
+import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/drawer_data_transfer_section.dart';
 
 class CalendarDrawer extends StatelessWidget {
   const CalendarDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return NavigationDrawer(
-      header: Text('header'),
-      footer: Text('footer'),
-      children: [Text('child 1'), Text('child 2')],
+    return const NavigationDrawer(
+      header: CalendarDrawerHeader(),
+      footer: CalendarDrawerFooter(),
+      children: [DrawerDataTransferSection()],
     );
   }
 }

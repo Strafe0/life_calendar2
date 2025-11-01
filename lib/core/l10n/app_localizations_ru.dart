@@ -157,4 +157,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get errorPhotoAttach => 'Не получилось прикрепить фото';
+
+  @override
+  String get birthdate => 'Дата рождения';
+
+  @override
+  String get privacyPolicy => 'Политика конфиденциальности';
+
+  @override
+  String get calendarExport => 'Экспорт календаря';
+
+  @override
+  String get calendarImport => 'Импорт календаря';
 }
