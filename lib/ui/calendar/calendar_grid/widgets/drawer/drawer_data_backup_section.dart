@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/drawer_item.dart';
 
-class DrawerDataTransferSection extends StatelessWidget {
-  const DrawerDataTransferSection({super.key});
+class DrawerDataBackupSection extends StatelessWidget {
+  const DrawerDataBackupSection({super.key});
 
   @override
   Widget build(BuildContext context) {
