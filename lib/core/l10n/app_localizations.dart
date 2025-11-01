@@ -399,6 +399,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Импорт календаря'**
   String get calendarImport;
+
+  /// No description provided for @errorPrivacyPolicy.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не получилось перейти к политике конфиденциальности'**
+  String get errorPrivacyPolicy;
 }
 
 class _AppLocalizationsDelegate

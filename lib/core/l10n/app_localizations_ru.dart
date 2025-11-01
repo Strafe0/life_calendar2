@@ -169,4 +169,8 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get calendarImport => 'Импорт календаря';
+
+  @override
+  String get errorPrivacyPolicy =>
+      'Не получилось перейти к политике конфиденциальности';
 }

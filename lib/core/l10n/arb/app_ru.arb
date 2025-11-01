@@ -139,5 +139,7 @@
     "calendarExport": "Экспорт календаря",
     "@calendarExport": {},
     "calendarImport": "Импорт календаря",
-    "@calendarImport": {}
+    "@calendarImport": {},
+    "errorPrivacyPolicy": "Не получилось перейти к политике конфиденциальности",
+    "@errorPrivacyPolicy": {}
 }

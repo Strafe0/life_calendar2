@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/drawer_item.dart';
+import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
+import 'package:life_calendar2/ui/core/dialogs/error_dialog.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CalendarDrawerFooter extends StatelessWidget {
   const CalendarDrawerFooter({super.key});
@@ -15,12 +20,38 @@ class CalendarDrawerFooter extends StatelessWidget {
           DrawerItem(
             icon: Icons.shield_outlined,
             title: context.l10n.privacyPolicy,
-            // TODO: implement privacy policy
-            onPressed: () {},
+            onPressed: () => _goToPrivacyPolicy(context),
           ),
           const SizedBox(height: 54),
         ],
       ),
     );
+  }
+
+  Future<void> _goToPrivacyPolicy(BuildContext context) async {
+    final url = Uri.parse(privacyPolicyUrl);
+
+    bool isSuccess = true;
+    try {
+      isSuccess = await launchUrl(url);
+    } catch (e) {
+      logger.e('Failed to open Privacy Policy', error: e);
+      isSuccess = false;
+    }
+
+    if (!isSuccess) {
+      if (!context.mounted) return;
+      showErrorDialog(
+        context,
+        title: context.l10n.error,
+        content: context.l10n.errorPrivacyPolicy,
+        actions: [
+          DialogAction(
+            onPressed: (context) => Navigator.of(context).pop(),
+            title: context.l10n.gotIt,
+          ),
+        ],
+      );
+    }
   }
 }
