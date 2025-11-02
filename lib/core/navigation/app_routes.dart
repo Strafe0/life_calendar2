@@ -7,6 +7,8 @@ class AppRoute {
 
   static const photoView = 'photo-view/:index';
 
+  static const feedback = 'feedback';
+
   static const onboarding = '/onboarding';
 
   static const error = '/error';

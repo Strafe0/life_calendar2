@@ -159,5 +159,17 @@
     "cancel": "Отмена",
     "@cancel": {},
     "continueButton": "Продолжить",
-    "@continueButton": {}
+    "@continueButton": {},
+    "feedback": "Обратная связь",
+    "@feedback": {},
+    "contactDeveloper": "Связь с разработчиком",
+    "@contactDeveloper": {},
+    "leaveReviewMessage": "Если вам понравилось приложение,\n напишите положительный отзыв!",
+    "@leaveReviewMessage": {},
+    "writeFeedbackToMail": "Для предложений и сообщениях об ошибках\n пишите на почту.",
+    "@writeFeedbackToMail": {},
+    "errorWriteFeedback": "Упс... Возникла неизвестная проблема",
+    "@errorWriteFeedback": {},
+    "writeButton": "Написать",
+    "@writeButton": {}
 }

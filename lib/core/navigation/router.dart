@@ -6,6 +6,7 @@ import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dar
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_screen.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_screen.dart';
+import 'package:life_calendar2/ui/feedback/feedback_screen.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_screen.dart';
 import 'package:life_calendar2/ui/splash/widgets/error_splash_screen.dart';
 import 'package:life_calendar2/ui/splash/widgets/splash_screen.dart';
@@ -58,6 +59,10 @@ final goRouter = GoRouter(
                   ),
                 );
               },
+            ),
+            GoRoute(
+              path: AppRoute.feedback,
+              builder: (context, state) => const FeedbackScreen(),
             ),
           ],
         ),

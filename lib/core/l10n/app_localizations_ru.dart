@@ -202,4 +202,24 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get continueButton => 'Продолжить';
+
+  @override
+  String get feedback => 'Обратная связь';
+
+  @override
+  String get contactDeveloper => 'Связь с разработчиком';
+
+  @override
+  String get leaveReviewMessage =>
+      'Если вам понравилось приложение,\n напишите положительный отзыв!';
+
+  @override
+  String get writeFeedbackToMail =>
+      'Для предложений и сообщениях об ошибках\n пишите на почту.';
+
+  @override
+  String get errorWriteFeedback => 'Упс... Возникла неизвестная проблема';
+
+  @override
+  String get writeButton => 'Написать';
 }

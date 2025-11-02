@@ -459,6 +459,42 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Продолжить'**
   String get continueButton;
+
+  /// No description provided for @feedback.
+  ///
+  /// In ru, this message translates to:
+  /// **'Обратная связь'**
+  String get feedback;
+
+  /// No description provided for @contactDeveloper.
+  ///
+  /// In ru, this message translates to:
+  /// **'Связь с разработчиком'**
+  String get contactDeveloper;
+
+  /// No description provided for @leaveReviewMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Если вам понравилось приложение,\n напишите положительный отзыв!'**
+  String get leaveReviewMessage;
+
+  /// No description provided for @writeFeedbackToMail.
+  ///
+  /// In ru, this message translates to:
+  /// **'Для предложений и сообщениях об ошибках\n пишите на почту.'**
+  String get writeFeedbackToMail;
+
+  /// No description provided for @errorWriteFeedback.
+  ///
+  /// In ru, this message translates to:
+  /// **'Упс... Возникла неизвестная проблема'**
+  String get errorWriteFeedback;
+
+  /// No description provided for @writeButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Написать'**
+  String get writeButton;
 }
 
 class _AppLocalizationsDelegate
