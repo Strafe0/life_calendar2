@@ -144,10 +144,20 @@
     "@archiveCreationInProcess": {},
     "archiveCreationSuccess": "Архив успешно создан",
     "@archiveCreationSuccess": {},
-    "errorArchiveCreation": "Произошла ошибка при создании архива. Попробуйте снова",
+    "errorArchiveCreation": "Произошла ошибка при создании архива. Попробуйте снова.",
     "@errorArchiveCreation": {},
     "calendarImport": "Импорт календаря",
     "@calendarImport": {},
+    "importDialogTitle": "Импорт данных приложения",
+    "@importDialogTitle": {},
+    "importDrawerDialogMessage": "При импорте календаря все ваши текущие данные будут удалены и заменены новыми!\n\nУбедитесь, что старые данные вам не нужны, или сделайте экспорт.\n\nПосле импорта вам нужно будет перезайти в приложение.",
+    "@importDrawerDialogMessage": {},
+    "errorImport": "Произошла ошибка во время импорта",
+    "@errorImport": {},
     "errorPrivacyPolicy": "Не получилось перейти к политике конфиденциальности",
-    "@errorPrivacyPolicy": {}
+    "@errorPrivacyPolicy": {},
+    "cancel": "Отмена",
+    "@cancel": {},
+    "continueButton": "Продолжить",
+    "@continueButton": {}
 }

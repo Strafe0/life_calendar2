@@ -21,7 +21,7 @@ class CalendarScreen extends StatelessWidget {
       ),
       child: SafeArea(
         child: Scaffold(
-          drawer: CalendarDrawer(),
+          drawer: const CalendarDrawer(),
           drawerEdgeDragWidth: MediaQuery.sizeOf(context).width,
           body: InteractiveViewer(
             maxScale: 5,

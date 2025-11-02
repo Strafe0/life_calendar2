@@ -23,7 +23,10 @@ class _ExportDialogState extends State<ExportDialog> {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const CircularProgressIndicator(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 24),
+                  child: CircularProgressIndicator(),
+                ),
                 Text(context.l10n.archiveCreationInProcess),
               ],
             );
@@ -37,12 +40,6 @@ class _ExportDialogState extends State<ExportDialog> {
           return Text(context.l10n.errorArchiveCreation);
         },
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(context.l10n.gotIt),
-        ),
-      ],
     );
   }
 }

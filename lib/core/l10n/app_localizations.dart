@@ -415,7 +415,7 @@ abstract class AppLocalizations {
   /// No description provided for @errorArchiveCreation.
   ///
   /// In ru, this message translates to:
-  /// **'Произошла ошибка при создании архива. Попробуйте снова'**
+  /// **'Произошла ошибка при создании архива. Попробуйте снова.'**
   String get errorArchiveCreation;
 
   /// No description provided for @calendarImport.
@@ -424,11 +424,41 @@ abstract class AppLocalizations {
   /// **'Импорт календаря'**
   String get calendarImport;
 
+  /// No description provided for @importDialogTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Импорт данных приложения'**
+  String get importDialogTitle;
+
+  /// No description provided for @importDrawerDialogMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'При импорте календаря все ваши текущие данные будут удалены и заменены новыми!\n\nУбедитесь, что старые данные вам не нужны, или сделайте экспорт.\n\nПосле импорта вам нужно будет перезайти в приложение.'**
+  String get importDrawerDialogMessage;
+
+  /// No description provided for @errorImport.
+  ///
+  /// In ru, this message translates to:
+  /// **'Произошла ошибка во время импорта'**
+  String get errorImport;
+
   /// No description provided for @errorPrivacyPolicy.
   ///
   /// In ru, this message translates to:
   /// **'Не получилось перейти к политике конфиденциальности'**
   String get errorPrivacyPolicy;
+
+  /// No description provided for @cancel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отмена'**
+  String get cancel;
+
+  /// No description provided for @continueButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продолжить'**
+  String get continueButton;
 }
 
 class _AppLocalizationsDelegate

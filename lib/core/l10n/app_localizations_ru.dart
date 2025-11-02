@@ -178,12 +178,28 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get errorArchiveCreation =>
-      'Произошла ошибка при создании архива. Попробуйте снова';
+      'Произошла ошибка при создании архива. Попробуйте снова.';
 
   @override
   String get calendarImport => 'Импорт календаря';
 
   @override
+  String get importDialogTitle => 'Импорт данных приложения';
+
+  @override
+  String get importDrawerDialogMessage =>
+      'При импорте календаря все ваши текущие данные будут удалены и заменены новыми!\n\nУбедитесь, что старые данные вам не нужны, или сделайте экспорт.\n\nПосле импорта вам нужно будет перезайти в приложение.';
+
+  @override
+  String get errorImport => 'Произошла ошибка во время импорта';
+
+  @override
   String get errorPrivacyPolicy =>
       'Не получилось перейти к политике конфиденциальности';
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get continueButton => 'Продолжить';
 }

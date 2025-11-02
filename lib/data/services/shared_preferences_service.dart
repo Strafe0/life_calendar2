@@ -11,9 +11,9 @@ class SharedPreferencesService {
 
   Future<bool> isFirstLaunch() async {
     try {
-      final prefs = SharedPreferencesAsync();
+      final prefs = await SharedPreferences.getInstance();
 
-      final isFirstLaunch = await prefs.getBool(_firstLaunchKey);
+      final isFirstLaunch = prefs.getBool(_firstLaunchKey);
 
       if (isFirstLaunch == null) {
         logger.d('isFirstLaunch from prefs is null');
@@ -29,7 +29,7 @@ class SharedPreferencesService {
 
   Future<void> setFirstLaunch({required bool isFirstLaunch}) async {
     try {
-      final prefs = SharedPreferencesAsync();
+      final prefs = await SharedPreferences.getInstance();
 
       await prefs.setBool(_firstLaunchKey, isFirstLaunch);
     } catch (e, s) {
@@ -39,8 +39,8 @@ class SharedPreferencesService {
 
   Future<int?> getBirthday() async {
     try {
-      final prefs = SharedPreferencesAsync();
-      final birthday = await prefs.getInt(_birthdayKey);
+      final prefs = await SharedPreferences.getInstance();
+      final birthday = prefs.getInt(_birthdayKey);
 
       if (birthday == null) {
         logger.d('Birthday from prefs is null');
@@ -55,7 +55,7 @@ class SharedPreferencesService {
 
   Future<void> setBirthday(int birthday) async {
     try {
-      final prefs = SharedPreferencesAsync();
+      final prefs = await SharedPreferences.getInstance();
 
       await prefs.setInt(_birthdayKey, birthday);
     } catch (e, s) {
@@ -65,9 +65,9 @@ class SharedPreferencesService {
 
   Future<int?> getLifespan() async {
     try {
-      final prefs = SharedPreferencesAsync();
+      final prefs = await SharedPreferences.getInstance();
 
-      final lifespan = await prefs.getInt(_lifespanKey);
+      final lifespan = prefs.getInt(_lifespanKey);
 
       if (lifespan == null) {
         logger.d('Lifespan from prefs is null');
@@ -82,7 +82,7 @@ class SharedPreferencesService {
 
   Future<void> setLifespan(int lifespan) async {
     try {
-      final prefs = SharedPreferencesAsync();
+      final prefs = await SharedPreferences.getInstance();
 
       await prefs.setInt(_lifespanKey, lifespan);
     } catch (e, s) {
@@ -92,9 +92,9 @@ class SharedPreferencesService {
 
   Future<String?> getUserId() async {
     try {
-      final prefs = SharedPreferencesAsync();
+      final prefs = await SharedPreferences.getInstance();
 
-      final userId = await prefs.getString(_userIdKey);
+      final userId = prefs.getString(_userIdKey);
 
       if (userId == null) {
         logger.d('UserId from prefs is null');
@@ -109,7 +109,7 @@ class SharedPreferencesService {
 
   Future<void> setUserId(String userId) async {
     try {
-      final prefs = SharedPreferencesAsync();
+      final prefs = await SharedPreferences.getInstance();
 
       await prefs.setString(_userIdKey, userId);
     } catch (e, s) {
