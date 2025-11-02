@@ -26,7 +26,7 @@ final class CalendarSuccess extends CalendarState {
 }
 
 final class CalendarFailure extends CalendarState {
-  final Exception exception;
+  final Object exception;
 
   const CalendarFailure(this.exception);
 }

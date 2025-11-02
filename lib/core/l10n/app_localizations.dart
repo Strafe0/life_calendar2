@@ -394,6 +394,30 @@ abstract class AppLocalizations {
   /// **'Экспорт календаря'**
   String get calendarExport;
 
+  /// No description provided for @exportDialogTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Экспорт данных приложения'**
+  String get exportDialogTitle;
+
+  /// No description provided for @archiveCreationInProcess.
+  ///
+  /// In ru, this message translates to:
+  /// **'Происходит создание архива'**
+  String get archiveCreationInProcess;
+
+  /// No description provided for @archiveCreationSuccess.
+  ///
+  /// In ru, this message translates to:
+  /// **'Архив успешно создан'**
+  String get archiveCreationSuccess;
+
+  /// No description provided for @errorArchiveCreation.
+  ///
+  /// In ru, this message translates to:
+  /// **'Произошла ошибка при создании архива. Попробуйте снова'**
+  String get errorArchiveCreation;
+
   /// No description provided for @calendarImport.
   ///
   /// In ru, this message translates to:

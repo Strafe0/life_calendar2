@@ -23,7 +23,7 @@ final class OnboardingSuccess extends OnboardingState with EquatableMixin {
 }
 
 final class OnboardingFailure extends OnboardingState {
-  final Exception exception;
+  final Object exception;
 
   const OnboardingFailure(this.exception);
 }

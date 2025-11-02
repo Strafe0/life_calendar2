@@ -19,7 +19,7 @@ final class UserSuccess extends UserState {
 }
 
 final class UserFailure extends UserState {
-  final Exception exception;
+  final Object exception;
 
   const UserFailure(this.exception);
 }

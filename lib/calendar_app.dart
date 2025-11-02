@@ -14,8 +14,10 @@ import 'package:life_calendar2/data/repositories/week_repository/week_repository
 import 'package:life_calendar2/data/repositories/week_repository/week_repository_impl.dart';
 import 'package:life_calendar2/data/services/database_service.dart';
 import 'package:life_calendar2/data/services/image_picker_service_impl.dart';
+import 'package:life_calendar2/data/services/local_backup_service_impl.dart';
 import 'package:life_calendar2/data/services/shared_preferences_service.dart';
 import 'package:life_calendar2/domain/services/image_picker_service.dart';
+import 'package:life_calendar2/domain/services/local_backup_service.dart';
 import 'package:life_calendar2/ui/core/themes/app_theme.dart';
 import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
 
@@ -24,6 +26,7 @@ class CalendarApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: replace with Provider
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => DatabaseService()),
@@ -47,6 +50,9 @@ class CalendarApp extends StatelessWidget {
         RepositoryProvider<WeekRepository>(
           create:
               (context) => WeekRepositoryImpl(databaseService: context.read()),
+        ),
+        RepositoryProvider<LocalBackupService>(
+          create: (_) => const LocalBackupServiceImpl(),
         ),
       ],
       child: Builder(

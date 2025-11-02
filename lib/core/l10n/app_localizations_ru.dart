@@ -168,6 +168,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get calendarExport => 'Экспорт календаря';
 
   @override
+  String get exportDialogTitle => 'Экспорт данных приложения';
+
+  @override
+  String get archiveCreationInProcess => 'Происходит создание архива';
+
+  @override
+  String get archiveCreationSuccess => 'Архив успешно создан';
+
+  @override
+  String get errorArchiveCreation =>
+      'Произошла ошибка при создании архива. Попробуйте снова';
+
+  @override
   String get calendarImport => 'Импорт календаря';
 
   @override
