@@ -23,7 +23,7 @@ class CalendarViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     logger.d('Build CalendarViewBody');
     return GestureDetector(
-      onTapDown: (details) => _onCalendarTap(context, details, calendarSize),
+      onTapUp: (details) => _onCalendarTap(context, details, calendarSize),
       child: RepaintBoundary(
         child: CustomPaint(
           size: Size.infinite,
@@ -41,7 +41,7 @@ class CalendarViewBody extends StatelessWidget {
 
   void _onCalendarTap(
     BuildContext context,
-    TapDownDetails details,
+    TapUpDetails details,
     CalendarSize calendarSize,
   ) {
     final position = details.localPosition;
