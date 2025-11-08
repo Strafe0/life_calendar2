@@ -228,4 +228,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get releaseToSearch => 'Отпустите для поиска';
+
+  @override
+  String get search => 'Поиск';
 }

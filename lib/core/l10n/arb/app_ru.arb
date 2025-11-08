@@ -175,5 +175,7 @@
     "pullToSearch": "Потяните для поиска",
     "@pullToSearch": {},
     "releaseToSearch": "Отпустите для поиска",
-    "@releaseToSearch": {}
+    "@releaseToSearch": {},
+    "search": "Поиск",
+    "@search": {}
 }

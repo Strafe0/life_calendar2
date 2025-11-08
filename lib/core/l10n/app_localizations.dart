@@ -507,6 +507,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Отпустите для поиска'**
   String get releaseToSearch;
+
+  /// No description provided for @search.
+  ///
+  /// In ru, this message translates to:
+  /// **'Поиск'**
+  String get search;
 }
 
 class _AppLocalizationsDelegate
