@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/extensions/string/string_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
 import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
 import 'package:life_calendar2/ui/user/bloc/user_state.dart';
@@ -9,7 +10,7 @@ import 'package:life_calendar2/ui/user/bloc/user_state.dart';
 class SearchSheet extends StatefulWidget {
   const SearchSheet({super.key, required this.onSubmit});
 
-  final void Function(DateTime) onSubmit;
+  final void Function(int weekId) onSubmit;
 
   @override
   State<SearchSheet> createState() => _SearchSheetState();
@@ -42,7 +43,13 @@ class _SearchSheetState extends State<SearchSheet> {
                     final isValid = _formKey.currentState?.validate() ?? false;
 
                     if (isValid && _dateTime != null) {
-                      widget.onSubmit(_dateTime!);
+                      widget.onSubmit(
+                        _searchWeekId(
+                          _dateTime!,
+                          user.birthdate,
+                          user.lifeSpan,
+                        ),
+                      );
                     }
                   },
                   child: Text(context.l10n.ready),
@@ -56,5 +63,20 @@ class _SearchSheetState extends State<SearchSheet> {
         };
       },
     );
+  }
+
+  int _searchWeekId(DateTime date, DateTime birthdate, int lifeSpan) {
+    if (date.isBefore(birthdate)) {
+      logger.w('Searched date cannot be earlier than birthdate');
+    } else if (date.isAfter(
+      DateTime(birthdate.year + lifeSpan, birthdate.month, birthdate.day),
+    )) {
+      logger.w('Searched date cannot be later than last day');
+    }
+
+    final diff = date.difference(birthdate);
+    logger.d('Found week id: ${diff.inDays / 7} (${diff.inDays ~/ 7 + 1})');
+
+    return diff.inDays ~/ 7 + 1;
   }
 }
