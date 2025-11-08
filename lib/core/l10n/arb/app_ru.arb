@@ -171,5 +171,9 @@
     "errorWriteFeedback": "Упс... Возникла неизвестная проблема",
     "@errorWriteFeedback": {},
     "writeButton": "Написать",
-    "@writeButton": {}
+    "@writeButton": {},
+    "pullToSearch": "Потяните для поиска",
+    "@pullToSearch": {},
+    "releaseToSearch": "Отпустите для поиска",
+    "@releaseToSearch": {}
 }

@@ -222,4 +222,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get writeButton => 'Написать';
+
+  @override
+  String get pullToSearch => 'Потяните для поиска';
+
+  @override
+  String get releaseToSearch => 'Отпустите для поиска';
 }

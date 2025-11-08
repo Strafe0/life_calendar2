@@ -495,6 +495,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Написать'**
   String get writeButton;
+
+  /// No description provided for @pullToSearch.
+  ///
+  /// In ru, this message translates to:
+  /// **'Потяните для поиска'**
+  String get pullToSearch;
+
+  /// No description provided for @releaseToSearch.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отпустите для поиска'**
+  String get releaseToSearch;
 }
 
 class _AppLocalizationsDelegate
