@@ -32,7 +32,7 @@ class _SearchSheetState extends State<SearchSheet> {
                 const SizedBox(height: 32),
                 DateTextField(
                   firstDate: user.birthdate,
-                  lastDate: user.lastDate,
+                  lastDate: user.lastDate.subtract(const Duration(days: 1)),
                   fieldLabelText: context.l10n.enterDate,
                   errorFormatText: context.l10n.dateFormatError,
                   onChanged: (value) => _dateTime = value.toDateTime(),
@@ -68,14 +68,21 @@ class _SearchSheetState extends State<SearchSheet> {
   int _searchWeekId(DateTime date, DateTime birthdate, int lifeSpan) {
     if (date.isBefore(birthdate)) {
       logger.w('Searched date cannot be earlier than birthdate');
+      return -1;
     } else if (date.isAfter(
-      DateTime(birthdate.year + lifeSpan, birthdate.month, birthdate.day),
+      DateTime(birthdate.year + lifeSpan + 1, birthdate.month, birthdate.day),
     )) {
-      logger.w('Searched date cannot be later than last day');
+      logger.w(
+        'Searched date cannot be later than last day',
+      );
+      return -1;
     }
 
-    final diff = date.difference(birthdate);
-    logger.d('Found week id: ${diff.inDays / 7} (${diff.inDays ~/ 7 + 1})');
+    final diff = date.difference(birthdate) + const Duration(days: 1);
+    logger.d(
+      'Found week id: ${diff.inDays / 7} (${diff.inDays ~/ 7 + 1}).\n'
+      'Diff: ${diff.inDays}',
+    );
 
     return diff.inDays ~/ 7 + 1;
   }
