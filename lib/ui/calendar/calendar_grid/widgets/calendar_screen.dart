@@ -19,14 +19,11 @@ class CalendarScreen extends StatelessWidget {
         statusBarIconBrightness:
             isDarkMode ? Brightness.light : Brightness.dark,
       ),
-      child: SafeArea(
+      child: const SafeArea(
         child: Scaffold(
-          drawer: const CalendarDrawer(),
+          drawer: CalendarDrawer(),
           drawerEdgeDragWidth: 40,
-          body: InteractiveViewer(
-            maxScale: 5,
-            child: const CalendarView(),
-          ),
+          body: CalendarView(),
         ),
       ),
     );
