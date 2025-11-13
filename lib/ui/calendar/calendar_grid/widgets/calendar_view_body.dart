@@ -28,6 +28,7 @@ class CalendarViewBody extends StatefulWidget {
 }
 
 class _CalendarViewBodyState extends State<CalendarViewBody> {
+  final _transformationController = TransformationController();
   final _topNotifier = ValueNotifier<double>(0);
   bool _isSearchTriggered = false;
   bool _isHapticTriggered = false;
@@ -39,8 +40,13 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
     logger.d('Build CalendarViewBody');
     return GestureDetector(
       onTapUp:
-          (details) => _onCalendarTap(context, details, widget.calendarSize),
+          (details) => _onCalendarTap(
+            context,
+            _transformationController.toScene(details.localPosition),
+            widget.calendarSize,
+          ),
       child: CalendarInteractiveViewer(
+        controller: _transformationController,
         onDragStart: () {
           _isSearchTriggered = false;
           _isHapticTriggered = false;
@@ -104,12 +110,9 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
 
   void _onCalendarTap(
     BuildContext context,
-    TapUpDetails details,
+    Offset position,
     CalendarSize calendarSize,
   ) {
-    // TODO: fix position
-    final position = details.localPosition;
-
     final weekId =
         widget.weekBoxes
             .firstWhere(
@@ -126,5 +129,11 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
     if (weekId != -1) {
       context.push(AppRoute.weekId(weekId));
     }
+  }
+
+  @override
+  void dispose() {
+    _transformationController.dispose();
+    super.dispose();
   }
 }

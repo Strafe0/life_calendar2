@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class CalendarInteractiveViewer extends StatefulWidget {
   const CalendarInteractiveViewer({
     super.key,
+    required this.controller,
     required this.onDragStart,
     required this.onDrag,
     required this.onDragEnd,
     required this.child,
   });
 
+  final TransformationController controller;
   final void Function() onDragStart;
   final void Function(double dragDistance) onDrag;
   final void Function() onDragEnd;
@@ -21,7 +23,6 @@ class CalendarInteractiveViewer extends StatefulWidget {
 
 class _CalendarInteractiveViewerState extends State<CalendarInteractiveViewer>
     with SingleTickerProviderStateMixin {
-  final _controller = TransformationController();
   Offset? _initialFocalPoint;
   double? _scale = 1;
   double _dragDistance = 0;
@@ -32,7 +33,7 @@ class _CalendarInteractiveViewerState extends State<CalendarInteractiveViewer>
   @override
   void initState() {
     super.initState();
-    _controller.addListener(_controllerListener);
+    widget.controller.addListener(_controllerListener);
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -40,13 +41,13 @@ class _CalendarInteractiveViewerState extends State<CalendarInteractiveViewer>
   }
 
   void _controllerListener() {
-    _scale = _controller.value.getMaxScaleOnAxis();
+    _scale = widget.controller.value.getMaxScaleOnAxis();
   }
 
   @override
   Widget build(BuildContext context) {
     return InteractiveViewer(
-      transformationController: _controller,
+      transformationController: widget.controller,
       onInteractionStart: (details) {
         _initialFocalPoint = details.focalPoint;
         widget.onDragStart();
@@ -84,7 +85,6 @@ class _CalendarInteractiveViewerState extends State<CalendarInteractiveViewer>
 
   @override
   void dispose() {
-    _controller.dispose();
     _animationController.dispose();
     super.dispose();
   }
