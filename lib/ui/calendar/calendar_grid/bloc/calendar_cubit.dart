@@ -65,7 +65,7 @@ class CalendarCubit extends Cubit<CalendarState> {
     }
   }
 
-  void updateWeek({required Week week, required Brightness brightness}) {
+  void updateWeek({required Week week}) {
     if (state is CalendarSuccess) {
       final weeks = (state as CalendarSuccess).weeks;
       final weekBox = (state as CalendarSuccess).weeks.firstWhere(
@@ -76,7 +76,6 @@ class CalendarCubit extends Cubit<CalendarState> {
         weeks[weekBox.weekId - 1] = WeekBox.fromWeek(
           week: week,
           rect: weekBox.rect,
-          brightness: brightness,
         );
         emit(CalendarSuccess(weeks: weeks, lastUpdateTime: DateTime.now()));
       }
@@ -131,7 +130,8 @@ class CalendarCubit extends Cubit<CalendarState> {
       return WeekBox(
         weekId: weeks[weekId].id,
         yearId: weeks[weekId].yearId,
-        color: weeks[weekId].getColor(brightness: brightness),
+        colorLight: weeks[weekId].getColor(brightness: Brightness.light),
+        colorDark: weeks[weekId].getColor(brightness: Brightness.dark),
         rect: rrect,
       );
     });

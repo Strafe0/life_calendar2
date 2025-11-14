@@ -41,7 +41,12 @@ class CalendarPainter extends CustomPainter {
       }
 
       final week = weekBoxes[weekId];
-      canvas.drawRRect(week.rect, Paint()..color = week.color);
+      canvas.drawRRect(
+        week.rect,
+        Paint()
+          ..color =
+              brightness == Brightness.light ? week.colorLight : week.colorDark,
+      );
 
       if (weekId + 1 < weekBoxes.length &&
           weekBoxes[weekId + 1].yearId > yearId) {

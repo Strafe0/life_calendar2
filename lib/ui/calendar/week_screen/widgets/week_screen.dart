@@ -24,10 +24,7 @@ class WeekScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is WeekSuccess) {
             logger.d('Update Calendar with new week');
-            context.read<CalendarCubit>().updateWeek(
-              week: state.week,
-              brightness: MediaQuery.platformBrightnessOf(context),
-            );
+            context.read<CalendarCubit>().updateWeek(week: state.week);
 
             _requestAdLoad(context);
           }

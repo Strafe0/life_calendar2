@@ -16,7 +16,6 @@ import 'package:life_calendar2/ui/user/bloc/user_state.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 import 'package:life_calendar2/utils/calendar/search_utils.dart';
 
-// TODO: colors not changed when Brightness changed
 class CalendarViewBody extends StatefulWidget {
   const CalendarViewBody({
     super.key,
