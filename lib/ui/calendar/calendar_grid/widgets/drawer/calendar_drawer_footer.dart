@@ -4,7 +4,7 @@ import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/drawer_item.dart';
 import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
-import 'package:life_calendar2/ui/core/dialogs/error_dialog.dart';
+import 'package:life_calendar2/ui/core/dialogs/alert_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CalendarDrawerFooter extends StatelessWidget {
@@ -41,7 +41,7 @@ class CalendarDrawerFooter extends StatelessWidget {
 
     if (!isSuccess) {
       if (!context.mounted) return;
-      showErrorDialog(
+      showAlertDialog(
         context,
         title: context.l10n.error,
         content: context.l10n.errorPrivacyPolicy,

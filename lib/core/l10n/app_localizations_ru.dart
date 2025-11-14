@@ -234,4 +234,23 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get pullToGoToCurrentWeek => 'Перейти к текущей неделе';
+
+  @override
+  String get donate => 'Поблагодарить';
+
+  @override
+  String get donateDialogTitle => 'Ваша поддержка важна';
+
+  @override
+  String get donateDialogMessage =>
+      'Проект создаётся в свободное время с любовью и вниманием к деталям. Если приложение оказалось полезным, буду благодарен за поддержку — она помогает мне двигаться дальше.';
+
+  @override
+  String get donateDialogButtonPositive => 'Поддержать проект';
+
+  @override
+  String get donateDialogButtonNegative => 'Пока не готов';
+
+  @override
+  String get tryAgainLater => 'Попробовать позже';
 }

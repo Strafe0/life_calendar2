@@ -9,7 +9,7 @@ import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_stat
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab_state_provider.dart';
 import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
-import 'package:life_calendar2/ui/core/dialogs/error_dialog.dart';
+import 'package:life_calendar2/ui/core/dialogs/alert_dialog.dart';
 
 class PhotoFab extends StatelessWidget {
   const PhotoFab({super.key});
@@ -54,7 +54,7 @@ class PhotoFab extends StatelessWidget {
 
     if (file == null) {
       if (hasError && context.mounted) {
-        showErrorDialog(
+        showAlertDialog(
           context,
           title: context.l10n.error,
           content: context.l10n.errorPhotoAttach,

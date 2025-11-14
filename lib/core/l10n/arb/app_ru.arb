@@ -179,5 +179,17 @@
     "search": "Поиск",
     "@search": {},
     "pullToGoToCurrentWeek": "Перейти к текущей неделе",
-    "@pullToGoToCurrentWeek": {}
+    "@pullToGoToCurrentWeek": {},
+    "donate": "Поблагодарить",
+    "@donate": {},
+    "donateDialogTitle": "Ваша поддержка важна",
+    "@donateDialogTitle": {},
+    "donateDialogMessage": "Проект создаётся в свободное время с любовью и вниманием к деталям. Если приложение оказалось полезным, буду благодарен за поддержку — она помогает мне двигаться дальше.",
+    "@donateDialogMessage": {},
+    "donateDialogButtonPositive": "Поддержать проект",
+    "@donateDialogButtonPositive": {},
+    "donateDialogButtonNegative": "Пока не готов",
+    "@donateDialogButtonNegative": {},
+    "tryAgainLater": "Попробовать позже",
+    "@tryAgainLater": {}
 }

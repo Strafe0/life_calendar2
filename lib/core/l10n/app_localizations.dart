@@ -519,6 +519,42 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Перейти к текущей неделе'**
   String get pullToGoToCurrentWeek;
+
+  /// No description provided for @donate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Поблагодарить'**
+  String get donate;
+
+  /// No description provided for @donateDialogTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ваша поддержка важна'**
+  String get donateDialogTitle;
+
+  /// No description provided for @donateDialogMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Проект создаётся в свободное время с любовью и вниманием к деталям. Если приложение оказалось полезным, буду благодарен за поддержку — она помогает мне двигаться дальше.'**
+  String get donateDialogMessage;
+
+  /// No description provided for @donateDialogButtonPositive.
+  ///
+  /// In ru, this message translates to:
+  /// **'Поддержать проект'**
+  String get donateDialogButtonPositive;
+
+  /// No description provided for @donateDialogButtonNegative.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пока не готов'**
+  String get donateDialogButtonNegative;
+
+  /// No description provided for @tryAgainLater.
+  ///
+  /// In ru, this message translates to:
+  /// **'Попробовать позже'**
+  String get tryAgainLater;
 }
 
 class _AppLocalizationsDelegate

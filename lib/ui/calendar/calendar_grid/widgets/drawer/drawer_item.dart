@@ -4,11 +4,13 @@ class DrawerItem extends StatelessWidget {
   const DrawerItem({
     super.key,
     required this.icon,
+    this.iconColor,
     required this.title,
     required this.onPressed,
   });
 
   final IconData icon;
+  final Color? iconColor;
   final String title;
   final VoidCallback onPressed;
 
@@ -24,7 +26,11 @@ class DrawerItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
           child: Row(
             children: [
-              Icon(icon, size: 24, color: ColorScheme.of(context).onSurface),
+              Icon(
+                icon,
+                size: 24,
+                color: iconColor ?? ColorScheme.of(context).onSurface,
+              ),
               const SizedBox(width: 16),
               Expanded(
                 child: Text(

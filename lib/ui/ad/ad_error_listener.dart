@@ -4,7 +4,7 @@ import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_bloc.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_state.dart';
 import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
-import 'package:life_calendar2/ui/core/dialogs/error_dialog.dart';
+import 'package:life_calendar2/ui/core/dialogs/alert_dialog.dart';
 
 class AdErrorListener extends StatelessWidget {
   const AdErrorListener({super.key, required this.child});
@@ -17,7 +17,7 @@ class AdErrorListener extends StatelessWidget {
       listener: (context, state) {
         switch (state) {
           case WeekAdShowFailure():
-            showErrorDialog(
+            showAlertDialog(
               context,
               title: context.l10n.error,
               content: context.l10n.errorAdLoading,
