@@ -231,4 +231,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get search => 'Поиск';
+
+  @override
+  String get pullToGoToCurrentWeek => 'Перейти к текущей неделе';
 }

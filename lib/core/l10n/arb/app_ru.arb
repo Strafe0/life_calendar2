@@ -177,5 +177,7 @@
     "releaseToSearch": "Отпустите для поиска",
     "@releaseToSearch": {},
     "search": "Поиск",
-    "@search": {}
+    "@search": {},
+    "pullToGoToCurrentWeek": "Перейти к текущей неделе",
+    "@pullToGoToCurrentWeek": {}
 }

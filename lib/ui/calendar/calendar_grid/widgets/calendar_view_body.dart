@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_interactive_viewer.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_painter.dart';
+import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/current_week_indicator.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/search/search_pull_indicator.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/search/search_utils.dart';
+import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/search/search_ui_utils.dart';
+import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/triggers/calendar_triggers.dart';
+import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar2/ui/user/bloc/user_state.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
+import 'package:life_calendar2/utils/calendar/search_utils.dart';
 
 // TODO: colors not changed when Brightness changed
 class CalendarViewBody extends StatefulWidget {
@@ -30,81 +36,104 @@ class CalendarViewBody extends StatefulWidget {
 class _CalendarViewBodyState extends State<CalendarViewBody> {
   final _transformationController = TransformationController();
   final _topNotifier = ValueNotifier<double>(0);
-  bool _isSearchTriggered = false;
-  bool _isHapticTriggered = false;
+  final _triggers = Triggers();
 
-  static const _searchTriggerThreshold = 100.0;
+  static const _indicatorHeight = 100.0;
 
   @override
   Widget build(BuildContext context) {
     logger.d('Build CalendarViewBody');
-    return GestureDetector(
-      onTapUp:
-          (details) => _onCalendarTap(
-            context,
-            _transformationController.toScene(details.localPosition),
-            widget.calendarSize,
-          ),
-      child: CalendarInteractiveViewer(
-        controller: _transformationController,
-        onDragStart: () {
-          _isSearchTriggered = false;
-          _isHapticTriggered = false;
-        },
-        onDrag: (dragDistance) {
-          _topNotifier.value = dragDistance;
-          if (dragDistance > _searchTriggerThreshold) {
-            if (!_isHapticTriggered) {
-              HapticFeedback.lightImpact();
-              _isHapticTriggered = true;
-            }
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return GestureDetector(
+          onTapUp:
+              (details) => _onCalendarTap(
+                context,
+                _transformationController.toScene(details.localPosition),
+                widget.calendarSize,
+              ),
+          child: CalendarInteractiveViewer(
+            controller: _transformationController,
+            maxDragDistance: _indicatorHeight * 1.5,
+            onDragStart: _triggers.reset,
+            onDrag: (dragDistance) {
+              _topNotifier.value = dragDistance;
 
-            _isSearchTriggered = true;
-          }
-        },
-        onDragEnd: () {
-          if (_isSearchTriggered) {
-            showSearchSheet(context);
-          }
-        },
-        child: Stack(
-          children: [
-            ValueListenableBuilder(
-              valueListenable: _topNotifier,
-              builder: (context, value, child) {
-                return Transform.translate(
-                  offset: Offset(0, -_searchTriggerThreshold + value),
-                  child: SearchPullIndicator(
-                    isSearchTriggered: _isSearchTriggered,
-                    height: _searchTriggerThreshold,
-                  ),
-                );
-              },
-            ),
-            ValueListenableBuilder(
-              valueListenable: _topNotifier,
-              builder: (context, value, child) {
-                return Transform.translate(
-                  offset: Offset(0, value),
-                  child: child,
-                );
-              },
-              child: RepaintBoundary(
-                child: CustomPaint(
-                  size: Size.infinite,
-                  painter: CalendarPainter(
-                    weekBoxes: widget.weekBoxes,
-                    calendarSize: widget.calendarSize,
-                    lastUpdateTime: widget.lastUpdateTime,
-                    textColor: Theme.of(context).colorScheme.onSurface,
-                    brightness: Theme.of(context).brightness,
+              if (dragDistance > _indicatorHeight) {
+                if (!_triggers.haptic) {
+                  _triggers.activate(CalendarTrigger.haptic);
+                  HapticFeedback.lightImpact();
+                }
+
+                _triggers.activate(CalendarTrigger.search);
+              } else if (dragDistance < -_indicatorHeight) {
+                if (!_triggers.haptic) {
+                  _triggers.activate(CalendarTrigger.haptic);
+                  HapticFeedback.lightImpact();
+                }
+
+                _triggers.activate(CalendarTrigger.currentWeek);
+              }
+            },
+            onDragEnd: () {
+              if (_triggers.search) {
+                showSearchSheet(context);
+              } else if (_triggers.currentWeek) {
+                _goToCurrentWeek(context);
+              }
+            },
+            child: Stack(
+              children: [
+                ValueListenableBuilder(
+                  valueListenable: _topNotifier,
+                  builder: (context, value, child) {
+                    return Transform.translate(
+                      offset: Offset(0, -_indicatorHeight + value),
+                      child: SearchPullIndicator(
+                        isSearchTriggered: _triggers.search,
+                        height: _indicatorHeight,
+                      ),
+                    );
+                  },
+                ),
+                ValueListenableBuilder(
+                  valueListenable: _topNotifier,
+                  builder: (context, value, child) {
+                    return Transform.translate(
+                      offset: Offset(0, constraints.maxHeight + value),
+                      child: CurrentWeekIndicator(
+                        isCurrentWeekTriggered: _triggers.currentWeek,
+                        height: _indicatorHeight,
+                      ),
+                    );
+                  },
+                ),
+                ValueListenableBuilder(
+                  valueListenable: _topNotifier,
+                  builder: (context, value, child) {
+                    return Transform.translate(
+                      offset: Offset(0, value),
+                      child: child,
+                    );
+                  },
+                  child: RepaintBoundary(
+                    child: CustomPaint(
+                      size: Size.infinite,
+                      painter: CalendarPainter(
+                        weekBoxes: widget.weekBoxes,
+                        calendarSize: widget.calendarSize,
+                        lastUpdateTime: widget.lastUpdateTime,
+                        textColor: Theme.of(context).colorScheme.onSurface,
+                        brightness: Theme.of(context).brightness,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -128,6 +157,23 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
     logger.i('Tapped on $weekId week');
     if (weekId != -1) {
       context.push(AppRoute.weekId(weekId));
+    }
+  }
+
+  void _goToCurrentWeek(BuildContext context) {
+    final userState = context.read<UserBloc>().state;
+    if (userState is UserSuccess) {
+      final user = userState.user;
+
+      final weekId = findWeekIdByDate(
+        DateTime.now(),
+        birthdate: user.birthdate,
+        lifeSpan: user.lifeSpan,
+      );
+
+      if (weekId != -1) {
+        context.push(AppRoute.weekId(weekId));
+      }
     }
   }
 

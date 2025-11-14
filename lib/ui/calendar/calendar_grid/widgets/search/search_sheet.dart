@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/extensions/string/string_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
 import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
 import 'package:life_calendar2/ui/user/bloc/user_state.dart';
+import 'package:life_calendar2/utils/calendar/search_utils.dart';
 
 class SearchSheet extends StatefulWidget {
   const SearchSheet({super.key, required this.onSubmit});
@@ -44,10 +44,10 @@ class _SearchSheetState extends State<SearchSheet> {
 
                     if (isValid && _dateTime != null) {
                       widget.onSubmit(
-                        _searchWeekId(
+                        findWeekIdByDate(
                           _dateTime!,
-                          user.birthdate,
-                          user.lifeSpan,
+                          birthdate: user.birthdate,
+                          lifeSpan: user.lifeSpan,
                         ),
                       );
                     }
@@ -63,27 +63,5 @@ class _SearchSheetState extends State<SearchSheet> {
         };
       },
     );
-  }
-
-  int _searchWeekId(DateTime date, DateTime birthdate, int lifeSpan) {
-    if (date.isBefore(birthdate)) {
-      logger.w('Searched date cannot be earlier than birthdate');
-      return -1;
-    } else if (date.isAfter(
-      DateTime(birthdate.year + lifeSpan + 1, birthdate.month, birthdate.day),
-    )) {
-      logger.w(
-        'Searched date cannot be later than last day',
-      );
-      return -1;
-    }
-
-    final diff = date.difference(birthdate) + const Duration(days: 1);
-    logger.d(
-      'Found week id: ${diff.inDays / 7} (${diff.inDays ~/ 7 + 1}).\n'
-      'Diff: ${diff.inDays}',
-    );
-
-    return diff.inDays ~/ 7 + 1;
   }
 }

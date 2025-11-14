@@ -4,6 +4,7 @@ class CalendarInteractiveViewer extends StatefulWidget {
   const CalendarInteractiveViewer({
     super.key,
     required this.controller,
+    required this.maxDragDistance,
     required this.onDragStart,
     required this.onDrag,
     required this.onDragEnd,
@@ -11,6 +12,7 @@ class CalendarInteractiveViewer extends StatefulWidget {
   });
 
   final TransformationController controller;
+  final double maxDragDistance;
   final void Function() onDragStart;
   final void Function(double dragDistance) onDrag;
   final void Function() onDragEnd;
@@ -58,7 +60,10 @@ class _CalendarInteractiveViewerState extends State<CalendarInteractiveViewer>
               details.focalPoint.dy -
               (_initialFocalPoint?.dy ?? details.focalPoint.dy);
 
-          _dragDistance = _dragDistance.clamp(0, 150);
+          _dragDistance = _dragDistance.clamp(
+            -widget.maxDragDistance,
+            widget.maxDragDistance,
+          );
           widget.onDrag(_dragDistance);
         }
       },

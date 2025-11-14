@@ -513,6 +513,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Поиск'**
   String get search;
+
+  /// No description provided for @pullToGoToCurrentWeek.
+  ///
+  /// In ru, this message translates to:
+  /// **'Перейти к текущей неделе'**
+  String get pullToGoToCurrentWeek;
 }
 
 class _AppLocalizationsDelegate
