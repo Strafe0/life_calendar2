@@ -14,6 +14,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       super(const UserInitial()) {
     on<UserReceived>((event, emit) => emit(UserSuccess(user: event.user)));
     on<UserLoadingTriggered>(_getUser);
+    on<UserChangeLifeSpanRequested>(_changeLifeSpan);
   }
 
   int? get age => state is UserSuccess ? (state as UserSuccess).user.age : null;
@@ -34,6 +35,48 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       case Error<User>():
         logger.d('Failed to get user', error: userResult.error);
         emit(UserFailure(userResult.error));
+    }
+  }
+
+  Future<void> _changeLifeSpan(
+    UserChangeLifeSpanRequested event,
+    Emitter<UserState> emit,
+  ) async {
+    final currentState = state;
+    final newLifeSpan = event.lifeSpan;
+
+    emit(const UserLoading());
+
+    if (currentState is UserSuccess) {
+      final oldLifeSpan = currentState.user.lifeSpan;
+      final resultFuture =
+          newLifeSpan < oldLifeSpan
+              ? _userRepository.reduceLifeSpan(
+                oldLifeSpan: oldLifeSpan,
+                newLifeSpan: newLifeSpan,
+              )
+              : _userRepository.increaseLifeSpan(
+                oldLifeSpan: oldLifeSpan,
+                newLifeSpan: newLifeSpan,
+              );
+
+      final result = await resultFuture;
+
+      switch (result) {
+        case Ok<void>():
+          logger.d(
+            'Changed user life span '
+            'from $oldLifeSpan to $newLifeSpan',
+          );
+          emit(
+            UserSuccess(
+              user: currentState.user.copyWith(lifeSpan: newLifeSpan),
+            ),
+          );
+        case Error<void>():
+          logger.e('Failed to change user life span', error: result.error);
+          emit(UserFailure(result.error));
+      }
     }
   }
 }

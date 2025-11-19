@@ -21,4 +21,26 @@ class UserRepositoryMock implements UserRepository {
       ),
     );
   }
+
+  @override
+  Future<Result<void>> increaseLifeSpan({
+    required int oldLifeSpan,
+    required int newLifeSpan,
+  }) {
+    return Future.delayed(
+      const Duration(milliseconds: 500),
+      () => const Result.ok(null),
+    );
+  }
+
+  @override
+  Future<Result<void>> reduceLifeSpan({
+    required int oldLifeSpan,
+    required int newLifeSpan,
+  }) {
+    return Future.delayed(
+      const Duration(milliseconds: 500),
+      () => const Result.ok(null),
+    );
+  }
 }

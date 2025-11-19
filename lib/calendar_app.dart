@@ -44,8 +44,10 @@ class CalendarApp extends StatelessWidget {
         ),
         RepositoryProvider<UserRepository>(
           create:
-              (context) =>
-                  UserRepositoryImpl(sharedPreferencesService: context.read()),
+              (context) => UserRepositoryImpl(
+                sharedPreferencesService: context.read(),
+                databaseService: context.read(),
+              ),
         ),
         RepositoryProvider<WeekRepository>(
           create:

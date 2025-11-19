@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/extensions/string/string_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/domain/models/user/user.dart';
 import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
+import 'package:life_calendar2/ui/core/widgets/lifespan_text_field.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_cubit.dart';
 
 class RegistrationFormBody extends StatefulWidget {
@@ -35,24 +35,7 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
           onChanged: (value) => _birthdate = value.toDateTime(),
         ),
         const SizedBox(height: 16),
-        TextFormField(
-          controller: _lifeSpanTextController,
-          decoration: InputDecoration(labelText: context.l10n.enterLifespan),
-          keyboardType: TextInputType.number,
-          onTapOutside:
-              (event) => FocusManager.instance.primaryFocus?.unfocus(),
-          validator: (value) {
-            final lifeSpan = int.tryParse(value ?? '');
-            if (lifeSpan == null || !_lifeSpanIsValid(lifeSpan)) {
-              return context.l10n.lifespanInterval(
-                User.minLifeSpan,
-                User.maxLifeSpan,
-              );
-            }
-
-            return null;
-          },
-        ),
+        LifeSpanTextField(controller: _lifeSpanTextController),
         const Spacer(),
         // TODO: add import button
         OutlinedButton(
@@ -82,7 +65,4 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
       ],
     );
   }
-
-  bool _lifeSpanIsValid(int lifeSpan) =>
-      User.minLifeSpan <= lifeSpan && lifeSpan <= User.maxLifeSpan;
 }

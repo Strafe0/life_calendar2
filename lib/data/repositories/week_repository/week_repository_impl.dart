@@ -94,7 +94,7 @@ class WeekRepositoryImpl implements WeekRepository {
   @override
   Future<Result<void>> insertWeeks(List<Week> weeks) async {
     try {
-      await _databaseService.insertAllWeeks(weeks);
+      await _databaseService.insertWeeks(weeks);
 
       return const Result.ok(null);
     } on Exception catch (e, s) {

@@ -13,3 +13,9 @@ final class UserReceived extends UserEvent {
 final class UserLoadingTriggered extends UserEvent {
   const UserLoadingTriggered();
 }
+
+final class UserChangeLifeSpanRequested extends UserEvent {
+  final int lifeSpan;
+
+  const UserChangeLifeSpanRequested(this.lifeSpan);
+}

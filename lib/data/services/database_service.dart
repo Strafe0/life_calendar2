@@ -64,7 +64,7 @@ class DatabaseService {
     batch.execute('ALTER TABLE $tableName ADD photos TEXT');
   }
 
-  Future<bool> insertAllWeeks(List<Week> weeks) {
+  Future<bool> insertWeeks(List<Week> weeks) {
     return _db.transaction((txn) async {
       final batch = txn.batch();
 
@@ -184,5 +184,34 @@ class DatabaseService {
       jsonEncode(photos),
       weekId,
     ]);
+  }
+
+  Future<Week> getLastWeek() async {
+    final records = await _db.query(tableName, orderBy: 'id DESC', limit: 1);
+
+    if (records.length != 1) {
+      logger.w('Number of current week in DB: ${records.length}');
+    }
+
+    return Week.fromJson(records.first);
+  }
+
+  Future<void> removeWeeksByYearIds({
+    required int startYearId,
+    required int endYearId,
+  }) async {
+    if (endYearId < startYearId) {
+      throw Exception(
+        'Invalid range: end yearId ($endYearId) < start yearId ($startYearId)',
+      );
+    }
+
+    final deleted = await _db.delete(
+      tableName,
+      where: 'yearId BETWEEN ? AND ?',
+      whereArgs: [startYearId, endYearId],
+    );
+
+    logger.i('Deleted $deleted weeks (between years $startYearId and $endYearId)');
   }
 }

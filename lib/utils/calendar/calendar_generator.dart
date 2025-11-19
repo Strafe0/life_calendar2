@@ -8,9 +8,9 @@ class CalendarGenerator {
 
   const CalendarGenerator({required this.birthday, required this.lifeSpan});
 
-  List<Week> generateWeeks() {
+  List<Week> generateWeeks({int? startWeekIndex, int? startYearIndex}) {
     final List<Week> weeks = [];
-    int count = 0;
+    int count = startWeekIndex ?? 0;
     var lastBirthday = birthday;
     var yearMonday = previousMonday(lastBirthday);
 
@@ -37,7 +37,7 @@ class CalendarGenerator {
         weeks.add(
           Week(
             id: count,
-            yearId: yearId,
+            yearId: (startYearIndex ?? 0) + yearId,
             start: weekMonday,
             end: weekSunday,
             tense:

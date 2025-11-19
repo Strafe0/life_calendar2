@@ -7,6 +7,7 @@ import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/calendar
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/drawer_data_backup_section.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/drawer_item.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/drawer_thanks.dart';
+import 'package:life_calendar2/ui/user/widgets/change_lifespan_drawer_button.dart';
 
 class CalendarDrawer extends StatelessWidget {
   const CalendarDrawer({super.key});
@@ -24,6 +25,7 @@ class CalendarDrawer extends StatelessWidget {
           onPressed:
               () => context.push('${AppRoute.calendar}/${AppRoute.feedback}'),
         ),
+        const ChangeLifespanDrawerButton(),
         const DrawerThanks(),
       ],
     );

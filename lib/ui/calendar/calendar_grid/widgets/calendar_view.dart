@@ -19,73 +19,80 @@ class CalendarView extends StatefulWidget {
 }
 
 class _CalendarViewState extends State<CalendarView> {
-  Widget? _calendar;
+  CalendarSize? _calendarSize;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadCalendar();
+    });
+  }
+
+  void _loadCalendar() {
+    final brightness = Theme.of(context).brightness;
+    final userState = context.read<UserBloc>().state;
+
+    if (userState is! UserSuccess) return;
+
+    final yearsCount = userState.user.lifeSpan;
+    logger.d('_loadCalendar, yearsCount: $yearsCount');
+
+    final renderObject = context.findRenderObject();
+    final constraints =
+        renderObject is RenderBox ? renderObject.constraints : null;
+
+    if (constraints == null) return;
+
+    final deviceType = device_type.getDeviceType();
+    final calendarSize = switch (deviceType) {
+      device_type.DeviceType.phone => CalendarSize.forPhone(
+        constraints.maxWidth,
+        constraints.maxHeight,
+        yearsCount,
+      ),
+      device_type.DeviceType.tablet => CalendarSize.forTablet(
+        constraints.maxWidth,
+        constraints.maxHeight,
+        yearsCount,
+      ),
+    };
+
+    _calendarSize = calendarSize;
+
+    context.read<CalendarCubit>().getWeeks(
+      calendarSize: calendarSize,
+      brightness: brightness,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
-
-    return BlocSelector<UserBloc, UserState, int>(
-      selector: (state) {
-        return switch (state) {
-          UserInitial() || UserLoading() => 0,
-          UserFailure() => -1,
-          UserSuccess() => state.user.lifeSpan,
-        };
-      },
-      builder: (context, yearsCount) {
-        logger.d('Years count: $yearsCount');
-
-        if (yearsCount == 0) {
-          return const CalendarViewLoadingBody();
-        } else if (yearsCount == -1) {
-          return const CalendarViewFailureBody();
+    return BlocListener<UserBloc, UserState>(
+      listener: (context, state) {
+        if (state is UserSuccess) {
+          _loadCalendar();
         }
-
-        return LayoutBuilder(
-          builder: (context, constraints) {
-            final deviceType = device_type.getDeviceType();
-
-            final calendarSize = switch (deviceType) {
-              device_type.DeviceType.phone => CalendarSize.forPhone(
-                constraints.maxWidth,
-                constraints.maxHeight,
-                yearsCount,
-              ),
-              device_type.DeviceType.tablet => CalendarSize.forTablet(
-                constraints.maxWidth,
-                constraints.maxHeight,
-                yearsCount,
-              ),
-            };
-
-            _calendar ??= BlocProvider.value(
-              value:
-                  context.read<CalendarCubit>()..getWeeks(
-                    calendarSize: calendarSize,
-                    brightness: brightness,
-                  ),
-              child: BlocBuilder<CalendarCubit, CalendarState>(
-                builder: (context, state) {
-                  logger.d('Calendar new state: $state');
-                  return switch (state) {
-                    CalendarInitial() ||
-                    CalendarLoading() => const CalendarViewLoadingBody(),
-                    CalendarFailure() => const CalendarViewFailureBody(),
-                    CalendarSuccess() => CalendarViewBody(
-                      weekBoxes: state.weeks,
-                      calendarSize: calendarSize,
-                      lastUpdateTime: state.lastUpdateTime,
-                    ),
-                  };
-                },
-              ),
-            );
-
-            return _calendar!;
-          },
-        );
       },
+      child: BlocBuilder<CalendarCubit, CalendarState>(
+        builder: (context, state) {
+          if (_calendarSize == null) {
+            return const CalendarViewLoadingBody();
+          }
+
+          return switch (state) {
+            CalendarInitial() ||
+            CalendarLoading() => const CalendarViewLoadingBody(),
+            CalendarFailure() => const CalendarViewFailureBody(),
+            CalendarSuccess() => CalendarViewBody(
+              weekBoxes: state.weeks,
+              calendarSize: _calendarSize!,
+              lastUpdateTime: state.lastUpdateTime,
+            ),
+          };
+        },
+      ),
     );
   }
 }

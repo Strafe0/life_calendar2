@@ -42,4 +42,7 @@ abstract class User with _$User {
 
   static const minLifeSpan = 60;
   static const maxLifeSpan = 100;
+
+  static bool isLifeSpanValid(int lifeSpan) =>
+      User.minLifeSpan <= lifeSpan && lifeSpan <= User.maxLifeSpan;
 }
