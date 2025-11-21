@@ -12,56 +12,58 @@ import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 import 'package:life_calendar2/utils/device_type.dart' as device_type;
 
 class CalendarView extends StatefulWidget {
-  const CalendarView({super.key});
+  const CalendarView({super.key, required this.constraints});
+
+  final BoxConstraints constraints;
 
   @override
   State<CalendarView> createState() => _CalendarViewState();
 }
 
 class _CalendarViewState extends State<CalendarView> {
+  late BoxConstraints _constraints;
   CalendarSize? _calendarSize;
 
   @override
   void initState() {
     super.initState();
 
+    _constraints = widget.constraints;
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadCalendar();
     });
   }
 
-  void _loadCalendar() {
+  Future<void> _loadCalendar() async {
     final brightness = Theme.of(context).brightness;
     final userState = context.read<UserBloc>().state;
 
-    if (userState is! UserSuccess) return;
+    if (userState is! UserSuccess) {
+      logger.w('Cancel loading of calendar: user is not ready');
+      return;
+    }
 
     final yearsCount = userState.user.lifeSpan;
-    logger.d('_loadCalendar, yearsCount: $yearsCount');
-
-    final renderObject = context.findRenderObject();
-    final constraints =
-        renderObject is RenderBox ? renderObject.constraints : null;
-
-    if (constraints == null) return;
+    logger.i('_loadCalendar, yearsCount: $yearsCount');
 
     final deviceType = device_type.getDeviceType();
     final calendarSize = switch (deviceType) {
       device_type.DeviceType.phone => CalendarSize.forPhone(
-        constraints.maxWidth,
-        constraints.maxHeight,
+        _constraints.maxWidth,
+        _constraints.maxHeight,
         yearsCount,
       ),
       device_type.DeviceType.tablet => CalendarSize.forTablet(
-        constraints.maxWidth,
-        constraints.maxHeight,
+        _constraints.maxWidth,
+        _constraints.maxHeight,
         yearsCount,
       ),
     };
 
     _calendarSize = calendarSize;
 
-    context.read<CalendarCubit>().getWeeks(
+    await context.read<CalendarCubit>().getWeeks(
       calendarSize: calendarSize,
       brightness: brightness,
     );
@@ -77,6 +79,8 @@ class _CalendarViewState extends State<CalendarView> {
       },
       child: BlocBuilder<CalendarCubit, CalendarState>(
         builder: (context, state) {
+          logger.d('BlocBuilder<CalendarState>: $state');
+
           if (_calendarSize == null) {
             return const CalendarViewLoadingBody();
           }
