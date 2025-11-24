@@ -205,8 +205,6 @@ class WeekRepositoryImpl implements WeekRepository {
     }
   }
 
-  // 0, 1, 2, 3, 4, 5
-
   @override
   Future<Result<bool>> hasChangesInRange({
     required int startYearId,
