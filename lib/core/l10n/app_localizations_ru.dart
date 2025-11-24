@@ -253,4 +253,20 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tryAgainLater => 'Попробовать позже';
+
+  @override
+  String get buttonYes => 'Да';
+
+  @override
+  String get buttonNo => 'Нет';
+
+  @override
+  String get changeLifespan => 'Изменить продолжительности жизни';
+
+  @override
+  String get confirmChanges => 'Подтвердите изменения';
+
+  @override
+  String get lifespanChangeDialogMessage =>
+      'При уменьшении срока жизни будут удалены данные будущих недель. Продолжить?';
 }

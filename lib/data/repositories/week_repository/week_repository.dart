@@ -39,4 +39,9 @@ abstract class WeekRepository {
     required int weekId,
     required List<String> photos,
   });
+
+  Future<Result<bool>> hasChangesInRange({
+    required int startYearId,
+    required int endYearId,
+  });
 }

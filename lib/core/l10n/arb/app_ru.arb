@@ -191,5 +191,15 @@
     "donateDialogButtonNegative": "Пока не готов",
     "@donateDialogButtonNegative": {},
     "tryAgainLater": "Попробовать позже",
-    "@tryAgainLater": {}
+    "@tryAgainLater": {},
+    "buttonYes": "Да",
+    "@buttonYes": {},
+    "buttonNo": "Нет",
+    "@buttonNo": {},
+    "changeLifespan": "Изменить продолжительности жизни",
+    "@changeLifespan": {},
+    "confirmChanges": "Подтвердите изменения",
+    "@confirmChanges": {},
+    "lifespanChangeDialogMessage": "При уменьшении срока жизни будут удалены данные будущих недель. Продолжить?",
+    "@lifespanChangeDialogMessage": {}
 }

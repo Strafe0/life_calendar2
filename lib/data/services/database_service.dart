@@ -212,6 +212,34 @@ class DatabaseService {
       whereArgs: [startYearId, endYearId],
     );
 
-    logger.i('Deleted $deleted weeks (between years $startYearId and $endYearId)');
+    logger.i(
+      'Deleted $deleted weeks (between years $startYearId and $endYearId)',
+    );
+  }
+
+  Future<bool> hasChangesInRange({
+    required int startYearId,
+    required int endYearId,
+  }) async {
+    final result = await _db.rawQuery(
+      '''
+        SELECT COUNT(*) as cnt
+        FROM $tableName
+        WHERE yearId BETWEEN ? AND ?
+          AND (
+                (assessment IS NOT NULL AND assessment != 'Нейтрально')
+            OR (goals IS NOT NULL AND goals != '[]')
+            OR (events IS NOT NULL AND events != '[]')
+            OR (resume IS NOT NULL AND resume != '')
+            OR (photos IS NOT NULL AND photos != '[]')
+          )
+        LIMIT 1
+      ''',
+      [startYearId, endYearId],
+    );
+
+    final count = Sqflite.firstIntValue(result) ?? 0;
+
+    return count > 0;
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger.dart';
@@ -135,5 +137,24 @@ class CalendarCubit extends Cubit<CalendarState> {
         rect: rrect,
       );
     });
+  }
+
+  Future<bool> hasChangedWeeks({required int newLifeSpan}) async {
+    final oldLifeSpan = await _sharedPreferencesService.getLifespan();
+
+    if (oldLifeSpan == null) {
+      logger.w('Failed to check changed weeks, because old lifespan is null');
+      return false;
+    }
+
+    final result = await _weekRepository.hasChangesInRange(
+      startYearId: math.min(oldLifeSpan, newLifeSpan),
+      endYearId: math.max(oldLifeSpan, newLifeSpan),
+    );
+
+    return switch (result) {
+      Ok<bool>() => result.value,
+      _ => false,
+    };
   }
 }

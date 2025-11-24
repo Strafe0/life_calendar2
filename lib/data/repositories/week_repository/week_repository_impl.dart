@@ -204,4 +204,29 @@ class WeekRepositoryImpl implements WeekRepository {
       return Result.error(e);
     }
   }
+
+  // 0, 1, 2, 3, 4, 5
+
+  @override
+  Future<Result<bool>> hasChangesInRange({
+    required int startYearId,
+    required int endYearId,
+  }) async {
+    try {
+      final hasChanges = await _databaseService.hasChangesInRange(
+        startYearId: startYearId,
+        endYearId: endYearId,
+      );
+
+      return Result.ok(hasChanges);
+    } on Exception catch (e, s) {
+      logger.e(
+        'Failed to check changes in range $startYearId-$endYearId',
+        error: e,
+        stackTrace: s,
+      );
+
+      return Result.error(e);
+    }
+  }
 }

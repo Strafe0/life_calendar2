@@ -115,4 +115,10 @@ class WeekRepositoryMock implements WeekRepository {
     const Duration(milliseconds: 100),
     () => const Result.ok(null),
   );
+
+  @override
+  Future<Result<bool>> hasChangesInRange({
+    required int startYearId,
+    required int endYearId,
+  }) => Future.delayed(const Duration(seconds: 1), () => const Result.ok(true));
 }

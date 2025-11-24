@@ -555,6 +555,36 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Попробовать позже'**
   String get tryAgainLater;
+
+  /// No description provided for @buttonYes.
+  ///
+  /// In ru, this message translates to:
+  /// **'Да'**
+  String get buttonYes;
+
+  /// No description provided for @buttonNo.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет'**
+  String get buttonNo;
+
+  /// No description provided for @changeLifespan.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменить продолжительности жизни'**
+  String get changeLifespan;
+
+  /// No description provided for @confirmChanges.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подтвердите изменения'**
+  String get confirmChanges;
+
+  /// No description provided for @lifespanChangeDialogMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'При уменьшении срока жизни будут удалены данные будущих недель. Продолжить?'**
+  String get lifespanChangeDialogMessage;
 }
 
 class _AppLocalizationsDelegate
