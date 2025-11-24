@@ -269,4 +269,11 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get lifespanChangeDialogMessage =>
       'При уменьшении срока жизни будут удалены данные будущих недель. Продолжить?';
+
+  @override
+  String get exitAppDialogTitle => 'Выход из приложения';
+
+  @override
+  String get exitAppDialogMessage =>
+      'Вы действительно хотите покинуть приложение?';
 }

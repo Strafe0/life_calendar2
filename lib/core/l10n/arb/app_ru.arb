@@ -201,5 +201,9 @@
     "confirmChanges": "Подтвердите изменения",
     "@confirmChanges": {},
     "lifespanChangeDialogMessage": "При уменьшении срока жизни будут удалены данные будущих недель. Продолжить?",
-    "@lifespanChangeDialogMessage": {}
+    "@lifespanChangeDialogMessage": {},
+    "exitAppDialogTitle": "Выход из приложения",
+    "@exitAppDialogTitle": {},
+    "exitAppDialogMessage": "Вы действительно хотите покинуть приложение?",
+    "@exitAppDialogMessage": {}
 }

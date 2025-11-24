@@ -585,6 +585,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'При уменьшении срока жизни будут удалены данные будущих недель. Продолжить?'**
   String get lifespanChangeDialogMessage;
+
+  /// No description provided for @exitAppDialogTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выход из приложения'**
+  String get exitAppDialogTitle;
+
+  /// No description provided for @exitAppDialogMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы действительно хотите покинуть приложение?'**
+  String get exitAppDialogMessage;
 }
 
 class _AppLocalizationsDelegate
