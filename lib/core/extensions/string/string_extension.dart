@@ -1,22 +1,38 @@
+import 'package:intl/intl.dart';
 import 'package:life_calendar2/core/logger.dart';
 
 extension StringExtension on String {
-  DateTime? toDateTime({String delimiter = '.'}) {
-    final splitted = split(delimiter);
-    if (splitted.length != 3) {
-      logger.w('Cannot parse string "$this" to date');
+  /// Преобразует строку в дату с учетом локали или конкретного паттерна.
+  ///
+  /// [locale] - например 'en_US' или 'ru_RU'.
+  /// Если null, используется системная.
+  ///
+  /// [pattern] - жесткий паттерн, например 'dd.MM.yyyy'.
+  /// Если задан, locale игнорируется.
+  DateTime? toDateTime({String? locale, String? pattern}) {
+    if (isEmpty) return null;
+
+    try {
+      late DateFormat format;
+
+      if (pattern != null) {
+        format = DateFormat(pattern);
+      } else {
+        format = DateFormat.yMd(locale);
+      }
+
+      final DateTime date = format.parse(this);
+
+      return date;
+    } catch (e, s) {
+      // Используем ваш логгер
+      logger.w(
+        'Cannot parse string "$this" to date using '
+        'locale: $locale, pattern: $pattern',
+        error: e,
+        stackTrace: s,
+      );
       return null;
     }
-
-    final day = int.tryParse(splitted[0]);
-    final month = int.tryParse(splitted[1]);
-    final year = int.tryParse(splitted[2]);
-
-    if (day == null || month == null || year == null) {
-      logger.w('Cannot parse string "$this" to date');
-      return null;
-    }
-
-    return DateTime(year, month, day);
   }
 }

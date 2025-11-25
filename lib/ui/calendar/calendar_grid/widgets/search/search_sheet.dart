@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/extensions/string/string_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/core/utils/local_date_format_utils.dart';
 import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
 import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
 import 'package:life_calendar2/ui/user/bloc/user_state.dart';
@@ -35,7 +36,14 @@ class _SearchSheetState extends State<SearchSheet> {
                   lastDate: user.lastDate.subtract(const Duration(days: 1)),
                   fieldLabelText: context.l10n.enterDate,
                   errorFormatText: context.l10n.dateFormatError,
-                  onChanged: (value) => _dateTime = value.toDateTime(),
+                  onChanged: (value) {
+                    final locale = Localizations.localeOf(context);
+
+                    _dateTime = value.toDateTime(
+                      locale: locale.toString(),
+                      pattern: getLocalDateFormat(locale).pattern,
+                    );
+                  },
                 ),
                 const SizedBox(height: 16),
                 OutlinedButton(

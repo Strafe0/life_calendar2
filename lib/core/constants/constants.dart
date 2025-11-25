@@ -1,9 +1,10 @@
 import 'package:intl/intl.dart';
 
 final dateFormat = DateFormat('dd.MM.yyyy', 'ru');
+const dateFormatPattern = 'dd.MM.yyyy';
 final fileDateFormat = DateFormat('dd-MM-yyyy – hh:mm');
 
-const dateFormatHintText = 'ДД.ММ.ГГГГ';
+const dateFormatHintText = 'dd.MM.yyyy';
 
 const maxTitleLength = 50;
 

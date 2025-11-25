@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/extensions/string/string_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/core/utils/local_date_format_utils.dart';
 import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
 import 'package:life_calendar2/ui/core/widgets/lifespan_text_field.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_cubit.dart';
@@ -32,7 +33,14 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
           initialDate: _birthdate,
           fieldLabelText: context.l10n.enterBirthdate,
           errorFormatText: context.l10n.dateFormatError,
-          onChanged: (value) => _birthdate = value.toDateTime(),
+          onChanged: (value) {
+            final locale = Localizations.localeOf(context);
+
+            _birthdate = value.toDateTime(
+              locale: locale.toString(),
+              pattern: getLocalDateFormat(locale).pattern,
+            );
+          },
         ),
         const SizedBox(height: 16),
         LifeSpanTextField(controller: _lifeSpanTextController),

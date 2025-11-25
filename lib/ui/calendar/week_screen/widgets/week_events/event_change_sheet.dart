@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:life_calendar2/core/extensions/string/string_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/utils/local_date_format_utils.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/event_text_field.dart';
 import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
 
@@ -57,7 +58,14 @@ class _EventChangeSheetState extends State<EventChangeSheet> {
             initialDate: _dateTime,
             fieldLabelText: context.l10n.enterDate,
             errorFormatText: context.l10n.dateFormatError,
-            onChanged: (value) => _dateTime = value.toDateTime(),
+            onChanged: (value) {
+              final locale = Localizations.localeOf(context);
+
+              _dateTime = value.toDateTime(
+                locale: locale.toString(),
+                pattern: getLocalDateFormat(locale).pattern,
+              );
+            },
           ),
           const SizedBox(height: 16),
           OutlinedButton(

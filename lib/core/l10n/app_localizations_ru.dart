@@ -276,4 +276,13 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get exitAppDialogMessage =>
       'Вы действительно хотите покинуть приложение?';
+
+  @override
+  String get daySymbol => 'Д';
+
+  @override
+  String get monthSymbol => 'М';
+
+  @override
+  String get yearSymbol => 'Г';
 }

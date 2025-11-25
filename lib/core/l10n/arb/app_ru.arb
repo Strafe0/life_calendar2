@@ -205,5 +205,11 @@
     "exitAppDialogTitle": "Выход из приложения",
     "@exitAppDialogTitle": {},
     "exitAppDialogMessage": "Вы действительно хотите покинуть приложение?",
-    "@exitAppDialogMessage": {}
+    "@exitAppDialogMessage": {},
+    "daySymbol": "Д",
+    "@daySymbol": {},
+    "monthSymbol": "М",
+    "@monthSymbol": {},
+    "yearSymbol": "Г",
+    "@yearSymbol": {}
 }

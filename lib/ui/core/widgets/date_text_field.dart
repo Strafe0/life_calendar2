@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
-import 'package:life_calendar2/core/extensions/string/string_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/core/utils/local_date_format_utils.dart';
 import 'package:life_calendar2/ui/core/input_formatters/date_input_formatter.dart';
 
 class DateTextField extends StatefulWidget {
@@ -30,11 +31,40 @@ class DateTextField extends StatefulWidget {
 class _DateTextFieldState extends State<DateTextField> {
   final _dateController = TextEditingController();
 
+  // Данные для локализации
+  late String _separator;
+  late List<int> _segmentLengths;
+  late DateFormat _dateFormat; // Храним форматтер для парсинга и валидации
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    _dateController.text = widget.initialDate?.toLocalString(context) ?? '';
+    _setupLocaleParameters();
+
+    if (_dateController.text.isEmpty && widget.initialDate != null) {
+      _dateController.text = _dateFormat.format(widget.initialDate!);
+    }
+  }
+
+  void _setupLocaleParameters() {
+    _dateFormat = getLocalDateFormat(Localizations.localeOf(context));
+    final pattern = _dateFormat.pattern ?? 'dd.MM.yyyy';
+
+    _separator = getLocalDateSeparatorByPattern(pattern);
+
+    // Определяем порядок полей и длины сегментов
+    // Это эвристика: смотрим, где находится 'y' (год)
+    final int yIndex = pattern.indexOf('y');
+    final int dIndex = pattern.indexOf('d');
+
+    // Если год идет первым (yyyy-MM-dd), как в ISO/Японии
+    if (yIndex < dIndex) {
+      _segmentLengths = [4, 2, 2];
+    } else {
+      // Иначе (dd.MM.yyyy или MM/dd/yyyy)
+      _segmentLengths = [2, 2, 4];
+    }
   }
 
   @override
@@ -45,10 +75,18 @@ class _DateTextFieldState extends State<DateTextField> {
           child: TextFormField(
             controller: _dateController,
             keyboardType: TextInputType.datetime,
-            inputFormatters: [const DateInputFormatter(separator: '.')],
+            inputFormatters: [
+              UniversalDateInputFormatter(
+                separator: _separator,
+                segmentLengths: _segmentLengths,
+              ),
+            ],
             onChanged: widget.onChanged,
             decoration: InputDecoration(
-              hintText: dateFormatHintText,
+              hintText: getLocalizedHint(
+                _dateFormat.pattern ?? dateFormatHintText,
+                context.l10n,
+              ),
               suffixIcon: IconButton(
                 onPressed: () async {
                   final pickedDate = await showDatePicker(
@@ -72,18 +110,24 @@ class _DateTextFieldState extends State<DateTextField> {
               ),
             ),
             validator: (value) {
-              final parsedDate = value?.toDateTime();
-              if (parsedDate == null) {
-                return context.l10n.dateFormatError;
-              } else if (parsedDate.isBefore(widget.firstDate) ||
-                  parsedDate.isAfter(widget.lastDate)) {
-                return context.l10n.dateInvalid(
-                  widget.firstDate.toLocalString(context),
-                  widget.lastDate.toLocalString(context),
-                );
+              if (value == null || value.isEmpty) {
+                return null;
               }
 
-              return null;
+              try {
+                final parsedDate = _dateFormat.parse(value);
+
+                if (parsedDate.isBefore(widget.firstDate) ||
+                    parsedDate.isAfter(widget.lastDate)) {
+                  return context.l10n.dateInvalid(
+                    _dateFormat.format(widget.firstDate),
+                    _dateFormat.format(widget.lastDate),
+                  );
+                }
+                return null;
+              } catch (e) {
+                return widget.errorFormatText ?? context.l10n.dateFormatError;
+              }
             },
           ),
         ),
