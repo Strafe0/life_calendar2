@@ -1,30 +1,397 @@
 PODS:
+  - AppLovinSDK (13.3.1)
+  - AppLovinYandexMobileAdsAdapters (13.3.1.2):
+    - AppLovinSDK (~> 13.3.1)
+    - YandexMobileAds (~> 7.17.0)
+  - AppMetricaAdSupport (5.14.0):
+    - AppMetricaCore (= 5.14.0)
+    - AppMetricaCoreExtension (= 5.14.0)
+  - AppMetricaCore (5.14.0):
+    - AppMetricaCoreUtils (= 5.14.0)
+    - AppMetricaEncodingUtils (= 5.14.0)
+    - AppMetricaFMDB (= 5.14.0)
+    - AppMetricaHostState (= 5.14.0)
+    - AppMetricaIdentifiers (= 5.14.0)
+    - AppMetricaKeychain (= 5.14.0)
+    - AppMetricaLog (= 5.14.0)
+    - AppMetricaNetwork (= 5.14.0)
+    - AppMetricaPlatform (= 5.14.0)
+    - AppMetricaProtobuf (= 5.14.0)
+    - AppMetricaProtobufUtils (= 5.14.0)
+    - AppMetricaStorageUtils (= 5.14.0)
+  - AppMetricaCoreExtension (5.14.0):
+    - AppMetricaCore (= 5.14.0)
+    - AppMetricaStorageUtils (= 5.14.0)
+  - AppMetricaCoreUtils (5.14.0):
+    - AppMetricaLog (= 5.14.0)
+  - AppMetricaEncodingUtils (5.14.0):
+    - AppMetricaCoreUtils (= 5.14.0)
+    - AppMetricaLog (= 5.14.0)
+    - AppMetricaPlatform (= 5.14.0)
+  - AppMetricaFMDB (5.14.0)
+  - AppMetricaHostState (5.14.0):
+    - AppMetricaCoreUtils (= 5.14.0)
+    - AppMetricaLog (= 5.14.0)
+  - AppMetricaIdentifiers (5.14.0):
+    - AppMetricaKeychain (= 5.14.0)
+    - AppMetricaLogSwift (= 5.14.0)
+    - AppMetricaPlatform (= 5.14.0)
+    - AppMetricaStorageUtils (= 5.14.0)
+    - AppMetricaSynchronization (= 5.14.0)
+  - AppMetricaKeychain (5.14.0):
+    - AppMetricaCoreUtils (= 5.14.0)
+    - AppMetricaLog (= 5.14.0)
+    - AppMetricaStorageUtils (= 5.14.0)
+  - AppMetricaLibraryAdapter (5.14.0):
+    - AppMetricaCore (= 5.14.0)
+    - AppMetricaCoreExtension (= 5.14.0)
+  - AppMetricaLog (5.14.0)
+  - AppMetricaLogSwift (5.14.0):
+    - AppMetricaLog (= 5.14.0)
+  - AppMetricaNetwork (5.14.0):
+    - AppMetricaCoreUtils (= 5.14.0)
+    - AppMetricaLog (= 5.14.0)
+    - AppMetricaPlatform (= 5.14.0)
+  - AppMetricaPlatform (5.14.0):
+    - AppMetricaCoreUtils (= 5.14.0)
+    - AppMetricaLog (= 5.14.0)
+  - AppMetricaProtobuf (5.14.0)
+  - AppMetricaProtobufUtils (5.14.0):
+    - AppMetricaProtobuf (= 5.14.0)
+  - AppMetricaStorageUtils (5.14.0):
+    - AppMetricaCoreUtils (= 5.14.0)
+    - AppMetricaLog (= 5.14.0)
+  - AppMetricaSynchronization (5.14.0):
+    - AppMetricaLogSwift (= 5.14.0)
+  - BigoADS (4.6.0)
+  - BigoADSYandexMobileAdsAdapters (4.6.0.12):
+    - BigoADS (~> 4.6.0)
+    - YandexMobileAds (~> 7.17.0)
+  - ChartboostSDK (9.9.3)
+  - ChartboostYandexMobileAdsAdapters (9.9.2.2):
+    - ChartboostSDK (~> 9.9.2)
+    - YandexMobileAds (~> 7.17.0)
+  - DivKit (32.27.0):
+    - DivKit_LayoutKit (= 32.27.0)
+    - DivKit_Serialization (= 32.27.0)
+    - VGSL (~> 7.12)
+  - DivKit_LayoutKit (32.27.0):
+    - DivKit_LayoutKitInterface (= 32.27.0)
+    - VGSL (~> 7.12)
+  - DivKit_LayoutKitInterface (32.27.0):
+    - VGSL (~> 7.12)
+  - DivKit_Serialization (32.27.0):
+    - VGSL (~> 7.12)
+  - DivKitBinaryCompatibilityFacade (5.2.1):
+    - DivKit (~> 32.14)
+  - DKImagePickerController/Core (4.3.9):
+    - DKImagePickerController/ImageDataManager
+    - DKImagePickerController/Resource
+  - DKImagePickerController/ImageDataManager (4.3.9)
+  - DKImagePickerController/PhotoGallery (4.3.9):
+    - DKImagePickerController/Core
+    - DKPhotoGallery
+  - DKImagePickerController/Resource (4.3.9)
+  - DKPhotoGallery (0.0.19):
+    - DKPhotoGallery/Core (= 0.0.19)
+    - DKPhotoGallery/Model (= 0.0.19)
+    - DKPhotoGallery/Preview (= 0.0.19)
+    - DKPhotoGallery/Resource (= 0.0.19)
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Core (0.0.19):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Preview
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Model (0.0.19):
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Preview (0.0.19):
+    - DKPhotoGallery/Model
+    - DKPhotoGallery/Resource
+    - SDWebImage
+    - SwiftyGif
+  - DKPhotoGallery/Resource (0.0.19):
+    - SDWebImage
+    - SwiftyGif
+  - file_picker (0.0.1):
+    - DKImagePickerController/PhotoGallery
+    - Flutter
+  - file_saver (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
+  - flutter_archive (0.0.1):
+    - Flutter
+    - ZIPFoundation (= 0.9.19)
+  - flutter_native_splash (2.4.3):
+    - Flutter
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - InMobiSDK (10.8.8)
+  - InMobiYandexMobileAdsAdapters (10.8.6.2):
+    - InMobiSDK (~> 10.8.6)
+    - YandexMobileAds (~> 7.17.0)
+  - IronSourceAdQualitySDK (7.26.2)
+  - IronSourceSDK (8.11.0.0):
+    - IronSourceSDK/AdQuality (= 8.11.0.0)
+    - IronSourceSDK/Ads (= 8.11.0.0)
+  - IronSourceSDK/AdQuality (8.11.0.0):
+    - IronSourceAdQualitySDK (~> 7.26.1)
+  - IronSourceSDK/Ads (8.11.0.0)
+  - IronSourceYandexMobileAdsAdapters (8.11.0.1):
+    - IronSourceSDK (~> 8.11.0.0)
+    - YandexMobileAds (~> 7.17.0)
+  - MintegralAdSDK (7.7.9):
+    - MintegralAdSDK/BannerAd (= 7.7.9)
+    - MintegralAdSDK/BidBannerAd (= 7.7.9)
+    - MintegralAdSDK/BidInterstitialVideoAd (= 7.7.9)
+    - MintegralAdSDK/BidNativeAd (= 7.7.9)
+    - MintegralAdSDK/BidNewInterstitialAd (= 7.7.9)
+    - MintegralAdSDK/BidRewardVideoAd (= 7.7.9)
+    - MintegralAdSDK/InterstitialVideoAd (= 7.7.9)
+    - MintegralAdSDK/NativeAd (= 7.7.9)
+    - MintegralAdSDK/NewInterstitialAd (= 7.7.9)
+    - MintegralAdSDK/RewardVideoAd (= 7.7.9)
+  - MintegralAdSDK/BannerAd (7.7.9):
+    - MintegralAdSDK/NativeAd
+  - MintegralAdSDK/BidBannerAd (7.7.9):
+    - MintegralAdSDK/BannerAd
+    - MintegralAdSDK/BidNativeAd
+  - MintegralAdSDK/BidInterstitialVideoAd (7.7.9):
+    - MintegralAdSDK/BidNativeAd
+    - MintegralAdSDK/InterstitialVideoAd
+  - MintegralAdSDK/BidNativeAd (7.7.9):
+    - MintegralAdSDK/NativeAd
+  - MintegralAdSDK/BidNewInterstitialAd (7.7.9):
+    - MintegralAdSDK/BidNativeAd
+    - MintegralAdSDK/NewInterstitialAd
+  - MintegralAdSDK/BidRewardVideoAd (7.7.9):
+    - MintegralAdSDK/BidNativeAd
+    - MintegralAdSDK/RewardVideoAd
+  - MintegralAdSDK/InterstitialVideoAd (7.7.9):
+    - MintegralAdSDK/NativeAd
+  - MintegralAdSDK/NativeAd (7.7.9)
+  - MintegralAdSDK/NewInterstitialAd (7.7.9):
+    - MintegralAdSDK/InterstitialVideoAd
+    - MintegralAdSDK/NativeAd
+  - MintegralAdSDK/RewardVideoAd (7.7.9):
+    - MintegralAdSDK/NativeAd
+  - MintegralAdSDK/SplashAd (7.7.9):
+    - MintegralAdSDK/NativeAd
+  - MintegralYandexMobileAdsAdapters (7.7.9.2):
+    - MintegralAdSDK (~> 7.7.9)
+    - MintegralAdSDK/SplashAd (~> 7.7.9)
+    - YandexMobileAds (~> 7.17.0)
+  - myTargetSDK (5.28.0):
+    - myTrackerSDK (~> 3.2.0)
+  - MyTargetYandexMobileAdsAdapters (5.28.0.7):
+    - myTargetSDK (~> 5.28.0)
+    - YandexMobileAds (~> 7.17.0)
+  - myTrackerSDK (3.2.1)
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - SDWebImage (5.21.3):
+    - SDWebImage/Core (= 5.21.3)
+  - SDWebImage/Core (5.21.3)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
   - sqflite_darwin (0.0.4):
     - Flutter
     - FlutterMacOS
+  - SwiftyGif (5.4.5)
+  - UnityAds (4.16.4)
+  - UnityAdsYandexMobileAdsAdapters (4.16.1.2):
+    - UnityAds (~> 4.16.1)
+    - YandexMobileAds (~> 7.17.0)
+  - url_launcher_ios (0.0.1):
+    - Flutter
+  - VGSL (7.12.3):
+    - VGSLFundamentals (= 7.12.3)
+    - VGSLNetworking (= 7.12.3)
+    - VGSLUI (= 7.12.3)
+  - VGSLFundamentals (7.12.3)
+  - VGSLNetworking (7.12.3):
+    - VGSLFundamentals (= 7.12.3)
+    - VGSLUI (= 7.12.3)
+  - VGSLUI (7.12.3):
+    - VGSLFundamentals (= 7.12.3)
+  - yandex_mobileads (7.17.0):
+    - Flutter
+    - YandexMobileAds (~> 7.17.0)
+  - YandexMobileAds (7.17.1):
+    - AppMetricaAdSupport (~> 5.14.0)
+    - AppMetricaCore (~> 5.14.0)
+    - AppMetricaLibraryAdapter (~> 5.14.0)
+    - DivKitBinaryCompatibilityFacade (~> 5.2.1)
+  - ZIPFoundation (0.9.19)
 
 DEPENDENCIES:
+  - AppLovinYandexMobileAdsAdapters (= 13.3.1.2)
+  - BigoADSYandexMobileAdsAdapters (= 4.6.0.12)
+  - ChartboostYandexMobileAdsAdapters (= 9.9.2.2)
+  - file_picker (from `.symlinks/plugins/file_picker/ios`)
+  - file_saver (from `.symlinks/plugins/file_saver/ios`)
   - Flutter (from `Flutter`)
+  - flutter_archive (from `.symlinks/plugins/flutter_archive/ios`)
+  - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - InMobiYandexMobileAdsAdapters (= 10.8.6.2)
+  - IronSourceYandexMobileAdsAdapters (= 8.11.0.1)
+  - MintegralYandexMobileAdsAdapters (= 7.7.9.2)
+  - MyTargetYandexMobileAdsAdapters (= 5.28.0.7)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
+  - UnityAdsYandexMobileAdsAdapters (= 4.16.1.2)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - yandex_mobileads (from `.symlinks/plugins/yandex_mobileads/ios`)
+  - YandexMobileAds (~> 7.17.0)
+
+SPEC REPOS:
+  trunk:
+    - AppLovinSDK
+    - AppLovinYandexMobileAdsAdapters
+    - AppMetricaAdSupport
+    - AppMetricaCore
+    - AppMetricaCoreExtension
+    - AppMetricaCoreUtils
+    - AppMetricaEncodingUtils
+    - AppMetricaFMDB
+    - AppMetricaHostState
+    - AppMetricaIdentifiers
+    - AppMetricaKeychain
+    - AppMetricaLibraryAdapter
+    - AppMetricaLog
+    - AppMetricaLogSwift
+    - AppMetricaNetwork
+    - AppMetricaPlatform
+    - AppMetricaProtobuf
+    - AppMetricaProtobufUtils
+    - AppMetricaStorageUtils
+    - AppMetricaSynchronization
+    - BigoADS
+    - BigoADSYandexMobileAdsAdapters
+    - ChartboostSDK
+    - ChartboostYandexMobileAdsAdapters
+    - DivKit
+    - DivKit_LayoutKit
+    - DivKit_LayoutKitInterface
+    - DivKit_Serialization
+    - DivKitBinaryCompatibilityFacade
+    - DKImagePickerController
+    - DKPhotoGallery
+    - InMobiSDK
+    - InMobiYandexMobileAdsAdapters
+    - IronSourceAdQualitySDK
+    - IronSourceSDK
+    - IronSourceYandexMobileAdsAdapters
+    - MintegralAdSDK
+    - MintegralYandexMobileAdsAdapters
+    - myTargetSDK
+    - MyTargetYandexMobileAdsAdapters
+    - myTrackerSDK
+    - SDWebImage
+    - SwiftyGif
+    - UnityAds
+    - UnityAdsYandexMobileAdsAdapters
+    - VGSL
+    - VGSLFundamentals
+    - VGSLNetworking
+    - VGSLUI
+    - YandexMobileAds
+    - ZIPFoundation
 
 EXTERNAL SOURCES:
+  file_picker:
+    :path: ".symlinks/plugins/file_picker/ios"
+  file_saver:
+    :path: ".symlinks/plugins/file_saver/ios"
   Flutter:
     :path: Flutter
+  flutter_archive:
+    :path: ".symlinks/plugins/flutter_archive/ios"
+  flutter_native_splash:
+    :path: ".symlinks/plugins/flutter_native_splash/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sqflite_darwin:
     :path: ".symlinks/plugins/sqflite_darwin/darwin"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
+  yandex_mobileads:
+    :path: ".symlinks/plugins/yandex_mobileads/ios"
 
 SPEC CHECKSUMS:
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  AppLovinSDK: 5075837afdee4fb429121799b8cbcc5918ef3a23
+  AppLovinYandexMobileAdsAdapters: 131b18193c44caf82f7527454ce5e3bde1e9a019
+  AppMetricaAdSupport: 702bdcf46b81a7fed457de56f6b0554d0480b5a3
+  AppMetricaCore: d1c73033e83316264d5797d003f0c8f7957b7f31
+  AppMetricaCoreExtension: 02a8409b471de413ac5ccf9249b12223816737c1
+  AppMetricaCoreUtils: 8d6d710d016d15cf30caa46ed7b38219842b6e51
+  AppMetricaEncodingUtils: 37803d738b7751b80e8cd3911cf42d43af6e011b
+  AppMetricaFMDB: 109e4a5ff89ca8c5609c2f2b597831aac7712e65
+  AppMetricaHostState: 8a9a1d723974201acdf819bf3a5fadb3af3f2e82
+  AppMetricaIdentifiers: 57e3164c945075fce4831567ae3a65959efaff44
+  AppMetricaKeychain: 99950a926fb90e54913d6737a9901c45af34d800
+  AppMetricaLibraryAdapter: 643eeb8958caad92a37658751c10a591b3f74e28
+  AppMetricaLog: d2bee5f12ec196308f4a13c46b4a65013900d2db
+  AppMetricaLogSwift: 0cff437339756bd78f0a4d1526e34c51486edf3f
+  AppMetricaNetwork: 82d32db120ac3fccf7c42006354b4e203debf555
+  AppMetricaPlatform: b7bbbe687890caac28cae837fc548e66e3542cfb
+  AppMetricaProtobuf: 7b8e4a072bf634b9354f5d13cf6cc0a14b519b85
+  AppMetricaProtobufUtils: 3696c3b28c3a6a5fd95b8e44953c662ad5648f7b
+  AppMetricaStorageUtils: bb31d877359a6d1ad8ae5a6d89951edddf01af75
+  AppMetricaSynchronization: 76f438564c57b4688d640b7befc5600e21bff875
+  BigoADS: c4d9ec9cf6d3346843e126cdba111647ec402d9b
+  BigoADSYandexMobileAdsAdapters: b3dacef5491ea9eb12171ca8a702682eff6f0058
+  ChartboostSDK: b145b4671df894755be0f7811b3e69a912cecbdc
+  ChartboostYandexMobileAdsAdapters: e43b33124ac465381b9d09f06aac7bc42b379ba7
+  DivKit: e46e996e62f5af44c1c6ef535cccbed131a4d1c1
+  DivKit_LayoutKit: 5dc0cdffb519906b39f1800163b14dc170516264
+  DivKit_LayoutKitInterface: deed0466b9c9497646088ff25f719cc24a90e03b
+  DivKit_Serialization: c004c3a4626071aa3762e075dbce63b4da3af951
+  DivKitBinaryCompatibilityFacade: 38b84cea43f82129388706b4c25f71519d42a18d
+  DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
+  DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
+  file_picker: a0560bc09d61de87f12d246fc47d2119e6ef37be
+  file_saver: 6cdbcddd690cb02b0c1a0c225b37cd805c2bf8b6
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_archive: ad8edfd7f7d1bb12058d05424ba93e27d9930efe
+  flutter_native_splash: c32d145d68aeda5502d5f543ee38c192065986cf
+  image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
+  InMobiSDK: 3772de19a4fa048225857e78d8a466dda0a004a8
+  InMobiYandexMobileAdsAdapters: 18358a3999736f9d2d6456f6f6cbe7efae69e3ca
+  IronSourceAdQualitySDK: 03888a0ac60e1f24ff6277672c3184f00813af64
+  IronSourceSDK: 32eeb199f608b590112a8263028a485e50f8d1b7
+  IronSourceYandexMobileAdsAdapters: 69c9baea91c76f249c4b528cbf4ab84a349042e6
+  MintegralAdSDK: 054814f99bb7e967b8974fe635d9005b225cbe42
+  MintegralYandexMobileAdsAdapters: fc195411d30794455b807125fb3d0a1599593b42
+  myTargetSDK: a61199b9bcdf2c40011a2076687cb29efd1e00da
+  MyTargetYandexMobileAdsAdapters: 3d94d0e53bb2bc6ac4ee3a8db63bd90b66683233
+  myTrackerSDK: 5b4e009f9f87a8febdbf2742b2a02559aeb56849
+  path_provider_foundation: bb55f6dbba17d0dccd6737fe6f7f34fbd0376880
+  SDWebImage: 16309af6d214ba3f77a7c6f6fdda888cb313a50a
   shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
   sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
+  SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
+  UnityAds: 91a5d786c1e79fcbf702c525af4700158aeb36c8
+  UnityAdsYandexMobileAdsAdapters: 3d6e56d71abee96c204992f3a82461a963dc8142
+  url_launcher_ios: 7a95fa5b60cc718a708b8f2966718e93db0cef1b
+  VGSL: 7286de744142fedf137953e542a251b12c94b796
+  VGSLFundamentals: 43e3a150efd99d181e823fcdd60241e295ed4c7b
+  VGSLNetworking: 9152be749af191ed4a77d5d1398142d74284c49f
+  VGSLUI: 56123a84ba0cf39540befa77a08ca5a0e9d7c2d3
+  yandex_mobileads: 489ecd6a1dee23501f7e2db6eeae81eca8d6ac3f
+  YandexMobileAds: 289ca4aa8e92f9c3ee093ee9236795e8b94a13a0
+  ZIPFoundation: b8c29ea7ae353b309bc810586181fd073cb3312c
 
-PODFILE CHECKSUM: 4305caec6b40dde0ae97be1573c53de1882a07e5
+PODFILE CHECKSUM: 6248adeab85ab4b77d642c6499f55a790515c481
 
 COCOAPODS: 1.16.2

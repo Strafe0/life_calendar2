@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '12.0'
+platform :ios, '13.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -27,8 +27,30 @@ require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelpe
 
 flutter_ios_podfile_setup
 
+use_modular_headers!
+
 target 'Runner' do
-  use_frameworks!
+  # Закомментировал из-за Yandex MobileAds
+  # use_frameworks! 
+
+  # https://ads.yandex.com/helpcenter/ru/dev/flutter/list-network
+  pod 'YandexMobileAds', '~> 7.17.0'
+  # https://ads.yandex.com/helpcenter/ru/dev/flutter/inmobi?tabs=defaultTabsGroup-41vxe6mh_ios
+  pod 'InMobiYandexMobileAdsAdapters', '10.8.6.2'
+  # https://ads.yandex.com/helpcenter/ru/dev/flutter/mytarget?tabs=defaultTabsGroup-dz4cxppq_ios
+  pod 'MyTargetYandexMobileAdsAdapters', '5.28.0.7'
+  # https://ads.yandex.com/helpcenter/ru/dev/flutter/unityads?tabs=defaultTabsGroup-xbrfx1sm_ios
+  pod 'UnityAdsYandexMobileAdsAdapters', '4.16.1.2'
+  # https://ads.yandex.com/helpcenter/ru/dev/flutter/applovin?tabs=defaultTabsGroup-zc4kb4e8_ios
+  pod 'AppLovinYandexMobileAdsAdapters', '13.3.1.2'
+  # https://ads.yandex.com/helpcenter/ru/dev/flutter/ironsource?tabs=defaultTabsGroup-coovgit5_ios
+  pod 'IronSourceYandexMobileAdsAdapters', '8.11.0.1'
+  # https://ads.yandex.com/helpcenter/ru/dev/flutter/mintegral?tabs=defaultTabsGroup-qzvt9c7h_ios
+  pod 'MintegralYandexMobileAdsAdapters', '7.7.9.2'
+  # https://ads.yandex.com/helpcenter/ru/dev/flutter/chartboost?tabs=defaultTabsGroup-jc4w7xyb_ios
+  pod 'ChartboostYandexMobileAdsAdapters', '9.9.2.2'
+  # https://ads.yandex.com/helpcenter/ru/dev/flutter/bigoads?tabs=defaultTabsGroup-tbd554vg_ios
+  pod 'BigoADSYandexMobileAdsAdapters', '4.6.0.12'
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
   target 'RunnerTests' do
