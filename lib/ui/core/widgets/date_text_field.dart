@@ -84,8 +84,9 @@ class _DateTextFieldState extends State<DateTextField> {
             onChanged: widget.onChanged,
             decoration: InputDecoration(
               hintText: getLocalizedHint(
-                _dateFormat.pattern ?? dateFormatHintText,
-                context.l10n,
+                pattern: _dateFormat.pattern ?? dateFormatHintText,
+                l10n: context.l10n,
+                segmentLengths: _segmentLengths,
               ),
               suffixIcon: IconButton(
                 onPressed: () async {
