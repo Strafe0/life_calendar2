@@ -4,6 +4,7 @@ import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/core/utils/local_date_format_utils.dart';
+import 'package:life_calendar2/ui/core/dialogs/date_picker.dart';
 import 'package:life_calendar2/ui/core/input_formatters/date_input_formatter.dart';
 
 class DateTextField extends StatefulWidget {
@@ -90,8 +91,8 @@ class _DateTextFieldState extends State<DateTextField> {
               ),
               suffixIcon: IconButton(
                 onPressed: () async {
-                  final pickedDate = await showDatePicker(
-                    context: context,
+                  final pickedDate = await showAdaptiveDatePicker(
+                    context,
                     firstDate: widget.firstDate,
                     lastDate: widget.lastDate,
                   );
