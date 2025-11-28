@@ -26,7 +26,7 @@ class OnboardingPageWidget extends StatelessWidget {
           ),
         if (title != null)
           Padding(
-            padding: const EdgeInsets.only(bottom: 16),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             child: Text(
               title,
               style: Theme.of(
@@ -35,10 +35,13 @@ class OnboardingPageWidget extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-        Text(
-          content,
-          style: Theme.of(context).textTheme.bodySmall,
-          textAlign: TextAlign.center,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Text(
+            content,
+            style: Theme.of(context).textTheme.bodySmall,
+            textAlign: TextAlign.center,
+          ),
         ),
         const Spacer(),
       ],
