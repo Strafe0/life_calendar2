@@ -5,16 +5,16 @@ Future<T?> showAlertDialog<T>(
   BuildContext context, {
   required String title,
   required String content,
-  List<DialogAction>? actions,
+  required List<DialogAction> actions,
 }) {
   return showDialog<T>(
     context: context,
     builder: (context) {
-      return AlertDialog(
+      return AlertDialog.adaptive(
         title: Text(title),
         content: Text(content),
         actions: actions
-            ?.map(
+            .map(
               (action) => TextButton(
                 onPressed: () => action.onPressed(context),
                 child: Text(

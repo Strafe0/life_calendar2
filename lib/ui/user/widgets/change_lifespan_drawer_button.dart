@@ -93,6 +93,9 @@ class _ChangeLifespanDrawerButtonState
               User.minLifeSpan,
               User.maxLifeSpan,
             ),
+            actions: [
+              DialogAction(onPressed: Navigator.pop, title: context.l10n.gotIt),
+            ],
           );
         }
       },

@@ -1,4 +1,4 @@
-import 'dart:io'; // Не забудьте импортировать для проверки платформы
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
