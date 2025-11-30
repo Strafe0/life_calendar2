@@ -211,5 +211,11 @@
     "monthSymbol": "М",
     "@monthSymbol": {},
     "yearSymbol": "Г",
-    "@yearSymbol": {}
+    "@yearSymbol": {},
+    "assessmentGood": "Хорошо 🤩",
+    "@assessmentGood": {},
+    "assessmentBad": "Плохо 🫠",
+    "@assessmentBad": {},
+    "assessmentPoor": "Нейтрально 😐",
+    "@assessmentPoor": {}
 }

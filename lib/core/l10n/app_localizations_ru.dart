@@ -285,4 +285,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get yearSymbol => 'Г';
+
+  @override
+  String get assessmentGood => 'Хорошо 🤩';
+
+  @override
+  String get assessmentBad => 'Плохо 🫠';
+
+  @override
+  String get assessmentPoor => 'Нейтрально 😐';
 }

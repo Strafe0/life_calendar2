@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
@@ -5,6 +7,8 @@ import 'package:life_calendar2/core/logger.dart';
 import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_goals/goal_utils.dart';
+import 'package:life_calendar2/ui/core/constants.dart';
+import 'package:life_calendar2/ui/core/menus/adaptive_action_menu.dart';
 
 class GoalWidget extends StatelessWidget {
   const GoalWidget({super.key, required this.goal});
@@ -14,10 +18,10 @@ class GoalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
-      child: CheckboxListTile(
+      shape: shapeBorder,
+      child: CheckboxListTile.adaptive(
+        checkboxScaleFactor: Platform.isIOS ? 1.3 : 1,
+        shape: shapeBorder,
         controlAffinity: ListTileControlAffinity.leading,
         value: goal.isCompleted,
         onChanged: (newValue) {
@@ -32,35 +36,12 @@ class GoalWidget extends StatelessWidget {
         },
         title: Text(goal.title, style: Theme.of(context).textTheme.bodyMedium),
         contentPadding: const EdgeInsets.only(left: 8),
-        secondary: PopupMenuButton<int>(
-          icon: Icon(
-            Icons.more_vert,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-          itemBuilder:
-              (context) => [
-                PopupMenuItem(
-                  value: 1,
-                  child: Text(
-                    context.l10n.edit,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 2,
-                  child: Text(
-                    context.l10n.delete,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ),
-              ],
-          onSelected: (value) {
-            if (value == 1) {
-              showGoalSheet(context, goal: goal);
-            } else if (value == 2) {
-              context.read<WeekCubit>().deleteGoal(goal);
-            }
-          },
+        secondary: AdaptiveActionMenu(
+          onEdit: () => showGoalSheet(context, goal: goal),
+          onDelete: () => context.read<WeekCubit>().deleteGoal(goal),
+          editLabel: context.l10n.edit,
+          deleteLabel: context.l10n.delete,
+          cancelLabel: context.l10n.cancel,
         ),
       ),
     );

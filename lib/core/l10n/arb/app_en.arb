@@ -211,5 +211,11 @@
     "monthSymbol": "M",
     "@monthSymbol": {},
     "yearSymbol": "Y",
-    "@yearSymbol": {}
+    "@yearSymbol": {},
+    "assessmentGood": "Good 🤩",
+    "@assessmentGood": {},
+    "assessmentBad": "Bad 🫠",
+    "@assessmentBad": {},
+    "assessmentPoor": "Normal 😐",
+    "@assessmentPoor": {}
 }

@@ -175,18 +175,18 @@ class AppTheme {
     ),
 
     cardTheme: const CardThemeData(
-      color: Color(0xFFF2F0F4),
+      color: Color(0xFFFBF8FD),
       surfaceTintColor: Colors.transparent,
       elevation: 1,
     ),
 
     dialogTheme: const DialogThemeData(
-      backgroundColor: Color(0xFFF2F0F4),
+      backgroundColor: Color(0xFFFBF8FD),
       surfaceTintColor: Colors.transparent,
     ),
 
     popupMenuTheme: const PopupMenuThemeData(
-      color: Color(0xFFF2F0F4),
+      color: Color(0xFFFBF8FD),
       surfaceTintColor: Colors.transparent,
       textStyle: TextStyle(
         fontSize: 14,

@@ -4,6 +4,8 @@ import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_resume/resume_utils.dart';
+import 'package:life_calendar2/ui/core/constants.dart';
+import 'package:life_calendar2/ui/core/menus/adaptive_action_menu.dart';
 
 class WeekResumeWidget extends StatelessWidget {
   const WeekResumeWidget({super.key});
@@ -24,9 +26,7 @@ class WeekResumeWidget extends StatelessWidget {
         ),
         BlocSelector<WeekCubit, WeekState, String>(
           selector: (weekState) {
-            if (weekState is WeekSuccess) {
-              return weekState.week.resume;
-            }
+            if (weekState is WeekSuccess) return weekState.week.resume;
             return '';
           },
           builder: (context, resume) {
@@ -38,9 +38,7 @@ class WeekResumeWidget extends StatelessWidget {
 
             return SliverToBoxAdapter(
               child: Card(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                ),
+                shape: shapeBorder,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 4, 0, 4),
                   child: Row(
@@ -51,19 +49,12 @@ class WeekResumeWidget extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
-                      PopupMenuButton<int>(
-                        icon: Icon(
-                          Icons.more_vert,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        ),
-                        onSelected: (value) {
-                          if (value == 1) {
-                            showResumeSheet(context);
-                          } else if (value == 2) {
-                            _deleteResume(context);
-                          }
-                        },
-                        itemBuilder: _menuItemBuilder,
+                      AdaptiveActionMenu(
+                        editLabel: context.l10n.edit,
+                        deleteLabel: context.l10n.delete,
+                        cancelLabel: context.l10n.cancel,
+                        onEdit: () => showResumeSheet(context),
+                        onDelete: () => _deleteResume(context),
                       ),
                     ],
                   ),
@@ -76,28 +67,8 @@ class WeekResumeWidget extends StatelessWidget {
     );
   }
 
-  List<PopupMenuEntry<int>> _menuItemBuilder(BuildContext context) {
-    return [
-      PopupMenuItem(
-        value: 1,
-        child: Text(
-          context.l10n.edit,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-      ),
-      PopupMenuItem(
-        value: 2,
-        child: Text(
-          context.l10n.delete,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-      ),
-    ];
-  }
-
   Future<void> _deleteResume(BuildContext context) async {
     final weekCubit = context.read<WeekCubit>();
-
     await weekCubit.deleteResume();
   }
 }

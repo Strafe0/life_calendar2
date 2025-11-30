@@ -619,6 +619,24 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Г'**
   String get yearSymbol;
+
+  /// No description provided for @assessmentGood.
+  ///
+  /// In ru, this message translates to:
+  /// **'Хорошо 🤩'**
+  String get assessmentGood;
+
+  /// No description provided for @assessmentBad.
+  ///
+  /// In ru, this message translates to:
+  /// **'Плохо 🫠'**
+  String get assessmentBad;
+
+  /// No description provided for @assessmentPoor.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нейтрально 😐'**
+  String get assessmentPoor;
 }
 
 class _AppLocalizationsDelegate

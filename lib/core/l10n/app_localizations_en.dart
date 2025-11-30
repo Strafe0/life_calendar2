@@ -283,4 +283,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yearSymbol => 'Y';
+
+  @override
+  String get assessmentGood => 'Good 🤩';
+
+  @override
+  String get assessmentBad => 'Bad 🫠';
+
+  @override
+  String get assessmentPoor => 'Normal 😐';
 }
