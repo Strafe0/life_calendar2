@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
+import 'package:life_calendar2/domain/services/local_backup_service.dart';
+import 'package:life_calendar2/ui/core/snackbars/error_snack_bar.dart';
 import 'package:life_calendar2/ui/core/widgets/page_indicator.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_page_widget.dart';
 import 'package:life_calendar2/ui/registration/widgets/registration_page.dart';
+import 'package:life_calendar2/utils/result.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key, required this.pages});
@@ -31,20 +38,45 @@ class _OnboardingViewState extends State<OnboardingView>
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Align(
-          alignment: Alignment.centerLeft,
-          child: TextButton(
-            onPressed:
-                () => _pageController.animateToPage(
-                  widget.pages.length,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.fastOutSlowIn,
+          alignment: Alignment.topCenter,
+          child: Row(
+            children: [
+              TextButton(
+                onPressed:
+                    () => _pageController.animateToPage(
+                      widget.pages.length,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.fastOutSlowIn,
+                    ),
+                child: Text(
+                  context.l10n.skip,
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withAlpha(122),
+                  ),
                 ),
-            child: Text(
-              context.l10n.skip,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withAlpha(122),
               ),
-            ),
+              const Spacer(),
+              TextButton(
+                onPressed: () async {
+                  final result =
+                      await context.read<LocalBackupService>().importCalendar();
+
+                  if (!context.mounted) {
+                    logger.w('Context is not mounted');
+                    return;
+                  }
+
+                  if (result is Ok<bool> && result.value) {
+                    context.go(AppRoute.calendar);
+                  } else {
+                    showErrorSnackBar(context, text: context.l10n.errorImport);
+                  }
+                },
+                child: Text(context.l10n.importDialogTitle),
+              ),
+            ],
           ),
         ),
         Expanded(
