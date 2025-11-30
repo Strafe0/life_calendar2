@@ -37,7 +37,7 @@ class WeekAssessmentWidget extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
-            if (Platform.isAndroid)
+            if (Platform.isIOS)
               _CupertinoAssessmentSelector(
                 selected: selectedAssessment,
                 onChanged: onAssessmentChanged,
@@ -80,6 +80,7 @@ class _CupertinoAssessmentSelector extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(
                   assessment.label(context.l10n),
+                  textAlign: TextAlign.center,
                   style: TextTheme.of(context).bodyMedium?.copyWith(
                     color:
                         selected == assessment
@@ -126,7 +127,9 @@ class _MaterialAssessmentSelector extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Text(
                       assessment.label(context.l10n),
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color:
                             selected == assessment
                                 ? Colors.white

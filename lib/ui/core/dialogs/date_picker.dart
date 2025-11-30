@@ -46,7 +46,7 @@ Future<DateTime?> showAdaptiveDatePicker(
                 Expanded(
                   child: CupertinoDatePicker(
                     mode: CupertinoDatePickerMode.date,
-                    initialDateTime: initialDate,
+                    initialDateTime: firstDate,
                     minimumDate: firstDate,
                     maximumDate: lastDate,
                     onDateTimeChanged: (newDate) {

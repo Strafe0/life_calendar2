@@ -3,7 +3,7 @@ import 'dart:io' show File;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/extensions/theme_extension.dart';
+import 'package:life_calendar2/core/extensions/brightness_extension.dart';
 import 'package:life_calendar2/ui/core/widgets/page_indicator.dart';
 
 class PhotoViewer extends StatefulWidget {
@@ -45,8 +45,8 @@ class _PhotoViewerState extends State<PhotoViewer>
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
         statusBarColor: Theme.of(context).colorScheme.surface,
-        statusBarIconBrightness: Theme.of(context).inverseBrightness,
-        statusBarBrightness: Theme.of(context).inverseBrightness,
+        statusBarIconBrightness: Theme.brightnessOf(context).inverse,
+        statusBarBrightness: Theme.brightnessOf(context).inverse,
       ),
       child: SafeArea(
         child: PageView.builder(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/extensions/theme_extension.dart';
+import 'package:life_calendar2/core/extensions/brightness_extension.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/ui/splash/bloc/splash_cubit.dart';
 import 'package:life_calendar2/ui/splash/bloc/splash_state.dart';
@@ -23,17 +23,16 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     MobileAds.initialize();
   }
+
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final surfaceColor = theme.colorScheme.surface;
-    final isDarkMode = theme.isDarkMode;
-
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
-        statusBarColor: surfaceColor,
+        statusBarColor: ColorScheme.of(context).surface,
         statusBarIconBrightness:
-            isDarkMode ? Brightness.light : Brightness.dark,
+            Theme.brightnessOf(context).isDarkMode
+                ? Brightness.light
+                : Brightness.dark,
       ),
       child: BlocProvider(
         create:

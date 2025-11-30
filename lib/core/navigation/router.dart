@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -66,23 +69,34 @@ final goRouter = GoRouter(
                   return const MaterialPage(child: ErrorSplashScreen());
                 }
 
-                return CustomTransitionPage(
-                  transitionsBuilder: (context, animation, _, child) {
-                    return FadeTransition(opacity: animation, child: child);
-                  },
-                  child: BlocProvider(
-                    create:
-                        (context) =>
-                            WeekCubit(weekRepository: context.read())
-                              ..getWeek(weekId: selectedWeekId),
-                    child: WeekScreen(selectedWeekId: selectedWeekId),
-                  ),
+                final child = BlocProvider(
+                  create:
+                      (context) =>
+                          WeekCubit(weekRepository: context.read())
+                            ..getWeek(weekId: selectedWeekId),
+                  child: WeekScreen(selectedWeekId: selectedWeekId),
                 );
+
+                if (Platform.isIOS) {
+                  return CupertinoPage(key: state.pageKey, child: child);
+                } else {
+                  return MaterialPage(key: state.pageKey, child: child);
+                }
               },
             ),
             GoRoute(
               path: AppRoute.feedback,
-              builder: (context, state) => const FeedbackScreen(),
+              pageBuilder:
+                  (context, state) =>
+                      Platform.isIOS
+                          ? CupertinoPage(
+                            key: state.pageKey,
+                            child: const FeedbackScreen(),
+                          )
+                          : MaterialPage(
+                            key: state.pageKey,
+                            child: const FeedbackScreen(),
+                          ),
             ),
           ],
         ),

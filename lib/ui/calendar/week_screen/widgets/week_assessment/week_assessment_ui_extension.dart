@@ -4,14 +4,11 @@ import 'package:life_calendar2/domain/models/week/week_assessment/week_assessmen
 
 extension WeekAssessmentUiExtension on WeekAssessment {
   String label(AppLocalizations l10n) {
-    switch (this) {
-      case WeekAssessment.good:
-        return l10n.assessmentGood;
-      case WeekAssessment.poor:
-        return l10n.assessmentPoor;
-      case WeekAssessment.bad:
-        return l10n.assessmentBad;
-    }
+    return switch (this) {
+      WeekAssessment.good => l10n.assessmentGood,
+      WeekAssessment.poor => l10n.assessmentPoor,
+      WeekAssessment.bad => l10n.assessmentBad,
+    }.replaceAll(' ', '\n');
   }
 
   Color get color {
