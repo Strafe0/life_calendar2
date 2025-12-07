@@ -1,4 +1,6 @@
+import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/uuid/app_uuid.dart';
 import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
 import 'package:life_calendar2/data/services/database_service.dart';
 import 'package:life_calendar2/data/services/shared_preferences_service.dart';
@@ -39,17 +41,27 @@ class UserRepositoryImpl implements UserRepository {
         return Result.ok(User.empty());
       }
 
-      final userId = await _sharedPreferencesService.getUserId();
+      String? userId = await _sharedPreferencesService.getUserId();
       final birthdate = await _getBirthdate();
-      final lifeSpan = await _sharedPreferencesService.getLifespan();
+      int? lifeSpan = await _sharedPreferencesService.getLifespan();
 
-      if (userId == null || birthdate == null || lifeSpan == null) {
+      if (birthdate == null) {
         logger.e(
           'Failed to get from prefs UserID (null - ${userId == null}), '
           'or birthdate: (null - ${birthdate == null}), '
           'or lifeSpan(null - ${lifeSpan == null})',
         );
         return Result.error(Exception());
+      }
+
+      if (userId == null) {
+        userId = AppUuid.generateTimeBasedUuid();
+        await _sharedPreferencesService.setUserId(userId);
+      }
+
+      if (lifeSpan == null) {
+        lifeSpan = (await _databaseService.getLastWeek()).yearId;
+        await _sharedPreferencesService.setLifespan(lifeSpan);
       }
 
       return Result.ok(
@@ -125,8 +137,6 @@ class UserRepositoryImpl implements UserRepository {
 
     if (birthdate == null) return null;
 
-    return DateTime.fromMillisecondsSinceEpoch(
-      Duration(seconds: birthdate).inMilliseconds,
-    );
+    return DateTimeExtension.fromFlexibleTimestamp(birthdate);
   }
 }

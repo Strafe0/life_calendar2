@@ -18,4 +18,19 @@ extension DateTimeExtension on DateTime {
       return toString();
     }
   }
+
+  static DateTime fromFlexibleTimestamp(int timestamp) {
+    // Пороговое значение: 100 миллиардов.
+    // Если число меньше — это секунды (хватит до 5138 года).
+    // Если больше — это миллисекунды.
+    const int threshold = 100000000000;
+
+    if (timestamp < threshold) {
+      // Это секунды: переводим в миллисекунды
+      return DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
+    } else {
+      // Это уже миллисекунды
+      return DateTime.fromMillisecondsSinceEpoch(timestamp);
+    }
+  }
 }

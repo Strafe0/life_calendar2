@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Event {
 
- String get id; String get title; DateTime get date;
+ String get id; String get title;@DateConverter() DateTime get date;
 /// Create a copy of Event
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $EventCopyWith<$Res>  {
   factory $EventCopyWith(Event value, $Res Function(Event) _then) = _$EventCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, DateTime date
+ String id, String title,@DateConverter() DateTime date
 });
 
 
@@ -82,12 +82,12 @@ as DateTime,
 @JsonSerializable()
 
 class _Event implements Event {
-  const _Event({required this.id, required this.title, required this.date});
+  const _Event({required this.id, required this.title, @DateConverter() required this.date});
   factory _Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
 
 @override final  String id;
 @override final  String title;
-@override final  DateTime date;
+@override@DateConverter() final  DateTime date;
 
 /// Create a copy of Event
 /// with the given fields replaced by the non-null parameter values.
@@ -122,7 +122,7 @@ abstract mixin class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
   factory _$EventCopyWith(_Event value, $Res Function(_Event) _then) = __$EventCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String title, DateTime date
+ String id, String title,@DateConverter() DateTime date
 });
 
 
