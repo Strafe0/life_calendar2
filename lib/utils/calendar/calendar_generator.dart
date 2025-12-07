@@ -32,8 +32,6 @@ class CalendarGenerator {
       );
 
       while (nextBirthday.isAfter(weekSunday)) {
-        count++;
-
         weeks.add(
           Week(
             id: count,
@@ -61,6 +59,8 @@ class CalendarGenerator {
           minute: 59,
           second: 59,
         );
+
+        count++;
       }
 
       lastBirthday = nextBirthday;

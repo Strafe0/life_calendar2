@@ -70,14 +70,13 @@ class CalendarCubit extends Cubit<CalendarState> {
   void updateWeek({required Week week}) {
     if (state is CalendarSuccess) {
       final weeks = (state as CalendarSuccess).weeks;
-      final weekBox = (state as CalendarSuccess).weeks.firstWhere(
+      final weekBoxIndex = (state as CalendarSuccess).weeks.indexWhere(
         (w) => w.weekId == week.id,
-        orElse: () => const WeekBox.empty(),
       );
-      if (weekBox.weekId > 1) {
-        weeks[weekBox.weekId - 1] = WeekBox.fromWeek(
+      if (weekBoxIndex != 1) {
+        weeks[weekBoxIndex] = WeekBox.fromWeek(
           week: week,
-          rect: weekBox.rect,
+          rect: weeks[weekBoxIndex].rect,
         );
         emit(CalendarSuccess(weeks: weeks, lastUpdateTime: DateTime.now()));
       }

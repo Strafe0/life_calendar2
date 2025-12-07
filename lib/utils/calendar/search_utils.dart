@@ -17,9 +17,9 @@ int findWeekIdByDate(
 
   final diff = date.difference(birthdate) + const Duration(days: 1);
   logger.d(
-    'Found week id: ${diff.inDays / 7} (${diff.inDays ~/ 7 + 1}).\n'
+    'Found week id: ${diff.inDays / 7}.\n'
     'Diff: ${diff.inDays}',
   );
 
-  return diff.inDays ~/ 7 + 1;
+  return diff.inDays ~/ 7;
 }
