@@ -10,6 +10,8 @@ import 'package:life_calendar2/ui/core/snackbars/error_snack_bar.dart';
 import 'package:life_calendar2/ui/core/widgets/page_indicator.dart';
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_page_widget.dart';
 import 'package:life_calendar2/ui/registration/widgets/registration_page.dart';
+import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar2/ui/user/bloc/user_event.dart';
 import 'package:life_calendar2/utils/result.dart';
 
 class OnboardingView extends StatefulWidget {
@@ -67,6 +69,8 @@ class _OnboardingViewState extends State<OnboardingView>
                     logger.w('Context is not mounted');
                     return;
                   }
+
+                  context.read<UserBloc>().add(const UserLoadingTriggered());
 
                   if (result is Ok<bool> && result.value) {
                     context.go(AppRoute.calendar);

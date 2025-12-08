@@ -5,30 +5,53 @@ import 'package:file_saver/file_saver.dart';
 import 'package:flutter_archive/flutter_archive.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/data/services/backup/backup_strategy.dart';
 import 'package:life_calendar2/domain/services/local_backup_service.dart';
 import 'package:life_calendar2/utils/result.dart';
+import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 class LocalBackupServiceImpl implements LocalBackupService {
-  const LocalBackupServiceImpl();
+  const LocalBackupServiceImpl({required List<BackupStrategy> strategies})
+    : _strategies = strategies;
+
+  final List<BackupStrategy> _strategies;
 
   @override
   Future<bool> exportCalendar() async {
+    File? zipFile;
+    Directory? sourceDir;
+
     try {
-      final zipFile = await _createZipFile();
+      zipFile = await _createZipFile();
+      if (zipFile == null) {
+        return false;
+      }
 
-      if (zipFile == null) return false;
+      // Если вдруг остался хвост от прошлого раза
+      if (zipFile.existsSync()) {
+        zipFile.deleteSync();
+      }
 
-      final sourceDir = await _createSourceDir();
+      sourceDir = await _createSourceDir();
+      if (sourceDir == null) {
+        return false;
+      }
 
-      if (sourceDir == null) return false;
+      // 1. Запуск стратегий
+      // Если здесь упадет ошибка, мы сразу улетим в catch -> finally
+      for (final strategy in _strategies) {
+        await strategy.backup(sourceDir);
+      }
 
+      // 2. Архивация
       await ZipFile.createFromDirectory(
         sourceDir: sourceDir,
         zipFile: zipFile,
         recurseSubDirs: true,
       );
 
+      // 3. Сохранение
       final formattedDate = fileDateFormat.format(DateTime.now());
       final resultPath = await FileSaver.instance.saveAs(
         name: 'life-calendar-$formattedDate',
@@ -41,11 +64,29 @@ class LocalBackupServiceImpl implements LocalBackupService {
     } catch (e, s) {
       logger.e('Failed to export calendar', error: e, stackTrace: s);
       return false;
+    } finally {
+      // Очистка
+      if (sourceDir != null && sourceDir.existsSync()) {
+        try {
+          sourceDir.deleteSync(recursive: true);
+        } catch (e) {
+          logger.w('Failed to clean up sourceDir', error: e);
+        }
+      }
+      if (zipFile != null && zipFile.existsSync()) {
+        try {
+          zipFile.deleteSync();
+        } catch (e) {
+          logger.w('Failed to clean up zipFile', error: e);
+        }
+      }
     }
   }
 
   @override
   Future<Result<bool>> importCalendar() async {
+    Directory? restoreTempDir;
+
     try {
       final result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
@@ -57,50 +98,31 @@ class LocalBackupServiceImpl implements LocalBackupService {
         return const Result.ok(false);
       }
 
-      final file = File(result.files.single.path!);
+      final zipFile = File(result.files.single.path!);
+      final docsDir = await getApplicationDocumentsDirectory();
 
-      final tempDir = await getTemporaryDirectory();
-      final appDir = tempDir.parent;
+      restoreTempDir = Directory(p.join(docsDir.path, 'restore_temp'));
 
-      // creating a directory in which the archive will be extracted
-      final archiveExtractDir = Directory('${appDir.path}/archive_source');
-      if (archiveExtractDir.existsSync()) {
-        archiveExtractDir.deleteSync(recursive: true);
+      // Подготовка чистой папки
+      if (restoreTempDir.existsSync()) {
+        restoreTempDir.deleteSync(recursive: true);
       }
-      archiveExtractDir.createSync();
+      restoreTempDir.createSync(recursive: true);
 
+      // 1. Распаковка архива
       await ZipFile.extractToDirectory(
-        zipFile: file,
-        destinationDir: archiveExtractDir,
+        zipFile: zipFile,
+        destinationDir: restoreTempDir,
       );
 
-      // replacing db
-      File(
-        '${appDir.path}/databases/TheCalendarDatabase',
-      ).deleteSync(recursive: true);
-      File(
-        '${archiveExtractDir.path}/TheCalendarDatabase',
-      ).copySync('${appDir.path}/databases/TheCalendarDatabase');
-
-      // replacing shared_preferences
-      File(
-        '${appDir.path}/shared_prefs/FlutterSharedPreferences.xml',
-      ).deleteSync(recursive: true);
-      File(
-        '${archiveExtractDir.path}/FlutterSharedPreferences.xml',
-      ).copySync('${appDir.path}/shared_prefs/FlutterSharedPreferences.xml');
-
-      // deleting old images
-      tempDir.listSync().forEach(
-        (element) => element.deleteSync(recursive: true),
-      );
-
-      // extracting new images
-      final imageArchive = File('${archiveExtractDir.path}/cache_archive');
-      await ZipFile.extractToDirectory(
-        zipFile: imageArchive,
-        destinationDir: tempDir,
-      );
+      // 2. Запуск стратегий восстановления (Fail Fast)
+      for (final strategy in _strategies) {
+        // Мы НЕ оборачиваем этот вызов в try-catch.
+        // Если стратегия падает (throw), исключение летит выше в общий catch,
+        // и процесс импорта прерывается целиком.
+        logger.d('Starting restore strategy: ${strategy.id}');
+        await strategy.restore(restoreTempDir);
+      }
 
       return const Result.ok(true);
     } catch (error, stackTrace) {
@@ -109,67 +131,38 @@ class LocalBackupServiceImpl implements LocalBackupService {
         error: error,
         stackTrace: stackTrace,
       );
+
       return Result.error(error);
+    } finally {
+      // Очистка
+      if (restoreTempDir != null && restoreTempDir.existsSync()) {
+        try {
+          restoreTempDir.deleteSync(recursive: true);
+        } catch (e) {
+          logger.w('Failed to clean up restoreTempDir', error: e);
+        }
+      }
     }
   }
 
   Future<File?> _createZipFile() async {
-    final externalStorageDir = await getExternalStorageDirectory();
-    if (externalStorageDir != null && externalStorageDir.existsSync()) {
-      final file = File('${externalStorageDir.path}/life-calendar.zip');
-      return file;
-    } else {
-      logger.e('Failed to create zip file in external storage directory');
-      return null;
-    }
+    final externalStorageDir = await getApplicationCacheDirectory();
+    return File(p.join(externalStorageDir.path, 'life-calendar.zip'));
   }
 
   Future<Directory?> _createSourceDir() async {
-    final tempDir = await getTemporaryDirectory();
-    final appDir = tempDir.parent;
+    try {
+      final docsDir = await getApplicationDocumentsDirectory();
+      final archiveDir = Directory(p.join(docsDir.path, 'archive_source'));
 
-    // creating the directory that will be archived
-    final result = Directory('${appDir.path}/archive_source');
-    if (result.existsSync()) {
-      result.deleteSync(recursive: true);
-    }
-    result.createSync();
-
-    // copying db to the directory
-    final dbFile = File('${appDir.path}/databases/TheCalendarDatabase');
-    if (dbFile.existsSync()) {
-      dbFile.copySync('${result.path}/TheCalendarDatabase');
-    } else {
-      logger.e('Creating archive', error: 'DB file does not exist');
+      if (archiveDir.existsSync()) {
+        archiveDir.deleteSync(recursive: true);
+      }
+      archiveDir.createSync(recursive: true);
+      return archiveDir;
+    } catch (e) {
+      logger.e('Critical error creating source dir', error: e);
       return null;
     }
-
-    // copying shared_prefs to the directory
-    final sharedPrefsFile = File(
-      '${appDir.path}/shared_prefs/FlutterSharedPreferences.xml',
-    );
-    if (sharedPrefsFile.existsSync()) {
-      sharedPrefsFile.copySync('${result.path}/FlutterSharedPreferences.xml');
-    } else {
-      logger.e('Creating archive', error: 'SharedPrefs file does not exist');
-      return null;
-    }
-
-    // copying images to the directory as archive
-    final cacheArchive = File('${result.path}/cache_archive');
-    await ZipFile.createFromDirectory(
-      sourceDir: tempDir,
-      zipFile: cacheArchive,
-      recurseSubDirs: true,
-      onZipping: (filePath, isDirectory, progress) {
-        if (isDirectory && filePath.contains('WebView')) {
-          return ZipFileOperation.skipItem;
-        } else {
-          return ZipFileOperation.includeItem;
-        }
-      },
-    );
-
-    return result;
   }
 }

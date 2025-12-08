@@ -13,7 +13,7 @@ import 'package:sqflite/sqflite.dart';
 
 class DatabaseService {
   static const tableName = 'TheCalendarDatabase';
-  late final Database _db;
+  late Database _db;
   final int _dbVersion = 2;
 
   Future<Result> init() async {
@@ -241,5 +241,10 @@ class DatabaseService {
     final count = Sqflite.firstIntValue(result) ?? 0;
 
     return count > 0;
+  }
+
+  Future<void> close() async {
+    await _db.close();
+    logger.i('DB is closed');
   }
 }

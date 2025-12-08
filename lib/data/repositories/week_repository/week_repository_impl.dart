@@ -48,6 +48,7 @@ class WeekRepositoryImpl implements WeekRepository {
     }
   }
 
+  // TODO: optimize
   Future<void> _updateCurrentWeek(DateTime today, Week currentWeek) async {
     logger.d('Updating current week in DB');
 

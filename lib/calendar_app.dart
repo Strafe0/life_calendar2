@@ -12,6 +12,9 @@ import 'package:life_calendar2/data/repositories/user_repository/user_repository
 import 'package:life_calendar2/data/repositories/user_repository/user_repository_impl.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository_impl.dart';
+import 'package:life_calendar2/data/services/backup/cache_backup_strategy_impl.dart';
+import 'package:life_calendar2/data/services/backup/database_backup_strategy_impl.dart';
+import 'package:life_calendar2/data/services/backup/shared_prefs_backup_strategy_impl.dart';
 import 'package:life_calendar2/data/services/database_service.dart';
 import 'package:life_calendar2/data/services/image_picker_service_impl.dart';
 import 'package:life_calendar2/data/services/local_backup_service_impl.dart';
@@ -54,7 +57,14 @@ class CalendarApp extends StatelessWidget {
               (context) => WeekRepositoryImpl(databaseService: context.read()),
         ),
         Provider<LocalBackupService>(
-          create: (_) => const LocalBackupServiceImpl(),
+          create:
+              (context) => LocalBackupServiceImpl(
+                strategies: [
+                  DatabaseBackupStrategy(databaseService: context.read()),
+                  const SharedPreferencesBackupStrategy(),
+                  const CacheBackupStrategy(),
+                ],
+              ),
         ),
       ],
       child: Builder(

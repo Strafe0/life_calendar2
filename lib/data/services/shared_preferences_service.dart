@@ -12,6 +12,9 @@ class SharedPreferencesService {
   Future<bool> isFirstLaunch() async {
     try {
       final prefs = await SharedPreferences.getInstance();
+      for (final key in prefs.getKeys()) {
+        logger.t('SharedPrefs. $key: ${prefs.get(key)}');
+      }
 
       final isFirstLaunch = prefs.getBool(_firstLaunchKey);
 

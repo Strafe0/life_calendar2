@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:life_calendar2/core/logger.dart';
 
-class PhotoConverter implements JsonConverter<List<String>, String> {
+class PhotoConverter implements JsonConverter<List<String>, String?> {
   const PhotoConverter();
 
   @override
-  List<String> fromJson(String json) {
+  List<String> fromJson(String? json) {
     try {
-      final List photos = jsonDecode(json);
+      final List photos = jsonDecode(json!);
       return photos.map((photo) => photo as String).toList();
-    } on FormatException catch (e, s) {
+    } catch (e, s) {
       logger.e('Failed to parse photos', error: e, stackTrace: s);
       return [];
     }
