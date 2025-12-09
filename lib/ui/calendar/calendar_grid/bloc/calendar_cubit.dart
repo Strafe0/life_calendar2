@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart' show PlatformDispatcher;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger/logger.dart';
@@ -9,6 +10,7 @@ import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_state.dart';
 import 'package:life_calendar2/ui/core/themes/week_extension.dart';
+import 'package:life_calendar2/ui/home_widget/home_widget_service.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 import 'package:life_calendar2/utils/result.dart';
 
@@ -30,12 +32,6 @@ class CalendarCubit extends Cubit<CalendarState> {
     emit(const CalendarLoading());
 
     final updateCurrWeekResult = await _weekRepository.updateCurrentWeek();
-    if (updateCurrWeekResult is Error) {
-      logger.w(
-        'Failed to update current week in DB',
-        error: updateCurrWeekResult.error,
-      );
-    }
 
     final weeksResult = await _weekRepository.getWeeks();
 
@@ -50,6 +46,8 @@ class CalendarCubit extends Cubit<CalendarState> {
             emit(CalendarFailure(Exception('No data')));
           }
         }
+
+        await _updateHomeWidget(updateCurrWeekResult, weeksResult.value.length);
 
         emit(
           CalendarSuccess(
@@ -155,5 +153,26 @@ class CalendarCubit extends Cubit<CalendarState> {
       Ok<bool>() => result.value,
       _ => false,
     };
+  }
+
+  Future<void> _updateHomeWidget(
+    Result<Week> currentWeekResult,
+    int weeksCount,
+  ) async {
+    switch (currentWeekResult) {
+      case Ok<Week>():
+        await HomeWidgetService.updateProgress(
+          currentWeekNumber: currentWeekResult.value.id + 1,
+          totalWeeksCount: weeksCount,
+          currentWeekGoalsCount: currentWeekResult.value.goals.length,
+          currentWeekEventsCount: currentWeekResult.value.events.length,
+          locale: PlatformDispatcher.instance.locale,
+        );
+      case Error<Week>():
+        logger.w(
+          'Failed to update current week in DB',
+          error: currentWeekResult.error,
+        );
+    }
   }
 }

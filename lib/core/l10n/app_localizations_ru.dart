@@ -294,4 +294,42 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get assessmentPoor => 'Нейтрально 😐';
+
+  @override
+  String widgetWeeksStats(int current, int total) {
+    return '$current/$total недель';
+  }
+
+  @override
+  String widgetLifeStats(int percent) {
+    return '$percent% жизни';
+  }
+
+  @override
+  String widgetGoalsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count целей',
+      many: '$count целей',
+      few: '$count цели',
+      one: '$count цель',
+      zero: 'Нет целей',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String widgetEventsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count событий',
+      many: '$count событий',
+      few: '$count события',
+      one: '$count событие',
+      zero: 'Нет событий',
+    );
+    return '$_temp0';
+  }
 }

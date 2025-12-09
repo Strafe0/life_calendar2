@@ -217,5 +217,44 @@
     "assessmentBad": "Bad 🫠",
     "@assessmentBad": {},
     "assessmentPoor": "Normal 😐",
-    "@assessmentPoor": {}
+    "@assessmentPoor": {},
+    "widgetWeeksStats": "{current}/{total} weeks",
+    "@widgetWeeksStats": {
+        "description": "Stats for weeks widget",
+        "placeholders": {
+            "current": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "widgetLifeStats": "{percent}% life",
+    "@widgetLifeStats": {
+        "description": "Percentage of life lived",
+        "placeholders": {
+            "percent": {
+                "type": "int"
+            }
+        }
+    },
+    "widgetGoalsCount": "{count, plural, =0{No goals} =1{1 goal} other{{count} goals}}",
+    "@widgetGoalsCount": {
+        "description": "Goals count with pluralization",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "widgetEventsCount": "{count, plural, =0{No events} =1{1 event} other{{count} events}}",
+    "@widgetEventsCount": {
+        "description": "Events count with pluralization",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }

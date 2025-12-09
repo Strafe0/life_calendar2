@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show PlatformDispatcher;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
@@ -12,6 +13,7 @@ import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
 import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
+import 'package:life_calendar2/ui/home_widget/home_widget_service.dart';
 import 'package:life_calendar2/utils/result.dart';
 
 class WeekCubit extends Cubit<WeekState> {
@@ -206,6 +208,12 @@ class WeekCubit extends Cubit<WeekState> {
         );
       }
 
+      unawaited(
+        HomeWidgetService.updateEventsCount(
+          eventsCount: newEventList.length,
+          locale: PlatformDispatcher.instance.locale,
+        ),
+      );
       unawaited(_analytics.logAddWeekContent(WeekContentEvent.event));
     } else {
       logger.e('Cannot change event, because week is not ready');
@@ -264,6 +272,12 @@ class WeekCubit extends Cubit<WeekState> {
         );
       }
 
+      unawaited(
+        HomeWidgetService.updateEventsCount(
+          eventsCount: newEventList.length,
+          locale: PlatformDispatcher.instance.locale,
+        ),
+      );
       unawaited(_analytics.logChangeWeekContent(WeekContentEvent.event));
     } else {
       logger.e('Cannot delete event, because week is not ready');
@@ -297,6 +311,12 @@ class WeekCubit extends Cubit<WeekState> {
         );
       }
 
+      unawaited(
+        HomeWidgetService.updateGoalsCount(
+          goalsCount: newGoalList.length,
+          locale: PlatformDispatcher.instance.locale,
+        ),
+      );
       unawaited(_analytics.logAddWeekContent(WeekContentEvent.goal));
     } else {
       logger.e('Cannot add goal, because week is not ready');
@@ -353,6 +373,12 @@ class WeekCubit extends Cubit<WeekState> {
         );
       }
 
+      unawaited(
+        HomeWidgetService.updateGoalsCount(
+          goalsCount: newGoalList.length,
+          locale: PlatformDispatcher.instance.locale,
+        ),
+      );
       unawaited(_analytics.logDeleteWeekContent(WeekContentEvent.goal));
     } else {
       logger.e('Cannot delete goal, because week is not ready');

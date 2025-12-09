@@ -28,9 +28,9 @@ class WeekRepositoryMock implements WeekRepository {
   );
 
   @override
-  Future<Result<void>> updateCurrentWeek() => Future.delayed(
+  Future<Result<Week>> updateCurrentWeek() => Future.delayed(
     const Duration(milliseconds: 300),
-    () => const Result.ok(null),
+    () => Result.ok(Week.empty()),
   );
 
   @override

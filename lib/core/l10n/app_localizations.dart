@@ -637,6 +637,30 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Нейтрально 😐'**
   String get assessmentPoor;
+
+  /// Статистика недель (1408/4226 недель)
+  ///
+  /// In ru, this message translates to:
+  /// **'{current}/{total} недель'**
+  String widgetWeeksStats(int current, int total);
+
+  /// Процент прожитой жизни
+  ///
+  /// In ru, this message translates to:
+  /// **'{percent}% жизни'**
+  String widgetLifeStats(int percent);
+
+  /// Количество целей с правильным склонением
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, =0{Нет целей} one{{count} цель} few{{count} цели} many{{count} целей} other{{count} целей}}'**
+  String widgetGoalsCount(int count);
+
+  /// Количество событий с правильным склонением
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, =0{Нет событий} one{{count} событие} few{{count} события} many{{count} событий} other{{count} событий}}'**
+  String widgetEventsCount(int count);
 }
 
 class _AppLocalizationsDelegate

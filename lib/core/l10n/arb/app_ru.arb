@@ -217,5 +217,44 @@
     "assessmentBad": "Плохо 🫠",
     "@assessmentBad": {},
     "assessmentPoor": "Нейтрально 😐",
-    "@assessmentPoor": {}
+    "@assessmentPoor": {},
+    "widgetWeeksStats": "{current}/{total} недель",
+    "@widgetWeeksStats": {
+        "description": "Статистика недель (1408/4226 недель)",
+        "placeholders": {
+            "current": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "widgetLifeStats": "{percent}% жизни",
+    "@widgetLifeStats": {
+        "description": "Процент прожитой жизни",
+        "placeholders": {
+            "percent": {
+                "type": "int"
+            }
+        }
+    },
+    "widgetGoalsCount": "{count, plural, =0{Нет целей} one{{count} цель} few{{count} цели} many{{count} целей} other{{count} целей}}",
+    "@widgetGoalsCount": {
+        "description": "Количество целей с правильным склонением",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "widgetEventsCount": "{count, plural, =0{Нет событий} one{{count} событие} few{{count} события} many{{count} событий} other{{count} событий}}",
+    "@widgetEventsCount": {
+        "description": "Количество событий с правильным склонением",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    }
 }

@@ -29,4 +29,20 @@ abstract class Week with _$Week {
   }) = _Week;
 
   factory Week.fromJson(Map<String, dynamic> json) => _$WeekFromJson(json);
+
+  factory Week.empty() {
+    final now = DateTime.now();
+    return Week(
+      id: -1,
+      yearId: -1,
+      start: now,
+      end: now,
+      tense: WeekTense.past,
+      assessment: WeekAssessment.poor,
+      goals: [],
+      events: [],
+      resume: '',
+      photos: [],
+    );
+  }
 }

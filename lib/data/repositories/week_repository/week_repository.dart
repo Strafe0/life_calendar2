@@ -13,7 +13,7 @@ abstract class WeekRepository {
 
   Future<Result<Week>> getCurrentWeek();
 
-  Future<Result<void>> updateCurrentWeek();
+  Future<Result<Week>> updateCurrentWeek();
 
   Future<Result<void>> updateAssessment({
     required int weekId,

@@ -292,4 +292,38 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get assessmentPoor => 'Normal 😐';
+
+  @override
+  String widgetWeeksStats(int current, int total) {
+    return '$current/$total weeks';
+  }
+
+  @override
+  String widgetLifeStats(int percent) {
+    return '$percent% life';
+  }
+
+  @override
+  String widgetGoalsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count goals',
+      one: '1 goal',
+      zero: 'No goals',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String widgetEventsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count events',
+      one: '1 event',
+      zero: 'No events',
+    );
+    return '$_temp0';
+  }
 }

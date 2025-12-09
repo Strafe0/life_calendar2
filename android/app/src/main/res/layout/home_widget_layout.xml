@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/home_widget_background">
+
+    <TextView
+        android:id="@+id/widget_weeks_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1408/4226 недель"
+        android:textSize="14sp"
+        android:textColor="#757575"
+        android:textStyle="bold"/>
+
+    <ProgressBar
+        android:id="@+id/widget_linear_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp" 
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/linear_progress" />
+
+    <TextView
+        android:id="@+id/widget_percent_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="33% жизни"
+        android:textSize="12sp"
+        android:textColor="#2196F3"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView
+        android:id="@+id/widget_goals_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🎯 3 цели"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/widget_events_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📅 2 события"
+        android:textSize="14sp"
+        android:textColor="#000000" />
+
+</LinearLayout>

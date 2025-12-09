@@ -27,14 +27,17 @@ class WeekRepositoryImpl implements WeekRepository {
   }
 
   @override
-  Future<Result<void>> updateCurrentWeek() async {
+  Future<Result<Week>> updateCurrentWeek() async {
     try {
       final today = DateTime.now();
       final currentWeekResult = await getCurrentWeek();
       switch (currentWeekResult) {
         case Ok():
-          await _updateCurrentWeek(today, currentWeekResult.value);
-          return const Result.ok(null);
+          final currentWeek = await _updateCurrentWeek(
+            today,
+            currentWeekResult.value,
+          );
+          return Result.ok(currentWeek);
         case Error():
           logger.e(
             'Failed to get current week for updating',
@@ -49,7 +52,7 @@ class WeekRepositoryImpl implements WeekRepository {
   }
 
   // TODO: optimize
-  Future<void> _updateCurrentWeek(DateTime today, Week currentWeek) async {
+  Future<Week> _updateCurrentWeek(DateTime today, Week currentWeek) async {
     logger.d('Updating current week in DB');
 
     Week currWeekDb = currentWeek;
@@ -67,6 +70,8 @@ class WeekRepositoryImpl implements WeekRepository {
     await _databaseService.insertWeek(
       currWeekDb.copyWith(tense: WeekTense.current),
     );
+
+    return currWeekDb;
   }
 
   @override
