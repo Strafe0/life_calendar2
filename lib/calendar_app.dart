@@ -76,7 +76,11 @@ class CalendarApp extends StatelessWidget {
       child: Builder(
         builder: (context) {
           return BlocProvider(
-            create: (context) => UserBloc(userRepository: context.read()),
+            create:
+                (context) => UserBloc(
+                  userRepository: context.read(),
+                  analytics: context.read(),
+                ),
             child: MaterialApp.router(
               title: 'Life Calendar',
               theme: AppTheme.lightTheme,

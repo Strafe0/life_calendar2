@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
+import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
 import 'package:life_calendar2/domain/models/user/user.dart';
 import 'package:life_calendar2/ui/user/bloc/user_event.dart';
 import 'package:life_calendar2/ui/user/bloc/user_state.dart';
@@ -8,10 +11,14 @@ import 'package:life_calendar2/utils/result.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository _userRepository;
+  final AnalyticsService _analytics;
 
-  UserBloc({required UserRepository userRepository})
-    : _userRepository = userRepository,
-      super(const UserInitial()) {
+  UserBloc({
+    required UserRepository userRepository,
+    required AnalyticsService analytics,
+  }) : _userRepository = userRepository,
+       _analytics = analytics,
+       super(const UserInitial()) {
     on<UserReceived>((event, emit) => emit(UserSuccess(user: event.user)));
     on<UserLoadingTriggered>(_getUser);
     on<UserChangeLifeSpanRequested>(_changeLifeSpan);
@@ -77,6 +84,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           logger.e('Failed to change user life span', error: result.error);
           emit(UserFailure(result.error));
       }
+
+      unawaited(_analytics.logChangeLifespan(oldLifeSpan, newLifeSpan));
     }
   }
 }

@@ -57,4 +57,23 @@ class FirebaseAnalyticsService implements AnalyticsService {
   Future<void> logDonate(DonateStep step) async {
     await _firebase.logEvent(name: 'donate', parameters: {'step': step.name});
   }
+
+  @override
+  Future<void> logChangeLifespan(int oldValue, int newValue) async {
+    await _firebase.logEvent(
+      name: 'change_lifespan',
+      parameters: {'old_lifespan': oldValue, 'new_lifespan': newValue},
+    );
+  }
+
+  @override
+  Future<void> logRegistration(DateTime birthdate, int lifeSpan) async {
+    await _firebase.logEvent(
+      name: 'registration',
+      parameters: {
+        'birthdate': birthdate.toIso8601String(),
+        'lifespan': lifeSpan,
+      },
+    );
+  }
 }

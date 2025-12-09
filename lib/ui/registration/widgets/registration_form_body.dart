@@ -45,7 +45,6 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
         const SizedBox(height: 16),
         LifeSpanTextField(controller: _lifeSpanTextController),
         const Spacer(),
-        // TODO: add import button
         OutlinedButton(
           onPressed: () async {
             if (_isLoading) return;

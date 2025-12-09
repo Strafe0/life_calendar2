@@ -16,4 +16,6 @@ abstract class AnalyticsService {
   Future<void> logBackup(BackupEvent event);
   Future<void> logWeekOpening(WeekTransitionEvent event);
   Future<void> logDonate(DonateStep step);
+  Future<void> logChangeLifespan(int oldValue, int newValue);
+  Future<void> logRegistration(DateTime birthdate, int lifeSpan);
 }

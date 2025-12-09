@@ -27,6 +27,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           (context) => RegistrationCubit(
             authRepository: context.read(),
             weekRepository: context.read(),
+            analytics: context.read(),
           ),
       child: Builder(
         builder: (context) {

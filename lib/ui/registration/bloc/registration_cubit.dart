@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/data/repositories/auth_repository/auth_repository.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
+import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
 import 'package:life_calendar2/domain/models/user/user.dart';
 import 'package:life_calendar2/ui/registration/bloc/registration_state.dart';
 import 'package:life_calendar2/utils/calendar/calendar_generator.dart';
@@ -10,12 +13,15 @@ import 'package:life_calendar2/utils/result.dart';
 class RegistrationCubit extends Cubit<RegistrationState> {
   final AuthRepository _authRepository;
   final WeekRepository _weekRepository;
+  final AnalyticsService _analytics;
 
   RegistrationCubit({
     required AuthRepository authRepository,
     required WeekRepository weekRepository,
+    required AnalyticsService analytics,
   }) : _authRepository = authRepository,
        _weekRepository = weekRepository,
+       _analytics = analytics,
        super(const RegistrationInitial());
 
   Future<void> register({
@@ -52,5 +58,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
         logger.e('Registration is failed', error: result.error);
         emit(const RegistrationFailure());
     }
+
+    unawaited(_analytics.logRegistration(birthday, lifeSpan));
   }
 }
