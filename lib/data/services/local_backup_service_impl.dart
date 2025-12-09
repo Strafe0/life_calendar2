@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -5,6 +6,7 @@ import 'package:file_saver/file_saver.dart';
 import 'package:flutter_archive/flutter_archive.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/logger/logger.dart';
+import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
 import 'package:life_calendar2/data/services/backup/backup_strategy.dart';
 import 'package:life_calendar2/domain/services/local_backup_service.dart';
 import 'package:life_calendar2/utils/result.dart';
@@ -12,10 +14,14 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 class LocalBackupServiceImpl implements LocalBackupService {
-  const LocalBackupServiceImpl({required List<BackupStrategy> strategies})
-    : _strategies = strategies;
+  const LocalBackupServiceImpl({
+    required List<BackupStrategy> strategies,
+    required AnalyticsService analytics,
+  }) : _strategies = strategies,
+       _analytics = analytics;
 
   final List<BackupStrategy> _strategies;
+  final AnalyticsService _analytics;
 
   @override
   Future<bool> exportCalendar() async {
@@ -65,6 +71,8 @@ class LocalBackupServiceImpl implements LocalBackupService {
       logger.e('Failed to export calendar', error: e, stackTrace: s);
       return false;
     } finally {
+      unawaited(_analytics.logBackup(BackupEvent.export));
+
       // Очистка
       if (sourceDir != null && sourceDir.existsSync()) {
         try {
@@ -134,6 +142,8 @@ class LocalBackupServiceImpl implements LocalBackupService {
 
       return Result.error(error);
     } finally {
+      unawaited(_analytics.logBackup(BackupEvent.import));
+
       // Очистка
       if (restoreTempDir != null && restoreTempDir.existsSync()) {
         try {

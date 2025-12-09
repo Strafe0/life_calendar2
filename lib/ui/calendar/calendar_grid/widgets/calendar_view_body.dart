@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
+import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_interactive_viewer.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_painter.dart';
@@ -155,6 +156,9 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
 
     logger.i('Tapped on $weekId week');
     if (weekId != -1) {
+      context.read<AnalyticsService>().logWeekOpening(
+        WeekTransitionEvent.weekBox,
+      );
       context.push(AppRoute.weekId(weekId));
     }
   }
@@ -171,6 +175,9 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
       );
 
       if (weekId != -1) {
+        context.read<AnalyticsService>().logWeekOpening(
+          WeekTransitionEvent.currentWeek,
+        );
         context.push(AppRoute.weekId(weekId));
       }
     }

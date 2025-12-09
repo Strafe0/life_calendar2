@@ -76,9 +76,10 @@ final goRouter = GoRouter(
 
                 final child = BlocProvider(
                   create:
-                      (context) =>
-                          WeekCubit(weekRepository: context.read())
-                            ..getWeek(weekId: selectedWeekId),
+                      (context) => WeekCubit(
+                        weekRepository: context.read(),
+                        analytics: context.read(),
+                      )..getWeek(weekId: selectedWeekId),
                   child: WeekScreen(selectedWeekId: selectedWeekId),
                 );
 

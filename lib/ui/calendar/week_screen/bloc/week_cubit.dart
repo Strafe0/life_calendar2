@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/core/uuid/app_uuid.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
+import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';
 import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';
@@ -12,11 +15,15 @@ import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
 import 'package:life_calendar2/utils/result.dart';
 
 class WeekCubit extends Cubit<WeekState> {
+  final AnalyticsService _analytics;
   final WeekRepository _weekRepository;
 
-  WeekCubit({required WeekRepository weekRepository})
-    : _weekRepository = weekRepository,
-      super(const WeekInitial());
+  WeekCubit({
+    required WeekRepository weekRepository,
+    required AnalyticsService analytics,
+  }) : _weekRepository = weekRepository,
+       _analytics = analytics,
+       super(const WeekInitial());
 
   bool get isLoading => state == const WeekLoading();
 
@@ -78,6 +85,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logAssessmentChange(newAssessment));
     } else {
       logger.e('Cannot change assessment, because week is not ready');
     }
@@ -109,6 +118,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logChangeWeekContent(WeekContentEvent.goal));
     } else {
       logger.e('Cannot change goal, because week is not ready');
     }
@@ -131,6 +142,12 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(
+        prevState.week.resume.isEmpty
+            ? _analytics.logAddWeekContent(WeekContentEvent.resume)
+            : _analytics.logChangeWeekContent(WeekContentEvent.resume),
+      );
     } else {
       logger.e('Cannot change resume, because week is not ready');
     }
@@ -153,6 +170,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logDeleteWeekContent(WeekContentEvent.resume));
     } else {
       logger.e('Cannot delete resume, because week is not ready');
     }
@@ -186,6 +205,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logAddWeekContent(WeekContentEvent.event));
     } else {
       logger.e('Cannot change event, because week is not ready');
     }
@@ -213,6 +234,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logChangeWeekContent(WeekContentEvent.event));
     } else {
       logger.e('Cannot change event, because week is not ready');
     }
@@ -240,6 +263,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logChangeWeekContent(WeekContentEvent.event));
     } else {
       logger.e('Cannot delete event, because week is not ready');
     }
@@ -271,6 +296,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logAddWeekContent(WeekContentEvent.goal));
     } else {
       logger.e('Cannot add goal, because week is not ready');
     }
@@ -298,6 +325,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logChangeWeekContent(WeekContentEvent.goal));
     } else {
       logger.e('Cannot change goal, because week is not ready');
     }
@@ -323,6 +352,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logDeleteWeekContent(WeekContentEvent.goal));
     } else {
       logger.e('Cannot delete goal, because week is not ready');
     }
@@ -347,6 +378,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logAddWeekContent(WeekContentEvent.photo));
     } else {
       logger.e('Cannot change goal, because week is not ready');
     }
@@ -371,6 +404,8 @@ class WeekCubit extends Cubit<WeekState> {
           error: result.error,
         );
       }
+
+      unawaited(_analytics.logAddWeekContent(WeekContentEvent.photo));
     } else {
       logger.e('Cannot delete photo, because week is not ready');
     }
