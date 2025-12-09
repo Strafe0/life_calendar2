@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar2/core/l10n/app_localizations.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/core/navigation/router.dart';
 import 'package:life_calendar2/data/repositories/auth_repository/auth_repository.dart';
 import 'package:life_calendar2/data/repositories/auth_repository/auth_repository_impl.dart';

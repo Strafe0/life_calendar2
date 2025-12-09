@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 
 class WeekFabStateProvider extends InheritedWidget {
   WeekFabStateProvider({super.key, required super.child});

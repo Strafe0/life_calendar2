@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';
 import 'package:life_calendar2/domain/models/week/goal/goal.dart';
 import 'package:life_calendar2/domain/models/week/week.dart';

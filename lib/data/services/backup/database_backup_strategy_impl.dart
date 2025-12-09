@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/data/services/backup/backup_strategy.dart';
 import 'package:life_calendar2/data/services/database_service.dart';
 import 'package:path/path.dart' as p;

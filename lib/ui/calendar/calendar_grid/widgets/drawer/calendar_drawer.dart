@@ -27,6 +27,13 @@ class CalendarDrawer extends StatelessWidget {
         ),
         const ChangeLifespanDrawerButton(),
         const DrawerThanks(),
+        DrawerItem(
+          icon: Icons.error,
+          title: 'TEST ERROR',
+          onPressed: () {
+            throw Exception('Тестовая ошибка для проверки Crashlytics!');
+          },
+        ),
       ],
     );
   }

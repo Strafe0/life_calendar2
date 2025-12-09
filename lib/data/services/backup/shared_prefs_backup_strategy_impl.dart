@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/data/services/backup/backup_strategy.dart';
 import 'package:life_calendar2/data/services/backup/prefs/json_prefs_restore_strategy_impl.dart';
 import 'package:life_calendar2/data/services/backup/prefs/prefs_restore_strategy.dart';

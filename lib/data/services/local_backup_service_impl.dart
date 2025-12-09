@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter_archive/flutter_archive.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/data/services/backup/backup_strategy.dart';
 import 'package:life_calendar2/domain/services/local_backup_service.dart';
 import 'package:life_calendar2/utils/result.dart';

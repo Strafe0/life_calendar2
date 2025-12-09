@@ -1,5 +1,5 @@
 import 'package:image_picker/image_picker.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/domain/services/image_picker_service.dart';
 
 class ImagePickerServiceImpl implements ImagePickerService {

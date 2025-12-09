@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/data/repositories/auth_repository/auth_repository.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/domain/models/user/user.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
 import 'package:life_calendar2/domain/services/local_backup_service.dart';
@@ -94,6 +94,7 @@ class _OnboardingViewState extends State<OnboardingView>
               return OnboardingPageWidget(page: widget.pages[i]);
             },
             onPageChanged: (newPageIndex) {
+              logger.i('Onboarding: $newPageIndex');
               setState(() {
                 _tabController.index = newPageIndex;
                 _pageIndex = newPageIndex;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_interactive_viewer.dart';

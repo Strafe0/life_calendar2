@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/core/uuid/app_uuid.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';

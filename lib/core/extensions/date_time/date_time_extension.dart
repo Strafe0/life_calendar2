@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 
 extension DateTimeExtension on DateTime {
   int toTimeStamp() => Duration(milliseconds: millisecondsSinceEpoch).inSeconds;

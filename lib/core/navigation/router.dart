@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar2/core/logger/crashlytics_navigation_observer.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
 import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_screen.dart';
@@ -18,9 +19,11 @@ import 'package:life_calendar2/ui/splash/widgets/error_splash_screen.dart';
 import 'package:life_calendar2/ui/splash/widgets/splash_screen.dart';
 
 final goRouter = GoRouter(
+  observers: [CrashlyticsNavigationObserver()],
   routes: [
     GoRoute(
       path: AppRoute.root,
+      name: 'SplashScreen',
       builder: (context, state) => const SplashScreen(),
     ),
     ShellRoute(
@@ -36,6 +39,7 @@ final goRouter = GoRouter(
       routes: [
         GoRoute(
           path: AppRoute.calendar,
+          name: 'CalendarScreen',
           builder: (context, state) => const CalendarScreen(),
           onExit: (context, state) async {
             final userChoice = await showAlertDialog<bool>(
@@ -60,6 +64,7 @@ final goRouter = GoRouter(
             // add shell route for week
             GoRoute(
               path: AppRoute.week,
+              name: 'WeekScreen',
               pageBuilder: (context, state) {
                 final selectedWeekId = int.tryParse(
                   state.pathParameters['weekId'] ?? '',
@@ -86,6 +91,7 @@ final goRouter = GoRouter(
             ),
             GoRoute(
               path: AppRoute.feedback,
+              name: 'FeedbackScreen',
               pageBuilder:
                   (context, state) =>
                       Platform.isIOS
@@ -104,10 +110,12 @@ final goRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoute.onboarding,
+      name: 'OnboardingScreen',
       builder: (context, state) => const OnboardingScreen(),
     ),
     GoRoute(
       path: AppRoute.error,
+      name: 'ErrorScreen',
       builder: (context, state) => const ErrorSplashScreen(),
     ),
   ],

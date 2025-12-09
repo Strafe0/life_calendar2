@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 
 extension StringExtension on String {
   /// Преобразует строку в дату с учетом локали или конкретного паттерна.

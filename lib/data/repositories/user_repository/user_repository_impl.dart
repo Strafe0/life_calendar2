@@ -1,5 +1,5 @@
 import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/core/uuid/app_uuid.dart';
 import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
 import 'package:life_calendar2/data/services/database_service.dart';

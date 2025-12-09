@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
 class RewardedAdManager {

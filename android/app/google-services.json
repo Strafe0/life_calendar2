@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "69522046073",
+    "project_id": "life-calendar-2ad86",
+    "storage_bucket": "life-calendar-2ad86.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69522046073:android:06c90d6ba1f2eca5aaa8a8",
+        "android_client_info": {
+          "package_name": "com.vgol.life_calendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69522046073-n9ng5sanjlgg0u1tgv2fo65o29ked59v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vgol.life_calendar",
+            "certificate_hash": "12574d0b214bac36cadeff2317948ccc34962e7f"
+          }
+        },
+        {
+          "client_id": "69522046073-ij364hfimgagoqsiqr9sqqbus6670erb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmxl_B3sK7dbQHtqM-_o_vexOVY6Wkelc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69522046073-ij364hfimgagoqsiqr9sqqbus6670erb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "69522046073-hlbr5pmreahuhdk5o33kmtvcdl8hp839.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vgol.lifeCalendar"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69522046073:android:8d9f96361b162f3eaaa8a8",
+        "android_client_info": {
+          "package_name": "com.vgol.life_calendar2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69522046073-ij364hfimgagoqsiqr9sqqbus6670erb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmxl_B3sK7dbQHtqM-_o_vexOVY6Wkelc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69522046073-ij364hfimgagoqsiqr9sqqbus6670erb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "69522046073-hlbr5pmreahuhdk5o33kmtvcdl8hp839.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vgol.lifeCalendar"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar2/data/services/database_service.dart';
 import 'package:life_calendar2/domain/models/week/event/event.dart';

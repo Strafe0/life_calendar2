@@ -1,7 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/core/logger.dart';
+import 'package:life_calendar2/core/logger/logger.dart';
 import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
 import 'package:life_calendar2/utils/calendar/calendar_size.dart';
 
