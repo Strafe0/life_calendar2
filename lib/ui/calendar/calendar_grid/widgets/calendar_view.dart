@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_state.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_view_body.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_view_failure_body.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_view_loading_body.dart';
-import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
-import 'package:life_calendar2/ui/user/bloc/user_state.dart';
-import 'package:life_calendar2/utils/calendar/calendar_size.dart';
-import 'package:life_calendar2/utils/device_type.dart' as device_type;
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/bloc/calendar_state.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_view_body.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_view_failure_body.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_view_loading_body.dart';
+import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar/ui/user/bloc/user_state.dart';
+import 'package:life_calendar/utils/calendar/calendar_size.dart';
+import 'package:life_calendar/utils/device_type.dart' as device_type;
 
 class CalendarView extends StatefulWidget {
   const CalendarView({super.key, required this.constraints});

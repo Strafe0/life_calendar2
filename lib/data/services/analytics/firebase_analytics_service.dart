@@ -1,6 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
-import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar/data/services/analytics/analytics_service_interface.dart';
+import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
 
 class FirebaseAnalyticsService implements AnalyticsService {
   final FirebaseAnalytics _firebase = FirebaseAnalytics.instance;

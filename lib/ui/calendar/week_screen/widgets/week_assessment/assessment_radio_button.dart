@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
 
 class AssessmentRadioButton extends StatelessWidget {
   const AssessmentRadioButton({

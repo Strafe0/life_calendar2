@@ -4,12 +4,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter_archive/flutter_archive.dart';
-import 'package:life_calendar2/core/constants/constants.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
-import 'package:life_calendar2/data/services/backup/backup_strategy.dart';
-import 'package:life_calendar2/domain/services/local_backup_service.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/core/constants/constants.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/services/analytics/analytics_service_interface.dart';
+import 'package:life_calendar/data/services/backup/backup_strategy.dart';
+import 'package:life_calendar/domain/services/local_backup_service.dart';
+import 'package:life_calendar/utils/result.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 

@@ -1,6 +1,6 @@
-import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
-import 'package:life_calendar2/domain/models/user/user.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/data/repositories/user_repository/user_repository.dart';
+import 'package:life_calendar/domain/models/user/user.dart';
+import 'package:life_calendar/utils/result.dart';
 
 class UserRepositoryMock implements UserRepository {
   @override

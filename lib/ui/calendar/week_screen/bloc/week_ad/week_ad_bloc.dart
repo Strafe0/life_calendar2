@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_event.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_state.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_ad/week_ad_event.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_ad/week_ad_state.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
 class WeekAdBloc extends Bloc<WeekAdEvent, WeekAdState> {

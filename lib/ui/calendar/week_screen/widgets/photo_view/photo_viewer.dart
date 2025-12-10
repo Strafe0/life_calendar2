@@ -3,8 +3,8 @@ import 'dart:io' show File;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/extensions/brightness_extension.dart';
-import 'package:life_calendar2/ui/core/widgets/page_indicator.dart';
+import 'package:life_calendar/core/extensions/brightness_extension.dart';
+import 'package:life_calendar/ui/core/widgets/page_indicator.dart';
 
 class PhotoViewer extends StatefulWidget {
   const PhotoViewer({

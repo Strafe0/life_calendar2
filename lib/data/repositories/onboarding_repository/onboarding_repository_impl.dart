@@ -1,6 +1,6 @@
-import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository.dart';
-import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/data/repositories/onboarding_repository/onboarding_repository.dart';
+import 'package:life_calendar/domain/models/onboarding/onboarding_page.dart';
+import 'package:life_calendar/utils/result.dart';
 
 class OnboardingRepositoryImpl implements OnboardingRepository {
   const OnboardingRepositoryImpl();

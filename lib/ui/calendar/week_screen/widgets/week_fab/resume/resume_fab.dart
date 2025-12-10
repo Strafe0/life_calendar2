@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_resume/resume_utils.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/ui/calendar/week_screen/widgets/week_resume/resume_utils.dart';
 
 class ResumeFab extends StatelessWidget {
   const ResumeFab({super.key});

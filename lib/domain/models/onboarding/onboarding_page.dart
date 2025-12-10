@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:life_calendar2/core/l10n/app_localizations.dart';
+import 'package:life_calendar/core/l10n/app_localizations.dart';
 
 class OnboardingPage extends Equatable {
   /// Url or path

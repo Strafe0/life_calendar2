@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/ui/core/themes/onboarding_theme.dart';
-import 'package:life_calendar2/ui/onboarding/bloc/onboarding_cubit.dart';
-import 'package:life_calendar2/ui/onboarding/bloc/onboarding_state.dart';
-import 'package:life_calendar2/ui/onboarding/widgets/onboarding_error_view.dart';
-import 'package:life_calendar2/ui/onboarding/widgets/onboarding_loading_view.dart';
-import 'package:life_calendar2/ui/onboarding/widgets/onboarding_view.dart';
+import 'package:life_calendar/ui/core/themes/onboarding_theme.dart';
+import 'package:life_calendar/ui/onboarding/bloc/onboarding_cubit.dart';
+import 'package:life_calendar/ui/onboarding/bloc/onboarding_state.dart';
+import 'package:life_calendar/ui/onboarding/widgets/onboarding_error_view.dart';
+import 'package:life_calendar/ui/onboarding/widgets/onboarding_loading_view.dart';
+import 'package:life_calendar/ui/onboarding/widgets/onboarding_view.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key, required this.isFullOnboarding});

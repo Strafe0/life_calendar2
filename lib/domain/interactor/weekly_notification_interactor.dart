@@ -1,8 +1,8 @@
 import 'dart:ui' show PlatformDispatcher;
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/data/services/notifications/local_notification_service.dart';
-import 'package:life_calendar2/data/services/settings_service.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/services/notifications/local_notification_service.dart';
+import 'package:life_calendar/data/services/settings_service.dart';
+import 'package:life_calendar/utils/result.dart';
 
 class WeeklyNotificationInteractor {
   final LocalNotificationService _notificationService;

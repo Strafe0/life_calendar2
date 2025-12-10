@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter_archive/flutter_archive.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/data/services/backup/backup_strategy.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/services/backup/backup_strategy.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 

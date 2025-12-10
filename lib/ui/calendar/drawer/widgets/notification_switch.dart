@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/ui/calendar/drawer/bloc/settings_cubit.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/ui/calendar/drawer/bloc/settings_cubit.dart';
 
 class NotificationSwitch extends StatefulWidget {
   const NotificationSwitch({super.key});

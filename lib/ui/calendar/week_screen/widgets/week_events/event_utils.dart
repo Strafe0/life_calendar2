@@ -1,13 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/domain/models/week/event/event.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/event_change_sheet.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_fab/week_fab_state_provider.dart';
-import 'package:life_calendar2/ui/core/widgets/bottom_sheet.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/domain/models/week/event/event.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_cubit.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_state.dart';
+import 'package:life_calendar/ui/calendar/week_screen/widgets/week_events/event_change_sheet.dart';
+import 'package:life_calendar/ui/calendar/week_screen/widgets/week_fab/week_fab_state_provider.dart';
+import 'package:life_calendar/ui/core/widgets/bottom_sheet.dart';
 
 Future<void> showEventSheet(BuildContext context, {Event? event}) async {
   final weekCubit = context.read<WeekCubit>();

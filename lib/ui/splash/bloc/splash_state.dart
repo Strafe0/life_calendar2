@@ -1,4 +1,4 @@
-import 'package:life_calendar2/domain/models/user/user.dart';
+import 'package:life_calendar/domain/models/user/user.dart';
 
 sealed class SplashState {
   const SplashState();

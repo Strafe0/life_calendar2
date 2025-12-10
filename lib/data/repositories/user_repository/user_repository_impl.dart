@@ -1,12 +1,12 @@
-import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/core/uuid/app_uuid.dart';
-import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
-import 'package:life_calendar2/data/services/database_service.dart';
-import 'package:life_calendar2/data/services/shared_preferences_service.dart';
-import 'package:life_calendar2/domain/models/user/user.dart';
-import 'package:life_calendar2/utils/calendar/calendar_generator.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/core/extensions/date_time/date_time_extension.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/core/uuid/app_uuid.dart';
+import 'package:life_calendar/data/repositories/user_repository/user_repository.dart';
+import 'package:life_calendar/data/services/database_service.dart';
+import 'package:life_calendar/data/services/shared_preferences_service.dart';
+import 'package:life_calendar/domain/models/user/user.dart';
+import 'package:life_calendar/utils/calendar/calendar_generator.dart';
+import 'package:life_calendar/utils/result.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final SharedPreferencesService _sharedPreferencesService;

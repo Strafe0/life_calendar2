@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
 
 class CurrentWeekIndicator extends StatelessWidget {
   const CurrentWeekIndicator({

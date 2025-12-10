@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/extensions/date_time/date_time_extension.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/domain/models/week/event/event.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_events/event_utils.dart';
-import 'package:life_calendar2/ui/core/constants.dart';
+import 'package:life_calendar/core/extensions/date_time/date_time_extension.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/domain/models/week/event/event.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_cubit.dart';
+import 'package:life_calendar/ui/calendar/week_screen/widgets/week_events/event_utils.dart';
+import 'package:life_calendar/ui/core/constants.dart';
 
 class EventWidget extends StatelessWidget {
   const EventWidget({super.key, required this.event});

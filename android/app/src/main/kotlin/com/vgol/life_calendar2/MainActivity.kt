@@ -1,4 +1,4 @@
-package com.vgol.life_calendar2
+package com.vgol.life_calendar
 
 import io.flutter.embedding.android.FlutterActivity
 

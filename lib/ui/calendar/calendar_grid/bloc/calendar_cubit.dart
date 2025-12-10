@@ -3,16 +3,16 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart' show PlatformDispatcher;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
-import 'package:life_calendar2/data/services/shared_preferences_service.dart';
-import 'package:life_calendar2/domain/models/week/week.dart';
-import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_state.dart';
-import 'package:life_calendar2/ui/core/themes/week_extension.dart';
-import 'package:life_calendar2/ui/home_widget/home_widget_service.dart';
-import 'package:life_calendar2/utils/calendar/calendar_size.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/repositories/week_repository/week_repository.dart';
+import 'package:life_calendar/data/services/shared_preferences_service.dart';
+import 'package:life_calendar/domain/models/week/week.dart';
+import 'package:life_calendar/domain/models/week/week_box/week_box.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/bloc/calendar_state.dart';
+import 'package:life_calendar/ui/core/themes/week_extension.dart';
+import 'package:life_calendar/ui/home_widget/home_widget_service.dart';
+import 'package:life_calendar/utils/calendar/calendar_size.dart';
+import 'package:life_calendar/utils/result.dart';
 
 class CalendarCubit extends Cubit<CalendarState> {
   final WeekRepository _weekRepository;

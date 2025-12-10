@@ -3,9 +3,9 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:life_calendar2/calendar_app.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/firebase_options.dart';
+import 'package:life_calendar/calendar_app.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

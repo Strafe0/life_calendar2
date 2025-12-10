@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/core/constants/constants.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/core/constants/constants.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
 
 class GoalChangeSheet extends StatefulWidget {
   const GoalChangeSheet({super.key, required this.onSubmit, this.initialText});

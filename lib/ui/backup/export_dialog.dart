@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/extensions/connection_state_extension.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/domain/services/local_backup_service.dart';
+import 'package:life_calendar/core/extensions/connection_state_extension.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/domain/services/local_backup_service.dart';
 
 class ExportDialog extends StatefulWidget {
   const ExportDialog({super.key});

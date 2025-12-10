@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/data/repositories/auth_repository/auth_repository.dart';
-import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
-import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
-import 'package:life_calendar2/domain/models/user/user.dart';
-import 'package:life_calendar2/ui/registration/bloc/registration_state.dart';
-import 'package:life_calendar2/utils/calendar/calendar_generator.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/repositories/auth_repository/auth_repository.dart';
+import 'package:life_calendar/data/repositories/week_repository/week_repository.dart';
+import 'package:life_calendar/data/services/analytics/analytics_service_interface.dart';
+import 'package:life_calendar/domain/models/user/user.dart';
+import 'package:life_calendar/ui/registration/bloc/registration_state.dart';
+import 'package:life_calendar/utils/calendar/calendar_generator.dart';
+import 'package:life_calendar/utils/result.dart';
 
 class RegistrationCubit extends Cubit<RegistrationState> {
   final AuthRepository _authRepository;

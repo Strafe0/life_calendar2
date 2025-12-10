@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/extensions/string/string_extension.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/core/utils/local_date_format_utils.dart';
-import 'package:life_calendar2/ui/core/widgets/date_text_field.dart';
-import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
-import 'package:life_calendar2/ui/user/bloc/user_state.dart';
-import 'package:life_calendar2/utils/calendar/search_utils.dart';
+import 'package:life_calendar/core/extensions/string/string_extension.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/core/utils/local_date_format_utils.dart';
+import 'package:life_calendar/ui/core/widgets/date_text_field.dart';
+import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar/ui/user/bloc/user_state.dart';
+import 'package:life_calendar/utils/calendar/search_utils.dart';
 
 class SearchSheet extends StatefulWidget {
   const SearchSheet({super.key, required this.onSubmit});

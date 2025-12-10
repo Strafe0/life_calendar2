@@ -1,4 +1,4 @@
-import 'package:life_calendar2/core/logger/logger.dart';
+import 'package:life_calendar/core/logger/logger.dart';
 
 int findWeekIdByDate(
   DateTime date, {

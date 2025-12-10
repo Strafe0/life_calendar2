@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
+import 'package:life_calendar/ui/core/dialogs/dialog_action.dart';
 
 Future<T?> showAlertDialog<T>(
   BuildContext context, {

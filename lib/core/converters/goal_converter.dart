@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/core/uuid/app_uuid.dart';
-import 'package:life_calendar2/domain/models/week/goal/goal.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/core/uuid/app_uuid.dart';
+import 'package:life_calendar/domain/models/week/goal/goal.dart';
 
 class GoalConverter implements JsonConverter<List<Goal>, String> {
   const GoalConverter();

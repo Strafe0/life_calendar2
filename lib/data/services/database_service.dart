@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/domain/models/week/event/event.dart';
-import 'package:life_calendar2/domain/models/week/goal/goal.dart';
-import 'package:life_calendar2/domain/models/week/week.dart';
-import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
-import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/domain/models/week/event/event.dart';
+import 'package:life_calendar/domain/models/week/goal/goal.dart';
+import 'package:life_calendar/domain/models/week/week.dart';
+import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
+import 'package:life_calendar/utils/result.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService {

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/extensions/brightness_extension.dart';
-import 'package:life_calendar2/core/navigation/app_routes.dart';
-import 'package:life_calendar2/data/services/notifications/local_notification_service.dart';
-import 'package:life_calendar2/data/services/settings_service.dart';
-import 'package:life_calendar2/domain/interactor/weekly_notification_interactor.dart';
-import 'package:life_calendar2/ui/splash/bloc/splash_cubit.dart';
-import 'package:life_calendar2/ui/splash/bloc/splash_state.dart';
-import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
-import 'package:life_calendar2/ui/user/bloc/user_event.dart';
+import 'package:life_calendar/core/extensions/brightness_extension.dart';
+import 'package:life_calendar/core/navigation/app_routes.dart';
+import 'package:life_calendar/data/services/notifications/local_notification_service.dart';
+import 'package:life_calendar/data/services/settings_service.dart';
+import 'package:life_calendar/domain/interactor/weekly_notification_interactor.dart';
+import 'package:life_calendar/ui/splash/bloc/splash_cubit.dart';
+import 'package:life_calendar/ui/splash/bloc/splash_state.dart';
+import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar/ui/user/bloc/user_event.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
 class SplashScreen extends StatefulWidget {

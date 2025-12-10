@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
-import 'package:life_calendar2/ui/user/bloc/user_state.dart';
+import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar/ui/user/bloc/user_state.dart';
 import 'package:yandex_mobileads/mobile_ads.dart';
 
 class AdBlock extends StatefulWidget {

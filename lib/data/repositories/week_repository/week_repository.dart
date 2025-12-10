@@ -1,8 +1,8 @@
-import 'package:life_calendar2/domain/models/week/event/event.dart';
-import 'package:life_calendar2/domain/models/week/goal/goal.dart';
-import 'package:life_calendar2/domain/models/week/week.dart';
-import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/domain/models/week/event/event.dart';
+import 'package:life_calendar/domain/models/week/goal/goal.dart';
+import 'package:life_calendar/domain/models/week/week.dart';
+import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar/utils/result.dart';
 
 abstract class WeekRepository {
   Future<Result<List<Week>>> getWeeks();

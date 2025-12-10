@@ -1,12 +1,12 @@
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
-import 'package:life_calendar2/data/services/database_service.dart';
-import 'package:life_calendar2/domain/models/week/event/event.dart';
-import 'package:life_calendar2/domain/models/week/goal/goal.dart';
-import 'package:life_calendar2/domain/models/week/week.dart';
-import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
-import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/repositories/week_repository/week_repository.dart';
+import 'package:life_calendar/data/services/database_service.dart';
+import 'package:life_calendar/domain/models/week/event/event.dart';
+import 'package:life_calendar/domain/models/week/goal/goal.dart';
+import 'package:life_calendar/domain/models/week/week.dart';
+import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
+import 'package:life_calendar/utils/result.dart';
 
 class WeekRepositoryImpl implements WeekRepository {
   final DatabaseService _databaseService;

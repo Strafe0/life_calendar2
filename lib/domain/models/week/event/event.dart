@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_calendar2/core/converters/date_converter.dart';
+import 'package:life_calendar/core/converters/date_converter.dart';
 
 part 'event.freezed.dart';
 

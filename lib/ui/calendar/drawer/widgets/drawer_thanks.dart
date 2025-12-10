@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/core/constants/constants.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
-import 'package:life_calendar2/ui/calendar/drawer/widgets/drawer_item.dart';
-import 'package:life_calendar2/ui/core/dialogs/alert_dialog.dart';
-import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
+import 'package:life_calendar/core/constants/constants.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/services/analytics/analytics_service_interface.dart';
+import 'package:life_calendar/ui/calendar/drawer/widgets/drawer_item.dart';
+import 'package:life_calendar/ui/core/dialogs/alert_dialog.dart';
+import 'package:life_calendar/ui/core/dialogs/dialog_action.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 

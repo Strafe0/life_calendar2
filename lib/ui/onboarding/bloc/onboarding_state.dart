@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:life_calendar2/domain/models/onboarding/onboarding_page.dart';
+import 'package:life_calendar/domain/models/onboarding/onboarding_page.dart';
 
 sealed class OnboardingState {
   const OnboardingState();

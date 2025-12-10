@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
-import 'package:life_calendar2/data/services/database_service.dart';
-import 'package:life_calendar2/data/services/shared_preferences_service.dart';
-import 'package:life_calendar2/domain/interactor/weekly_notification_interactor.dart';
-import 'package:life_calendar2/domain/models/user/user.dart';
-import 'package:life_calendar2/ui/splash/bloc/splash_state.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/data/repositories/user_repository/user_repository.dart';
+import 'package:life_calendar/data/services/database_service.dart';
+import 'package:life_calendar/data/services/shared_preferences_service.dart';
+import 'package:life_calendar/domain/interactor/weekly_notification_interactor.dart';
+import 'package:life_calendar/domain/models/user/user.dart';
+import 'package:life_calendar/ui/splash/bloc/splash_state.dart';
+import 'package:life_calendar/utils/result.dart';
 
 class SplashCubit extends Cubit<SplashState> {
   final DatabaseService _databaseService;
@@ -33,6 +33,7 @@ class SplashCubit extends Cubit<SplashState> {
     await _prepareNotifications();
 
     if (result is Ok && userResult is Ok<User>) {
+      await _sharedPreferencesService.setFirstLaunchV3(isFirstLaunch: false);
       emit(
         SplashReady(user: userResult.value, isFirstLaunchV3: isFirstLaunchV3),
       );

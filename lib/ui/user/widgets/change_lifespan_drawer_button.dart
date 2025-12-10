@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/domain/models/user/user.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
-import 'package:life_calendar2/ui/calendar/drawer/widgets/drawer_item.dart';
-import 'package:life_calendar2/ui/core/dialogs/alert_dialog.dart';
-import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
-import 'package:life_calendar2/ui/core/widgets/lifespan_text_field.dart';
-import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
-import 'package:life_calendar2/ui/user/bloc/user_event.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/domain/models/user/user.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
+import 'package:life_calendar/ui/calendar/drawer/widgets/drawer_item.dart';
+import 'package:life_calendar/ui/core/dialogs/alert_dialog.dart';
+import 'package:life_calendar/ui/core/dialogs/dialog_action.dart';
+import 'package:life_calendar/ui/core/widgets/lifespan_text_field.dart';
+import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar/ui/user/bloc/user_event.dart';
 
 class ChangeLifespanDrawerButton extends StatefulWidget {
   const ChangeLifespanDrawerButton({super.key});

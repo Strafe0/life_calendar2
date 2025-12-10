@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/domain/models/user/user.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/domain/models/user/user.dart';
 
 class LifeSpanTextField extends StatelessWidget {
   const LifeSpanTextField({super.key, this.controller, this.validator});

@@ -2,9 +2,9 @@ import 'dart:io';
 import 'dart:ui' show Locale;
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:life_calendar2/core/l10n/app_localizations.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/data/services/notifications/local_notification_id_enum.dart';
+import 'package:life_calendar/core/l10n/app_localizations.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/services/notifications/local_notification_id_enum.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 

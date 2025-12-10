@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
-import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
-import 'package:life_calendar2/domain/models/user/user.dart';
-import 'package:life_calendar2/ui/user/bloc/user_event.dart';
-import 'package:life_calendar2/ui/user/bloc/user_state.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/repositories/user_repository/user_repository.dart';
+import 'package:life_calendar/data/services/analytics/analytics_service_interface.dart';
+import 'package:life_calendar/domain/models/user/user.dart';
+import 'package:life_calendar/ui/user/bloc/user_event.dart';
+import 'package:life_calendar/ui/user/bloc/user_state.dart';
+import 'package:life_calendar/utils/result.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository _userRepository;

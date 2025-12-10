@@ -1,8 +1,8 @@
-name: life_calendar2
+name: life_calendar
 description: "Life calendar in weeks"
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 3.0.0
 
 environment:
   sdk: ^3.7.0

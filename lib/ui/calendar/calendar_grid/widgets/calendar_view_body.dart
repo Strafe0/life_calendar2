@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/core/navigation/app_routes.dart';
-import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
-import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_interactive_viewer.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_painter.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/current_week_indicator.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/search/search_pull_indicator.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/search/search_ui_utils.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/triggers/calendar_triggers.dart';
-import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
-import 'package:life_calendar2/ui/user/bloc/user_state.dart';
-import 'package:life_calendar2/utils/calendar/calendar_size.dart';
-import 'package:life_calendar2/utils/calendar/search_utils.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/core/navigation/app_routes.dart';
+import 'package:life_calendar/data/services/analytics/analytics_service_interface.dart';
+import 'package:life_calendar/domain/models/week/week_box/week_box.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_interactive_viewer.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_painter.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/widgets/current_week_indicator.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/widgets/search/search_pull_indicator.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/widgets/search/search_ui_utils.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/widgets/triggers/calendar_triggers.dart';
+import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar/ui/user/bloc/user_state.dart';
+import 'package:life_calendar/utils/calendar/calendar_size.dart';
+import 'package:life_calendar/utils/calendar/search_utils.dart';
 
 class CalendarViewBody extends StatefulWidget {
   const CalendarViewBody({

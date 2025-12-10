@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/domain/services/local_backup_service.dart';
-import 'package:life_calendar2/ui/core/snackbars/error_snack_bar.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/domain/services/local_backup_service.dart';
+import 'package:life_calendar/ui/core/snackbars/error_snack_bar.dart';
+import 'package:life_calendar/utils/result.dart';
 
 class ImportDialog extends StatelessWidget {
   const ImportDialog({super.key});

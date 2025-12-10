@@ -1,4 +1,4 @@
-package com.vgol.life_calendar2 
+package com.vgol.life_calendar
 
 import android.appwidget.AppWidgetManager
 import android.content.Context

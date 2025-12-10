@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/data/services/settings_service.dart';
-import 'package:life_calendar2/domain/interactor/weekly_notification_interactor.dart';
-import 'package:life_calendar2/utils/result.dart';
+import 'package:life_calendar/data/services/settings_service.dart';
+import 'package:life_calendar/domain/interactor/weekly_notification_interactor.dart';
+import 'package:life_calendar/utils/result.dart';
 
 // Простые состояния для настроек
 class SettingsState {

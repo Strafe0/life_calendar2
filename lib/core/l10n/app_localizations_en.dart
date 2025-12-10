@@ -302,7 +302,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get assessmentGood => 'Good 🤩';
 
   @override
-  String get assessmentBad => 'Bad 🫠';
+  String get assessmentBad => 'Bad ☹️';
 
   @override
   String get assessmentPoor => 'Normal 😐';

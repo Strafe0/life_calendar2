@@ -4,19 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/core/logger/crashlytics_navigation_observer.dart';
-import 'package:life_calendar2/core/navigation/app_routes.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/calendar_screen.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_screen.dart';
-import 'package:life_calendar2/ui/core/dialogs/alert_dialog.dart';
-import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
-import 'package:life_calendar2/ui/feedback/feedback_screen.dart';
-import 'package:life_calendar2/ui/onboarding/widgets/onboarding_screen.dart';
-import 'package:life_calendar2/ui/splash/widgets/error_splash_screen.dart';
-import 'package:life_calendar2/ui/splash/widgets/splash_screen.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/core/logger/crashlytics_navigation_observer.dart';
+import 'package:life_calendar/core/navigation/app_routes.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_screen.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_cubit.dart';
+import 'package:life_calendar/ui/calendar/week_screen/widgets/week_screen.dart';
+import 'package:life_calendar/ui/core/dialogs/alert_dialog.dart';
+import 'package:life_calendar/ui/core/dialogs/dialog_action.dart';
+import 'package:life_calendar/ui/feedback/feedback_screen.dart';
+import 'package:life_calendar/ui/onboarding/widgets/onboarding_screen.dart';
+import 'package:life_calendar/ui/splash/widgets/error_splash_screen.dart';
+import 'package:life_calendar/ui/splash/widgets/splash_screen.dart';
 
 final goRouter = GoRouter(
   observers: [CrashlyticsNavigationObserver()],

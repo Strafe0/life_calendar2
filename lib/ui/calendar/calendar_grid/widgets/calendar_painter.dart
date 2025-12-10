@@ -1,9 +1,9 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/domain/models/week/week_box/week_box.dart';
-import 'package:life_calendar2/utils/calendar/calendar_size.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/domain/models/week/week_box/week_box.dart';
+import 'package:life_calendar/utils/calendar/calendar_size.dart';
 
 class CalendarPainter extends CustomPainter {
   final List<WeekBox> weekBoxes;

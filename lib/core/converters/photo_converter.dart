@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
+import 'package:life_calendar/core/logger/logger.dart';
 
 class PhotoConverter implements JsonConverter<List<String>, String?> {
   const PhotoConverter();

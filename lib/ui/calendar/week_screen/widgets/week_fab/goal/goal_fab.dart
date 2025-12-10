@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_bloc.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_event.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_source_enum.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_state.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_goals/goal_utils.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_ad/week_ad_bloc.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_ad/week_ad_event.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_ad/week_ad_source_enum.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_ad/week_ad_state.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_cubit.dart';
+import 'package:life_calendar/ui/calendar/week_screen/widgets/week_goals/goal_utils.dart';
 
 class GoalFab extends StatelessWidget {
   const GoalFab({super.key});

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/extensions/brightness_extension.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_bloc.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_event.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_state.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_failure_view.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_loading_view.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_view.dart';
-import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar/core/extensions/brightness_extension.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_ad/week_ad_bloc.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_ad/week_ad_event.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_cubit.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_state.dart';
+import 'package:life_calendar/ui/calendar/week_screen/widgets/week_failure_view.dart';
+import 'package:life_calendar/ui/calendar/week_screen/widgets/week_loading_view.dart';
+import 'package:life_calendar/ui/calendar/week_screen/widgets/week_view.dart';
+import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
 
 class WeekScreen extends StatelessWidget {
   const WeekScreen({super.key, required this.selectedWeekId});

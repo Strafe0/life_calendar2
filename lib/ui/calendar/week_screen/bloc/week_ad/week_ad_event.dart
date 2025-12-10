@@ -1,4 +1,4 @@
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_ad/week_ad_source_enum.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_ad/week_ad_source_enum.dart';
 
 sealed class WeekAdEvent {
   const WeekAdEvent();

@@ -2,13 +2,13 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/domain/models/week/goal/goal.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/bloc/week_cubit.dart';
-import 'package:life_calendar2/ui/calendar/week_screen/widgets/week_goals/goal_utils.dart';
-import 'package:life_calendar2/ui/core/constants.dart';
-import 'package:life_calendar2/ui/core/menus/adaptive_action_menu.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/domain/models/week/goal/goal.dart';
+import 'package:life_calendar/ui/calendar/week_screen/bloc/week_cubit.dart';
+import 'package:life_calendar/ui/calendar/week_screen/widgets/week_goals/goal_utils.dart';
+import 'package:life_calendar/ui/core/constants.dart';
+import 'package:life_calendar/ui/core/menus/adaptive_action_menu.dart';
 
 class GoalWidget extends StatelessWidget {
   const GoalWidget({super.key, required this.goal});

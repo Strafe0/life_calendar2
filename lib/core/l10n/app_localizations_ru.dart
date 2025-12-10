@@ -305,7 +305,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get assessmentGood => 'Хорошо 🤩';
 
   @override
-  String get assessmentBad => 'Плохо 🫠';
+  String get assessmentBad => 'Плохо ☹️';
 
   @override
   String get assessmentPoor => 'Нейтрально 😐';

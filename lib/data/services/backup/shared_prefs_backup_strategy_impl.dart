@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/data/services/backup/backup_strategy.dart';
-import 'package:life_calendar2/data/services/backup/prefs/json_prefs_restore_strategy_impl.dart';
-import 'package:life_calendar2/data/services/backup/prefs/prefs_restore_strategy.dart';
-import 'package:life_calendar2/data/services/backup/prefs/xml_prefs_backup_strategy_impl.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/services/backup/backup_strategy.dart';
+import 'package:life_calendar/data/services/backup/prefs/json_prefs_restore_strategy_impl.dart';
+import 'package:life_calendar/data/services/backup/prefs/prefs_restore_strategy.dart';
+import 'package:life_calendar/data/services/backup/prefs/xml_prefs_backup_strategy_impl.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 

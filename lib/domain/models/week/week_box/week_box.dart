@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:life_calendar2/domain/models/week/week.dart';
-import 'package:life_calendar2/ui/core/themes/week_extension.dart';
+import 'package:life_calendar/domain/models/week/week.dart';
+import 'package:life_calendar/ui/core/themes/week_extension.dart';
 
 class WeekBox {
   final int weekId;

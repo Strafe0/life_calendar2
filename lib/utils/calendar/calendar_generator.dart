@@ -1,6 +1,6 @@
-import 'package:life_calendar2/domain/models/week/week.dart';
-import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
-import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
+import 'package:life_calendar/domain/models/week/week.dart';
+import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
 
 class CalendarGenerator {
   final DateTime birthday;

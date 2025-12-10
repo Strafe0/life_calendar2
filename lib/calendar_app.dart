@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar2/core/l10n/app_localizations.dart';
-import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
-import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/core/navigation/router.dart';
-import 'package:life_calendar2/data/repositories/auth_repository/auth_repository.dart';
-import 'package:life_calendar2/data/repositories/auth_repository/auth_repository_impl.dart';
-import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository.dart';
-import 'package:life_calendar2/data/repositories/onboarding_repository/onboarding_repository_impl.dart';
-import 'package:life_calendar2/data/repositories/user_repository/user_repository.dart';
-import 'package:life_calendar2/data/repositories/user_repository/user_repository_impl.dart';
-import 'package:life_calendar2/data/repositories/week_repository/week_repository.dart';
-import 'package:life_calendar2/data/repositories/week_repository/week_repository_impl.dart';
-import 'package:life_calendar2/data/services/analytics/analytics_service_interface.dart';
-import 'package:life_calendar2/data/services/analytics/firebase_analytics_service.dart';
-import 'package:life_calendar2/data/services/backup/cache_backup_strategy_impl.dart';
-import 'package:life_calendar2/data/services/backup/database_backup_strategy_impl.dart';
-import 'package:life_calendar2/data/services/backup/shared_prefs_backup_strategy_impl.dart';
-import 'package:life_calendar2/data/services/database_service.dart';
-import 'package:life_calendar2/data/services/image_picker_service_impl.dart';
-import 'package:life_calendar2/data/services/local_backup_service_impl.dart';
-import 'package:life_calendar2/data/services/notifications/local_notification_service.dart';
-import 'package:life_calendar2/data/services/settings_service.dart';
-import 'package:life_calendar2/data/services/shared_preferences_service.dart';
-import 'package:life_calendar2/domain/interactor/weekly_notification_interactor.dart';
-import 'package:life_calendar2/domain/services/image_picker_service.dart';
-import 'package:life_calendar2/domain/services/local_backup_service.dart';
-import 'package:life_calendar2/ui/calendar/drawer/bloc/settings_cubit.dart';
-import 'package:life_calendar2/ui/core/themes/app_theme.dart';
-import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
+import 'package:life_calendar/core/l10n/app_localizations.dart';
+import 'package:life_calendar/core/l10n/app_localizations_extension.dart';
+import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/core/navigation/router.dart';
+import 'package:life_calendar/data/repositories/auth_repository/auth_repository.dart';
+import 'package:life_calendar/data/repositories/auth_repository/auth_repository_impl.dart';
+import 'package:life_calendar/data/repositories/onboarding_repository/onboarding_repository.dart';
+import 'package:life_calendar/data/repositories/onboarding_repository/onboarding_repository_impl.dart';
+import 'package:life_calendar/data/repositories/user_repository/user_repository.dart';
+import 'package:life_calendar/data/repositories/user_repository/user_repository_impl.dart';
+import 'package:life_calendar/data/repositories/week_repository/week_repository.dart';
+import 'package:life_calendar/data/repositories/week_repository/week_repository_impl.dart';
+import 'package:life_calendar/data/services/analytics/analytics_service_interface.dart';
+import 'package:life_calendar/data/services/analytics/firebase_analytics_service.dart';
+import 'package:life_calendar/data/services/backup/cache_backup_strategy_impl.dart';
+import 'package:life_calendar/data/services/backup/database_backup_strategy_impl.dart';
+import 'package:life_calendar/data/services/backup/shared_prefs_backup_strategy_impl.dart';
+import 'package:life_calendar/data/services/database_service.dart';
+import 'package:life_calendar/data/services/image_picker_service_impl.dart';
+import 'package:life_calendar/data/services/local_backup_service_impl.dart';
+import 'package:life_calendar/data/services/notifications/local_notification_service.dart';
+import 'package:life_calendar/data/services/settings_service.dart';
+import 'package:life_calendar/data/services/shared_preferences_service.dart';
+import 'package:life_calendar/domain/interactor/weekly_notification_interactor.dart';
+import 'package:life_calendar/domain/services/image_picker_service.dart';
+import 'package:life_calendar/domain/services/local_backup_service.dart';
+import 'package:life_calendar/ui/calendar/drawer/bloc/settings_cubit.dart';
+import 'package:life_calendar/ui/core/themes/app_theme.dart';
+import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
 import 'package:provider/provider.dart';
 
 class CalendarApp extends StatelessWidget {
@@ -106,6 +106,7 @@ class CalendarApp extends StatelessWidget {
               routerConfig: goRouter,
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
+              debugShowCheckedModeBanner: false,
               builder: (context, widget) {
                 Widget error = Center(child: Text(context.l10n.errorHappened));
                 if (widget is Scaffold || widget is Navigator) {

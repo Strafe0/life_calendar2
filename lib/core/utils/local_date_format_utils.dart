@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:life_calendar2/core/constants/constants.dart';
-import 'package:life_calendar2/core/l10n/app_localizations.dart';
+import 'package:life_calendar/core/constants/constants.dart';
+import 'package:life_calendar/core/l10n/app_localizations.dart';
 
 String getLocalizedHint({
   required String pattern,

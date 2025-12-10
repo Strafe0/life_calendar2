@@ -1,13 +1,13 @@
 // ignore_for_file: invalid_annotation_target
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:life_calendar2/core/converters/date_converter.dart';
-import 'package:life_calendar2/core/converters/event_converter.dart';
-import 'package:life_calendar2/core/converters/goal_converter.dart';
-import 'package:life_calendar2/core/converters/photo_converter.dart';
-import 'package:life_calendar2/domain/models/week/event/event.dart';
-import 'package:life_calendar2/domain/models/week/goal/goal.dart';
-import 'package:life_calendar2/domain/models/week/week_assessment/week_assessment.dart';
-import 'package:life_calendar2/domain/models/week/week_tense/week_tense.dart';
+import 'package:life_calendar/core/converters/date_converter.dart';
+import 'package:life_calendar/core/converters/event_converter.dart';
+import 'package:life_calendar/core/converters/goal_converter.dart';
+import 'package:life_calendar/core/converters/photo_converter.dart';
+import 'package:life_calendar/domain/models/week/event/event.dart';
+import 'package:life_calendar/domain/models/week/goal/goal.dart';
+import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
 
 part 'week.freezed.dart';
 

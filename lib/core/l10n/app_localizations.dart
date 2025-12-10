@@ -653,7 +653,7 @@ abstract class AppLocalizations {
   /// No description provided for @assessmentBad.
   ///
   /// In ru, this message translates to:
-  /// **'Плохо 🫠'**
+  /// **'Плохо ☹️'**
   String get assessmentBad;
 
   /// No description provided for @assessmentPoor.
