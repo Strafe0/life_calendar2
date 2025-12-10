@@ -6,6 +6,7 @@ import 'package:life_calendar2/ui/calendar/drawer/widgets/drawer_item.dart';
 import 'package:life_calendar2/ui/calendar/drawer/widgets/drawer_thanks.dart';
 import 'package:life_calendar2/ui/core/dialogs/alert_dialog.dart';
 import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CalendarDrawerFooter extends StatelessWidget {
@@ -20,11 +21,30 @@ class CalendarDrawerFooter extends StatelessWidget {
           const DrawerThanks(),
           const Divider(indent: 16, endIndent: 16),
           DrawerItem(
-            icon: Icons.shield_outlined,
+            icon: Icons.info_outline,
+            title: context.l10n.aboutAppDrawerTitle,
+            onPressed: () async {
+              final packageInfo = await PackageInfo.fromPlatform();
+
+              final String appName = packageInfo.appName;
+              // final String packageName = packageInfo.packageName;
+              final String version = packageInfo.version;
+              final String buildNumber = packageInfo.buildNumber;
+
+              if (!context.mounted) return;
+
+              showAboutDialog(
+                context: context,
+                applicationName: appName,
+                applicationVersion: '$version ($buildNumber)',
+              );
+            },
+          ),
+          DrawerItem(
+            icon: Icons.policy_outlined,
             title: context.l10n.privacyPolicy,
             onPressed: () => _goToPrivacyPolicy(context),
           ),
-          const SizedBox(height: 54),
         ],
       ),
     );

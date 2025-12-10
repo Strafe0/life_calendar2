@@ -342,4 +342,7 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get notificationWeeklyReviewBody =>
       'Воскресный вечер — лучшее время, чтобы вспомнить всё хорошее. Загляни в календарь.';
+
+  @override
+  String get aboutAppDrawerTitle => 'О приложении';
 }

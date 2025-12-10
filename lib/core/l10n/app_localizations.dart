@@ -679,6 +679,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Воскресный вечер — лучшее время, чтобы вспомнить всё хорошее. Загляни в календарь.'**
   String get notificationWeeklyReviewBody;
+
+  /// No description provided for @aboutAppDrawerTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'О приложении'**
+  String get aboutAppDrawerTitle;
 }
 
 class _AppLocalizationsDelegate
