@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/ui/backup/export_dialog.dart';
 import 'package:life_calendar2/ui/backup/import_dialog.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/drawer_item.dart';
+import 'package:life_calendar2/ui/calendar/drawer/widgets/drawer_item.dart';
 
 class DrawerDataBackupSection extends StatelessWidget {
   const DrawerDataBackupSection({super.key});

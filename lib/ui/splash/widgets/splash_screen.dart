@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar2/core/extensions/brightness_extension.dart';
 import 'package:life_calendar2/core/navigation/app_routes.dart';
+import 'package:life_calendar2/data/services/notifications/local_notification_service.dart';
+import 'package:life_calendar2/data/services/settings_service.dart';
+import 'package:life_calendar2/domain/interactor/weekly_notification_interactor.dart';
 import 'package:life_calendar2/ui/splash/bloc/splash_cubit.dart';
 import 'package:life_calendar2/ui/splash/bloc/splash_state.dart';
 import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
@@ -39,6 +42,10 @@ class _SplashScreenState extends State<SplashScreen> {
             (context) => SplashCubit(
               databaseService: context.read(),
               userRepository: context.read(),
+              weeklyNotificationInteractor: WeeklyNotificationInteractor(
+                context.read<LocalNotificationService>(),
+                const SettingsService(),
+              ),
             )..prepareApp(),
         child: Builder(
           builder: (context) {

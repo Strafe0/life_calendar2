@@ -20,9 +20,13 @@ import 'package:life_calendar2/data/services/backup/shared_prefs_backup_strategy
 import 'package:life_calendar2/data/services/database_service.dart';
 import 'package:life_calendar2/data/services/image_picker_service_impl.dart';
 import 'package:life_calendar2/data/services/local_backup_service_impl.dart';
+import 'package:life_calendar2/data/services/notifications/local_notification_service.dart';
+import 'package:life_calendar2/data/services/settings_service.dart';
 import 'package:life_calendar2/data/services/shared_preferences_service.dart';
+import 'package:life_calendar2/domain/interactor/weekly_notification_interactor.dart';
 import 'package:life_calendar2/domain/services/image_picker_service.dart';
 import 'package:life_calendar2/domain/services/local_backup_service.dart';
+import 'package:life_calendar2/ui/calendar/drawer/bloc/settings_cubit.dart';
 import 'package:life_calendar2/ui/core/themes/app_theme.dart';
 import 'package:life_calendar2/ui/user/bloc/user_bloc.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +40,20 @@ class CalendarApp extends StatelessWidget {
       providers: [
         Provider(create: (_) => DatabaseService()),
         Provider(create: (_) => const SharedPreferencesService()),
+        Provider(create: (context) => LocalNotificationService()),
+        Provider(
+          create: (context) {
+            const settingsService = SettingsService();
+
+            return SettingsCubit(
+              WeeklyNotificationInteractor(
+                context.read<LocalNotificationService>(),
+                settingsService,
+              ),
+              settingsService,
+            );
+          },
+        ),
         Provider<AnalyticsService>(
           create: (context) => FirebaseAnalyticsService(),
         ),

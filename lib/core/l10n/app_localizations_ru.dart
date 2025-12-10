@@ -332,4 +332,14 @@ class AppLocalizationsRu extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get notificationSwitchTitle => 'Воскресное напоминание';
+
+  @override
+  String get notificationWeeklyReviewTitle => 'Время для себя';
+
+  @override
+  String get notificationWeeklyReviewBody =>
+      'Воскресный вечер — лучшее время, чтобы вспомнить всё хорошее. Загляни в календарь.';
 }

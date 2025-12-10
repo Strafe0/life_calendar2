@@ -661,6 +661,24 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'{count, plural, =0{Нет событий} one{{count} событие} few{{count} события} many{{count} событий} other{{count} событий}}'**
   String widgetEventsCount(int count);
+
+  /// No description provided for @notificationSwitchTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Воскресное напоминание'**
+  String get notificationSwitchTitle;
+
+  /// No description provided for @notificationWeeklyReviewTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Время для себя'**
+  String get notificationWeeklyReviewTitle;
+
+  /// No description provided for @notificationWeeklyReviewBody.
+  ///
+  /// In ru, this message translates to:
+  /// **'Воскресный вечер — лучшее время, чтобы вспомнить всё хорошее. Загляни в календарь.'**
+  String get notificationWeeklyReviewBody;
 }
 
 class _AppLocalizationsDelegate

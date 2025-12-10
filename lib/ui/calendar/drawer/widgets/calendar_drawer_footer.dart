@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:life_calendar2/core/constants/constants.dart';
 import 'package:life_calendar2/core/l10n/app_localizations_extension.dart';
 import 'package:life_calendar2/core/logger/logger.dart';
-import 'package:life_calendar2/ui/calendar/calendar_grid/widgets/drawer/drawer_item.dart';
+import 'package:life_calendar2/ui/calendar/drawer/widgets/drawer_item.dart';
+import 'package:life_calendar2/ui/calendar/drawer/widgets/drawer_thanks.dart';
 import 'package:life_calendar2/ui/core/dialogs/alert_dialog.dart';
 import 'package:life_calendar2/ui/core/dialogs/dialog_action.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,6 +17,7 @@ class CalendarDrawerFooter extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Column(
         children: [
+          const DrawerThanks(),
           const Divider(indent: 16, endIndent: 16),
           DrawerItem(
             icon: Icons.shield_outlined,

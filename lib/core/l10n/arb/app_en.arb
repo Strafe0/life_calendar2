@@ -256,5 +256,8 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "notificationSwitchTitle": "Sunday Evening Reminder",
+    "notificationWeeklyReviewTitle": "Time for yourself",
+    "notificationWeeklyReviewBody": "Sunday evening is the perfect time to remember the good moments. Take a look at your calendar."
 }

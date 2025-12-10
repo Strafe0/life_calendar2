@@ -256,5 +256,11 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "notificationSwitchTitle": "Воскресное напоминание",
+    "@notificationSwitchTitle": {},
+    "notificationWeeklyReviewTitle": "Время для себя",
+    "@notificationWeeklyReviewTitle": {},
+    "notificationWeeklyReviewBody": "Воскресный вечер — лучшее время, чтобы вспомнить всё хорошее. Загляни в календарь.",
+    "@notificationWeeklyReviewBody": {}
 }
