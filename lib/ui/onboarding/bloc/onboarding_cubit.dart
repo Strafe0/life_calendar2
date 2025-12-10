@@ -12,12 +12,14 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     : _onboardingRepository = onboardingRepository,
       super(const OnboardingInitial());
 
-  Future<void> loadPages() async {
+  Future<void> loadPages({required bool isFullOnboarding}) async {
     if (state is OnboardingLoading) return;
 
     emit(const OnboardingLoading());
 
-    final pagesResult = await _onboardingRepository.getPages();
+    final pagesResult = await _onboardingRepository.getPages(
+      isFullOnboarding: isFullOnboarding,
+    );
 
     switch (pagesResult) {
       case Ok<List<OnboardingPage>>():

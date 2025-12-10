@@ -46,6 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 context.read<LocalNotificationService>(),
                 const SettingsService(),
               ),
+              sharedPreferencesService: context.read(),
             )..prepareApp(),
         child: Builder(
           builder: (context) {
@@ -58,6 +59,13 @@ class _SplashScreenState extends State<SplashScreen> {
                   case SplashReady():
                     if (state.isAuthenticated) {
                       context.read<UserBloc>().add(UserReceived(state.user));
+
+                      if (state.isFirstLaunchV3) {
+                        return context.go(
+                          AppRoute.onboardingPath(isFull: false),
+                        );
+                      }
+
                       context.go(AppRoute.calendar);
                     } else {
                       context.go(AppRoute.onboarding);

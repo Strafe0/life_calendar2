@@ -9,7 +9,9 @@ import 'package:life_calendar2/ui/onboarding/widgets/onboarding_loading_view.dar
 import 'package:life_calendar2/ui/onboarding/widgets/onboarding_view.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+  const OnboardingScreen({super.key, required this.isFullOnboarding});
+
+  final bool isFullOnboarding;
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -25,7 +27,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       create:
           (context) =>
               OnboardingCubit(onboardingRepository: context.read())
-                ..loadPages(),
+                ..loadPages(isFullOnboarding: widget.isFullOnboarding),
       child: AnnotatedRegion(
         value: SystemUiOverlayStyle(
           statusBarColor: theme.statusBarColor,
@@ -45,8 +47,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   return switch (state) {
                     OnboardingInitial() ||
                     OnboardingLoading() => const OnboardingLoadingView(),
-                    OnboardingFailure() => const OnboardingErrorView(),
-                    OnboardingSuccess() => OnboardingView(pages: state.pages),
+                    OnboardingFailure() => OnboardingErrorView(
+                      isFullOnboarding: widget.isFullOnboarding,
+                    ),
+                    OnboardingSuccess() => OnboardingView(
+                      pages: state.pages,
+                      isFullOnboarding: widget.isFullOnboarding,
+                    ),
                   };
                 },
               ),

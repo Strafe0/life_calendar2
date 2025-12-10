@@ -103,11 +103,26 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get onboardingTitleJumpToCurrentWeek =>
-      'Переходите к текущей неделе одним нажатием';
+      'Переходите к текущей неделе одним движением';
 
   @override
   String get onboardingContentJumpToCurrentWeek =>
-      'Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.';
+      'Чтобы сразу перейти к текущей неделе, потяните снизу вверх.';
+
+  @override
+  String get onboardingTitleSearch =>
+      'Переходите к поиску недели одним движением';
+
+  @override
+  String get onboardingContentSearch =>
+      'Чтобы перейти к поиску недели, сделайте свайп сверху вниз';
+
+  @override
+  String get onboardingTitleSideMenu => 'Открывайте боковое меню вытягиванием';
+
+  @override
+  String get onboardingContentSideMenu =>
+      'Чтобы открыть боковое меню, потяните от левого края к центру экрана.';
 
   @override
   String get enterBirthdate => 'Введите дату рождения';

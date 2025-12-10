@@ -9,7 +9,8 @@ class AppRoute {
 
   static const feedback = 'feedback';
 
-  static const onboarding = '/onboarding';
+  static const onboarding = '/onboarding/:isFull';
+  static String onboardingPath({required bool isFull}) => '/onboarding/$isFull';
 
   static const error = '/error';
 }

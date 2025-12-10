@@ -103,11 +103,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingTitleJumpToCurrentWeek =>
-      'Jump to the current week with one tap';
+      'Jump to the current week in one move';
 
   @override
   String get onboardingContentJumpToCurrentWeek =>
-      'To jump immediately to the current week, tap the button at the bottom right.';
+      'To quickly navigate to the current week, pull up from the bottom.';
+
+  @override
+  String get onboardingTitleSearch => 'Jump to week search in one move';
+
+  @override
+  String get onboardingContentSearch =>
+      'To access week search, swipe down from the top.';
+
+  @override
+  String get onboardingTitleSideMenu => 'Open the side menu by swiping';
+
+  @override
+  String get onboardingContentSideMenu =>
+      'To open the side menu, pull from the left edge toward the center of the screen.';
 
   @override
   String get enterBirthdate => 'Enter date of birth';

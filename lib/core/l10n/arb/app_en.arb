@@ -72,14 +72,12 @@
     "@onboardingContentZoom": {
         "description": "Текст подсказки о приближении календаря"
     },
-    "onboardingTitleJumpToCurrentWeek": "Jump to the current week with one tap",
-    "@onboardingTitleJumpToCurrentWeek": {
-        "description": "Заголовок подсказки о переходе к текущей неделе"
-    },
-    "onboardingContentJumpToCurrentWeek": "To jump immediately to the current week, tap the button at the bottom right.",
-    "@onboardingContentJumpToCurrentWeek": {
-        "description": "Текст подсказки о переходе к текущей неделе"
-    },
+    "onboardingTitleJumpToCurrentWeek": "Jump to the current week in one move",
+    "onboardingContentJumpToCurrentWeek": "To quickly navigate to the current week, pull up from the bottom.",
+    "onboardingTitleSearch": "Jump to week search in one move",
+    "onboardingContentSearch": "To access week search, swipe down from the top.",
+    "onboardingTitleSideMenu": "Open the side menu by swiping",
+    "onboardingContentSideMenu": "To open the side menu, pull from the left edge toward the center of the screen.",
     "enterBirthdate": "Enter date of birth",
     "@enterBirthdate": {},
     "dateFormatError": "Invalid date format",

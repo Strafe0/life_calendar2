@@ -15,8 +15,13 @@ import 'package:life_calendar2/ui/user/bloc/user_event.dart';
 import 'package:life_calendar2/utils/result.dart';
 
 class OnboardingView extends StatefulWidget {
-  const OnboardingView({super.key, required this.pages});
+  const OnboardingView({
+    super.key,
+    required this.pages,
+    required this.isFullOnboarding,
+  });
 
+  final bool isFullOnboarding;
   final List<OnboardingPage> pages;
 
   @override
@@ -25,7 +30,9 @@ class OnboardingView extends StatefulWidget {
 
 class _OnboardingViewState extends State<OnboardingView>
     with TickerProviderStateMixin {
-  int get totalPageCount => widget.pages.length + 1; // + registration
+  int get totalPageCount =>
+      widget.pages.length +
+      (widget.isFullOnboarding ? 1 : 0); // + optional registration
 
   final _pageController = PageController();
   late final _tabController = TabController(
@@ -44,12 +51,17 @@ class _OnboardingViewState extends State<OnboardingView>
           child: Row(
             children: [
               TextButton(
-                onPressed:
-                    () => _pageController.animateToPage(
-                      widget.pages.length,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.fastOutSlowIn,
-                    ),
+                onPressed: () {
+                  if (!widget.isFullOnboarding) {
+                    return context.go(AppRoute.calendar);
+                  }
+
+                  _pageController.animateToPage(
+                    widget.pages.length,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.fastOutSlowIn,
+                  );
+                },
                 child: Text(
                   context.l10n.skip,
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
@@ -88,9 +100,10 @@ class _OnboardingViewState extends State<OnboardingView>
             itemCount: totalPageCount,
             controller: _pageController,
             itemBuilder: (context, i) {
-              if (i == widget.pages.length) {
+              if (i == widget.pages.length && widget.isFullOnboarding) {
                 return const RegistrationPage();
               }
+
               return OnboardingPageWidget(page: widget.pages[i]);
             },
             onPageChanged: (newPageIndex) {
@@ -112,6 +125,13 @@ class _OnboardingViewState extends State<OnboardingView>
               curve: Curves.easeInOut,
             );
           },
+          lastPageRightButton:
+              widget.isFullOnboarding
+                  ? null
+                  : TextButton(
+                    onPressed: () => context.go(AppRoute.calendar),
+                    child: Text(context.l10n.gotIt),
+                  ),
         ),
       ],
     );

@@ -281,14 +281,38 @@ abstract class AppLocalizations {
   /// Заголовок подсказки о переходе к текущей неделе
   ///
   /// In ru, this message translates to:
-  /// **'Переходите к текущей неделе одним нажатием'**
+  /// **'Переходите к текущей неделе одним движением'**
   String get onboardingTitleJumpToCurrentWeek;
 
   /// Текст подсказки о переходе к текущей неделе
   ///
   /// In ru, this message translates to:
-  /// **'Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.'**
+  /// **'Чтобы сразу перейти к текущей неделе, потяните снизу вверх.'**
   String get onboardingContentJumpToCurrentWeek;
+
+  /// Заголовок подсказки о переходе к поиску недели
+  ///
+  /// In ru, this message translates to:
+  /// **'Переходите к поиску недели одним движением'**
+  String get onboardingTitleSearch;
+
+  /// No description provided for @onboardingContentSearch.
+  ///
+  /// In ru, this message translates to:
+  /// **'Чтобы перейти к поиску недели, сделайте свайп сверху вниз'**
+  String get onboardingContentSearch;
+
+  /// Заголовок подсказки об открытии бокового меню
+  ///
+  /// In ru, this message translates to:
+  /// **'Открывайте боковое меню вытягиванием'**
+  String get onboardingTitleSideMenu;
+
+  /// No description provided for @onboardingContentSideMenu.
+  ///
+  /// In ru, this message translates to:
+  /// **'Чтобы открыть боковое меню, потяните от левого края к центру экрана.'**
+  String get onboardingContentSideMenu;
 
   /// No description provided for @enterBirthdate.
   ///

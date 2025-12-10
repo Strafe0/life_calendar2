@@ -112,7 +112,12 @@ final goRouter = GoRouter(
     GoRoute(
       path: AppRoute.onboarding,
       name: 'OnboardingScreen',
-      builder: (context, state) => const OnboardingScreen(),
+      builder: (context, state) {
+        final isFull =
+            bool.tryParse(state.pathParameters['isFull'] ?? 'true') ?? true;
+
+        return OnboardingScreen(isFullOnboarding: isFull);
+      },
     ),
     GoRoute(
       path: AppRoute.error,

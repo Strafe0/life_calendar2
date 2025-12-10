@@ -72,14 +72,26 @@
     "@onboardingContentZoom": {
         "description": "Текст подсказки о приближении календаря"
     },
-    "onboardingTitleJumpToCurrentWeek": "Переходите к текущей неделе одним нажатием",
+    "onboardingTitleJumpToCurrentWeek": "Переходите к текущей неделе одним движением",
     "@onboardingTitleJumpToCurrentWeek": {
         "description": "Заголовок подсказки о переходе к текущей неделе"
     },
-    "onboardingContentJumpToCurrentWeek": "Чтобы сразу перейти к текущей неделе, нажмите на кнопку снизу справа.",
+    "onboardingContentJumpToCurrentWeek": "Чтобы сразу перейти к текущей неделе, потяните снизу вверх.",
     "@onboardingContentJumpToCurrentWeek": {
         "description": "Текст подсказки о переходе к текущей неделе"
     },
+    "onboardingTitleSearch": "Переходите к поиску недели одним движением",
+    "@onboardingTitleSearch": {
+        "description": "Заголовок подсказки о переходе к поиску недели"
+    },
+    "onboardingContentSearch": "Чтобы перейти к поиску недели, сделайте свайп сверху вниз",
+    "@onboardingContentSearch": {},
+    "onboardingTitleSideMenu": "Открывайте боковое меню вытягиванием",
+    "@onboardingTitleSideMenu": {
+        "description": "Заголовок подсказки об открытии бокового меню"
+    },
+    "onboardingContentSideMenu": "Чтобы открыть боковое меню, потяните от левого края к центру экрана.",
+    "@onboardingContentSideMenu": {},
     "enterBirthdate": "Введите дату рождения",
     "@enterBirthdate": {},
     "dateFormatError": "Неверный формат даты",

@@ -5,6 +5,7 @@ class SharedPreferencesService {
   const SharedPreferencesService();
 
   static const _firstLaunchKey = 'firstTime';
+  static const _firstLaunchV3Key = 'firstTimeV3';
   static const _birthdayKey = 'birthday';
   static const _lifespanKey = 'lifespan';
   static const _userIdKey = 'user_id';
@@ -112,6 +113,34 @@ class SharedPreferencesService {
       final prefs = await SharedPreferences.getInstance();
 
       await prefs.setString(_userIdKey, userId);
+    } catch (e, s) {
+      logger.e('SharedPrefs error', error: e, stackTrace: s);
+    }
+  }
+
+  Future<bool> isFirstLaunchV3() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+
+      final isFirstLaunch = prefs.getBool(_firstLaunchV3Key);
+
+      if (isFirstLaunch == null) {
+        logger.d('isFirstLaunchV3 from prefs is null');
+        return true;
+      }
+
+      return isFirstLaunch;
+    } catch (e, s) {
+      logger.e('SharedPrefs error', error: e, stackTrace: s);
+      return true;
+    }
+  }
+
+  Future<void> setFirstLaunchV3({required bool isFirstLaunch}) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+
+      await prefs.setBool(_firstLaunchV3Key, isFirstLaunch);
     } catch (e, s) {
       logger.e('SharedPrefs error', error: e, stackTrace: s);
     }
