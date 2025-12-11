@@ -41,10 +41,9 @@ class WeekAdBloc extends Bloc<WeekAdEvent, WeekAdState> {
       },
     );
 
-    // TODO: add real id
     await adLoader.loadAd(
       adRequestConfiguration: AdRequestConfiguration(
-        adUnitId: 'demo-rewarded-yandex',
+        adUnitId: 'R-M-2265467-3',
         age: event.userAge,
       ),
     );

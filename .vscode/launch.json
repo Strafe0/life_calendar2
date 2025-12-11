@@ -1,25 +1,46 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "life_calendar2",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "life_calendar2 (profile mode)",
+            "name": "Life Calendar (Main)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "lifeCalendar"
+            ]
         },
         {
-            "name": "life_calendar2 (release mode)",
+            "name": "Life Calendar (Test)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "lifeCalendarTest"
+            ]
+        },
+        {
+            "name": "Life Calendar (Test 2)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "lifeCalendarTest2"
+            ]
+        },
+        {
+            "name": "Life Calendar (Release Mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "lifeCalendar"
+            ]
         }
     ]
 }

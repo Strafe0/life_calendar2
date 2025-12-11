@@ -1,3 +1,12 @@
+import java.util.Properties
+import java.io.FileInputStream
+
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+
 plugins {
     id("com.android.application")
     // START: FlutterFire Configuration
@@ -35,43 +44,44 @@ android {
         versionName = flutter.versionName
     }
 
-    // signingConfigs {
-    //     release {
-    //         keyAlias keystoreProperties['keyAlias']
-    //         keyPassword keystoreProperties['keyPassword']
-    //         storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-    //         storePassword keystoreProperties['storePassword']
-    //     }
-    // }
+    signingConfigs {
+        create("release") {
+            keyAlias = keystoreProperties["keyAlias"] as String?
+            keyPassword = keystoreProperties["keyPassword"] as String?
+            storePassword = keystoreProperties["storePassword"] as String?
+            
+            val storeFileKey = keystoreProperties["storeFile"] as String?
+            storeFile = if (storeFileKey != null) file(storeFileKey) else null
+        }
+    }
 
-    // flavorDimensions "app"
-    // productFlavors {
-    //     lifeCalendar {
-    //         dimension "app"
-    //         resValue "string", "app_name", "Календарь жизни"
-    //         signingConfig signingConfigs.release
-    //     }
-    //     lifeCalendarTest {
-    //         dimension "app"
-    //         resValue "string", "app_name", "Test Life Calendar"
-    //         applicationIdSuffix ".test"
-    //         versionNameSuffix "-test"
-    //         signingConfig signingConfigs.debug
-    //     }
-    //     lifeCalendarTest2 {
-    //         dimension "app"
-    //         resValue "string", "app_name", "Test2 Life Calendar"
-    //         applicationIdSuffix ".test2"
-    //         versionNameSuffix "-test2"
-    //         signingConfig signingConfigs.debug
-    //     }
-    // }
+    flavorDimensions += "app"
+    productFlavors {
+        create("lifeCalendar") {
+            dimension = "app"
+            
+            signingConfig = signingConfigs.getByName("release")
+        }
+
+        create("lifeCalendarTest") {
+            dimension = "app"
+            applicationIdSuffix = ".test"
+            versionNameSuffix = "-test"
+            
+            signingConfig = signingConfigs.getByName("debug")
+        }
+
+        create("lifeCalendarTest2") {
+            dimension = "app"
+            applicationIdSuffix = ".test2"
+            versionNameSuffix = "-test2"
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+        getByName("release") {            
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 }

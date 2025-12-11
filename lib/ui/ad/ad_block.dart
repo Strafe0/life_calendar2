@@ -30,9 +30,7 @@ class _AdBlockState extends State<AdBlock> {
     );
 
     _bannerAd = BannerAd(
-      // TODO: add real id
-      adUnitId: 'demo-banner-yandex',
-      // adUnitId: 'R-M-2265467-1',
+      adUnitId: 'R-M-2265467-1',
       adSize: adSize,
       adRequest: AdRequest(
         age: userState is UserSuccess ? userState.user.age : null,
