@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
@@ -30,7 +32,7 @@ class _AdBlockState extends State<AdBlock> {
     );
 
     _bannerAd = BannerAd(
-      adUnitId: 'R-M-2265467-1',
+      adUnitId: Platform.isAndroid ? 'R-M-2265467-1' : 'R-M-17977076-1',
       adSize: adSize,
       adRequest: AdRequest(
         age: userState is UserSuccess ? userState.user.age : null,

@@ -8,7 +8,7 @@ class HomeWidgetService {
   static const String _appGroupId = 'group.com.vgol.life_calendar2';
   static const String _androidWidgetName = 'HomeWidgetProvider';
   // Name of Kind from Swift file
-  static const String _iOSWidgetName = 'HomeWidget'; 
+  static const String _iOSWidgetName = 'HomeWidget';
 
   // Keys for data sharing
   static const String _keyWeeksText = 'id_weeks_text';
@@ -30,10 +30,7 @@ class HomeWidgetService {
     final progress =
         ((currentWeekNumber / totalWeeksCount).clamp(0.0, 1.0) * 100).toInt();
 
-    final weeksStr = l10n.widgetWeeksStats(
-      currentWeekNumber,
-      totalWeeksCount,
-    );
+    final weeksStr = l10n.widgetWeeksStats(currentWeekNumber, totalWeeksCount);
     final percentStr = l10n.widgetLifeStats(progress);
     final goalsStr = '🎯 ${l10n.widgetGoalsCount(currentWeekGoalsCount)}';
     final eventsStr = '🗓️ ${l10n.widgetEventsCount(currentWeekEventsCount)}';

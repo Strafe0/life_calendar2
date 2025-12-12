@@ -30,7 +30,6 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
         DateTextField(
           firstDate: firstAvailableDate,
           lastDate: DateTime.now(),
-          initialDate: _birthdate,
           fieldLabelText: context.l10n.enterBirthdate,
           errorFormatText: context.l10n.dateFormatError,
           onChanged: (value) {

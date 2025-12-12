@@ -12,6 +12,12 @@
             ]
         },
         {
+            "name": "Life Calendar (iOS)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+        },
+        {
             "name": "Life Calendar (Test)",
             "request": "launch",
             "type": "dart",

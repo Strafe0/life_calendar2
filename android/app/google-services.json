@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "69522046073-hlbr5pmreahuhdk5o33kmtvcdl8hp839.apps.googleusercontent.com",
+              "client_id": "69522046073-5hqveh89rcd6ck3tf2chlcacomvv1dj1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.vgol.lifeCalendar"
+                "bundle_id": "com.vgol.lifeCalendar2"
               }
             }
           ]
@@ -51,9 +51,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:69522046073:android:8d9f96361b162f3eaaa8a8",
+        "mobilesdk_app_id": "1:69522046073:android:b11de44798bf9385aaa8a8",
         "android_client_info": {
-          "package_name": "com.vgol.life_calendar2"
+          "package_name": "com.vgol.life_calendar.test"
         }
       },
       "oauth_client": [
@@ -75,10 +75,10 @@
               "client_type": 3
             },
             {
-              "client_id": "69522046073-hlbr5pmreahuhdk5o33kmtvcdl8hp839.apps.googleusercontent.com",
+              "client_id": "69522046073-5hqveh89rcd6ck3tf2chlcacomvv1dj1.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.vgol.lifeCalendar"
+                "bundle_id": "com.vgol.lifeCalendar2"
               }
             }
           ]

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show Platform;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar/core/logger/logger.dart';
@@ -43,7 +44,7 @@ class WeekAdBloc extends Bloc<WeekAdEvent, WeekAdState> {
 
     await adLoader.loadAd(
       adRequestConfiguration: AdRequestConfiguration(
-        adUnitId: 'R-M-2265467-3',
+        adUnitId: Platform.isAndroid ? 'R-M-2265467-3' : 'R-M-17977076-2',
         age: event.userAge,
       ),
     );

@@ -7,7 +7,7 @@ import android.widget.RemoteViews
 import es.antonborri.home_widget.HomeWidgetProvider
 import android.view.View
 
-class HomeWidgetProvider : HomeWidgetProvider() {
+open class HomeWidgetProvider : HomeWidgetProvider() {
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray, widgetData: SharedPreferences) {
         appWidgetIds.forEach { widgetId ->
