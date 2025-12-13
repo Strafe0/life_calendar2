@@ -71,16 +71,16 @@ PODS:
   - ChartboostYandexMobileAdsAdapters (9.9.2.2):
     - ChartboostSDK (~> 9.9.2)
     - YandexMobileAds (~> 7.17.0)
-  - DivKit (32.27.0):
-    - DivKit_LayoutKit (= 32.27.0)
-    - DivKit_Serialization (= 32.27.0)
+  - DivKit (32.29.0):
+    - DivKit_LayoutKit (= 32.29.0)
+    - DivKit_Serialization (= 32.29.0)
     - VGSL (~> 7.12)
-  - DivKit_LayoutKit (32.27.0):
-    - DivKit_LayoutKitInterface (= 32.27.0)
+  - DivKit_LayoutKit (32.29.0):
+    - DivKit_LayoutKitInterface (= 32.29.0)
     - VGSL (~> 7.12)
-  - DivKit_LayoutKitInterface (32.27.0):
+  - DivKit_LayoutKitInterface (32.29.0):
     - VGSL (~> 7.12)
-  - DivKit_Serialization (32.27.0):
+  - DivKit_Serialization (32.29.0):
     - VGSL (~> 7.12)
   - DivKitBinaryCompatibilityFacade (5.2.1):
     - DivKit (~> 32.14)
@@ -329,9 +329,9 @@ PODS:
   - PromisesObjC (2.4.0)
   - PromisesSwift (2.4.0):
     - PromisesObjC (= 2.4.0)
-  - SDWebImage (5.21.3):
-    - SDWebImage/Core (= 5.21.3)
-  - SDWebImage/Core (5.21.3)
+  - SDWebImage (5.21.5):
+    - SDWebImage/Core (= 5.21.5)
+  - SDWebImage/Core (5.21.5)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -339,22 +339,22 @@ PODS:
     - Flutter
     - FlutterMacOS
   - SwiftyGif (5.4.5)
-  - UnityAds (4.16.4)
+  - UnityAds (4.16.5)
   - UnityAdsYandexMobileAdsAdapters (4.16.1.2):
     - UnityAds (~> 4.16.1)
     - YandexMobileAds (~> 7.17.0)
   - url_launcher_ios (0.0.1):
     - Flutter
-  - VGSL (7.12.3):
-    - VGSLFundamentals (= 7.12.3)
-    - VGSLNetworking (= 7.12.3)
-    - VGSLUI (= 7.12.3)
-  - VGSLFundamentals (7.12.3)
-  - VGSLNetworking (7.12.3):
-    - VGSLFundamentals (= 7.12.3)
-    - VGSLUI (= 7.12.3)
-  - VGSLUI (7.12.3):
-    - VGSLFundamentals (= 7.12.3)
+  - VGSL (7.15.2):
+    - VGSLFundamentals (= 7.15.2)
+    - VGSLNetworking (= 7.15.2)
+    - VGSLUI (= 7.15.2)
+  - VGSLFundamentals (7.15.2)
+  - VGSLNetworking (7.15.2):
+    - VGSLFundamentals (= 7.15.2)
+    - VGSLUI (= 7.15.2)
+  - VGSLUI (7.15.2):
+    - VGSLFundamentals (= 7.15.2)
   - yandex_mobileads (7.17.0):
     - Flutter
     - YandexMobileAds (~> 7.17.0)
@@ -524,10 +524,10 @@ SPEC CHECKSUMS:
   BigoADSYandexMobileAdsAdapters: b3dacef5491ea9eb12171ca8a702682eff6f0058
   ChartboostSDK: b145b4671df894755be0f7811b3e69a912cecbdc
   ChartboostYandexMobileAdsAdapters: e43b33124ac465381b9d09f06aac7bc42b379ba7
-  DivKit: e46e996e62f5af44c1c6ef535cccbed131a4d1c1
-  DivKit_LayoutKit: 5dc0cdffb519906b39f1800163b14dc170516264
-  DivKit_LayoutKitInterface: deed0466b9c9497646088ff25f719cc24a90e03b
-  DivKit_Serialization: c004c3a4626071aa3762e075dbce63b4da3af951
+  DivKit: cb89a628fc0d7c89b4d1eb8e9ee315ded32a20d8
+  DivKit_LayoutKit: 65600989bafd387319409460fbb812a1687babc7
+  DivKit_LayoutKitInterface: d2d3c1d928ea7684069564dac6a057594e40a42f
+  DivKit_Serialization: 3f88e14df78a3a2178afed66530aefa53f6aee07
   DivKitBinaryCompatibilityFacade: 38b84cea43f82129388706b4c25f71519d42a18d
   DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
   DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
@@ -570,17 +570,17 @@ SPEC CHECKSUMS:
   path_provider_foundation: bb55f6dbba17d0dccd6737fe6f7f34fbd0376880
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   PromisesSwift: 9d77319bbe72ebf6d872900551f7eeba9bce2851
-  SDWebImage: 16309af6d214ba3f77a7c6f6fdda888cb313a50a
+  SDWebImage: e9c98383c7572d713c1a0d7dd2783b10599b9838
   shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
   sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
-  UnityAds: 91a5d786c1e79fcbf702c525af4700158aeb36c8
+  UnityAds: 8b9e0ecf7c4aa7334d15f81efb58db279e28f502
   UnityAdsYandexMobileAdsAdapters: 3d6e56d71abee96c204992f3a82461a963dc8142
   url_launcher_ios: 7a95fa5b60cc718a708b8f2966718e93db0cef1b
-  VGSL: 7286de744142fedf137953e542a251b12c94b796
-  VGSLFundamentals: 43e3a150efd99d181e823fcdd60241e295ed4c7b
-  VGSLNetworking: 9152be749af191ed4a77d5d1398142d74284c49f
-  VGSLUI: 56123a84ba0cf39540befa77a08ca5a0e9d7c2d3
+  VGSL: dabeeb6e50ea7e7a3bb9152cd2767e5348214a91
+  VGSLFundamentals: ce1fb1b5b665e766334598a28ff332a682b5cb22
+  VGSLNetworking: 98eb009d428290a234b9f8ce1f55d35aebd04441
+  VGSLUI: 4a75805b8c64c7260684894ab835ce2f5130c965
   yandex_mobileads: 489ecd6a1dee23501f7e2db6eeae81eca8d6ac3f
   YandexMobileAds: 289ca4aa8e92f9c3ee093ee9236795e8b94a13a0
   ZIPFoundation: b8c29ea7ae353b309bc810586181fd073cb3312c
