@@ -6,6 +6,7 @@ import 'package:life_calendar/domain/models/week/event/event.dart';
 import 'package:life_calendar/ui/calendar/week_screen/bloc/week_cubit.dart';
 import 'package:life_calendar/ui/calendar/week_screen/widgets/week_events/event_utils.dart';
 import 'package:life_calendar/ui/core/constants.dart';
+import 'package:life_calendar/ui/core/menus/adaptive_action_menu.dart';
 
 class EventWidget extends StatelessWidget {
   const EventWidget({super.key, required this.event});
@@ -23,35 +24,12 @@ class EventWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.bodySmall,
         ),
         contentPadding: const EdgeInsets.only(left: 16),
-        trailing: PopupMenuButton<int>(
-          icon: Icon(
-            Icons.more_vert,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-          onSelected: (value) {
-            if (value == 1) {
-              showEventSheet(context, event: event);
-            } else if (value == 2) {
-              context.read<WeekCubit>().deleteEvent(event);
-            }
-          },
-          itemBuilder:
-              (context) => [
-                PopupMenuItem(
-                  value: 1,
-                  child: Text(
-                    context.l10n.edit,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 2,
-                  child: Text(
-                    context.l10n.delete,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ),
-              ],
+        trailing: AdaptiveActionMenu(
+          onEdit: () => showEventSheet(context, event: event),
+          onDelete: () => context.read<WeekCubit>().deleteEvent(event),
+          editLabel: context.l10n.edit,
+          deleteLabel: context.l10n.delete,
+          cancelLabel: context.l10n.cancel,
         ),
       ),
     );
