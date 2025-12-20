@@ -20,7 +20,7 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
+    final brightness = Theme.brightnessOf(context);
     final theme = OnboardingTheme(brightness: brightness);
 
     return BlocProvider(
@@ -32,16 +32,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         value: SystemUiOverlayStyle(
           statusBarColor: theme.statusBarColor,
           systemNavigationBarColor: theme.systemNavigationBarColor,
-          statusBarBrightness:
-              brightness == Brightness.dark
-                  ? Brightness.light
-                  : Brightness.dark,
+          statusBarBrightness: brightness,
         ),
-        child: SafeArea(
-          maintainBottomViewPadding: true,
-          child: Scaffold(
-            body: DecoratedBox(
-              decoration: BoxDecoration(gradient: theme.gradient),
+        child: Scaffold(
+          body: DecoratedBox(
+            decoration: BoxDecoration(gradient: theme.gradient),
+            child: SafeArea(
+              maintainBottomViewPadding: true,
               child: BlocBuilder<OnboardingCubit, OnboardingState>(
                 builder: (context, state) {
                   return switch (state) {

@@ -123,8 +123,8 @@ class AppTheme {
       backgroundColor: Color(0xFF0151DF), // primary
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Color(0xFF0151DF),
-        statusBarIconBrightness: Brightness.light,
-        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
       ),
       iconTheme: IconThemeData(color: Color(0xFFFFFFFF)),
     ),
@@ -321,8 +321,8 @@ class AppTheme {
       backgroundColor: Color(0xFF303034), //primary
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Color(0xFF303034),
-        statusBarIconBrightness: Brightness.light,
-        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
       ),
       iconTheme: IconThemeData(color: Color(0xFFC7C6CA)),
     ),

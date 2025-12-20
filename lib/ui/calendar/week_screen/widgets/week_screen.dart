@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:life_calendar/core/extensions/brightness_extension.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/bloc/calendar_cubit.dart';
 import 'package:life_calendar/ui/calendar/week_screen/bloc/week_ad/week_ad_bloc.dart';
@@ -31,23 +29,14 @@ class WeekScreen extends StatelessWidget {
             _requestAdLoad(context);
           }
         },
-        child: AnnotatedRegion(
-          value: SystemUiOverlayStyle(
-            statusBarColor: Theme.of(context).appBarTheme.backgroundColor,
-            statusBarBrightness:
-                Theme.brightnessOf(context).isDarkMode
-                    ? Brightness.dark
-                    : Brightness.light,
-          ),
-          child: BlocBuilder<WeekCubit, WeekState>(
-            builder: (context, state) {
-              return switch (state) {
-                WeekSuccess() => WeekView(week: state.week),
-                WeekInitial() || WeekLoading() => const WeekLoadingView(),
-                WeekFailure() => const WeekFailureView(),
-              };
-            },
-          ),
+        child: BlocBuilder<WeekCubit, WeekState>(
+          builder: (context, state) {
+            return switch (state) {
+              WeekSuccess() => WeekView(week: state.week),
+              WeekInitial() || WeekLoading() => const WeekLoadingView(),
+              WeekFailure() => const WeekFailureView(),
+            };
+          },
         ),
       ),
     );

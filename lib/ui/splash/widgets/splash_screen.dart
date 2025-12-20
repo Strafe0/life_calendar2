@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:life_calendar/core/extensions/brightness_extension.dart';
 import 'package:life_calendar/core/navigation/app_routes.dart';
 import 'package:life_calendar/data/services/notifications/local_notification_service.dart';
 import 'package:life_calendar/data/services/settings_service.dart';
@@ -32,10 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
         statusBarColor: ColorScheme.of(context).surface,
-        statusBarIconBrightness:
-            Theme.brightnessOf(context).isDarkMode
-                ? Brightness.light
-                : Brightness.dark,
+        statusBarIconBrightness: Theme.brightnessOf(context),
       ),
       child: BlocProvider(
         create:
@@ -74,9 +70,9 @@ class _SplashScreenState extends State<SplashScreen> {
                     context.go(AppRoute.error);
                 }
               },
-              child: const SafeArea(
-                child: Scaffold(
-                  body: Center(child: CircularProgressIndicator()),
+              child: const Scaffold(
+                body: SafeArea(
+                  child: Center(child: CircularProgressIndicator()),
                 ),
               ),
             );
