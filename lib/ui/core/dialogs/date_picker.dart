@@ -18,7 +18,7 @@ Future<DateTime?> showAdaptiveDatePicker(
     );
   }
 
-  DateTime? tempPickedDate = initialDate;
+  DateTime? tempPickedDate = initialDate ?? firstDate;
 
   return showCupertinoModalPopup<DateTime>(
     context: context,
