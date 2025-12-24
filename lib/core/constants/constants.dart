@@ -20,3 +20,5 @@ const privacyPolicyUrl =
 const donateLink = 'https://pay.cloudtips.ru/p/7ca87dcd';
 
 const mailScheme = 'mailto:<vg01spare@gmail.com>';
+
+const kImageDirName = 'app_images';

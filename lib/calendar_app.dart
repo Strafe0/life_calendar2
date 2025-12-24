@@ -85,7 +85,7 @@ class CalendarApp extends StatelessWidget {
                 strategies: [
                   DatabaseBackupStrategy(databaseService: context.read()),
                   const SharedPreferencesBackupStrategy(),
-                  const CacheBackupStrategy(),
+                  CacheBackupStrategy(databaseService: context.read()),
                 ],
                 analytics: context.read(),
               ),

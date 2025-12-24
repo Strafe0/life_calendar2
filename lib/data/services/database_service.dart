@@ -9,6 +9,7 @@ import 'package:life_calendar/domain/models/week/week.dart';
 import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
 import 'package:life_calendar/utils/result.dart';
+import 'package:path/path.dart' as p show basename;
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService {
@@ -241,6 +242,73 @@ class DatabaseService {
     final count = Sqflite.firstIntValue(result) ?? 0;
 
     return count > 0;
+  }
+
+  Future<void> normalizePhotoPaths() async {
+    // 1. Read: Select only rows where photos column is not empty/null.
+    // We avoid '[]' (empty JSON array) to save resources.
+    final List<Map<String, dynamic>> rows = await _db.query(
+      tableName, // Your table name variable
+      columns: ['id', 'photos'],
+      where: 'photos IS NOT NULL AND photos != ?',
+      whereArgs: ['[]'],
+    );
+
+    if (rows.isEmpty) return;
+
+    final batch = _db.batch();
+    bool batchHasOps = false;
+
+    for (final row in rows) {
+      final int id = row['id'] as int;
+      final String rawPhotos = row['photos'] as String;
+
+      try {
+        // 2. Process: Decode JSON
+        final decoded = jsonDecode(rawPhotos);
+
+        // If it's not a list, skip it
+        if (decoded is! List) continue;
+
+        final List<String> oldPaths = decoded.map((e) => e.toString()).toList();
+        final List<String> newPaths = [];
+        bool needsUpdate = false;
+
+        for (final fullPath in oldPaths) {
+          // Extract filename: '/var/.../image.jpg' -> 'image.jpg'
+          final fileName = p.basename(fullPath);
+          newPaths.add(fileName);
+
+          // Check if the path was actually changed
+          // (to avoid unnecessary updates)
+          if (fullPath != fileName) {
+            needsUpdate = true;
+          }
+        }
+
+        // 3. Write: Add to batch if paths were changed
+        if (needsUpdate) {
+          batch.update(
+            tableName,
+            {'photos': jsonEncode(newPaths)},
+            where: 'id = ?',
+            whereArgs: [id],
+          );
+          batchHasOps = true;
+        }
+      } catch (e) {
+        // Log error but continue with other rows
+        logger.e(
+          'Failed to parse photos for id $id during migration',
+          error: e,
+        );
+      }
+    }
+
+    // Commit transaction if there are pending updates
+    if (batchHasOps) {
+      await batch.commit(noResult: true);
+    }
   }
 
   Future<void> close() async {

@@ -1,12 +1,18 @@
 import 'dart:io';
 import 'package:flutter_archive/flutter_archive.dart';
+import 'package:life_calendar/core/constants/constants.dart';
+import 'package:life_calendar/core/extensions/string/file_string_extension.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/data/services/backup/backup_strategy.dart';
+import 'package:life_calendar/data/services/database_service.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
 class CacheBackupStrategy implements BackupStrategy {
-  const CacheBackupStrategy();
+  const CacheBackupStrategy({required DatabaseService databaseService})
+    : _databaseService = databaseService;
+
+  final DatabaseService _databaseService;
 
   @override
   String get id => 'cache';
@@ -49,28 +55,43 @@ class CacheBackupStrategy implements BackupStrategy {
     }
 
     if (zipToExtract != null) {
-      final tempDir = await getTemporaryDirectory();
+      final appDocDir = await getApplicationDocumentsDirectory();
+      final tempCacheDir = Directory(p.join(appDocDir.path, 'temp_cache_dir'));
 
-      if (tempDir.existsSync()) {
-        try {
-          final entities = tempDir.listSync();
-          for (final entity in entities) {
-            // Защита от удаления основного архива, если он во временной папке
-            if (!entity.path.endsWith('.zip')) {
-              try {
-                entity.deleteSync(recursive: true);
-              } catch (_) {}
+      try {
+        await ZipFile.extractToDirectory(
+          zipFile: zipToExtract,
+          destinationDir: tempCacheDir,
+        );
+
+        final imagesDir = Directory(p.join(appDocDir.path, kImageDirName));
+
+        if (!imagesDir.existsSync()) {
+          await imagesDir.create(recursive: true);
+        }
+
+        for (final fileEntity in tempCacheDir.listSync()) {
+          if (fileEntity is Directory &&
+              !fileEntity.path.endsWith(kImageDirName)) {
+            for (final subFileEntity in fileEntity.listSync()) {
+              if (subFileEntity is File && subFileEntity.path.isImage) {
+                subFileEntity.copySync(
+                  p.join(imagesDir.path, p.basename(subFileEntity.path)),
+                );
+              }
+
+              subFileEntity.deleteSync(recursive: true);
             }
           }
-        } catch (e) {
-          logger.w('Error clearing temp dir', error: e);
         }
-      }
 
-      await ZipFile.extractToDirectory(
-        zipFile: zipToExtract,
-        destinationDir: tempDir,
-      );
+        tempCacheDir.deleteSync(recursive: true);
+
+        // Исправление путей в БД
+        await _databaseService.normalizePhotoPaths();
+      } catch (e) {
+        logger.w('Failed to restore cache', error: e);
+      }
     }
   }
 }

@@ -1,3 +1,6 @@
+import 'dart:io' show Directory;
+
+import 'package:life_calendar/core/constants/constants.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar/data/services/database_service.dart';
@@ -7,6 +10,9 @@ import 'package:life_calendar/domain/models/week/week.dart';
 import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
 import 'package:life_calendar/utils/result.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart'
+    show getApplicationDocumentsDirectory;
 
 class WeekRepositoryImpl implements WeekRepository {
   final DatabaseService _databaseService;
@@ -78,8 +84,18 @@ class WeekRepositoryImpl implements WeekRepository {
   Future<Result<Week>> getWeek(int id) async {
     try {
       final week = await _databaseService.getWeek(id);
+      final appDocDir = await getApplicationDocumentsDirectory();
+      final imagesBaseDir = Directory(p.join(appDocDir.path, kImageDirName));
 
-      return Result.ok(week);
+      return Result.ok(
+        week.copyWith(
+          photos:
+              week.photos.map((photo) {
+                final fullPath = p.join(imagesBaseDir.path, p.basename(photo));
+                return fullPath;
+              }).toList(),
+        ),
+      );
     } on Exception catch (e, s) {
       logger.e('Failed to get week $id from DB', error: e, stackTrace: s);
       return Result.error(e);
