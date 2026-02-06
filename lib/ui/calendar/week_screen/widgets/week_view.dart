@@ -29,23 +29,23 @@ class _WeekViewState extends State<WeekView> {
   Widget build(BuildContext context) {
     return WeekFabStateProvider(
       child: AdErrorListener(
-        child: SafeArea(
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text(
-                '${context.l10n.week} '
-                '${widget.week.start.toLocalString(context)} '
-                '- ${widget.week.end.toLocalString(context)}',
-              ),
-              titleSpacing: 0,
-              leadingWidth: 48,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              '${context.l10n.week} '
+              '${widget.week.start.toLocalString(context)} '
+              '- ${widget.week.end.toLocalString(context)}',
             ),
-            floatingActionButtonLocation: ExpandableFab.location,
-            floatingActionButton: Padding(
-              padding: EdgeInsets.only(bottom: _adHeight),
-              child: const WeekFab(),
-            ),
-            body: Padding(
+            titleSpacing: 0,
+            leadingWidth: 48,
+          ),
+          floatingActionButtonLocation: ExpandableFab.location,
+          floatingActionButton: Padding(
+            padding: EdgeInsets.only(bottom: 0),
+            child: const WeekFab(),
+          ),
+          body: SafeArea(
+            child: Padding(
               padding: const EdgeInsets.only(left: 8, right: 8),
               child: Stack(
                 children: [
@@ -76,14 +76,14 @@ class _WeekViewState extends State<WeekView> {
                       SliverToBoxAdapter(child: SizedBox(height: _adHeight)),
                     ],
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: AdBlock(
-                      onAdSizeCalculated: (adHeight) {
-                        setState(() => _adHeight = adHeight.toDouble());
-                      },
-                    ),
-                  ),
+                  // Align(
+                  //   alignment: Alignment.bottomCenter,
+                  //   child: AdBlock(
+                  //     onAdSizeCalculated: (adHeight) {
+                  //       setState(() => _adHeight = adHeight.toDouble());
+                  //     },
+                  //   ),
+                  // ),
                 ],
               ),
             ),

@@ -9,14 +9,14 @@ part of 'week.dart';
 _Week _$WeekFromJson(Map<String, dynamic> json) => _Week(
   id: (json['id'] as num).toInt(),
   yearId: (json['yearId'] as num).toInt(),
-  start: const DateConverter().fromJson((json['start'] as num).toInt()),
-  end: const DateConverter().fromJson((json['end'] as num).toInt()),
+  start: const DateConverter().fromJson(json['start'] as Object),
+  end: const DateConverter().fromJson(json['end'] as Object),
   tense: $enumDecode(_$WeekTenseEnumMap, json['state']),
   assessment: $enumDecode(_$WeekAssessmentEnumMap, json['assessment']),
   goals: const GoalConverter().fromJson(json['goals'] as String),
   events: const EventConverter().fromJson(json['events'] as String),
   resume: json['resume'] as String,
-  photos: const PhotoConverter().fromJson(json['photos'] as String),
+  photos: const PhotoConverter().fromJson(json['photos'] as String?),
 );
 
 Map<String, dynamic> _$WeekToJson(_Week instance) => <String, dynamic>{

@@ -9,7 +9,7 @@ part of 'event.dart';
 _Event _$EventFromJson(Map<String, dynamic> json) => _Event(
   id: json['id'] as String,
   title: json['title'] as String,
-  date: const DateConverter().fromJson((json['date'] as num).toInt()),
+  date: const DateConverter().fromJson(json['date'] as Object),
 );
 
 Map<String, dynamic> _$EventToJson(_Event instance) => <String, dynamic>{
