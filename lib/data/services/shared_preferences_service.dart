@@ -10,6 +10,10 @@ class SharedPreferencesService {
   static const _lifespanKey = 'lifespan';
   static const _userIdKey = 'user_id';
 
+  /// Boundary (≈ year 5138 in seconds / 1973 in ms) separating legacy birthday
+  /// timestamps stored in seconds from the current milliseconds format.
+  static const _birthdayMillisThreshold = 100000000000;
+
   Future<bool> isFirstLaunch() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -38,27 +42,37 @@ class SharedPreferencesService {
     }
   }
 
-  Future<int?> getBirthday() async {
+  Future<DateTime?> getBirthday() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final birthday = prefs.getInt(_birthdayKey);
+      var birthday = prefs.getInt(_birthdayKey);
 
       if (birthday == null) {
         logger.d('Birthday from prefs is null');
+        return null;
       }
 
-      return birthday;
+      // One-time migration: legacy builds stored the birthday in seconds.
+      // Detect such values, rewrite them as milliseconds, and from then on
+      // the stored value is always above the threshold (i.e. milliseconds).
+      if (birthday < _birthdayMillisThreshold) {
+        birthday *= 1000;
+        await prefs.setInt(_birthdayKey, birthday);
+        logger.d('Migrated birthday from seconds to milliseconds');
+      }
+
+      return DateTime.fromMillisecondsSinceEpoch(birthday);
     } catch (e, s) {
       logger.e('SharedPrefs error', error: e, stackTrace: s);
       return null;
     }
   }
 
-  Future<void> setBirthday(int birthday) async {
+  Future<void> setBirthday(DateTime birthday) async {
     try {
       final prefs = await SharedPreferences.getInstance();
 
-      await prefs.setInt(_birthdayKey, birthday);
+      await prefs.setInt(_birthdayKey, birthday.millisecondsSinceEpoch);
     } catch (e, s) {
       logger.e('SharedPrefs error', error: e, stackTrace: s);
     }

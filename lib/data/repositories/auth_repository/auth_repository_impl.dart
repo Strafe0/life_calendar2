@@ -1,4 +1,3 @@
-import 'package:life_calendar/core/extensions/date_time/date_time_extension.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/core/uuid/app_uuid.dart';
 import 'package:life_calendar/data/repositories/auth_repository/auth_repository.dart';
@@ -19,7 +18,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required int lifeSpan,
   }) async {
     try {
-      await _sharedPreferencesService.setBirthday(birthdate.toTimeStamp());
+      await _sharedPreferencesService.setBirthday(birthdate);
       logger.d('Birthdate $birthdate is saved');
 
       await _sharedPreferencesService.setLifespan(lifeSpan);

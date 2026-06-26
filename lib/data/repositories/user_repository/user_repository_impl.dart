@@ -1,4 +1,3 @@
-import 'package:life_calendar/core/extensions/date_time/date_time_extension.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/core/uuid/app_uuid.dart';
 import 'package:life_calendar/data/repositories/user_repository/user_repository.dart';
@@ -21,9 +20,7 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Result<void>> createUser(User user) async {
     try {
-      await _sharedPreferencesService.setBirthday(
-        Duration(milliseconds: user.birthdate.millisecondsSinceEpoch).inSeconds,
-      );
+      await _sharedPreferencesService.setBirthday(user.birthdate);
       await _sharedPreferencesService.setLifespan(user.lifeSpan);
 
       return const Result.ok(null);
@@ -42,7 +39,7 @@ class UserRepositoryImpl implements UserRepository {
       }
 
       String? userId = await _sharedPreferencesService.getUserId();
-      final birthdate = await _getBirthdate();
+      final birthdate = await _sharedPreferencesService.getBirthday();
       int? lifeSpan = await _sharedPreferencesService.getLifespan();
 
       if (birthdate == null) {
@@ -84,7 +81,7 @@ class UserRepositoryImpl implements UserRepository {
       }
       await _sharedPreferencesService.setLifespan(newLifeSpan);
       final lastWeek = await _databaseService.getLastWeek();
-      final birthdate = await _getBirthdate();
+      final birthdate = await _sharedPreferencesService.getBirthday();
 
       if (birthdate == null) {
         throw Exception('Null birthdate');
@@ -130,13 +127,5 @@ class UserRepositoryImpl implements UserRepository {
       logger.e('Failed to reduce life span', error: e, stackTrace: s);
       return Result.error(e);
     }
-  }
-
-  Future<DateTime?> _getBirthdate() async {
-    final birthdate = await _sharedPreferencesService.getBirthday();
-
-    if (birthdate == null) return null;
-
-    return DateTimeExtension.fromFlexibleTimestamp(birthdate);
   }
 }
