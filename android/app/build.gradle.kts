@@ -91,6 +91,5 @@ flutter {
 }
 
 dependencies {
-    implementation("com.yandex.android:mobileads-mediation:7.15.2.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }

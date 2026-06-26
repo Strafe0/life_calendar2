@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart' show PlatformDispatcher;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:life_calendar/core/constants/constants.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/core/uuid/app_uuid.dart';
 import 'package:life_calendar/data/repositories/week_repository/week_repository.dart';
@@ -28,27 +27,6 @@ class WeekCubit extends Cubit<WeekState> {
        super(const WeekInitial());
 
   bool get isLoading => state == const WeekLoading();
-
-  bool get isGoalsExceededLimit {
-    final currentState = state;
-
-    return currentState is WeekSuccess &&
-        currentState.week.goals.length >= goalLimit;
-  }
-
-  bool get isEventsExceededLimit {
-    final currentState = state;
-
-    return currentState is WeekSuccess &&
-        currentState.week.events.length >= eventLimit;
-  }
-
-  bool get isPhotosExceededLimit {
-    final currentState = state;
-
-    return currentState is WeekSuccess &&
-        currentState.week.photos.length >= photoLimit;
-  }
 
   Future<void> getWeek({required int? weekId}) async {
     emit(const WeekLoading());

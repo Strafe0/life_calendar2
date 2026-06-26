@@ -10,7 +10,6 @@ import 'package:life_calendar/ui/splash/bloc/splash_cubit.dart';
 import 'package:life_calendar/ui/splash/bloc/splash_state.dart';
 import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
 import 'package:life_calendar/ui/user/bloc/user_event.dart';
-import 'package:yandex_mobileads/mobile_ads.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,12 +19,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    YandexAds.initialize();
-  }
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
