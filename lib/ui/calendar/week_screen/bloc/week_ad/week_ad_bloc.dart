@@ -25,32 +25,26 @@ class WeekAdBloc extends Bloc<WeekAdEvent, WeekAdState> {
   ) async {
     emit(const WeekAdLoadInProgress());
 
-    final completer = Completer();
-
-    final adLoader = await RewardedAdLoader.create(
-      onAdLoaded: (rewardedAd) {
-        logger.i('Rewarded ad loaded');
-
-        emit(WeekAdLoadSuccess(rewardedAd, userAge: event.userAge));
-        completer.complete();
-      },
-      onAdFailedToLoad: (error) {
-        logger.e('Failed to load rewarded ad', error: error);
-
-        emit(WeekAdLoadFailure(error, userAge: event.userAge));
-        completer.complete();
-      },
-    );
-
-    await adLoader.loadAd(
-      adRequestConfiguration: AdRequestConfiguration(
-        adUnitId: Platform.isAndroid ? 'R-M-2265467-3' : 'R-M-17977076-2',
-        age: event.userAge,
-      ),
-    );
+    final adLoader = RewardedAdLoader();
 
     logger.d('Rewarded Ad loading started');
-    await completer.future;
+
+    try {
+      final rewardedAd = await adLoader.loadAd(
+        adRequest: AdRequest(
+          adUnitId: Platform.isAndroid ? 'R-M-2265467-3' : 'R-M-17977076-2',
+          targeting: AdTargeting(age: event.userAge),
+        ),
+      );
+
+      logger.i('Rewarded ad loaded');
+
+      emit(WeekAdLoadSuccess(rewardedAd, userAge: event.userAge));
+    } on AdRequestError catch (error) {
+      logger.e('Failed to load rewarded ad', error: error);
+
+      emit(WeekAdLoadFailure(error, userAge: event.userAge));
+    }
   }
 
   FutureOr<void> _showAd(

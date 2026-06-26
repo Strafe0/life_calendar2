@@ -31,13 +31,15 @@ class _AdBlockState extends State<AdBlock> {
       (height) => widget.onAdSizeCalculated?.call(height),
     );
 
-    _bannerAd = BannerAd(
-      adUnitId: Platform.isAndroid ? 'R-M-2265467-1' : 'R-M-17977076-1',
-      adSize: adSize,
-      adRequest: AdRequest(
-        age: userState is UserSuccess ? userState.user.age : null,
-      ),
-    );
+    _bannerAd = BannerAd(adSize: adSize)
+      ..load(
+        AdRequest(
+          adUnitId: Platform.isAndroid ? 'R-M-2265467-1' : 'R-M-17977076-1',
+          targeting: AdTargeting(
+            age: userState is UserSuccess ? userState.user.age : null,
+          ),
+        ),
+      );
   }
 
   @override

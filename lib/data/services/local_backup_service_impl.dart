@@ -96,7 +96,7 @@ class LocalBackupServiceImpl implements LocalBackupService {
     Directory? restoreTempDir;
 
     try {
-      final result = await FilePicker.platform.pickFiles(
+      final result = await FilePicker.pickFiles(
         type: FileType.custom,
         allowedExtensions: ['zip'],
       );

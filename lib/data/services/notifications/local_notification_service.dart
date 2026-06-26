@@ -35,7 +35,7 @@ class LocalNotificationService {
     );
 
     // 4. Finalize initialization
-    await _plugin.initialize(initSettings);
+    await _plugin.initialize(settings: initSettings);
   }
 
   /// Request permissions.
@@ -105,7 +105,12 @@ class LocalNotificationService {
       iOS: iosDetails,
     );
 
-    await _plugin.show(id, title, body, details);
+    await _plugin.show(
+      id: id,
+      title: title,
+      body: body,
+      notificationDetails: details,
+    );
   }
 
   /// Schedule a notification for a future time
@@ -130,11 +135,11 @@ class LocalNotificationService {
     );
 
     await _plugin.zonedSchedule(
-      id,
-      title,
-      body,
-      tz.TZDateTime.from(scheduledTime, tz.local),
-      details,
+      id: id,
+      title: title,
+      body: body,
+      scheduledDate: tz.TZDateTime.from(scheduledTime, tz.local),
+      notificationDetails: details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       // Если нужно, чтобы повторялось (например, каждый день в это время):
       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
@@ -172,11 +177,11 @@ class LocalNotificationService {
     );
 
     await _plugin.zonedSchedule(
-      LocalNotificationId.sumUpWeek.id,
-      l10n.notificationWeeklyReviewTitle,
-      l10n.notificationWeeklyReviewBody,
-      tz.TZDateTime.from(scheduledDate, tz.local),
-      details,
+      id: LocalNotificationId.sumUpWeek.id,
+      title: l10n.notificationWeeklyReviewTitle,
+      body: l10n.notificationWeeklyReviewBody,
+      scheduledDate: tz.TZDateTime.from(scheduledDate, tz.local),
+      notificationDetails: details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
     );
@@ -185,12 +190,12 @@ class LocalNotificationService {
   }
 
   Future<void> cancelWeeklyReview() async {
-    await _plugin.cancel(LocalNotificationId.sumUpWeek.id);
+    await _plugin.cancel(id: LocalNotificationId.sumUpWeek.id);
     logger.i('Canceled weekly notification');
   }
 
   /// Cancel a specific notification
   Future<void> cancelNotification(int id) async {
-    await _plugin.cancel(id);
+    await _plugin.cancel(id: id);
   }
 }

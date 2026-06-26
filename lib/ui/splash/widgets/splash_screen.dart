@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    MobileAds.initialize();
+    YandexAds.initialize();
   }
 
   @override
