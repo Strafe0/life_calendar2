@@ -13,13 +13,13 @@ class DateConverter implements JsonConverter<DateTime, Object> {
         return DateTime.fromMillisecondsSinceEpoch(int.parse(json));
       }
       throw FormatException('Invalid type: ${json.runtimeType}');
-    } catch (e, s) {
+    } on Exception catch (e, s) {
       logger.e(
-        'Failed to parse DateTime from $json. Return "now".',
+        'Failed to parse DateTime from $json',
         error: e,
         stackTrace: s,
       );
-      return DateTime.now();
+      rethrow;
     }
   }
 
