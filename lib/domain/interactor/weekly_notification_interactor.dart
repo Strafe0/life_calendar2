@@ -50,8 +50,6 @@ class WeeklyNotificationInteractor {
   }
 
   Future<void> _syncNotificationState({required bool isEnabled}) async {
-    final isEnabled = await _settingsService.isWeeklyReminderEnabled();
-
     if (!isEnabled) return _notificationService.cancelWeeklyReview();
 
     await _notificationService.scheduleWeeklyReview(
