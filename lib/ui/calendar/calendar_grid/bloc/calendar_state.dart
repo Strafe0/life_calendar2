@@ -1,5 +1,5 @@
 import 'package:life_calendar/core/extensions/date_time/date_time_extension.dart';
-import 'package:life_calendar/domain/models/week/week_box/week_box.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/models/week_box.dart';
 
 sealed class CalendarState {
   const CalendarState();

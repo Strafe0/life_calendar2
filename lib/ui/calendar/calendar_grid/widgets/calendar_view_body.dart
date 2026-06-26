@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/core/navigation/app_routes.dart';
 import 'package:life_calendar/data/services/analytics/analytics_service_interface.dart';
-import 'package:life_calendar/domain/models/week/week_box/week_box.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/models/week_box.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_interactive_viewer.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_painter.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/widgets/current_week_indicator.dart';

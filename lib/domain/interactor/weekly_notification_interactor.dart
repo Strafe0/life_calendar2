@@ -1,4 +1,4 @@
-import 'dart:ui' show PlatformDispatcher;
+import 'dart:ui' show Locale, PlatformDispatcher;
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/data/services/notifications/local_notification_service.dart';
 import 'package:life_calendar/data/services/settings_service.dart';
@@ -7,11 +7,15 @@ import 'package:life_calendar/utils/result.dart';
 class WeeklyNotificationInteractor {
   final LocalNotificationService _notificationService;
   final SettingsService _settingsService;
+  final Locale Function() _localeProvider;
 
   WeeklyNotificationInteractor(
     this._notificationService,
-    this._settingsService,
-  );
+    this._settingsService, {
+    Locale Function() localeProvider = _platformLocale,
+  }) : _localeProvider = localeProvider;
+
+  static Locale _platformLocale() => PlatformDispatcher.instance.locale;
 
   Future<void> initializeWithPermissions() async {
     await _notificationService.initialize();
@@ -52,8 +56,6 @@ class WeeklyNotificationInteractor {
   Future<void> _syncNotificationState({required bool isEnabled}) async {
     if (!isEnabled) return _notificationService.cancelWeeklyReview();
 
-    await _notificationService.scheduleWeeklyReview(
-      PlatformDispatcher.instance.locale,
-    );
+    await _notificationService.scheduleWeeklyReview(_localeProvider());
   }
 }

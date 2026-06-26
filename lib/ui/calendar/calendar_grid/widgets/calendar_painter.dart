@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:life_calendar/core/logger/logger.dart';
-import 'package:life_calendar/domain/models/week/week_box/week_box.dart';
+import 'package:life_calendar/ui/calendar/calendar_grid/models/week_box.dart';
 import 'package:life_calendar/utils/calendar/calendar_size.dart';
 
 class CalendarPainter extends CustomPainter {
