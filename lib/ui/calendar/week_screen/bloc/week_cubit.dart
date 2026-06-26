@@ -160,16 +160,14 @@ class WeekCubit extends Cubit<WeekState> {
   Future<void> addEvent(DateTime date, String title) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
-      final newEventList =
-          prevState.week.events
-            ..add(
-              Event(
-                id: AppUuid.generateTimeBasedUuid(),
-                title: title,
-                date: date,
-              ),
-            )
-            ..sort((a, b) => a.date.compareTo(b.date));
+      final newEventList = [
+        ...prevState.week.events,
+        Event(
+          id: AppUuid.generateTimeBasedUuid(),
+          title: title,
+          date: date,
+        ),
+      ]..sort((a, b) => a.date.compareTo(b.date));
 
       emit(prevState.copyWith(events: newEventList));
 
@@ -201,10 +199,10 @@ class WeekCubit extends Cubit<WeekState> {
   Future<void> changeEvent(Event newEvent) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
-      final oldEventIndex = prevState.week.events.indexWhere(
-        (event) => event.id == newEvent.id,
-      );
-      final newEventList = prevState.week.events..[oldEventIndex] = newEvent;
+      final newEventList = [
+        for (final e in prevState.week.events)
+          if (e.id == newEvent.id) newEvent else e,
+      ];
 
       emit(prevState.copyWith(events: newEventList));
 
@@ -239,7 +237,7 @@ class WeekCubit extends Cubit<WeekState> {
         return;
       }
 
-      final newEventList = prevState.week.events..removeAt(eventIndex);
+      final newEventList = [...prevState.week.events]..removeAt(eventIndex);
 
       emit(prevState.copyWith(events: newEventList));
 
@@ -271,14 +269,14 @@ class WeekCubit extends Cubit<WeekState> {
   Future<void> addGoal(String title) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
-      final newGoalList =
-          prevState.week.goals..add(
-            Goal(
-              id: AppUuid.generateTimeBasedUuid(),
-              title: title,
-              isCompleted: false,
-            ),
-          );
+      final newGoalList = [
+        ...prevState.week.goals,
+        Goal(
+          id: AppUuid.generateTimeBasedUuid(),
+          title: title,
+          isCompleted: false,
+        ),
+      ];
 
       emit(prevState.copyWith(goals: newGoalList));
 
@@ -310,10 +308,10 @@ class WeekCubit extends Cubit<WeekState> {
   Future<void> changeGoal(Goal newGoal) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
-      final oldGoalIndex = prevState.week.goals.indexWhere(
-        (g) => g.id == newGoal.id,
-      );
-      final newGoalList = prevState.week.goals..[oldGoalIndex] = newGoal;
+      final newGoalList = [
+        for (final g in prevState.week.goals)
+          if (g.id == newGoal.id) newGoal else g,
+      ];
 
       emit(prevState.copyWith(goals: newGoalList));
 
@@ -339,8 +337,10 @@ class WeekCubit extends Cubit<WeekState> {
   Future<void> deleteGoal(Goal goal) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
-      final goalIndex = prevState.week.goals.indexWhere((g) => g.id == goal.id);
-      final newGoalList = prevState.week.goals..removeAt(goalIndex);
+      final newGoalList = [
+        for (final g in prevState.week.goals)
+          if (g.id != goal.id) g,
+      ];
 
       emit(prevState.copyWith(goals: newGoalList));
 
@@ -372,7 +372,7 @@ class WeekCubit extends Cubit<WeekState> {
   Future<void> addPhotos(XFile photo) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
-      final newPhotoList = prevState.week.photos..add(photo.path);
+      final newPhotoList = [...prevState.week.photos, photo.path];
 
       emit(prevState.copyWith(photos: newPhotoList));
 
@@ -398,7 +398,7 @@ class WeekCubit extends Cubit<WeekState> {
   Future<void> deletePhoto(int index) async {
     final prevState = state;
     if (prevState is WeekSuccess) {
-      final newPhotoList = prevState.week.photos..removeAt(index);
+      final newPhotoList = [...prevState.week.photos]..removeAt(index);
 
       emit(prevState.copyWith(photos: newPhotoList));
 
