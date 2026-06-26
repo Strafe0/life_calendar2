@@ -231,8 +231,14 @@ class WeekCubit extends Cubit<WeekState> {
     final prevState = state;
     if (prevState is WeekSuccess) {
       final eventIndex = prevState.week.events.indexWhere(
-        (event) => event.id == event.id,
+        (e) => e.id == event.id,
       );
+
+      if (eventIndex == -1) {
+        logger.e('Cannot delete event ${event.id}, because it was not found');
+        return;
+      }
+
       final newEventList = prevState.week.events..removeAt(eventIndex);
 
       emit(prevState.copyWith(events: newEventList));
