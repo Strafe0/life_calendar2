@@ -27,12 +27,17 @@ class SplashCubit extends Cubit<SplashState> {
   Future<void> prepareApp() async {
     emit(const SplashLoading());
     final result = await _databaseService.init();
+    if (result is! Ok) {
+      emit(const SplashFailure());
+      return;
+    }
+
     final userResult = await _userRepository.getUser();
     final isFirstLaunchV3 = await _sharedPreferencesService.isFirstLaunchV3();
 
     await _prepareNotifications();
 
-    if (result is Ok && userResult is Ok<User>) {
+    if (userResult is Ok<User>) {
       await _sharedPreferencesService.setFirstLaunchV3(isFirstLaunch: false);
       emit(
         SplashReady(user: userResult.value, isFirstLaunchV3: isFirstLaunchV3),
