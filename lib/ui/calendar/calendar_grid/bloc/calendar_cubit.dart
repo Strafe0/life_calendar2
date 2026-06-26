@@ -71,7 +71,7 @@ class CalendarCubit extends Cubit<CalendarState> {
       final weekBoxIndex = (state as CalendarSuccess).weeks.indexWhere(
         (w) => w.weekId == week.id,
       );
-      if (weekBoxIndex != 1) {
+      if (weekBoxIndex != -1) {
         weeks[weekBoxIndex] = WeekBox.fromWeek(
           week: week,
           rect: weeks[weekBoxIndex].rect,
