@@ -244,7 +244,7 @@ class DatabaseService {
         FROM $tableName
         WHERE yearId BETWEEN ? AND ?
           AND (
-                (assessment IS NOT NULL AND assessment != 'Нейтрально')
+                (assessment IS NOT NULL AND assessment != ?)
             OR (goals IS NOT NULL AND goals != '[]')
             OR (events IS NOT NULL AND events != '[]')
             OR (resume IS NOT NULL AND resume != '')
@@ -252,7 +252,7 @@ class DatabaseService {
           )
         LIMIT 1
       ''',
-      [startYearId, endYearId],
+      [startYearId, endYearId, WeekAssessment.poor.name],
     );
 
     final count = Sqflite.firstIntValue(result) ?? 0;
