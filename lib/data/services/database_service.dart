@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:life_calendar/core/exceptions/data_exceptions.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/domain/models/week/event/event.dart';
 import 'package:life_calendar/domain/models/week/goal/goal.dart';
@@ -126,7 +127,12 @@ class DatabaseService {
       whereArgs: [id],
     );
 
-    return Week.fromJson(records.first);
+    final record = records.firstOrNull;
+    if (record == null) {
+      throw WeekNotFoundException('No week with id $id in DB');
+    }
+
+    return Week.fromJson(record);
   }
 
   Future<Week> getCurrentWeek() async {
@@ -140,7 +146,12 @@ class DatabaseService {
       logger.w('Number of current week in DB: ${records.length}');
     }
 
-    return Week.fromJson(records.first);
+    final record = records.firstOrNull;
+    if (record == null) {
+      throw const WeekNotFoundException('No current week in DB');
+    }
+
+    return Week.fromJson(record);
   }
 
   Future<void> updateAssessment({
@@ -194,7 +205,12 @@ class DatabaseService {
       logger.w('Number of current week in DB: ${records.length}');
     }
 
-    return Week.fromJson(records.first);
+    final record = records.firstOrNull;
+    if (record == null) {
+      throw const WeekNotFoundException('No weeks in DB');
+    }
+
+    return Week.fromJson(record);
   }
 
   Future<void> removeWeeksByYearIds({
