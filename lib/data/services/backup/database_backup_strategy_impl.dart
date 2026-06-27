@@ -41,13 +41,18 @@ class DatabaseBackupStrategy implements BackupStrategy {
 
   @override
   Future<void> restore(Directory sourceDir) async {
-    // Close the connection before working with the files
-    await _databaseService.close();
-
-    final sysDbPath = await getDatabasesPath();
     final restoredDb = File(p.join(sourceDir.path, DatabaseService.tableName));
 
-    if (restoredDb.existsSync()) {
+    // Nothing to restore: leave the live database open and untouched.
+    if (!restoredDb.existsSync()) {
+      return;
+    }
+
+    // Close the connection before working with the files.
+    await _databaseService.close();
+
+    try {
+      final sysDbPath = await getDatabasesPath();
       final currentDb = File(p.join(sysDbPath, DatabaseService.tableName));
       if (currentDb.existsSync()) {
         currentDb.deleteSync(recursive: true);
@@ -79,9 +84,11 @@ class DatabaseBackupStrategy implements BackupStrategy {
           p.join(sysDbPath, '${DatabaseService.tableName}-shm'),
         );
       }
+    } finally {
+      // Always reopen, even if the file swap throws partway through, so the
+      // app is never left with a closed database (the import now reinitializes
+      // in place instead of restarting the process).
+      await _databaseService.init();
     }
-
-    // Reopen the database
-    await _databaseService.init();
   }
 }
