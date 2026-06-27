@@ -37,7 +37,7 @@ class ImagePickerServiceImpl implements ImagePickerService {
 
       await File(filePath).copy(destinationPath);
 
-      return (file: file, hasError: false);
+      return (file: XFile(destinationPath), hasError: false);
     } catch (e, s) {
       logger.e('Failed to pick images', error: e, stackTrace: s);
       return (file: null, hasError: true);
