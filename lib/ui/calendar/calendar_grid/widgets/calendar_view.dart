@@ -36,7 +36,6 @@ class _CalendarViewState extends State<CalendarView> {
   }
 
   Future<void> _loadCalendar() async {
-    final brightness = Theme.of(context).brightness;
     final userState = context.read<UserBloc>().state;
 
     if (userState is! UserSuccess) {
@@ -63,10 +62,7 @@ class _CalendarViewState extends State<CalendarView> {
 
     _calendarSize = calendarSize;
 
-    await context.read<CalendarCubit>().getWeeks(
-      calendarSize: calendarSize,
-      brightness: brightness,
-    );
+    await context.read<CalendarCubit>().getWeeks(calendarSize: calendarSize);
   }
 
   @override

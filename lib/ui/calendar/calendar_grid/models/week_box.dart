@@ -5,32 +5,33 @@ import 'package:life_calendar/ui/core/themes/week_extension.dart';
 class WeekBox {
   final int weekId;
   final int yearId;
-  final Color colorLight;
-  final Color colorDark;
   final RRect rect;
+  final Week week;
 
   const WeekBox({
     required this.weekId,
     required this.yearId,
-    required this.colorLight,
-    required this.colorDark,
     required this.rect,
+    required this.week,
   });
 
-  const WeekBox.empty()
+  WeekBox.empty()
     : weekId = -1,
       yearId = -1,
-      colorLight = const Color(0xFFFFFFFF),
-      colorDark = const Color(0xFF000000),
-      rect = RRect.zero;
+      rect = RRect.zero,
+      week = Week.empty();
 
   factory WeekBox.fromWeek({required Week week, required RRect rect}) {
     return WeekBox(
       weekId: week.id,
       yearId: week.yearId,
-      colorLight: week.getColor(brightness: Brightness.light),
-      colorDark: week.getColor(brightness: Brightness.dark),
       rect: rect,
+      week: week,
     );
   }
+
+  /// Resolves the box color for the given [brightness] at paint time, keeping
+  /// theme-dependent presentation out of the cubit that builds the boxes.
+  Color color({required Brightness brightness}) =>
+      week.getColor(brightness: brightness);
 }
