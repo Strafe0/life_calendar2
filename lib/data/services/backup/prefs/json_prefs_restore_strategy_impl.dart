@@ -34,8 +34,10 @@ class JsonPrefsRestoreStrategy implements PrefsRestoreStrategy {
           await prefs.setStringList(key, List<String>.from(val));
         }
       }
-    } catch (e) {
-      logger.e('Error restoring from JSON prefs', error: e);
+    } catch (e, s) {
+      // Propagate so the import orchestrator can roll back the whole operation.
+      logger.e('Error restoring from JSON prefs', error: e, stackTrace: s);
+      rethrow;
     }
   }
 }

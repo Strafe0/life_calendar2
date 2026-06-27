@@ -94,6 +94,10 @@ class LocalBackupServiceImpl implements LocalBackupService {
   @override
   Future<Result<bool>> importCalendar() async {
     Directory? restoreTempDir;
+    Directory? rollbackDir;
+    // Tracks whether we have started mutating live state, so we only attempt a
+    // rollback once there is something to revert.
+    bool applyStarted = false;
 
     try {
       final result = await FilePicker.pickFiles(
@@ -110,12 +114,11 @@ class LocalBackupServiceImpl implements LocalBackupService {
       final docsDir = await getApplicationDocumentsDirectory();
 
       restoreTempDir = Directory(p.join(docsDir.path, 'restore_temp'));
+      rollbackDir = Directory(p.join(docsDir.path, 'rollback_snapshot'));
 
-      // Prepare a clean folder
-      if (restoreTempDir.existsSync()) {
-        restoreTempDir.deleteSync(recursive: true);
-      }
-      restoreTempDir.createSync(recursive: true);
+      // Prepare clean folders
+      _recreateDir(restoreTempDir);
+      _recreateDir(rollbackDir);
 
       // 1. Extract the archive
       await ZipFile.extractToDirectory(
@@ -123,11 +126,18 @@ class LocalBackupServiceImpl implements LocalBackupService {
         destinationDir: restoreTempDir,
       );
 
-      // 2. Run the restore strategies (Fail Fast)
+      // 2. Snapshot the current live state into [rollbackDir] using the same
+      // strategies. Because each strategy's backup/restore is a faithful
+      // inverse pair, restoring this snapshot reverts the whole import as one
+      // unit.
       for (final strategy in _strategies) {
-        // We do NOT wrap this call in try-catch.
-        // If a strategy throws, the exception propagates to the outer catch
-        // and the whole import is aborted.
+        await strategy.backup(rollbackDir);
+      }
+
+      // 3. Apply the imported data (fail-fast). If any strategy throws, the
+      // exception propagates to the outer catch, which rolls everything back.
+      applyStarted = true;
+      for (final strategy in _strategies) {
         logger.d('Starting restore strategy: ${strategy.id}');
         await strategy.restore(restoreTempDir);
       }
@@ -140,17 +150,52 @@ class LocalBackupServiceImpl implements LocalBackupService {
         stackTrace: stackTrace,
       );
 
+      if (applyStarted && rollbackDir != null) {
+        await _rollback(rollbackDir);
+      }
+
       return Result.error(error);
     } finally {
       unawaited(_analytics.logBackup(BackupEvent.import));
 
       // Cleanup
-      if (restoreTempDir != null && restoreTempDir.existsSync()) {
-        try {
-          restoreTempDir.deleteSync(recursive: true);
-        } catch (e) {
-          logger.w('Failed to clean up restoreTempDir', error: e);
-        }
+      _safeDelete(restoreTempDir);
+      _safeDelete(rollbackDir);
+    }
+  }
+
+  /// Reverts a partially-applied import by restoring the pre-import snapshot.
+  ///
+  /// Best-effort: a failure here is logged but cannot itself be rolled back, so
+  /// the original import error is still the one surfaced to the caller.
+  Future<void> _rollback(Directory rollbackDir) async {
+    try {
+      for (final strategy in _strategies) {
+        await strategy.restore(rollbackDir);
+      }
+      logger.i('Import rolled back to the pre-import snapshot');
+    } catch (error, stackTrace) {
+      logger.e(
+        'Failed to roll back after a failed import',
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  void _recreateDir(Directory dir) {
+    if (dir.existsSync()) {
+      dir.deleteSync(recursive: true);
+    }
+    dir.createSync(recursive: true);
+  }
+
+  void _safeDelete(Directory? dir) {
+    if (dir != null && dir.existsSync()) {
+      try {
+        dir.deleteSync(recursive: true);
+      } catch (e) {
+        logger.w('Failed to clean up ${dir.path}', error: e);
       }
     }
   }

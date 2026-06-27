@@ -90,8 +90,10 @@ class CacheBackupStrategy implements BackupStrategy {
 
       // Fix up photo paths in the DB
       await _databaseService.normalizePhotoPaths();
-    } catch (e) {
-      logger.w('Failed to restore cache', error: e);
+    } catch (e, s) {
+      // Propagate so the import orchestrator can roll back the whole operation.
+      logger.e('Failed to restore cache', error: e, stackTrace: s);
+      rethrow;
     } finally {
       if (stagingDir.existsSync()) {
         try {

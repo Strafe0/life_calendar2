@@ -87,8 +87,10 @@ class XmlPrefsRestoreStrategy implements PrefsRestoreStrategy {
           await prefs.setDouble(cleanKey(key), double.tryParse(value) ?? 0.0);
         }
       }
-    } catch (e) {
-      logger.e('Error parsing legacy XML prefs', error: e);
+    } catch (e, s) {
+      // Propagate so the import orchestrator can roll back the whole operation.
+      logger.e('Error parsing legacy XML prefs', error: e, stackTrace: s);
+      rethrow;
     }
   }
 }

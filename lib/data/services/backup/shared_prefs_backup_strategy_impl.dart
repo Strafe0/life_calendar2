@@ -37,8 +37,11 @@ class SharedPreferencesBackupStrategy implements BackupStrategy {
 
       final jsonFile = File(p.join(destinationDir.path, 'shared_prefs.json'));
       await jsonFile.writeAsString(jsonEncode(allPrefs));
-    } catch (e) {
-      logger.e('Error exporting SharedPrefs', error: e);
+    } catch (e, s) {
+      // Propagate so neither an export nor a pre-import rollback snapshot is
+      // silently left incomplete.
+      logger.e('Error exporting SharedPrefs', error: e, stackTrace: s);
+      rethrow;
     }
   }
 
