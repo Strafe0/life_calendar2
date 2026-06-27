@@ -19,26 +19,25 @@ class CacheBackupStrategy implements BackupStrategy {
 
   @override
   Future<void> backup(Directory destinationDir) async {
-    final tempDir = await getTemporaryDirectory();
+    // Photos are persisted in the app documents directory (not the temporary
+    // directory), so the canonical image library lives here.
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final imagesDir = Directory(p.join(appDocDir.path, kImageDirName));
+
+    // Always emit the archive (possibly empty) so restore is deterministic:
+    // an empty archive unambiguously means "no photos".
+    if (!imagesDir.existsSync()) {
+      await imagesDir.create(recursive: true);
+    }
+
     final cacheArchiveFile = File(
       p.join(destinationDir.path, 'cache_archive.zip'),
     );
 
-    // We use ZipFile inside the strategy because the cache itself is a
-    // zip archive nested within the main backup.
     await ZipFile.createFromDirectory(
-      sourceDir: tempDir,
+      sourceDir: imagesDir,
       zipFile: cacheArchiveFile,
       recurseSubDirs: true,
-      onZipping: (filePath, isDirectory, progress) {
-        if (filePath.contains('archive_source')) {
-          return ZipFileOperation.skipItem;
-        }
-        if (isDirectory && filePath.contains('WebView')) {
-          return ZipFileOperation.skipItem;
-        }
-        return ZipFileOperation.includeItem;
-      },
     );
   }
 
@@ -54,43 +53,52 @@ class CacheBackupStrategy implements BackupStrategy {
       zipToExtract = legacyCacheZip;
     }
 
-    if (zipToExtract != null) {
-      final appDocDir = await getApplicationDocumentsDirectory();
-      final tempCacheDir = Directory(p.join(appDocDir.path, 'temp_cache_dir'));
+    if (zipToExtract == null) {
+      // No photo archive in this backup: leave the current library untouched.
+      return;
+    }
 
-      try {
-        await ZipFile.extractToDirectory(
-          zipFile: zipToExtract,
-          destinationDir: tempCacheDir,
-        );
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final imagesDir = Directory(p.join(appDocDir.path, kImageDirName));
+    final stagingDir = Directory(p.join(appDocDir.path, 'temp_cache_dir'));
 
-        final imagesDir = Directory(p.join(appDocDir.path, kImageDirName));
+    try {
+      // Extract into staging first; only touch the live library once the
+      // archive has been successfully unpacked.
+      if (stagingDir.existsSync()) {
+        stagingDir.deleteSync(recursive: true);
+      }
+      await ZipFile.extractToDirectory(
+        zipFile: zipToExtract,
+        destinationDir: stagingDir,
+      );
 
-        if (!imagesDir.existsSync()) {
-          await imagesDir.create(recursive: true);
+      // Replace semantics: wipe the current library, then repopulate from the
+      // archive. A recursive search handles both the current format (images at
+      // the archive root) and the legacy format (images nested in
+      // sub-directories).
+      if (imagesDir.existsSync()) {
+        imagesDir.deleteSync(recursive: true);
+      }
+      imagesDir.createSync(recursive: true);
+
+      for (final entity in stagingDir.listSync(recursive: true)) {
+        if (entity is File && entity.path.isImage) {
+          entity.copySync(p.join(imagesDir.path, p.basename(entity.path)));
         }
+      }
 
-        for (final fileEntity in tempCacheDir.listSync()) {
-          if (fileEntity is Directory &&
-              !fileEntity.path.endsWith(kImageDirName)) {
-            for (final subFileEntity in fileEntity.listSync()) {
-              if (subFileEntity is File && subFileEntity.path.isImage) {
-                subFileEntity.copySync(
-                  p.join(imagesDir.path, p.basename(subFileEntity.path)),
-                );
-              }
-
-              subFileEntity.deleteSync(recursive: true);
-            }
-          }
+      // Fix up photo paths in the DB
+      await _databaseService.normalizePhotoPaths();
+    } catch (e) {
+      logger.w('Failed to restore cache', error: e);
+    } finally {
+      if (stagingDir.existsSync()) {
+        try {
+          stagingDir.deleteSync(recursive: true);
+        } catch (e) {
+          logger.w('Failed to clean up staging cache dir', error: e);
         }
-
-        tempCacheDir.deleteSync(recursive: true);
-
-        // Fix up photo paths in the DB
-        await _databaseService.normalizePhotoPaths();
-      } catch (e) {
-        logger.w('Failed to restore cache', error: e);
       }
     }
   }
