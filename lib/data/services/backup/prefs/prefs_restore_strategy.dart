@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Интерфейс для стратегии восстановления настроек из конкретного формата
+/// Interface for restoring settings from a specific format.
 abstract interface class PrefsRestoreStrategy {
-  /// Проверяет, может ли эта стратегия обработать данные в [sourceDir]
+  /// Whether this strategy can handle the data in [sourceDir].
   bool canRestore(Directory sourceDir);
 
-  /// Выполняет восстановление
+  /// Performs the restore.
   Future<void> restore(Directory sourceDir, SharedPreferences prefs);
 }

@@ -7,7 +7,7 @@ class AdaptiveActionMenu extends StatelessWidget {
   final VoidCallback onDelete;
   final String editLabel;
   final String deleteLabel;
-  final String cancelLabel; // Нужно для iOS ActionSheet
+  final String cancelLabel; // Needed for the iOS ActionSheet
 
   const AdaptiveActionMenu({
     super.key,

@@ -26,7 +26,7 @@ Future<DateTime?> showAdaptiveDatePicker(
         (context) => Container(
           height: 300,
           padding: const EdgeInsets.only(top: 6),
-          // Цвет фона должен подстраиваться под темную/светлую тему
+          // Background color should adapt to the dark/light theme
           color: CupertinoColors.systemBackground.resolveFrom(context),
           child: SafeArea(
             top: false,

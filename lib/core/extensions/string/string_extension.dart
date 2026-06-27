@@ -2,13 +2,13 @@ import 'package:intl/intl.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 
 extension StringExtension on String {
-  /// Преобразует строку в дату с учетом локали или конкретного паттерна.
+  /// Parses the string into a date using a locale or a specific pattern.
   ///
-  /// [locale] - например 'en_US' или 'ru_RU'.
-  /// Если null, используется системная.
+  /// [locale] — for example 'en_US' or 'ru_RU'.
+  /// If null, the system locale is used.
   ///
-  /// [pattern] - жесткий паттерн, например 'dd.MM.yyyy'.
-  /// Если задан, locale игнорируется.
+  /// [pattern] — a fixed pattern, for example 'dd.MM.yyyy'.
+  /// If set, [locale] is ignored.
   DateTime? toDateTime({String? locale, String? pattern}) {
     if (isEmpty) return null;
 
@@ -25,7 +25,6 @@ extension StringExtension on String {
 
       return date;
     } catch (e, s) {
-      // Используем ваш логгер
       logger.w(
         'Cannot parse string "$this" to date using '
         'locale: $locale, pattern: $pattern',

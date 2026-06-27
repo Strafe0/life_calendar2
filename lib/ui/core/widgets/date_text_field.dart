@@ -32,10 +32,10 @@ class DateTextField extends StatefulWidget {
 class _DateTextFieldState extends State<DateTextField> {
   final _dateController = TextEditingController();
 
-  // Данные для локализации
+  // Localization data
   late String _separator;
   late List<int> _segmentLengths;
-  late DateFormat _dateFormat; // Храним форматтер для парсинга и валидации
+  late DateFormat _dateFormat; // Keep the formatter for parsing and validation
 
   @override
   void didChangeDependencies() {
@@ -54,16 +54,16 @@ class _DateTextFieldState extends State<DateTextField> {
 
     _separator = getLocalDateSeparatorByPattern(pattern);
 
-    // Определяем порядок полей и длины сегментов
-    // Это эвристика: смотрим, где находится 'y' (год)
+    // Determine the field order and segment lengths
+    // Heuristic: look at where 'y' (year) is
     final int yIndex = pattern.indexOf('y');
     final int dIndex = pattern.indexOf('d');
 
-    // Если год идет первым (yyyy-MM-dd), как в ISO/Японии
+    // If the year comes first (yyyy-MM-dd), as in ISO/Japan
     if (yIndex < dIndex) {
       _segmentLengths = [4, 2, 2];
     } else {
-      // Иначе (dd.MM.yyyy или MM/dd/yyyy)
+      // Otherwise (dd.MM.yyyy or MM/dd/yyyy)
       _segmentLengths = [2, 2, 4];
     }
   }

@@ -34,7 +34,7 @@ class LocalBackupServiceImpl implements LocalBackupService {
         return false;
       }
 
-      // Если вдруг остался хвост от прошлого раза
+      // In case a leftover remains from a previous run
       if (zipFile.existsSync()) {
         zipFile.deleteSync();
       }
@@ -44,20 +44,20 @@ class LocalBackupServiceImpl implements LocalBackupService {
         return false;
       }
 
-      // 1. Запуск стратегий
-      // Если здесь упадет ошибка, мы сразу улетим в catch -> finally
+      // 1. Run the strategies
+      // If an error is thrown here, we go straight to catch -> finally
       for (final strategy in _strategies) {
         await strategy.backup(sourceDir);
       }
 
-      // 2. Архивация
+      // 2. Archiving
       await ZipFile.createFromDirectory(
         sourceDir: sourceDir,
         zipFile: zipFile,
         recurseSubDirs: true,
       );
 
-      // 3. Сохранение
+      // 3. Saving
       final formattedDate = fileDateFormat.format(DateTime.now());
       final resultPath = await FileSaver.instance.saveAs(
         name: 'life-calendar-$formattedDate',
@@ -73,7 +73,7 @@ class LocalBackupServiceImpl implements LocalBackupService {
     } finally {
       unawaited(_analytics.logBackup(BackupEvent.export));
 
-      // Очистка
+      // Cleanup
       if (sourceDir != null && sourceDir.existsSync()) {
         try {
           sourceDir.deleteSync(recursive: true);
@@ -111,23 +111,23 @@ class LocalBackupServiceImpl implements LocalBackupService {
 
       restoreTempDir = Directory(p.join(docsDir.path, 'restore_temp'));
 
-      // Подготовка чистой папки
+      // Prepare a clean folder
       if (restoreTempDir.existsSync()) {
         restoreTempDir.deleteSync(recursive: true);
       }
       restoreTempDir.createSync(recursive: true);
 
-      // 1. Распаковка архива
+      // 1. Extract the archive
       await ZipFile.extractToDirectory(
         zipFile: zipFile,
         destinationDir: restoreTempDir,
       );
 
-      // 2. Запуск стратегий восстановления (Fail Fast)
+      // 2. Run the restore strategies (Fail Fast)
       for (final strategy in _strategies) {
-        // Мы НЕ оборачиваем этот вызов в try-catch.
-        // Если стратегия падает (throw), исключение летит выше в общий catch,
-        // и процесс импорта прерывается целиком.
+        // We do NOT wrap this call in try-catch.
+        // If a strategy throws, the exception propagates to the outer catch
+        // and the whole import is aborted.
         logger.d('Starting restore strategy: ${strategy.id}');
         await strategy.restore(restoreTempDir);
       }
@@ -144,7 +144,7 @@ class LocalBackupServiceImpl implements LocalBackupService {
     } finally {
       unawaited(_analytics.logBackup(BackupEvent.import));
 
-      // Очистка
+      // Cleanup
       if (restoreTempDir != null && restoreTempDir.existsSync()) {
         try {
           restoreTempDir.deleteSync(recursive: true);

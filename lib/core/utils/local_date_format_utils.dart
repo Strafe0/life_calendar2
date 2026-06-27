@@ -8,7 +8,7 @@ String getLocalizedHint({
   required AppLocalizations l10n,
   List<int>? segmentLengths,
 }) {
-  // 1. Находим индексы символов, чтобы понять порядок (d, M, y)
+  // 1. Find the char indices to determine the order (d, M, y)
   final dIndex = pattern.indexOf('d');
   final mIndex = pattern.indexOf('M');
   final yIndex = pattern.indexOf('y');
@@ -18,22 +18,22 @@ String getLocalizedHint({
   if (mIndex != -1) indexMap[mIndex] = 'M';
   if (yIndex != -1) indexMap[yIndex] = 'y';
 
-  // Сортируем: кто раньше встречается в строке
+  // Sort: whichever appears earlier in the string comes first
   final sortedIndices = indexMap.keys.toList()..sort();
 
-  // 2. Автоматическое определение длин (ISO vs Local)
+  // 2. Auto-detect lengths (ISO vs Local)
   List<int> effectiveLengths = segmentLengths ?? [];
   if (effectiveLengths.isEmpty) {
-    // Если год идет раньше дня (yyyy-MM-dd), считаем ISO
+    // If the year comes before the day (yyyy-MM-dd), treat it as ISO
     final isYearFirst = yIndex != -1 && (dIndex == -1 || yIndex < dIndex);
     effectiveLengths = isYearFirst ? [4, 2, 2] : [2, 2, 4];
   }
 
   String result = pattern;
 
-  // 3. Проходим по порядку и заменяем ГРУППЫ символов
+  // 3. Walk through in order and replace GROUPS of characters
   for (int i = 0; i < sortedIndices.length; i++) {
-    // Безопасное получение длины
+    // Safely get the length
     final length =
         (i < effectiveLengths.length)
             ? effectiveLengths[i]
@@ -42,7 +42,7 @@ String getLocalizedHint({
     final charOriginalIndex = sortedIndices[i];
     final char = indexMap[charOriginalIndex]!;
 
-    // Выбираем локализованный символ
+    // Pick the localized symbol
     String localizedSymbol;
     switch (char) {
       case 'd':
@@ -73,7 +73,7 @@ String getLocalDateSeparator(Locale locale) {
 }
 
 String getLocalDateSeparatorByPattern(String pattern) {
-  // Определяем разделитель (первый не-буквенный символ)
+  // Determine the separator (first non-letter character)
   final separatorMatch = RegExp('[^a-zA-Z]').firstMatch(pattern);
   return separatorMatch?.group(0) ?? '.';
 }

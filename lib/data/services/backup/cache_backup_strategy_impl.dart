@@ -24,8 +24,8 @@ class CacheBackupStrategy implements BackupStrategy {
       p.join(destinationDir.path, 'cache_archive.zip'),
     );
 
-    // Мы используем ZipFile внутри стратегии, так как кэш сам по себе
-    // является zip-архивом внутри основного бэкапа.
+    // We use ZipFile inside the strategy because the cache itself is a
+    // zip archive nested within the main backup.
     await ZipFile.createFromDirectory(
       sourceDir: tempDir,
       zipFile: cacheArchiveFile,
@@ -87,7 +87,7 @@ class CacheBackupStrategy implements BackupStrategy {
 
         tempCacheDir.deleteSync(recursive: true);
 
-        // Исправление путей в БД
+        // Fix up photo paths in the DB
         await _databaseService.normalizePhotoPaths();
       } catch (e) {
         logger.w('Failed to restore cache', error: e);

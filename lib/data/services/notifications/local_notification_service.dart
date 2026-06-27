@@ -64,7 +64,7 @@ class LocalNotificationService {
     return false;
   }
 
-  /// Проверка и запрос прав на точные будильники (Android 12+)
+  /// Checks and requests exact-alarm permission (Android 12+)
   Future<void> requestExactAlarmsPermission() async {
     if (Platform.isAndroid) {
       final androidImplementation =
@@ -73,11 +73,11 @@ class LocalNotificationService {
                 AndroidFlutterLocalNotificationsPlugin
               >();
 
-      // Проверяем, можем ли мы планировать точные уведомления
+      // Check whether we can schedule exact notifications
       final bool? granted =
           await androidImplementation?.canScheduleExactNotifications();
 
-      // Если прав нет — запрашиваем (откроется диалог или настройки)
+      // If permission is missing, request it (opens a dialog or settings)
       if (granted == false) {
         await androidImplementation?.requestExactAlarmsPermission();
       }
@@ -141,7 +141,7 @@ class LocalNotificationService {
       scheduledDate: tz.TZDateTime.from(scheduledTime, tz.local),
       notificationDetails: details,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      // Если нужно, чтобы повторялось (например, каждый день в это время):
+      // Makes it repeat (e.g. every week on this weekday at this time):
       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
     );
   }

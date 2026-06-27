@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 class UniversalDateInputFormatter extends TextInputFormatter {
   final String separator;
 
-  /// Например [2, 2, 4] (ДД.ММ.ГГГГ) или [4, 2, 2] (YYYY.MM.DD)
+  /// For example [2, 2, 4] (DD.MM.YYYY) or [4, 2, 2] (YYYY.MM.DD)
   final List<int> segmentLengths;
 
   UniversalDateInputFormatter({
@@ -29,7 +29,7 @@ class UniversalDateInputFormatter extends TextInputFormatter {
       newText = newText.substring(0, totalLength);
     }
 
-    // Формируем строку с разделителями динамически
+    // Build the string with separators dynamically
     final buffer = StringBuffer();
     int currentSegmentIndex = 0;
     int currentSegmentLength = 0;
@@ -38,12 +38,12 @@ class UniversalDateInputFormatter extends TextInputFormatter {
       buffer.write(newText[i]);
       currentSegmentLength++;
 
-      // Проверяем, нужно ли ставить разделитель
-      // Если мы достигли длины текущего сегмента И это не последний сегмент
+      // Check whether a separator is needed
+      // If we reached the current segment length AND it's not the last segment
       if (currentSegmentIndex < segmentLengths.length - 1 &&
           currentSegmentLength == segmentLengths[currentSegmentIndex]) {
         buffer.write(separator);
-        currentSegmentLength = 0; // Сброс счетчика для следующего сегмента
+        currentSegmentLength = 0; // Reset the counter for the next segment
         currentSegmentIndex++;
       }
     }
@@ -54,9 +54,9 @@ class UniversalDateInputFormatter extends TextInputFormatter {
 
     final currentSelectionOffset = newValue.selection.baseOffset;
 
-    // *********** Начало логики расчета курсора ***********
+    // *********** Start of cursor calculation logic ***********
     int digitsBeforeCursor = 0;
-    // Считаем реальные цифры до курсора в исходном вводе (newValue)
+    // Count the actual digits before the cursor in the raw input (newValue)
     for (
       int i = 0;
       i < min(currentSelectionOffset, newValue.text.length);
@@ -78,26 +78,26 @@ class UniversalDateInputFormatter extends TextInputFormatter {
       if (digitsEncountered == digitsBeforeCursor) {
         newCursorOffset = i + 1;
 
-        // Если это не удаление И следующий символ - разделитель,
-        // перешагиваем его для удобства ввода
+        // If this isn't a deletion AND the next char is a separator,
+        // step over it for input convenience
         if (!isDeletion &&
             newCursorOffset < formattedText.length &&
             formattedText[newCursorOffset] == separator) {
           newCursorOffset += 1;
         }
 
-        // Если это было удаление, мы хотим, чтобы курсор остался точно
-        // на месте, где был удален символ.
+        // On deletion we want the cursor to stay exactly where the character
+        // was removed.
         //
-        // Если курсор находится сразу перед разделителем,
-        // мы должны его оставить там, чтобы Backspace мог удалить цифру.
+        // If the cursor sits right before a separator, we keep it there so
+        // Backspace can delete the digit.
 
-        // Если это удаление, и мы сейчас стоим на разделителе,
-        // то курсор должен вернуться на позицию перед ним.
+        // If this is a deletion and we're currently on a separator,
+        // the cursor should move back to the position before it.
         if (isDeletion &&
             newCursorOffset > 0 &&
             formattedText[newCursorOffset - 1] == separator) {
-          // Курсор должен встать на позицию, где была цифра перед разделителем
+          // Place the cursor where the digit before the separator was
           newCursorOffset--;
         }
 
@@ -105,7 +105,7 @@ class UniversalDateInputFormatter extends TextInputFormatter {
       }
     }
 
-    // Корректировка newCursorOffset по краям: 0 и formattedText.length
+    // Clamp newCursorOffset to the edges: 0 and formattedText.length
     if (digitsBeforeCursor == 0) newCursorOffset = 0;
     if (newCursorOffset > formattedText.length) {
       newCursorOffset = formattedText.length;

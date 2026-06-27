@@ -1,13 +1,13 @@
 import 'dart:io';
 
-/// Интерфейс для стратегии резервного копирования отдельного компонента
+/// Interface for backing up a single component.
 abstract interface class BackupStrategy {
-  /// Идентификатор стратегии (для логов или структуры папок)
+  /// Strategy identifier (for logs or the folder structure).
   String get id;
 
-  /// Выполняет копирование данных в папку архива [destinationDir]
+  /// Copies the data into the archive folder [destinationDir].
   Future<void> backup(Directory destinationDir);
 
-  /// Выполняет восстановление данных из папки архива [sourceDir]
+  /// Restores the data from the archive folder [sourceDir].
   Future<void> restore(Directory sourceDir);
 }

@@ -10,7 +10,7 @@ import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesBackupStrategy implements BackupStrategy {
-  // Внедряем список стратегий восстановления для максимальной гибкости
+  // Inject the list of restore strategies for maximum flexibility
   const SharedPreferencesBackupStrategy({
     this.restoreStrategies = const [
       JsonPrefsRestoreStrategy(),
@@ -25,7 +25,7 @@ class SharedPreferencesBackupStrategy implements BackupStrategy {
 
   @override
   Future<void> backup(Directory destinationDir) async {
-    // Логика бэкапа (экспорта) у нас всегда одна - в JSON
+    // The backup (export) logic is always the same — to JSON
     try {
       final prefs = await SharedPreferences.getInstance();
       final allPrefs = <String, dynamic>{};
@@ -47,8 +47,8 @@ class SharedPreferencesBackupStrategy implements BackupStrategy {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
 
-    // Паттерн "Chain of Responsibility" (упрощенный)
-    // Ищем первую подходящую стратегию
+    // Simplified "Chain of Responsibility" pattern
+    // Find the first strategy that can handle the data
     for (final strategy in restoreStrategies) {
       if (strategy.canRestore(sourceDir)) {
         logger.d('Restoring prefs using ${strategy.runtimeType}');

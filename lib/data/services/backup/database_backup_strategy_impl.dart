@@ -23,7 +23,7 @@ class DatabaseBackupStrategy implements BackupStrategy {
     if (dbFile.existsSync()) {
       dbFile.copySync(p.join(destinationDir.path, DatabaseService.tableName));
 
-      // Копируем WAL и SHM
+      // Copy WAL and SHM
       if (File('$dbPath-wal').existsSync()) {
         File('$dbPath-wal').copySync(
           p.join(destinationDir.path, '${DatabaseService.tableName}-wal'),
@@ -41,7 +41,7 @@ class DatabaseBackupStrategy implements BackupStrategy {
 
   @override
   Future<void> restore(Directory sourceDir) async {
-    // Закрываем соединение перед работой
+    // Close the connection before working with the files
     await _databaseService.close();
 
     final sysDbPath = await getDatabasesPath();
@@ -53,7 +53,7 @@ class DatabaseBackupStrategy implements BackupStrategy {
         currentDb.deleteSync(recursive: true);
       }
 
-      // Чистим старые WAL/SHM
+      // Clean up the old WAL/SHM
       final wal = File('${currentDb.path}-wal');
       final shm = File('${currentDb.path}-shm');
       if (wal.existsSync()) {
@@ -63,7 +63,7 @@ class DatabaseBackupStrategy implements BackupStrategy {
         shm.deleteSync();
       }
 
-      // Копируем новые
+      // Copy the new ones
       restoredDb.copySync(p.join(sysDbPath, DatabaseService.tableName));
 
       final restoredWal = File('${restoredDb.path}-wal');
@@ -81,7 +81,7 @@ class DatabaseBackupStrategy implements BackupStrategy {
       }
     }
 
-    // Переоткрываем базу
+    // Reopen the database
     await _databaseService.init();
   }
 }
