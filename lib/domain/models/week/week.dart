@@ -22,6 +22,7 @@ abstract class Week with _$Week {
     @DateConverter() required DateTime start,
     @DateConverter() required DateTime end,
     @JsonKey(name: 'state') required WeekTense tense,
+    @JsonKey(unknownEnumValue: WeekAssessment.poor)
     required WeekAssessment assessment,
     @GoalConverter() required List<Goal> goals,
     @EventConverter() required List<Event> events,

@@ -12,7 +12,11 @@ _Week _$WeekFromJson(Map<String, dynamic> json) => _Week(
   start: const DateConverter().fromJson(json['start'] as Object),
   end: const DateConverter().fromJson(json['end'] as Object),
   tense: $enumDecode(_$WeekTenseEnumMap, json['state']),
-  assessment: $enumDecode(_$WeekAssessmentEnumMap, json['assessment']),
+  assessment: $enumDecode(
+    _$WeekAssessmentEnumMap,
+    json['assessment'],
+    unknownValue: WeekAssessment.poor,
+  ),
   goals: const GoalConverter().fromJson(json['goals'] as String),
   events: const EventConverter().fromJson(json['events'] as String),
   resume: json['resume'] as String,
@@ -39,7 +43,7 @@ const _$WeekTenseEnumMap = {
 };
 
 const _$WeekAssessmentEnumMap = {
-  WeekAssessment.good: 'Хорошо',
-  WeekAssessment.bad: 'Плохо',
-  WeekAssessment.poor: 'Нейтрально',
+  WeekAssessment.good: 'good',
+  WeekAssessment.bad: 'bad',
+  WeekAssessment.poor: 'poor',
 };

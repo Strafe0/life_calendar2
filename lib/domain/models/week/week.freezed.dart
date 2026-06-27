@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Week {
 
- int get id; int get yearId;@DateConverter() DateTime get start;@DateConverter() DateTime get end;@JsonKey(name: 'state') WeekTense get tense; WeekAssessment get assessment;@GoalConverter() List<Goal> get goals;@EventConverter() List<Event> get events; String get resume;@PhotoConverter() List<String> get photos;
+ int get id; int get yearId;@DateConverter() DateTime get start;@DateConverter() DateTime get end;@JsonKey(name: 'state') WeekTense get tense;@JsonKey(unknownEnumValue: WeekAssessment.poor) WeekAssessment get assessment;@GoalConverter() List<Goal> get goals;@EventConverter() List<Event> get events; String get resume;@PhotoConverter() List<String> get photos;
 /// Create a copy of Week
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $WeekCopyWith<$Res>  {
   factory $WeekCopyWith(Week value, $Res Function(Week) _then) = _$WeekCopyWithImpl;
 @useResult
 $Res call({
- int id, int yearId,@DateConverter() DateTime start,@DateConverter() DateTime end,@JsonKey(name: 'state') WeekTense tense, WeekAssessment assessment,@GoalConverter() List<Goal> goals,@EventConverter() List<Event> events, String resume,@PhotoConverter() List<String> photos
+ int id, int yearId,@DateConverter() DateTime start,@DateConverter() DateTime end,@JsonKey(name: 'state') WeekTense tense,@JsonKey(unknownEnumValue: WeekAssessment.poor) WeekAssessment assessment,@GoalConverter() List<Goal> goals,@EventConverter() List<Event> events, String resume,@PhotoConverter() List<String> photos
 });
 
 
@@ -162,7 +162,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int yearId, @DateConverter()  DateTime start, @DateConverter()  DateTime end, @JsonKey(name: 'state')  WeekTense tense,  WeekAssessment assessment, @GoalConverter()  List<Goal> goals, @EventConverter()  List<Event> events,  String resume, @PhotoConverter()  List<String> photos)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int yearId, @DateConverter()  DateTime start, @DateConverter()  DateTime end, @JsonKey(name: 'state')  WeekTense tense, @JsonKey(unknownEnumValue: WeekAssessment.poor)  WeekAssessment assessment, @GoalConverter()  List<Goal> goals, @EventConverter()  List<Event> events,  String resume, @PhotoConverter()  List<String> photos)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Week() when $default != null:
 return $default(_that.id,_that.yearId,_that.start,_that.end,_that.tense,_that.assessment,_that.goals,_that.events,_that.resume,_that.photos);case _:
@@ -183,7 +183,7 @@ return $default(_that.id,_that.yearId,_that.start,_that.end,_that.tense,_that.as
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int yearId, @DateConverter()  DateTime start, @DateConverter()  DateTime end, @JsonKey(name: 'state')  WeekTense tense,  WeekAssessment assessment, @GoalConverter()  List<Goal> goals, @EventConverter()  List<Event> events,  String resume, @PhotoConverter()  List<String> photos)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int yearId, @DateConverter()  DateTime start, @DateConverter()  DateTime end, @JsonKey(name: 'state')  WeekTense tense, @JsonKey(unknownEnumValue: WeekAssessment.poor)  WeekAssessment assessment, @GoalConverter()  List<Goal> goals, @EventConverter()  List<Event> events,  String resume, @PhotoConverter()  List<String> photos)  $default,) {final _that = this;
 switch (_that) {
 case _Week():
 return $default(_that.id,_that.yearId,_that.start,_that.end,_that.tense,_that.assessment,_that.goals,_that.events,_that.resume,_that.photos);case _:
@@ -203,7 +203,7 @@ return $default(_that.id,_that.yearId,_that.start,_that.end,_that.tense,_that.as
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int yearId, @DateConverter()  DateTime start, @DateConverter()  DateTime end, @JsonKey(name: 'state')  WeekTense tense,  WeekAssessment assessment, @GoalConverter()  List<Goal> goals, @EventConverter()  List<Event> events,  String resume, @PhotoConverter()  List<String> photos)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int yearId, @DateConverter()  DateTime start, @DateConverter()  DateTime end, @JsonKey(name: 'state')  WeekTense tense, @JsonKey(unknownEnumValue: WeekAssessment.poor)  WeekAssessment assessment, @GoalConverter()  List<Goal> goals, @EventConverter()  List<Event> events,  String resume, @PhotoConverter()  List<String> photos)?  $default,) {final _that = this;
 switch (_that) {
 case _Week() when $default != null:
 return $default(_that.id,_that.yearId,_that.start,_that.end,_that.tense,_that.assessment,_that.goals,_that.events,_that.resume,_that.photos);case _:
@@ -218,7 +218,7 @@ return $default(_that.id,_that.yearId,_that.start,_that.end,_that.tense,_that.as
 @JsonSerializable()
 
 class _Week implements Week {
-  const _Week({required this.id, required this.yearId, @DateConverter() required this.start, @DateConverter() required this.end, @JsonKey(name: 'state') required this.tense, required this.assessment, @GoalConverter() required final  List<Goal> goals, @EventConverter() required final  List<Event> events, required this.resume, @PhotoConverter() required final  List<String> photos}): _goals = goals,_events = events,_photos = photos;
+  const _Week({required this.id, required this.yearId, @DateConverter() required this.start, @DateConverter() required this.end, @JsonKey(name: 'state') required this.tense, @JsonKey(unknownEnumValue: WeekAssessment.poor) required this.assessment, @GoalConverter() required final  List<Goal> goals, @EventConverter() required final  List<Event> events, required this.resume, @PhotoConverter() required final  List<String> photos}): _goals = goals,_events = events,_photos = photos;
   factory _Week.fromJson(Map<String, dynamic> json) => _$WeekFromJson(json);
 
 @override final  int id;
@@ -226,7 +226,7 @@ class _Week implements Week {
 @override@DateConverter() final  DateTime start;
 @override@DateConverter() final  DateTime end;
 @override@JsonKey(name: 'state') final  WeekTense tense;
-@override final  WeekAssessment assessment;
+@override@JsonKey(unknownEnumValue: WeekAssessment.poor) final  WeekAssessment assessment;
  final  List<Goal> _goals;
 @override@GoalConverter() List<Goal> get goals {
   if (_goals is EqualUnmodifiableListView) return _goals;
@@ -283,7 +283,7 @@ abstract mixin class _$WeekCopyWith<$Res> implements $WeekCopyWith<$Res> {
   factory _$WeekCopyWith(_Week value, $Res Function(_Week) _then) = __$WeekCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int yearId,@DateConverter() DateTime start,@DateConverter() DateTime end,@JsonKey(name: 'state') WeekTense tense, WeekAssessment assessment,@GoalConverter() List<Goal> goals,@EventConverter() List<Event> events, String resume,@PhotoConverter() List<String> photos
+ int id, int yearId,@DateConverter() DateTime start,@DateConverter() DateTime end,@JsonKey(name: 'state') WeekTense tense,@JsonKey(unknownEnumValue: WeekAssessment.poor) WeekAssessment assessment,@GoalConverter() List<Goal> goals,@EventConverter() List<Event> events, String resume,@PhotoConverter() List<String> photos
 });
 
 

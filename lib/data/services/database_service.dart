@@ -16,7 +16,7 @@ import 'package:sqflite/sqflite.dart';
 class DatabaseService {
   static const tableName = 'TheCalendarDatabase';
   late Database _db;
-  final int _dbVersion = 2;
+  final int _dbVersion = 3;
 
   Future<Result> init() async {
     try {
@@ -30,8 +30,13 @@ class DatabaseService {
         },
         onUpgrade: (db, oldVersion, newVersion) async {
           final batch = db.batch();
-          if (oldVersion == 1) {
+          // Cumulative thresholds so multi-step jumps (e.g. v1→v3, including
+          // restoring an old backup file) run every required step.
+          if (oldVersion < 2) {
             _updateTableV1toV2(batch);
+          }
+          if (oldVersion < 3) {
+            _migrateAssessmentValuesV2toV3(batch);
           }
           await batch.commit();
         },
@@ -64,6 +69,25 @@ class DatabaseService {
 
   void _updateTableV1toV2(Batch batch) {
     batch.execute('ALTER TABLE $tableName ADD photos TEXT');
+  }
+
+  /// Rewrites legacy localized assessment values to language-neutral codes.
+  ///
+  /// Builds <= db v2 stored the Russian display strings; the literals below are
+  /// frozen historical values and intentionally hardcoded (not derived from the
+  /// current enum).
+  void _migrateAssessmentValuesV2toV3(Batch batch) {
+    const legacyToCode = {
+      'Хорошо': 'good',
+      'Плохо': 'bad',
+      'Нейтрально': 'poor',
+    };
+    for (final entry in legacyToCode.entries) {
+      batch.rawUpdate(
+        'UPDATE $tableName SET assessment = ? WHERE assessment = ?',
+        [entry.value, entry.key],
+      );
+    }
   }
 
   Future<bool> insertWeeks(List<Week> weeks) {
