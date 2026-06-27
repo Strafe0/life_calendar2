@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 context.read<LocalNotificationService>(),
                 const SettingsService(),
               ),
-              sharedPreferencesService: context.read(),
+              settingsRepository: context.read(),
             )..prepareApp(),
         child: Builder(
           builder: (context) {

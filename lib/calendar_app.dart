@@ -8,6 +8,8 @@ import 'package:life_calendar/data/repositories/auth_repository/auth_repository.
 import 'package:life_calendar/data/repositories/auth_repository/auth_repository_impl.dart';
 import 'package:life_calendar/data/repositories/onboarding_repository/onboarding_repository.dart';
 import 'package:life_calendar/data/repositories/onboarding_repository/onboarding_repository_impl.dart';
+import 'package:life_calendar/data/repositories/settings_repository/settings_repository.dart';
+import 'package:life_calendar/data/repositories/settings_repository/settings_repository_impl.dart';
 import 'package:life_calendar/data/repositories/user_repository/user_repository.dart';
 import 'package:life_calendar/data/repositories/user_repository/user_repository_impl.dart';
 import 'package:life_calendar/data/repositories/week_repository/week_repository.dart';
@@ -42,6 +44,12 @@ class CalendarApp extends StatelessWidget {
         Provider(create: (_) => DatabaseService()),
         Provider(create: (_) => const SharedPreferencesService()),
         Provider(create: (context) => AppInitializer(context.read())),
+        Provider<SettingsRepository>(
+          create:
+              (context) => SettingsRepositoryImpl(
+                sharedPreferencesService: context.read(),
+              ),
+        ),
         Provider(create: (context) => LocalNotificationService()),
         Provider(
           create: (context) {

@@ -32,7 +32,7 @@ final goRouter = GoRouter(
             create:
                 (_) => CalendarCubit(
                   weekRepository: context.read(),
-                  sharedPreferencesService: context.read(),
+                  settingsRepository: context.read(),
                 ),
             child: child,
           ),

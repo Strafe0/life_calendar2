@@ -4,31 +4,27 @@ import 'package:flutter/foundation.dart' show PlatformDispatcher;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/data/repositories/settings_repository/settings_repository.dart';
 import 'package:life_calendar/data/repositories/week_repository/week_repository.dart';
-import 'package:life_calendar/data/services/shared_preferences_service.dart';
 import 'package:life_calendar/domain/models/week/week.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/bloc/calendar_state.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/models/week_box.dart';
-import 'package:life_calendar/ui/core/themes/week_extension.dart';
 import 'package:life_calendar/ui/home_widget/home_widget_service.dart';
 import 'package:life_calendar/utils/calendar/calendar_size.dart';
 import 'package:life_calendar/utils/result.dart';
 
 class CalendarCubit extends Cubit<CalendarState> {
   final WeekRepository _weekRepository;
-  final SharedPreferencesService _sharedPreferencesService;
+  final SettingsRepository _settingsRepository;
 
   CalendarCubit({
     required WeekRepository weekRepository,
-    required SharedPreferencesService sharedPreferencesService,
+    required SettingsRepository settingsRepository,
   }) : _weekRepository = weekRepository,
-       _sharedPreferencesService = sharedPreferencesService,
+       _settingsRepository = settingsRepository,
        super(const CalendarInitial());
 
-  Future<void> getWeeks({
-    required CalendarSize calendarSize,
-    required Brightness brightness,
-  }) async {
+  Future<void> getWeeks({required CalendarSize calendarSize}) async {
     emit(const CalendarLoading());
 
     final updateCurrWeekResult = await _weekRepository.updateCurrentWeek();
@@ -40,7 +36,7 @@ class CalendarCubit extends Cubit<CalendarState> {
         logger.d('Got ${weeksResult.value.length} weeks');
 
         if (weeksResult.value.isEmpty) {
-          final isFirstLaunch = await _sharedPreferencesService.isFirstLaunch();
+          final isFirstLaunch = await _settingsRepository.isFirstLaunch();
           if (!isFirstLaunch) {
             logger.e('Week list is empty and it is not first launch');
             emit(CalendarFailure(Exception('No data')));
@@ -51,11 +47,7 @@ class CalendarCubit extends Cubit<CalendarState> {
 
         emit(
           CalendarSuccess(
-            weeks: _prepareWeekBoxes(
-              weeksResult.value,
-              calendarSize,
-              brightness,
-            ),
+            weeks: _prepareWeekBoxes(weeksResult.value, calendarSize),
             lastUpdateTime: DateTime.now(),
           ),
         );
@@ -81,11 +73,7 @@ class CalendarCubit extends Cubit<CalendarState> {
     }
   }
 
-  List<WeekBox> _prepareWeekBoxes(
-    List<Week> weeks,
-    CalendarSize calendarSize,
-    Brightness brightness,
-  ) {
+  List<WeekBox> _prepareWeekBoxes(List<Week> weeks, CalendarSize calendarSize) {
     final y0 =
         calendarSize.vrtPadding +
         calendarSize.labelVrtPadding +
@@ -129,15 +117,14 @@ class CalendarCubit extends Cubit<CalendarState> {
       return WeekBox(
         weekId: weeks[weekId].id,
         yearId: weeks[weekId].yearId,
-        colorLight: weeks[weekId].getColor(brightness: Brightness.light),
-        colorDark: weeks[weekId].getColor(brightness: Brightness.dark),
         rect: rrect,
+        week: weeks[weekId],
       );
     });
   }
 
   Future<bool> hasChangedWeeks({required int newLifeSpan}) async {
-    final oldLifeSpan = await _sharedPreferencesService.getLifespan();
+    final oldLifeSpan = await _settingsRepository.getLifespan();
 
     if (oldLifeSpan == null) {
       logger.w('Failed to check changed weeks, because old lifespan is null');
