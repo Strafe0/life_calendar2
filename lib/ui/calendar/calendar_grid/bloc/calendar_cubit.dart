@@ -1,27 +1,29 @@
 import 'dart:math' as math;
 
-import 'package:flutter/foundation.dart' show PlatformDispatcher;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/data/repositories/settings_repository/settings_repository.dart';
 import 'package:life_calendar/data/repositories/week_repository/week_repository.dart';
 import 'package:life_calendar/domain/models/week/week.dart';
+import 'package:life_calendar/domain/services/home_widget_service.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/bloc/calendar_state.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/models/week_box.dart';
-import 'package:life_calendar/ui/home_widget/home_widget_service.dart';
 import 'package:life_calendar/utils/calendar/calendar_size.dart';
 import 'package:life_calendar/utils/result.dart';
 
 class CalendarCubit extends Cubit<CalendarState> {
   final WeekRepository _weekRepository;
   final SettingsRepository _settingsRepository;
+  final HomeWidgetService _homeWidgetService;
 
   CalendarCubit({
     required WeekRepository weekRepository,
     required SettingsRepository settingsRepository,
+    required HomeWidgetService homeWidgetService,
   }) : _weekRepository = weekRepository,
        _settingsRepository = settingsRepository,
+       _homeWidgetService = homeWidgetService,
        super(const CalendarInitial());
 
   Future<void> getWeeks({required CalendarSize calendarSize}) async {
@@ -148,12 +150,11 @@ class CalendarCubit extends Cubit<CalendarState> {
   ) async {
     switch (currentWeekResult) {
       case Ok<Week>():
-        await HomeWidgetService.updateProgress(
+        await _homeWidgetService.updateProgress(
           currentWeekNumber: currentWeekResult.value.id + 1,
           totalWeeksCount: weeksCount,
           currentWeekGoalsCount: currentWeekResult.value.goals.length,
           currentWeekEventsCount: currentWeekResult.value.events.length,
-          locale: PlatformDispatcher.instance.locale,
         );
       case Error<Week>():
         logger.w(

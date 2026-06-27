@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart' show PlatformDispatcher;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:life_calendar/core/logger/logger.dart';
@@ -11,19 +10,22 @@ import 'package:life_calendar/domain/models/week/event/event.dart';
 import 'package:life_calendar/domain/models/week/goal/goal.dart';
 import 'package:life_calendar/domain/models/week/week.dart';
 import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
+import 'package:life_calendar/domain/services/home_widget_service.dart';
 import 'package:life_calendar/ui/calendar/week_screen/bloc/week_state.dart';
-import 'package:life_calendar/ui/home_widget/home_widget_service.dart';
 import 'package:life_calendar/utils/result.dart';
 
 class WeekCubit extends Cubit<WeekState> {
   final AnalyticsService _analytics;
   final WeekRepository _weekRepository;
+  final HomeWidgetService _homeWidgetService;
 
   WeekCubit({
     required WeekRepository weekRepository,
     required AnalyticsService analytics,
+    required HomeWidgetService homeWidgetService,
   }) : _weekRepository = weekRepository,
        _analytics = analytics,
+       _homeWidgetService = homeWidgetService,
        super(const WeekInitial());
 
   bool get isLoading => state == const WeekLoading();
@@ -185,9 +187,8 @@ class WeekCubit extends Cubit<WeekState> {
       }
 
       unawaited(
-        HomeWidgetService.updateEventsCount(
+        _homeWidgetService.updateEventsCount(
           eventsCount: newEventList.length,
-          locale: PlatformDispatcher.instance.locale,
         ),
       );
       unawaited(_analytics.logAddWeekContent(WeekContentEvent.event));
@@ -255,9 +256,8 @@ class WeekCubit extends Cubit<WeekState> {
       }
 
       unawaited(
-        HomeWidgetService.updateEventsCount(
+        _homeWidgetService.updateEventsCount(
           eventsCount: newEventList.length,
-          locale: PlatformDispatcher.instance.locale,
         ),
       );
       unawaited(_analytics.logChangeWeekContent(WeekContentEvent.event));
@@ -294,9 +294,8 @@ class WeekCubit extends Cubit<WeekState> {
       }
 
       unawaited(
-        HomeWidgetService.updateGoalsCount(
+        _homeWidgetService.updateGoalsCount(
           goalsCount: newGoalList.length,
-          locale: PlatformDispatcher.instance.locale,
         ),
       );
       unawaited(_analytics.logAddWeekContent(WeekContentEvent.goal));
@@ -358,9 +357,8 @@ class WeekCubit extends Cubit<WeekState> {
       }
 
       unawaited(
-        HomeWidgetService.updateGoalsCount(
+        _homeWidgetService.updateGoalsCount(
           goalsCount: newGoalList.length,
-          locale: PlatformDispatcher.instance.locale,
         ),
       );
       unawaited(_analytics.logDeleteWeekContent(WeekContentEvent.goal));

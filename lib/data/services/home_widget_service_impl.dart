@@ -1,10 +1,12 @@
-import 'dart:ui'; // Для Locale
+import 'dart:ui' show Locale, PlatformDispatcher;
+
 import 'package:home_widget/home_widget.dart';
 import 'package:life_calendar/core/l10n/app_localizations.dart';
 import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/domain/services/home_widget_service.dart';
 
 /// Service responsible for updating native Home Screen widgets.
-class HomeWidgetService {
+class HomeWidgetServiceImpl implements HomeWidgetService {
   static const String _appGroupId = 'group.com.vgol.life_calendar2';
   static const String _androidWidgetName = 'HomeWidgetProvider';
   // Name of Kind from Swift file
@@ -17,14 +19,22 @@ class HomeWidgetService {
   static const String _keyEventsText = 'id_events_text';
   static const String _keyProgressValue = 'id_progress_value';
 
-  /// Updates the full widget state.
-  static Future<void> updateProgress({
+  final Locale Function() _localeProvider;
+
+  const HomeWidgetServiceImpl({
+    Locale Function() localeProvider = _platformLocale,
+  }) : _localeProvider = localeProvider;
+
+  static Locale _platformLocale() => PlatformDispatcher.instance.locale;
+
+  @override
+  Future<void> updateProgress({
     required int currentWeekNumber,
     required int totalWeeksCount,
     required int currentWeekGoalsCount,
     required int currentWeekEventsCount,
-    required Locale locale,
   }) async {
+    final locale = _localeProvider();
     final l10n = lookupAppLocalizations(locale);
 
     final progress =
@@ -56,12 +66,9 @@ class HomeWidgetService {
     }
   }
 
-  /// Updates only the goals count text.
-  static Future<void> updateGoalsCount({
-    required int goalsCount,
-    required Locale locale,
-  }) async {
-    final l10n = lookupAppLocalizations(locale);
+  @override
+  Future<void> updateGoalsCount({required int goalsCount}) async {
+    final l10n = lookupAppLocalizations(_localeProvider());
     final goalsStr = '🎯 ${l10n.widgetGoalsCount(goalsCount)}';
 
     try {
@@ -75,12 +82,9 @@ class HomeWidgetService {
     }
   }
 
-  /// Updates only the events count text.
-  static Future<void> updateEventsCount({
-    required int eventsCount,
-    required Locale locale,
-  }) async {
-    final l10n = lookupAppLocalizations(locale);
+  @override
+  Future<void> updateEventsCount({required int eventsCount}) async {
+    final l10n = lookupAppLocalizations(_localeProvider());
     final eventsStr = '🗓️ ${l10n.widgetEventsCount(eventsCount)}';
 
     try {
@@ -95,7 +99,7 @@ class HomeWidgetService {
   }
 
   /// Internal helper to trigger the update
-  static Future<void> _updateWidget() async {
+  Future<void> _updateWidget() async {
     await HomeWidget.updateWidget(
       name: _androidWidgetName,
       iOSName: _iOSWidgetName,

@@ -33,6 +33,7 @@ final goRouter = GoRouter(
                 (_) => CalendarCubit(
                   weekRepository: context.read(),
                   settingsRepository: context.read(),
+                  homeWidgetService: context.read(),
                 ),
             child: child,
           ),
@@ -79,6 +80,7 @@ final goRouter = GoRouter(
                       (context) => WeekCubit(
                         weekRepository: context.read(),
                         analytics: context.read(),
+                        homeWidgetService: context.read(),
                       )..getWeek(weekId: selectedWeekId),
                   child: WeekScreen(selectedWeekId: selectedWeekId),
                 );
