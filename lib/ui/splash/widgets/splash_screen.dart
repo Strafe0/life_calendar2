@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       child: BlocProvider(
         create:
             (context) => SplashCubit(
-              databaseService: context.read(),
+              appInitializer: context.read(),
               userRepository: context.read(),
               weeklyNotificationInteractor: WeeklyNotificationInteractor(
                 context.read<LocalNotificationService>(),

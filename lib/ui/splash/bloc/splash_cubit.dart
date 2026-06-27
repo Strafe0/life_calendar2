@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar/data/repositories/user_repository/user_repository.dart';
-import 'package:life_calendar/data/services/database_service.dart';
-import 'package:life_calendar/data/services/shared_preferences_service.dart';
+import 'package:life_calendar/domain/interactor/app_initializer.dart';
 import 'package:life_calendar/domain/interactor/weekly_notification_interactor.dart';
 import 'package:life_calendar/domain/models/user/user.dart';
 import 'package:life_calendar/ui/splash/bloc/splash_state.dart';
@@ -9,16 +8,15 @@ import 'package:life_calendar/utils/result.dart';
 
 class SplashCubit extends Cubit<SplashState> {
   final DatabaseService _databaseService;
-  final UserRepository _userRepository;
+  final AppInitializer _appInitializer;
   final SharedPreferencesService _sharedPreferencesService;
   final WeeklyNotificationInteractor _weeklyNotificationInteractor;
 
   SplashCubit({
-    required DatabaseService databaseService,
+    required AppInitializer appInitializer,
     required UserRepository userRepository,
     required WeeklyNotificationInteractor weeklyNotificationInteractor,
-    required SharedPreferencesService sharedPreferencesService,
-  }) : _databaseService = databaseService,
+  }) : _appInitializer = appInitializer,
        _userRepository = userRepository,
        _weeklyNotificationInteractor = weeklyNotificationInteractor,
        _sharedPreferencesService = sharedPreferencesService,
@@ -26,7 +24,7 @@ class SplashCubit extends Cubit<SplashState> {
 
   Future<void> prepareApp() async {
     emit(const SplashLoading());
-    final result = await _databaseService.init();
+    final result = await _appInitializer.initialize();
     if (result is! Ok) {
       emit(const SplashFailure());
       return;
