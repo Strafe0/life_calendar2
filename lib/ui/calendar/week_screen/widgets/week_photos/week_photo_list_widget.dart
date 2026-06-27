@@ -73,7 +73,7 @@ class WeekPhotoListWidget extends StatelessWidget {
       PageRouteBuilder(
         opaque: false,
         pageBuilder:
-            (_, __, ___) =>
+            (_, _, _) =>
                 PhotoViewer(photoPathList: photos, initialIndex: initialIndex),
       ),
     );

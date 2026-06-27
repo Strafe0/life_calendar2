@@ -31,33 +31,33 @@ class WeekView extends StatelessWidget {
         ),
         floatingActionButtonLocation: ExpandableFab.location,
         floatingActionButton: const Padding(
-          padding: EdgeInsets.only(bottom: 0),
+          padding: EdgeInsets.zero,
           child: WeekFab(),
         ),
-        body: SafeArea(
+        body: const SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
+            padding: EdgeInsets.only(left: 8, right: 8),
             child: CustomScrollView(
               slivers: [
-                const SliverPadding(
+                SliverPadding(
                   padding: EdgeInsets.only(top: 20),
                   sliver: SliverToBoxAdapter(
                     child: WeekAssessmentWidget(),
                   ),
                 ),
-                const SliverPadding(
+                SliverPadding(
                   padding: EdgeInsets.only(top: 20),
                   sliver: WeekGoalListWidget(),
                 ),
-                const SliverPadding(
+                SliverPadding(
                   padding: EdgeInsets.only(top: 20),
                   sliver: WeekEventListWidget(),
                 ),
-                const SliverPadding(
+                SliverPadding(
                   padding: EdgeInsets.only(top: 20),
                   sliver: WeekPhotoListWidget(),
                 ),
-                const SliverPadding(
+                SliverPadding(
                   padding: EdgeInsets.symmetric(vertical: 20),
                   sliver: WeekResumeWidget(),
                 ),
