@@ -1,3 +1,4 @@
+import 'package:life_calendar/core/time/time_source.dart';
 import 'package:life_calendar/domain/models/week/week.dart';
 import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
@@ -5,10 +6,16 @@ import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
 class CalendarGenerator {
   final DateTime birthday;
   final int lifeSpan;
+  final TimeSource time;
 
-  const CalendarGenerator({required this.birthday, required this.lifeSpan});
+  const CalendarGenerator({
+    required this.birthday,
+    required this.lifeSpan,
+    this.time = systemTime,
+  });
 
   List<Week> generateWeeks({int? startWeekIndex, int? startYearIndex}) {
+    final now = time();
     final List<Week> weeks = [];
     int count = startWeekIndex ?? 0;
     var lastBirthday = birthday;
@@ -39,9 +46,9 @@ class CalendarGenerator {
             start: weekMonday,
             end: weekSunday,
             tense:
-                weekSunday.isBefore(DateTime.now())
+                weekSunday.isBefore(now)
                     ? WeekTense.past
-                    : weekMonday.isBefore(DateTime.now())
+                    : weekMonday.isBefore(now)
                     ? WeekTense.current
                     : WeekTense.future,
             assessment: WeekAssessment.poor,

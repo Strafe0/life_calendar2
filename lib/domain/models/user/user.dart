@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:life_calendar/core/time/time_source.dart';
 
 part 'user.freezed.dart';
 
@@ -20,8 +21,8 @@ abstract class User with _$User {
 
   bool get isEmpty => id.isEmpty;
 
-  int get age {
-    final now = DateTime.now();
+  int age({TimeSource time = systemTime}) {
+    final now = time();
 
     if (now.month < birthdate.month) {
       return now.year - birthdate.year - 1;

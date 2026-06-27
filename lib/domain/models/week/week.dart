@@ -4,6 +4,7 @@ import 'package:life_calendar/core/converters/date_converter.dart';
 import 'package:life_calendar/core/converters/event_converter.dart';
 import 'package:life_calendar/core/converters/goal_converter.dart';
 import 'package:life_calendar/core/converters/photo_converter.dart';
+import 'package:life_calendar/core/time/time_source.dart';
 import 'package:life_calendar/domain/models/week/event/event.dart';
 import 'package:life_calendar/domain/models/week/goal/goal.dart';
 import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
@@ -30,8 +31,8 @@ abstract class Week with _$Week {
 
   factory Week.fromJson(Map<String, dynamic> json) => _$WeekFromJson(json);
 
-  factory Week.empty() {
-    final now = DateTime.now();
+  factory Week.empty({TimeSource time = systemTime}) {
+    final now = time();
     return Week(
       id: -1,
       yearId: -1,
