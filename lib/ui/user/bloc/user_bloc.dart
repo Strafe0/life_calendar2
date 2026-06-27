@@ -40,7 +40,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           '${userResult.value.lifeSpan})',
         );
         emit(UserSuccess(user: userResult.value));
-      case Error<User>():
+      case ResultError<User>():
         logger.d('Failed to get user', error: userResult.error);
         emit(UserFailure(userResult.error));
     }
@@ -81,7 +81,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               user: currentState.user.copyWith(lifeSpan: newLifeSpan),
             ),
           );
-        case Error<void>():
+        case ResultError<void>():
           logger.e('Failed to change user life span', error: result.error);
           emit(UserFailure(result.error));
       }

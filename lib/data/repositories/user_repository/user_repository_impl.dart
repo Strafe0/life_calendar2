@@ -1,3 +1,4 @@
+import 'package:life_calendar/core/exceptions/data_exceptions.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/core/uuid/app_uuid.dart';
 import 'package:life_calendar/data/repositories/user_repository/user_repository.dart';
@@ -48,7 +49,9 @@ class UserRepositoryImpl implements UserRepository {
           'or birthdate: (null - ${birthdate == null}), '
           'or lifeSpan(null - ${lifeSpan == null})',
         );
-        return Result.error(Exception());
+        return const Result.error(
+          UserDataException('Stored user profile has no birthdate'),
+        );
       }
 
       if (userId == null) {

@@ -43,7 +43,7 @@ class WeekRepositoryImpl implements WeekRepository {
             currentWeekResult.value,
           );
           return Result.ok(currentWeek);
-        case Error():
+        case ResultError():
           logger.e(
             'Failed to get current week for updating',
             error: currentWeekResult.error,

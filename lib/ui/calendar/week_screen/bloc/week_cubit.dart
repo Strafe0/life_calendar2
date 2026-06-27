@@ -44,7 +44,7 @@ class WeekCubit extends Cubit<WeekState> {
       case Ok<Week>():
         logger.d('Got week $weekId');
         emit(WeekSuccess(week: weekResult.value, lastUpdate: DateTime.now()));
-      case Error<Week>():
+      case ResultError<Week>():
         emit(WeekFailure(Exception('Failed to get week with id: $weekId')));
         logger.e('Failed to receive week $weekId', error: weekResult.error);
     }
@@ -60,7 +60,7 @@ class WeekCubit extends Cubit<WeekState> {
         assessment: newAssessment,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to change assessment. Returning previous state',
@@ -93,7 +93,7 @@ class WeekCubit extends Cubit<WeekState> {
         goals: newGoals,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to change goal. Returning previous state',
@@ -117,7 +117,7 @@ class WeekCubit extends Cubit<WeekState> {
         resume: resume,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to change resume. Returning previous state',
@@ -145,7 +145,7 @@ class WeekCubit extends Cubit<WeekState> {
         resume: '',
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to delete resume. Returning previous state',
@@ -178,7 +178,7 @@ class WeekCubit extends Cubit<WeekState> {
         events: newEventList,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to add new event. Returning previous state',
@@ -212,7 +212,7 @@ class WeekCubit extends Cubit<WeekState> {
         events: newEventList,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to change event. Returning previous state',
@@ -247,7 +247,7 @@ class WeekCubit extends Cubit<WeekState> {
         events: newEventList,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to delete event. Returning previous state',
@@ -285,7 +285,7 @@ class WeekCubit extends Cubit<WeekState> {
         goals: newGoalList,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to add new goal. Returning previous state',
@@ -319,7 +319,7 @@ class WeekCubit extends Cubit<WeekState> {
         goals: newGoalList,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to change goal. Returning previous state',
@@ -348,7 +348,7 @@ class WeekCubit extends Cubit<WeekState> {
         goals: newGoalList,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to delete goal. Returning previous state',
@@ -379,7 +379,7 @@ class WeekCubit extends Cubit<WeekState> {
         photos: newPhotoList,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to add new goal. Returning previous state',
@@ -405,7 +405,7 @@ class WeekCubit extends Cubit<WeekState> {
         photos: newPhotoList,
       );
 
-      if (result is Error) {
+      if (result is ResultError) {
         emit(prevState);
         logger.e(
           'Failed to delete photo. Returning previous state',

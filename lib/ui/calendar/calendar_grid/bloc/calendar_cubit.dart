@@ -53,7 +53,7 @@ class CalendarCubit extends Cubit<CalendarState> {
             lastUpdateTime: DateTime.now(),
           ),
         );
-      case Error<List<Week>>():
+      case ResultError<List<Week>>():
         logger.e('Failed to get weeks', error: weeksResult.error);
         emit(CalendarFailure(weeksResult.error));
     }
@@ -156,7 +156,7 @@ class CalendarCubit extends Cubit<CalendarState> {
           currentWeekGoalsCount: currentWeekResult.value.goals.length,
           currentWeekEventsCount: currentWeekResult.value.events.length,
         );
-      case Error<Week>():
+      case ResultError<Week>():
         logger.w(
           'Failed to update current week in DB',
           error: currentWeekResult.error,

@@ -29,7 +29,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
     final result = await _interactor.toggleNotification(isEnabled: value);
 
-    if (result is Error<void>) {
+    if (result is ResultError<void>) {
       emit(SettingsState(isWeeklyReminderEnabled: !value));
     }
   }

@@ -25,7 +25,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       case Ok<List<OnboardingPage>>():
         logger.d('Successfully loaded onboarding pages');
         emit(OnboardingSuccess(pages: pagesResult.value));
-      case Error<List<OnboardingPage>>():
+      case ResultError<List<OnboardingPage>>():
         logger.e('Failed to get onboarding pages');
         emit(OnboardingFailure(pagesResult.error));
     }

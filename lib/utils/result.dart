@@ -5,7 +5,7 @@ sealed class Result<T> {
   const factory Result.ok(T value) = Ok._;
 
   /// Creates an error [Result], completed with the specified [error].
-  const factory Result.error(Object error) = Error._;
+  const factory Result.error(Object error) = ResultError._;
 }
 
 /// Subclass of Result for values
@@ -20,8 +20,8 @@ final class Ok<T> extends Result<T> {
 }
 
 /// Subclass of Result for errors
-final class Error<T> extends Result<T> {
-  const Error._(this.error);
+final class ResultError<T> extends Result<T> {
+  const ResultError._(this.error);
 
   /// Returned error in result
   final Object error;
