@@ -22,6 +22,7 @@ import 'package:life_calendar/data/services/backup/shared_prefs_backup_strategy_
 import 'package:life_calendar/data/services/database_service.dart';
 import 'package:life_calendar/data/services/home_widget_service_impl.dart';
 import 'package:life_calendar/data/services/image_picker_service_impl.dart';
+import 'package:life_calendar/data/services/image_storage_service_impl.dart';
 import 'package:life_calendar/data/services/local_backup_service_impl.dart';
 import 'package:life_calendar/data/services/notifications/local_notification_service.dart';
 import 'package:life_calendar/data/services/settings_service.dart';
@@ -30,6 +31,7 @@ import 'package:life_calendar/domain/interactor/app_initializer.dart';
 import 'package:life_calendar/domain/interactor/weekly_notification_interactor.dart';
 import 'package:life_calendar/domain/services/home_widget_service.dart';
 import 'package:life_calendar/domain/services/image_picker_service.dart';
+import 'package:life_calendar/domain/services/image_storage_service.dart';
 import 'package:life_calendar/domain/services/local_backup_service.dart';
 import 'package:life_calendar/ui/calendar/drawer/bloc/settings_cubit.dart';
 import 'package:life_calendar/ui/core/themes/app_theme.dart';
@@ -77,6 +79,9 @@ class CalendarApp extends StatelessWidget {
         Provider<HomeWidgetService>(
           create: (_) => const HomeWidgetServiceImpl(),
         ),
+        Provider<ImageStorageService>(
+          create: (_) => const ImageStorageServiceImpl(),
+        ),
         Provider<OnboardingRepository>(
           create: (_) => const OnboardingRepositoryImpl(),
         ),
@@ -94,7 +99,10 @@ class CalendarApp extends StatelessWidget {
         ),
         Provider<WeekRepository>(
           create:
-              (context) => WeekRepositoryImpl(databaseService: context.read()),
+              (context) => WeekRepositoryImpl(
+                databaseService: context.read(),
+                imageStorageService: context.read(),
+              ),
         ),
         Provider<LocalBackupService>(
           create:
