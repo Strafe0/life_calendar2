@@ -53,18 +53,20 @@ class CalendarApp extends StatelessWidget {
               ),
         ),
         Provider(create: (context) => LocalNotificationService()),
+        Provider(create: (_) => const SettingsService()),
         Provider(
-          create: (context) {
-            const settingsService = SettingsService();
-
-            return SettingsCubit(
-              WeeklyNotificationInteractor(
+          create:
+              (context) => WeeklyNotificationInteractor(
                 context.read<LocalNotificationService>(),
-                settingsService,
+                context.read<SettingsService>(),
               ),
-              settingsService,
-            );
-          },
+        ),
+        BlocProvider(
+          create:
+              (context) => SettingsCubit(
+                context.read<WeeklyNotificationInteractor>(),
+                context.read<SettingsService>(),
+              ),
         ),
         Provider<AnalyticsService>(
           create: (context) => FirebaseAnalyticsService(),
