@@ -178,6 +178,50 @@ class DatabaseService {
     return Week.fromJson(record);
   }
 
+  /// Advances week tenses to reflect [today] in a single transaction.
+  ///
+  /// Every week that has already ended (`end < today`) becomes `past`, and the
+  /// week covering [today] (smallest `id` with `end >= today`) becomes
+  /// `current`. This replaces a week-by-week walk: cost is constant (one query
+  /// + two range updates) regardless of how many weeks have elapsed, and only
+  /// the `state` column is touched (no full-row JSON re-encode).
+  ///
+  /// Throws [WeekNotFoundException] if no week covers [today] (e.g. the date is
+  /// past the end of the generated calendar, or the table is empty).
+  Future<Week> advanceCurrentWeekTo(DateTime today) {
+    final todayMs = today.millisecondsSinceEpoch;
+
+    return _db.transaction((txn) async {
+      final records = await txn.query(
+        tableName,
+        where: 'end >= ?',
+        whereArgs: [todayMs],
+        orderBy: 'id ASC',
+        limit: 1,
+      );
+
+      final record = records.firstOrNull;
+      if (record == null) {
+        throw const WeekNotFoundException('No week covers the current date');
+      }
+
+      final newCurrentWeek = Week.fromJson(
+        record,
+      ).copyWith(tense: WeekTense.current);
+
+      await txn.rawUpdate(
+        'UPDATE $tableName SET state = ? WHERE end < ? AND state != ?',
+        [WeekTense.past.name, todayMs, WeekTense.past.name],
+      );
+      await txn.rawUpdate('UPDATE $tableName SET state = ? WHERE id = ?', [
+        WeekTense.current.name,
+        newCurrentWeek.id,
+      ]);
+
+      return newCurrentWeek;
+    });
+  }
+
   Future<void> updateAssessment({
     required int weekId,
     required WeekAssessment assessment,
