@@ -213,6 +213,14 @@ class DatabaseService {
         'UPDATE $tableName SET state = ? WHERE end < ? AND state != ?',
         [WeekTense.past.name, todayMs, WeekTense.past.name],
       );
+      // Reset any stale `current` other than the one we're about to set. If the
+      // device clock moved backwards, the previous current week now has
+      // `end >= today` (so it escaped the `past` update above) and would leave
+      // the table with two current weeks; demote it to `future`.
+      await txn.rawUpdate(
+        'UPDATE $tableName SET state = ? WHERE state = ? AND id != ?',
+        [WeekTense.future.name, WeekTense.current.name, newCurrentWeek.id],
+      );
       await txn.rawUpdate('UPDATE $tableName SET state = ? WHERE id = ?', [
         WeekTense.current.name,
         newCurrentWeek.id,
