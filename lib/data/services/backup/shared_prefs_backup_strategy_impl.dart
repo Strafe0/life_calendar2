@@ -48,13 +48,16 @@ class SharedPreferencesBackupStrategy implements BackupStrategy {
   @override
   Future<void> restore(Directory sourceDir) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
 
     // Simplified "Chain of Responsibility" pattern
     // Find the first strategy that can handle the data
     for (final strategy in restoreStrategies) {
       if (strategy.canRestore(sourceDir)) {
         logger.d('Restoring prefs using ${strategy.runtimeType}');
+        // Clear only once we know a strategy can repopulate the prefs, so a
+        // backup without recognizable prefs data doesn't wipe the existing
+        // settings (birthday/lifespan/userId).
+        await prefs.clear();
         await strategy.restore(sourceDir, prefs);
         return;
       }
