@@ -42,6 +42,7 @@ class CalendarCubit extends Cubit<CalendarState> {
           if (!isFirstLaunch) {
             logger.e('Week list is empty and it is not first launch');
             emit(CalendarFailure(Exception('No data')));
+            return;
           }
         }
 
