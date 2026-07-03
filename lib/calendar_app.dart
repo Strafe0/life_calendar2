@@ -47,7 +47,9 @@ class CalendarApp extends StatelessWidget {
       providers: [
         Provider(create: (_) => DatabaseService()),
         Provider(create: (_) => const SharedPreferencesService()),
-        Provider(create: (context) => AppInitializer(context.read())),
+        Provider(
+          create: (context) => AppInitializer(context.read<DatabaseService>()),
+        ),
         Provider<SettingsRepository>(
           create:
               (context) => SettingsRepositoryImpl(

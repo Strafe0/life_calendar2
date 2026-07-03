@@ -9,15 +9,17 @@ import 'package:life_calendar/domain/models/week/goal/goal.dart';
 import 'package:life_calendar/domain/models/week/week.dart';
 import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
+import 'package:life_calendar/domain/services/database_initializer.dart';
 import 'package:life_calendar/utils/result.dart';
 import 'package:path/path.dart' as p show basename;
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseService {
+class DatabaseService implements DatabaseInitializer {
   static const tableName = 'TheCalendarDatabase';
   late Database _db;
   final int _dbVersion = 3;
 
+  @override
   Future<Result> init() async {
     try {
       _db = await openDatabase(

@@ -1,12 +1,12 @@
-import 'package:life_calendar/data/services/database_service.dart';
+import 'package:life_calendar/domain/services/database_initializer.dart';
 import 'package:life_calendar/utils/result.dart';
 
 /// Owns app bootstrap (database initialization) so presentation depends on an
-/// interactor instead of reaching into [DatabaseService] directly.
+/// interactor instead of reaching into the database service directly.
 class AppInitializer {
-  final DatabaseService _databaseService;
+  final DatabaseInitializer _databaseInitializer;
 
-  const AppInitializer(this._databaseService);
+  const AppInitializer(this._databaseInitializer);
 
-  Future<Result> initialize() => _databaseService.init();
+  Future<Result> initialize() => _databaseInitializer.init();
 }
