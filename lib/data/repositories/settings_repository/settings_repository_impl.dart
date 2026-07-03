@@ -20,4 +20,8 @@ class SettingsRepositoryImpl implements SettingsRepository {
 
   @override
   Future<int?> getLifespan() => _sharedPreferencesService.getLifespan();
+
+  @override
+  Future<bool> isWeeklyReminderEnabled() =>
+      _sharedPreferencesService.isWeeklyReminderEnabled();
 }

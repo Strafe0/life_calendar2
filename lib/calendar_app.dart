@@ -25,7 +25,6 @@ import 'package:life_calendar/data/services/image_picker_service_impl.dart';
 import 'package:life_calendar/data/services/image_storage_service_impl.dart';
 import 'package:life_calendar/data/services/local_backup_service_impl.dart';
 import 'package:life_calendar/data/services/notifications/local_notification_service.dart';
-import 'package:life_calendar/data/services/settings_service.dart';
 import 'package:life_calendar/data/services/shared_preferences_service.dart';
 import 'package:life_calendar/domain/interactor/app_initializer.dart';
 import 'package:life_calendar/domain/interactor/weekly_notification_interactor.dart';
@@ -57,19 +56,18 @@ class CalendarApp extends StatelessWidget {
               ),
         ),
         Provider(create: (context) => LocalNotificationService()),
-        Provider(create: (_) => const SettingsService()),
         Provider(
           create:
               (context) => WeeklyNotificationInteractor(
                 context.read<LocalNotificationService>(),
-                context.read<SettingsService>(),
+                context.read<SharedPreferencesService>(),
               ),
         ),
         BlocProvider(
           create:
               (context) => SettingsCubit(
                 context.read<WeeklyNotificationInteractor>(),
-                context.read<SettingsService>(),
+                context.read<SettingsRepository>(),
               ),
         ),
         Provider<AnalyticsService>(

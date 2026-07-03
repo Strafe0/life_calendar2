@@ -8,4 +8,6 @@ abstract class SettingsRepository {
   Future<void> setFirstLaunchV3({required bool isFirstLaunch});
 
   Future<int?> getLifespan();
+
+  Future<bool> isWeeklyReminderEnabled();
 }
