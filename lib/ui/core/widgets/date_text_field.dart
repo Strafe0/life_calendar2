@@ -136,4 +136,10 @@ class _DateTextFieldState extends State<DateTextField> {
       ],
     );
   }
+
+  @override
+  void dispose() {
+    _dateController.dispose();
+    super.dispose();
+  }
 }
