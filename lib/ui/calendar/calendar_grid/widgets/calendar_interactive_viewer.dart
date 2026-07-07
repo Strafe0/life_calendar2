@@ -90,6 +90,7 @@ class _CalendarInteractiveViewerState extends State<CalendarInteractiveViewer>
 
   @override
   void dispose() {
+    widget.controller.removeListener(_controllerListener);
     _animationController.dispose();
     super.dispose();
   }

@@ -186,6 +186,7 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
   @override
   void dispose() {
     _transformationController.dispose();
+    _topNotifier.dispose();
     super.dispose();
   }
 }
