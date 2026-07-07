@@ -1,12 +1,17 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:life_calendar/data/repositories/settings_repository/settings_repository.dart';
 import 'package:life_calendar/domain/interactor/weekly_notification_interactor.dart';
 import 'package:life_calendar/utils/result.dart';
 
 // Simple settings state
-class SettingsState {
+class SettingsState extends Equatable {
   final bool isWeeklyReminderEnabled;
-  SettingsState({required this.isWeeklyReminderEnabled});
+
+  const SettingsState({required this.isWeeklyReminderEnabled});
+
+  @override
+  List<Object?> get props => [isWeeklyReminderEnabled];
 }
 
 class SettingsCubit extends Cubit<SettingsState> {
@@ -14,7 +19,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   final SettingsRepository _settingsRepository;
 
   SettingsCubit(this._interactor, this._settingsRepository)
-    : super(SettingsState(isWeeklyReminderEnabled: true));
+    : super(const SettingsState(isWeeklyReminderEnabled: true));
 
   /// Loads the initial toggle state when the screen is opened
   Future<void> loadSettings() async {
