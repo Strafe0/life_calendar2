@@ -61,19 +61,25 @@ class CalendarCubit extends Cubit<CalendarState> {
   }
 
   void updateWeek({required Week week}) {
-    if (state is CalendarSuccess) {
-      final weeks = (state as CalendarSuccess).weeks;
-      final weekBoxIndex = (state as CalendarSuccess).weeks.indexWhere(
-        (w) => w.weekId == week.id,
-      );
-      if (weekBoxIndex != -1) {
-        weeks[weekBoxIndex] = WeekBox.fromWeek(
-          week: week,
-          rect: weeks[weekBoxIndex].rect,
-        );
-        emit(CalendarSuccess(weeks: weeks, lastUpdateTime: DateTime.now()));
-      }
+    final currentState = state;
+    if (currentState is! CalendarSuccess) {
+      return;
     }
+
+    final weekBoxIndex = currentState.weeks.indexWhere(
+      (w) => w.weekId == week.id,
+    );
+    if (weekBoxIndex == -1) {
+      return;
+    }
+
+    final newWeeks = [...currentState.weeks];
+    newWeeks[weekBoxIndex] = WeekBox.fromWeek(
+      week: week,
+      rect: newWeeks[weekBoxIndex].rect,
+    );
+
+    emit(CalendarSuccess(weeks: newWeeks, lastUpdateTime: DateTime.now()));
   }
 
   List<WeekBox> _prepareWeekBoxes(List<Week> weeks, CalendarSize calendarSize) {
