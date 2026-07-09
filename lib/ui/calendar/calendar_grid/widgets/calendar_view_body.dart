@@ -46,12 +46,16 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return GestureDetector(
-          onTapUp:
-              (details) => _onCalendarTap(
-                context,
-                _transformationController.toScene(details.localPosition),
-                widget.calendarSize,
-              ),
+          onTapUp: (details) {
+            // The painted calendar is additionally shifted by
+            // _topNotifier.value via Transform.translate inside the viewer, so
+            // undo that offset on top of the InteractiveViewer transform
+            // before hit-testing.
+            final scenePosition = _transformationController
+                .toScene(details.localPosition)
+                .translate(0, -_topNotifier.value);
+            _onCalendarTap(context, scenePosition, widget.calendarSize);
+          },
           child: CalendarInteractiveViewer(
             controller: _transformationController,
             maxDragDistance: _indicatorHeight * 1.5,
