@@ -51,42 +51,43 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     Emitter<UserState> emit,
   ) async {
     final currentState = state;
+
+    if (currentState is! UserSuccess) {
+      logger.e('Cannot change life span, because user is not ready');
+      return;
+    }
+
     final newLifeSpan = event.lifeSpan;
+    final oldLifeSpan = currentState.user.lifeSpan;
 
     emit(const UserLoading());
 
-    if (currentState is UserSuccess) {
-      final oldLifeSpan = currentState.user.lifeSpan;
-      final resultFuture =
-          newLifeSpan < oldLifeSpan
-              ? _userRepository.reduceLifeSpan(
-                oldLifeSpan: oldLifeSpan,
-                newLifeSpan: newLifeSpan,
-              )
-              : _userRepository.increaseLifeSpan(
-                oldLifeSpan: oldLifeSpan,
-                newLifeSpan: newLifeSpan,
-              );
-
-      final result = await resultFuture;
-
-      switch (result) {
-        case Ok<void>():
-          logger.d(
-            'Changed user life span '
-            'from $oldLifeSpan to $newLifeSpan',
+    final resultFuture = newLifeSpan < oldLifeSpan
+        ? _userRepository.reduceLifeSpan(
+            oldLifeSpan: oldLifeSpan,
+            newLifeSpan: newLifeSpan,
+          )
+        : _userRepository.increaseLifeSpan(
+            oldLifeSpan: oldLifeSpan,
+            newLifeSpan: newLifeSpan,
           );
-          emit(
-            UserSuccess(
-              user: currentState.user.copyWith(lifeSpan: newLifeSpan),
-            ),
-          );
-        case ResultError<void>():
-          logger.e('Failed to change user life span', error: result.error);
-          emit(UserFailure(result.error));
-      }
 
-      unawaited(_analytics.logChangeLifespan(oldLifeSpan, newLifeSpan));
+    final result = await resultFuture;
+
+    switch (result) {
+      case Ok<void>():
+        logger.d(
+          'Changed user life span '
+          'from $oldLifeSpan to $newLifeSpan',
+        );
+        emit(
+          UserSuccess(user: currentState.user.copyWith(lifeSpan: newLifeSpan)),
+        );
+      case ResultError<void>():
+        logger.e('Failed to change user life span', error: result.error);
+        emit(UserFailure(result.error));
     }
+
+    unawaited(_analytics.logChangeLifespan(oldLifeSpan, newLifeSpan));
   }
 }

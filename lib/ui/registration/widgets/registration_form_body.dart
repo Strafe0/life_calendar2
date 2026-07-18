@@ -71,4 +71,10 @@ class _RegistrationFormBodyState extends State<RegistrationFormBody> {
       ],
     );
   }
+
+  @override
+  void dispose() {
+    _lifeSpanTextController.dispose();
+    super.dispose();
+  }
 }

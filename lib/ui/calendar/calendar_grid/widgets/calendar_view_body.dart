@@ -11,7 +11,6 @@ import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_painter
 import 'package:life_calendar/ui/calendar/calendar_grid/widgets/current_week_indicator.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/widgets/search/search_pull_indicator.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/widgets/search/search_ui_utils.dart';
-import 'package:life_calendar/ui/calendar/calendar_grid/widgets/triggers/calendar_triggers.dart';
 import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
 import 'package:life_calendar/ui/user/bloc/user_state.dart';
 import 'package:life_calendar/utils/calendar/calendar_size.dart';
@@ -36,7 +35,7 @@ class CalendarViewBody extends StatefulWidget {
 class _CalendarViewBodyState extends State<CalendarViewBody> {
   final _transformationController = TransformationController();
   final _topNotifier = ValueNotifier<double>(0);
-  final _triggers = Triggers();
+  bool _hapticFired = false;
 
   static const _indicatorHeight = 100.0;
 
@@ -46,39 +45,39 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return GestureDetector(
-          onTapUp:
-              (details) => _onCalendarTap(
-                context,
-                _transformationController.toScene(details.localPosition),
-                widget.calendarSize,
-              ),
+          onTapUp: (details) {
+            // The painted calendar is additionally shifted by
+            // _topNotifier.value via Transform.translate inside the viewer, so
+            // undo that offset on top of the InteractiveViewer transform
+            // before hit-testing.
+            final scenePosition = _transformationController
+                .toScene(details.localPosition)
+                .translate(0, -_topNotifier.value);
+            _onCalendarTap(context, scenePosition, widget.calendarSize);
+          },
           child: CalendarInteractiveViewer(
             controller: _transformationController,
             maxDragDistance: _indicatorHeight * 1.5,
-            onDragStart: _triggers.reset,
+            onDragStart: () => _hapticFired = false,
             onDrag: (dragDistance) {
               _topNotifier.value = dragDistance;
 
-              if (dragDistance > _indicatorHeight) {
-                if (!_triggers.haptic) {
-                  _triggers.activate(CalendarTrigger.haptic);
+              // Fire haptic once when crossing into the trigger zone, and
+              // re-arm it once the drag returns inside the threshold so the
+              // gesture can be cancelled (or re-triggered) without releasing.
+              if (dragDistance.abs() > _indicatorHeight) {
+                if (!_hapticFired) {
+                  _hapticFired = true;
                   HapticFeedback.lightImpact();
                 }
-
-                _triggers.activate(CalendarTrigger.search);
-              } else if (dragDistance < -_indicatorHeight) {
-                if (!_triggers.haptic) {
-                  _triggers.activate(CalendarTrigger.haptic);
-                  HapticFeedback.lightImpact();
-                }
-
-                _triggers.activate(CalendarTrigger.currentWeek);
+              } else {
+                _hapticFired = false;
               }
             },
-            onDragEnd: () {
-              if (_triggers.search) {
+            onDragEnd: (dragDistance) {
+              if (dragDistance > _indicatorHeight) {
                 showSearchSheet(context);
-              } else if (_triggers.currentWeek) {
+              } else if (dragDistance < -_indicatorHeight) {
                 _goToCurrentWeek(context);
               }
             },
@@ -90,7 +89,7 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
                     return Transform.translate(
                       offset: Offset(0, -_indicatorHeight + value),
                       child: SearchPullIndicator(
-                        isSearchTriggered: _triggers.search,
+                        isSearchTriggered: value > _indicatorHeight,
                         height: _indicatorHeight,
                       ),
                     );
@@ -102,7 +101,7 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
                     return Transform.translate(
                       offset: Offset(0, constraints.maxHeight + value),
                       child: CurrentWeekIndicator(
-                        isCurrentWeekTriggered: _triggers.currentWeek,
+                        isCurrentWeekTriggered: value < -_indicatorHeight,
                         height: _indicatorHeight,
                       ),
                     );
@@ -186,6 +185,7 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
   @override
   void dispose() {
     _transformationController.dispose();
+    _topNotifier.dispose();
     super.dispose();
   }
 }

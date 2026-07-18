@@ -39,4 +39,10 @@ class _ResumeTextFieldState extends State<ResumeTextField> {
       onEditingComplete: () => widget.onEditingComplete(_textController.text),
     );
   }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 }

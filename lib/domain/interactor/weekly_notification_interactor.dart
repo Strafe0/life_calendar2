@@ -1,12 +1,12 @@
 import 'dart:ui' show Locale, PlatformDispatcher;
 import 'package:life_calendar/core/logger/logger.dart';
-import 'package:life_calendar/data/services/notifications/local_notification_service.dart';
-import 'package:life_calendar/data/services/settings_service.dart';
+import 'package:life_calendar/domain/services/notification_service.dart';
+import 'package:life_calendar/domain/services/reminder_settings_service.dart';
 import 'package:life_calendar/utils/result.dart';
 
 class WeeklyNotificationInteractor {
-  final LocalNotificationService _notificationService;
-  final SettingsService _settingsService;
+  final NotificationService _notificationService;
+  final ReminderSettingsService _settingsService;
   final Locale Function() _localeProvider;
 
   WeeklyNotificationInteractor(

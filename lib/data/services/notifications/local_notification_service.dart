@@ -5,14 +5,16 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:life_calendar/core/l10n/app_localizations.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/data/services/notifications/local_notification_id_enum.dart';
+import 'package:life_calendar/domain/services/notification_service.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-class LocalNotificationService {
+class LocalNotificationService implements NotificationService {
   // Main plugin instance
   final _plugin = FlutterLocalNotificationsPlugin();
 
   // Initialization logic
+  @override
   Future<void> initialize() async {
     // 1. Initialize Timezones (needed for scheduled notifications)
     tz.initializeTimeZones();
@@ -40,6 +42,7 @@ class LocalNotificationService {
 
   /// Request permissions.
   /// Android 13+ requires manual request. iOS always requires it.
+  @override
   Future<bool?> requestPermissions() async {
     if (Platform.isIOS) {
       final iosImplementation =
@@ -65,6 +68,7 @@ class LocalNotificationService {
   }
 
   /// Checks and requests exact-alarm permission (Android 12+)
+  @override
   Future<void> requestExactAlarmsPermission() async {
     if (Platform.isAndroid) {
       final androidImplementation =
@@ -146,6 +150,7 @@ class LocalNotificationService {
     );
   }
 
+  @override
   Future<void> scheduleWeeklyReview(Locale locale) async {
     final l10n = lookupAppLocalizations(locale);
 
@@ -189,6 +194,7 @@ class LocalNotificationService {
     logger.i('Set weekly notification');
   }
 
+  @override
   Future<void> cancelWeeklyReview() async {
     await _plugin.cancel(id: LocalNotificationId.sumUpWeek.id);
     logger.i('Canceled weekly notification');

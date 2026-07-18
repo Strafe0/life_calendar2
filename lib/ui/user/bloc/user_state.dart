@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:life_calendar/domain/models/user/user.dart';
 
 sealed class UserState {
@@ -12,14 +13,20 @@ final class UserLoading extends UserState {
   const UserLoading();
 }
 
-final class UserSuccess extends UserState {
+final class UserSuccess extends UserState with EquatableMixin {
   final User user;
 
   const UserSuccess({required this.user});
+
+  @override
+  List<Object?> get props => [user];
 }
 
-final class UserFailure extends UserState {
+final class UserFailure extends UserState with EquatableMixin {
   final Object exception;
 
   const UserFailure(this.exception);
+
+  @override
+  List<Object?> get props => [exception];
 }

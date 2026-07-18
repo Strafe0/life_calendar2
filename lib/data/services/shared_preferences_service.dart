@@ -1,7 +1,8 @@
 import 'package:life_calendar/core/logger/logger.dart';
+import 'package:life_calendar/domain/services/reminder_settings_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferencesService {
+class SharedPreferencesService implements ReminderSettingsService {
   const SharedPreferencesService();
 
   static const _firstLaunchKey = 'firstTime';
@@ -9,6 +10,7 @@ class SharedPreferencesService {
   static const _birthdayKey = 'birthday';
   static const _lifespanKey = 'lifespan';
   static const _userIdKey = 'user_id';
+  static const _weeklyReminderKey = 'is_weekly_reminder_enabled';
 
   /// Boundary (≈ year 5138 in seconds / 1973 in ms) separating legacy birthday
   /// timestamps stored in seconds from the current milliseconds format.
@@ -155,6 +157,30 @@ class SharedPreferencesService {
       final prefs = await SharedPreferences.getInstance();
 
       await prefs.setBool(_firstLaunchV3Key, isFirstLaunch);
+    } catch (e, s) {
+      logger.e('SharedPrefs error', error: e, stackTrace: s);
+    }
+  }
+
+  /// Whether the weekly reminder is enabled (defaults to true).
+  @override
+  Future<bool> isWeeklyReminderEnabled() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+
+      return prefs.getBool(_weeklyReminderKey) ?? true;
+    } catch (e, s) {
+      logger.e('SharedPrefs error', error: e, stackTrace: s);
+      return true;
+    }
+  }
+
+  @override
+  Future<void> setWeeklyReminderEnabled({required bool isEnabled}) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+
+      await prefs.setBool(_weeklyReminderKey, isEnabled);
     } catch (e, s) {
       logger.e('SharedPrefs error', error: e, stackTrace: s);
     }

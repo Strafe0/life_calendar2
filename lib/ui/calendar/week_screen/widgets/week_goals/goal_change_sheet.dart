@@ -58,4 +58,10 @@ class _GoalChangeSheetState extends State<GoalChangeSheet> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 }

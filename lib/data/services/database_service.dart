@@ -9,15 +9,17 @@ import 'package:life_calendar/domain/models/week/goal/goal.dart';
 import 'package:life_calendar/domain/models/week/week.dart';
 import 'package:life_calendar/domain/models/week/week_assessment/week_assessment.dart';
 import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
+import 'package:life_calendar/domain/services/database_initializer.dart';
 import 'package:life_calendar/utils/result.dart';
 import 'package:path/path.dart' as p show basename;
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseService {
+class DatabaseService implements DatabaseInitializer {
   static const tableName = 'TheCalendarDatabase';
   late Database _db;
   final int _dbVersion = 3;
 
+  @override
   Future<Result> init() async {
     try {
       _db = await openDatabase(
@@ -212,6 +214,14 @@ class DatabaseService {
       await txn.rawUpdate(
         'UPDATE $tableName SET state = ? WHERE end < ? AND state != ?',
         [WeekTense.past.name, todayMs, WeekTense.past.name],
+      );
+      // Reset any stale `current` other than the one we're about to set. If the
+      // device clock moved backwards, the previous current week now has
+      // `end >= today` (so it escaped the `past` update above) and would leave
+      // the table with two current weeks; demote it to `future`.
+      await txn.rawUpdate(
+        'UPDATE $tableName SET state = ? WHERE state = ? AND id != ?',
+        [WeekTense.future.name, WeekTense.current.name, newCurrentWeek.id],
       );
       await txn.rawUpdate('UPDATE $tableName SET state = ? WHERE id = ?', [
         WeekTense.current.name,
