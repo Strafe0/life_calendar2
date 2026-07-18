@@ -113,6 +113,7 @@ class CalendarApp extends StatelessWidget {
                   CacheBackupStrategy(databaseService: context.read()),
                 ],
                 analytics: context.read(),
+                sharedPreferencesService: context.read(),
               ),
         ),
       ],

@@ -8,6 +8,7 @@ import 'package:life_calendar/core/constants/constants.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/data/services/analytics/analytics_service_interface.dart';
 import 'package:life_calendar/data/services/backup/backup_strategy.dart';
+import 'package:life_calendar/data/services/shared_preferences_service.dart';
 import 'package:life_calendar/domain/services/local_backup_service.dart';
 import 'package:life_calendar/utils/result.dart';
 import 'package:path/path.dart' as p;
@@ -17,11 +18,14 @@ class LocalBackupServiceImpl implements LocalBackupService {
   const LocalBackupServiceImpl({
     required List<BackupStrategy> strategies,
     required AnalyticsService analytics,
+    required SharedPreferencesService sharedPreferencesService,
   }) : _strategies = strategies,
-       _analytics = analytics;
+       _analytics = analytics,
+       _sharedPreferencesService = sharedPreferencesService;
 
   final List<BackupStrategy> _strategies;
   final AnalyticsService _analytics;
+  final SharedPreferencesService _sharedPreferencesService;
 
   @override
   Future<bool> exportCalendar() async {
@@ -141,6 +145,13 @@ class LocalBackupServiceImpl implements LocalBackupService {
         logger.d('Starting restore strategy: ${strategy.id}');
         await strategy.restore(restoreTempDir);
       }
+
+      // The imported data represents a fully set-up user, so force the
+      // first-launch flags off. Older backups may predate these keys (which the
+      // prefs restore wipes via clear()); left null they would send the user to
+      // onboarding and make getUser() ignore the imported profile.
+      await _sharedPreferencesService.setFirstLaunch(isFirstLaunch: false);
+      await _sharedPreferencesService.setFirstLaunchV3(isFirstLaunch: false);
 
       return const Result.ok(true);
     } catch (error, stackTrace) {
