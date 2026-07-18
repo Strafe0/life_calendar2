@@ -15,7 +15,7 @@ class CalendarInteractiveViewer extends StatefulWidget {
   final double maxDragDistance;
   final void Function() onDragStart;
   final void Function(double dragDistance) onDrag;
-  final void Function() onDragEnd;
+  final void Function(double dragDistance) onDragEnd;
   final Widget child;
 
   @override
@@ -46,16 +46,19 @@ class _CalendarInteractiveViewerState extends State<CalendarInteractiveViewer>
     _scale = widget.controller.value.getMaxScaleOnAxis();
   }
 
+  bool get _isAtRestScale => ((_scale ?? 1) - 1).abs() < 0.001;
+
   @override
   Widget build(BuildContext context) {
     return InteractiveViewer(
       transformationController: widget.controller,
       onInteractionStart: (details) {
         _initialFocalPoint = details.focalPoint;
+        _dragDistance = 0;
         widget.onDragStart();
       },
       onInteractionUpdate: (details) {
-        if (_scale == 1.0 && details.pointerCount == 1) {
+        if (_isAtRestScale && details.pointerCount == 1) {
           _dragDistance =
               details.focalPoint.dy -
               (_initialFocalPoint?.dy ?? details.focalPoint.dy);
@@ -68,7 +71,8 @@ class _CalendarInteractiveViewerState extends State<CalendarInteractiveViewer>
         }
       },
       onInteractionEnd: (details) {
-        if (_scale == 1) {
+        final dragDistance = _dragDistance;
+        if (_isAtRestScale) {
           _animation = Tween<double>(begin: _dragDistance, end: 0).animate(
             CurvedAnimation(
               parent: _animationController,
@@ -80,7 +84,7 @@ class _CalendarInteractiveViewerState extends State<CalendarInteractiveViewer>
           });
           _animationController.forward(from: 0);
         }
-        widget.onDragEnd();
+        widget.onDragEnd(dragDistance);
       },
       minScale: 1,
       maxScale: 5,
