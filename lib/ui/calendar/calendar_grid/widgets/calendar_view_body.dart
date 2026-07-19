@@ -11,6 +11,7 @@ import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_painter
 import 'package:life_calendar/ui/calendar/calendar_grid/widgets/current_week_indicator.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/widgets/search/search_pull_indicator.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/widgets/search/search_ui_utils.dart';
+import 'package:life_calendar/ui/calendar/drawer/calendar_drawer_controller.dart';
 import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
 import 'package:life_calendar/ui/user/bloc/user_state.dart';
 import 'package:life_calendar/utils/calendar/calendar_size.dart';
@@ -81,6 +82,10 @@ class _CalendarViewBodyState extends State<CalendarViewBody> {
                 _goToCurrentWeek(context);
               }
             },
+            onHorizontalDragUpdate: (dx) =>
+                context.read<CalendarDrawerController>().openDrag(dx),
+            onHorizontalDragEnd: (velocityX) =>
+                context.read<CalendarDrawerController>().endDrag(velocityX),
             child: Stack(
               children: [
                 ValueListenableBuilder(
