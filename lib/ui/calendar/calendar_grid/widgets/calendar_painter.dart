@@ -34,22 +34,41 @@ class CalendarPainter extends CustomPainter {
 
     _drawWeekLabels(canvas, textColor);
 
+    // Batch the boxes into one path per distinct colour. A life grid holds
+    // thousands of identical rounded rects but only a handful of colours, so
+    // this turns ~4000 draw commands into ~5. That matters most on re-raster
+    // (e.g. while zooming), where the whole display list is replayed: Impeller
+    // tessellates rounded rects rather than taking Skia's analytic fast path,
+    // so per-rect commands are expensive there.
+    final pathsByColor = <Color, Path>{};
+
     int yearId = 0;
+    int? labelledYear;
     for (int weekId = 0; weekId < weekBoxes.length; weekId++) {
-      if (yearId % 5 == 0) {
+      // Draw the label once per year, not once per week of that year — the
+      // year label is identical for all 52 weeks and was being overdrawn (and
+      // its paragraph re-laid-out) every iteration.
+      if (yearId % 5 == 0 && labelledYear != yearId) {
         _drawYearLabel(yearId, canvas, textColor);
+        labelledYear = yearId;
       }
 
       final week = weekBoxes[weekId];
-      canvas.drawRRect(
-        week.rect,
-        Paint()..color = week.color(brightness: brightness),
-      );
+      (pathsByColor[week.color(brightness: brightness)] ??= Path())
+          .addRRect(week.rect);
 
       if (weekId + 1 < weekBoxes.length &&
           weekBoxes[weekId + 1].yearId > yearId) {
         yearId++;
       }
+    }
+
+    // Boxes never overlap, so collapsing them by colour cannot change the
+    // rendered result. One Paint is reused: the canvas snapshots its state per
+    // draw call.
+    final boxPaint = Paint();
+    for (final entry in pathsByColor.entries) {
+      canvas.drawPath(entry.value, boxPaint..color = entry.key);
     }
   }
 
