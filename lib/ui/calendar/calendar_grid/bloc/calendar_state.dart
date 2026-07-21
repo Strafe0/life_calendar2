@@ -14,7 +14,7 @@ final class CalendarLoading extends CalendarState {
   const CalendarLoading();
 }
 
-final class CalendarSuccess extends CalendarState with EquatableMixin {
+final class CalendarSuccess extends CalendarState with Equatable {
   final List<WeekBox> weeks;
   final DateTime lastUpdateTime;
 
@@ -31,7 +31,7 @@ final class CalendarSuccess extends CalendarState with EquatableMixin {
   List<Object?> get props => [weeks, lastUpdateTime];
 }
 
-final class CalendarFailure extends CalendarState with EquatableMixin {
+final class CalendarFailure extends CalendarState with Equatable {
   final Object exception;
 
   const CalendarFailure(this.exception);

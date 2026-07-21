@@ -13,7 +13,7 @@ final class OnboardingLoading extends OnboardingState {
   const OnboardingLoading();
 }
 
-final class OnboardingSuccess extends OnboardingState with EquatableMixin {
+final class OnboardingSuccess extends OnboardingState with Equatable {
   final List<OnboardingPage> pages;
 
   const OnboardingSuccess({required this.pages});

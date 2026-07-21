@@ -17,7 +17,7 @@ final class WeekLoading extends WeekState {
   const WeekLoading();
 }
 
-final class WeekSuccess extends WeekState with EquatableMixin {
+final class WeekSuccess extends WeekState with Equatable {
   final DateTime lastUpdate;
   final Week week;
 

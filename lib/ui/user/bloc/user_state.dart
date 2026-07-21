@@ -13,7 +13,7 @@ final class UserLoading extends UserState {
   const UserLoading();
 }
 
-final class UserSuccess extends UserState with EquatableMixin {
+final class UserSuccess extends UserState with Equatable {
   final User user;
 
   const UserSuccess({required this.user});
@@ -22,7 +22,7 @@ final class UserSuccess extends UserState with EquatableMixin {
   List<Object?> get props => [user];
 }
 
-final class UserFailure extends UserState with EquatableMixin {
+final class UserFailure extends UserState with Equatable {
   final Object exception;
 
   const UserFailure(this.exception);
