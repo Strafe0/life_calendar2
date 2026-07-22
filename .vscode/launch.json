@@ -38,6 +38,17 @@
             ]
         },
         {
+            "name": "Life Calendar (Profile Mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "lifeCalendarTest",
+            ]
+        },
+        {
             "name": "Life Calendar (Release Mode)",
             "request": "launch",
             "type": "dart",
