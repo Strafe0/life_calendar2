@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:life_calendar/ui/calendar/calendar_grid/widgets/calendar_view.dart';
 import 'package:life_calendar/ui/calendar/drawer/widgets/calendar_drawer.dart';
+import 'package:life_calendar/ui/core/themes/system_overlay_style.dart';
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
@@ -9,10 +10,7 @@ class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
-        statusBarColor: ColorScheme.of(context).surface,
-        statusBarBrightness: Theme.brightnessOf(context),
-      ),
+      value: surfaceOverlayStyle(context),
       child: Scaffold(
         drawer: const CalendarDrawer(),
         drawerEdgeDragWidth: 40,

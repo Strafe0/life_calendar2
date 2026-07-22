@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_calendar/core/navigation/app_routes.dart';
+import 'package:life_calendar/ui/core/themes/system_overlay_style.dart';
 import 'package:life_calendar/ui/splash/bloc/splash_cubit.dart';
 import 'package:life_calendar/ui/splash/bloc/splash_state.dart';
 import 'package:life_calendar/ui/user/bloc/user_bloc.dart';
@@ -19,10 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion(
-      value: SystemUiOverlayStyle(
-        statusBarColor: ColorScheme.of(context).surface,
-        statusBarIconBrightness: Theme.brightnessOf(context),
-      ),
+      value: surfaceOverlayStyle(context),
       child: BlocProvider(
         create:
             (context) => SplashCubit(
