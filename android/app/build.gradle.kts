@@ -40,7 +40,7 @@ android {
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = 7
+        versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
@@ -79,11 +79,10 @@ android {
         }
     }
 
-    buildTypes {
-        getByName("release") {            
-            signingConfig = signingConfigs.getByName("release")
-        }
-    }
+    // Signing is declared per flavor: the production flavor uses the release
+    // key, the test flavors stay on the debug key so test builds can be
+    // installed over each other. Setting it on the release build type instead
+    // would override the flavors.
 }
 
 flutter {
