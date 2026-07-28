@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 
 class AppTheme {
-  static ThemeData get lightTheme => ThemeData(
+  // Built once (Dart initialises static finals lazily) rather than on every
+  // access: ThemeData is an expensive constructor, and the week colours are
+  // resolved per box on every calendar paint.
+  static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
@@ -202,7 +205,7 @@ class AppTheme {
     ),
   );
 
-  static ThemeData get darkTheme => ThemeData(
+  static final ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     colorScheme: const ColorScheme(
       brightness: Brightness.dark,
