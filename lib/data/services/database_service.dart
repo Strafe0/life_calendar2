@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:life_calendar/core/constants/constants.dart';
 import 'package:life_calendar/core/exceptions/data_exceptions.dart';
 import 'package:life_calendar/core/logger/logger.dart';
 import 'package:life_calendar/domain/models/week/event/event.dart';
@@ -11,13 +12,15 @@ import 'package:life_calendar/domain/models/week/week_assessment/week_assessment
 import 'package:life_calendar/domain/models/week/week_tense/week_tense.dart';
 import 'package:life_calendar/domain/services/database_initializer.dart';
 import 'package:life_calendar/utils/result.dart';
-import 'package:path/path.dart' as p show basename;
+import 'package:path/path.dart' as p show basename, join;
+import 'package:path_provider/path_provider.dart'
+    show getApplicationDocumentsDirectory;
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService implements DatabaseInitializer {
   static const tableName = 'TheCalendarDatabase';
   late Database _db;
-  final int _dbVersion = 3;
+  final int _dbVersion = 4;
 
   @override
   Future<Result> init() async {
@@ -41,6 +44,12 @@ class DatabaseService implements DatabaseInitializer {
             _migrateAssessmentValuesV2toV3(batch);
           }
           await batch.commit();
+
+          // Runs after the batch: needs async file I/O (path_provider +
+          // File.copy), which cannot be queued into a sqflite Batch.
+          if (oldVersion < 4) {
+            await _migratePhotosToAppDirV3toV4(db);
+          }
         },
       );
 
@@ -89,6 +98,88 @@ class DatabaseService implements DatabaseInitializer {
         'UPDATE $tableName SET assessment = ? WHERE assessment = ?',
         [entry.value, entry.key],
       );
+    }
+  }
+
+  /// Adopts photos captured by the pre-3.0 app into the new storage model.
+  ///
+  /// Older builds stored the raw `image_picker` cache path in the DB and never
+  /// copied the file anywhere, whereas the current app resolves every photo
+  /// against `getApplicationDocumentsDirectory()/$kImageDirName`. On an in-place
+  /// upgrade the old files still sit in the cache dir, so we copy each one into
+  /// the canonical images dir and rewrite the DB entry to a bare filename.
+  ///
+  /// Best-effort: a photo whose source file the OS has already evicted from the
+  /// cache is left as a filename record (nothing to recover), and any per-row
+  /// failure is logged without aborting the remaining rows.
+  Future<void> _migratePhotosToAppDirV3toV4(Database db) async {
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final imagesDir = Directory(p.join(appDocDir.path, kImageDirName));
+
+    await migratePhotosToImagesDir(db, imagesDir);
+  }
+
+  /// Testable core of the v3→v4 photo migration.
+  ///
+  /// Copies every photo referenced in the DB into [imagesDir] (keeping its
+  /// file name) and rewrites each row's `photos` column to bare file names.
+  /// Split out from [_migratePhotosToAppDirV3toV4] so tests can pass a temp
+  /// directory instead of relying on `path_provider`.
+  @visibleForTesting
+  Future<void> migratePhotosToImagesDir(
+    Database db,
+    Directory imagesDir,
+  ) async {
+    final List<Map<String, dynamic>> rows = await db.query(
+      tableName,
+      columns: ['id', 'photos'],
+      where: 'photos IS NOT NULL AND photos != ?',
+      whereArgs: ['[]'],
+    );
+
+    if (rows.isEmpty) return;
+
+    if (!imagesDir.existsSync()) {
+      imagesDir.createSync(recursive: true);
+    }
+
+    for (final row in rows) {
+      final int id = row['id'] as int;
+      final String rawPhotos = row['photos'] as String;
+
+      try {
+        final decoded = jsonDecode(rawPhotos);
+        if (decoded is! List) continue;
+
+        final oldPaths = decoded.map((e) => e.toString()).toList();
+        final newPaths = <String>[];
+
+        for (final oldPath in oldPaths) {
+          final fileName = p.basename(oldPath);
+          final destPath = p.join(imagesDir.path, fileName);
+
+          // Copy the source file into the images dir unless it is already
+          // there (idempotent re-runs, or a path that was already canonical).
+          if (!File(destPath).existsSync() && File(oldPath).existsSync()) {
+            File(oldPath).copySync(destPath);
+          }
+
+          newPaths.add(fileName);
+        }
+
+        await db.update(
+          tableName,
+          {'photos': jsonEncode(newPaths)},
+          where: 'id = ?',
+          whereArgs: [id],
+        );
+      } catch (e, s) {
+        logger.e(
+          'Failed to migrate photos for week $id (v3→v4)',
+          error: e,
+          stackTrace: s,
+        );
+      }
     }
   }
 
